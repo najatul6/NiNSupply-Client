@@ -6,6 +6,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
 import { CiShoppingCart } from "react-icons/ci";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,11 +22,13 @@ import { toast } from "react-toastify";
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import MyCart from "@/pages/RootView/MyCart/MyCart";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -167,12 +170,17 @@ const Header = () => {
                 </p>
               </div>
             </SheetTrigger>
-            <SheetContent className="w-full">
+            <SheetContent className="w-full flex flex-col">
               <SheetHeader>
                 <SheetTitle className="text-white">MY Carts</SheetTitle>
                 <hr />
               </SheetHeader>
+              <div className="h-full overflow-y-auto flex-grow no-scrollbar">
                 <MyCart />
+              </div>
+              <SheetFooter>
+                <Button type="submit" className="w-full">Checkout <MdOutlineShoppingCartCheckout/></Button>
+              </SheetFooter>
             </SheetContent>
           </Sheet>
 
