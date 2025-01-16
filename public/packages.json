@@ -1,0 +1,51 @@
+[
+  {
+    "id": "pkg-012",
+    "packageName": "Gmail Account",
+    "description": "A Gmail account for sending, receiving, and organizing emails, with Google integration for contacts, calendar, and storage.",
+    "thumbnail": "https://example.com/path/to/gmail-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-011",
+    "packageName": "WhatsApp Account",
+    "description": "A WhatsApp account for text messaging, voice calls, and sharing media with contacts in a secure and private environment.",
+    "thumbnail": "https://example.com/path/to/whatsapp-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-001",
+    "packageName": "Facebook Account",
+    "description": "A complete Facebook account with premium features, including customizable profile, social interactions, and media sharing capabilities.",
+    "thumbnail": "https://example.com/path/to/facebook-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-003",
+    "packageName": "Instagram Account",
+    "description": "A personalized Instagram account to share photos, engage with followers, explore trends, and follow influencers.",
+    "thumbnail": "https://example.com/path/to/instagram-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-002",
+    "packageName": "TikTok Account",
+    "description": "A dynamic TikTok account designed for sharing short-form videos, engaging with trends, and gaining followers.",
+    "thumbnail": "https://example.com/path/to/tiktok-thumbnail.jpg"
+  },
+
+  {
+    "id": "pkg-004",
+    "packageName": "Twitter Account",
+    "description": "A fully functional Twitter account for posting tweets, following trends, and engaging with followers in real-time.",
+    "thumbnail": "https://example.com/path/to/twitter-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-005",
+    "packageName": "LinkedIn Account",
+    "description": "A professional LinkedIn account for networking, job searching, and building a career profile.",
+    "thumbnail": "https://example.com/path/to/linkedin-thumbnail.jpg"
+  },
+  {
+    "id": "pkg-006",
+    "packageName": "YouTube Account",
+    "description": "A YouTube account to upload, share, and discover videos, build a channel, and interact with subscribers.",
+    "thumbnail": "https://example.com/path/to/youtube-thumbnail.jpg"
+  }
+]
