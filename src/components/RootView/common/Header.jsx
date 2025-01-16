@@ -59,8 +59,8 @@ const Header = () => {
             <NavLink
               className={({ isActive }) =>
                 isActive
-                  ? "border-b-2 border-orange-500 text-orange-500 transition duration-200"
-                  : "hover:border-b-2 hover:border-orange-500 transition duration-200"
+                  ? "border-b-2 border-baseColor text-baseColor font-medium transition duration-200"
+                  : "hover:border-b-2 hover:border-baseColor transition duration-200"
               }
               key={item.path}
               to={item.path}
@@ -75,7 +75,7 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="cursor-pointer">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-orange-600 bg-background2 overflow-hidden">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-baseColor bg-background2 overflow-hidden">
                       <img
                         src={
                           user?.photoURL ||
@@ -114,8 +114,8 @@ const Header = () => {
             </>
           ) : (
             <div className="hidden lg:flex items-center gap-5">
-              <NavLink to="/auth/login">Login</NavLink>
-              <NavLink to="/auth/register">Register</NavLink>
+              <NavLink to="/auth/login" className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2  text-center px-3 py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor">Login</NavLink>
+              
             </div>
           )}
         </div>
@@ -139,7 +139,7 @@ const Header = () => {
 
             {
               <ul
-                className={`capitalize w-full py-5 flex animate__animated flex-col lg:hidden gap-5 absolute z-50 bg-white/40 backdrop-blur-md  min-h-screen top-20  left-0 ${
+                className={`capitalize w-full py-5 flex animate__animated flex-col lg:hidden gap-5 absolute z-50 bg-background2 backdrop-blur-md  min-h-screen top-20  left-0 ${
                   isMenuOpen
                     ? "animate__fadeInLeft "
                     : isPageLoad
@@ -152,8 +152,8 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-orange-500 text-orange-500 transition duration-200"
-                        : "hover:border-b-2 hover:border-orange-500 transition duration-200"
+                        ? "border-b-2 border-baseColor font-medium text-baseColor transition font-medium duration-200"
+                        : "hover:border-b-2 hover:border-baseColor transition duration-200"
                     }
                     key={item.path}
                     to={item.path}
@@ -166,17 +166,17 @@ const Header = () => {
                 <div
                   className={`${
                     user && user?.email ? "hidden" : "flex"
-                  } flex-col gap-5 items-center border mt-5 py-2 border-orange-400`}
+                  } flex-col gap-5 items-center border mt-5 py-2 border-baseColor`}
                 >
                   <NavLink
                     to="/auth/login"
-                    className="uppercase border-b-2 hover:border-orange-500 text-orange-500 transition duration-200"
+                    className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2 w-3/4 text-center py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor"
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/auth/registration"
-                    className="uppercase border-b-2 hover:border-orange-500 text-orange-500 transition duration-200"
+                    className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2 w-3/4 text-center py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor"
                   >
                     Register
                   </NavLink>
