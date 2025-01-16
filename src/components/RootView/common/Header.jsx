@@ -172,10 +172,13 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent className="w-full flex flex-col">
               <SheetHeader>
+                <div className="flex justify-between items-center pt-4 px-2">
                 <SheetTitle className="text-white">MY Carts</SheetTitle>
+                <SheetTitle className="text-white">10</SheetTitle>
+                </div>
                 <hr />
               </SheetHeader>
-              <div className="h-full overflow-y-auto flex-grow no-scrollbar">
+              <div className="h-full overflow-y-auto scroll-smooth flex-grow no-scrollbar">
                 <MyCart />
               </div>
               <SheetFooter>
