@@ -17,7 +17,7 @@ import PropTypes from "prop-types";
 
 const Header = ({ setOpen }) => {
   return (
-    <div className="flex items-center justify-between lg:justify-end px-4 py-3 bg-background border-b">
+    <div className="flex items-center justify-between lg:justify-end px-4 py-3 bg-background2 border-b">
       
       <Button onClick={() => setOpen(true)} className="lg:hidden sm:block">
         <AlignJustify />

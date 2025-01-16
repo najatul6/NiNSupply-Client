@@ -18,6 +18,8 @@ body {
   :root {
     --background: 0 0% 100%;
 
+    --background2:#1c1c1c;
+
     --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
@@ -68,6 +70,8 @@ body {
   }
   .dark {
     --background: 0 0% 3.9%;
+    
+    --background2:#1c1c1c;
 
     --foreground: 0 0% 98%;
 
