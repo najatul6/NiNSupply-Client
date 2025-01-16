@@ -18,6 +18,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut, User } from "lucide-react";
 import { toast } from "react-toastify";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -136,10 +149,46 @@ const Header = () => {
           ))}
         </ul>
         <div className="flex items-center lg:gap-5">
-          <div className="flex justify-center items-center relative">
-            <CiShoppingCart  size={40} className="text-baseColor" />
-            <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">10</p>
-          </div>
+          <Sheet>
+            <SheetTrigger asChild>
+                <div className="flex justify-center items-center relative cursor-pointer">
+                  <CiShoppingCart size={40} className="text-baseColor" />
+                  <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">
+                    10
+                  </p>
+                </div>
+            </SheetTrigger>
+            <SheetContent className="w-full md:w-auto">
+              <SheetHeader>
+                <SheetTitle className="text-white">MY Carts</SheetTitle>
+                <hr />
+                
+              </SheetHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    value="Pedro Duarte"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Username
+                  </Label>
+                  <Input
+                    id="username"
+                    value="@peduarte"
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              
+            </SheetContent>
+          </Sheet>
 
           <div className=" lg:flex items-center gap-5">
             {user && user?.email ? (
