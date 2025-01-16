@@ -5,7 +5,7 @@ import brandImg from "../../../assets/ninSupply.svg";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
-import { MdOutlineShoppingBag } from "react-icons/md";
+import { CiShoppingCart } from "react-icons/ci";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -112,7 +112,6 @@ const Header = () => {
               </ul>
             }
           </div>
-          
         </div>
         <Link to="/" className="logo">
           <div className="flex justify-center items-center w-[150px] h-[30px]">
@@ -136,60 +135,66 @@ const Header = () => {
             </NavLink>
           ))}
         </ul>
-        <MdOutlineShoppingBag />
-        <div className=" lg:flex items-center gap-5">
-          {user && user?.email ? (
-            <>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="cursor-pointer">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-baseColor bg-background2 overflow-hidden">
-                      <img
-                        src={
-                          user?.photoURL ||
-                          "https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png"
-                        }
-                        alt="Profile Picture"
-                      />
-                    </div>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <Link to="my-profile">
-                      <DropdownMenuItem className="cursor-pointer">
-                        Profile
-                        <DropdownMenuShortcut>
-                          <User />
-                        </DropdownMenuShortcut>
-                      </DropdownMenuItem>
-                    </Link>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleLogOut}
-                    className="cursor-pointer"
-                  >
-                    Log out
-                    <DropdownMenuShortcut>
-                      <LogOut />
-                    </DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          ) : (
-            <div className="hidden lg:flex items-center gap-5">
-              <NavLink
-                to="/auth/login"
-                className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2  text-center px-3 py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor"
-              >
-                Login
-              </NavLink>
-            </div>
-          )}
+        <div className="flex items-center lg:gap-5">
+          <div className="flex justify-center items-center relative">
+            <CiShoppingCart  size={40} className="text-baseColor" />
+            <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">10</p>
+          </div>
+
+          <div className=" lg:flex items-center gap-5">
+            {user && user?.email ? (
+              <>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="cursor-pointer">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-baseColor bg-background2 overflow-hidden">
+                        <img
+                          src={
+                            user?.photoURL ||
+                            "https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png"
+                          }
+                          alt="Profile Picture"
+                        />
+                      </div>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <Link to="my-profile">
+                        <DropdownMenuItem className="cursor-pointer">
+                          Profile
+                          <DropdownMenuShortcut>
+                            <User />
+                          </DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                      </Link>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleLogOut}
+                      className="cursor-pointer"
+                    >
+                      Log out
+                      <DropdownMenuShortcut>
+                        <LogOut />
+                      </DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <div className="hidden lg:flex items-center gap-5">
+                <NavLink
+                  to="/auth/login"
+                  className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2  text-center px-3 py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor"
+                >
+                  Login
+                </NavLink>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
