@@ -45,7 +45,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="overflow-x-clip bg-muted">
+    <nav className="overflow-x-clip bg-background2">
       <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
           <div className="flex justify-center items-center w-[120px] h-[30px]">
@@ -75,7 +75,7 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="cursor-pointer">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-orange-600 bg-gray-200 overflow-hidden">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-[3px] p-[1px] border-orange-600 bg-background2 overflow-hidden">
                       <img
                         src={
                           user?.photoURL ||
