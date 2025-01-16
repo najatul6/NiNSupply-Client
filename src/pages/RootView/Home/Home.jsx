@@ -1,7 +1,8 @@
 const Home = () => {
+  const homeHeader="Order Before 7 PM to Get ⚡Fastest Delivery | Regular Delivery Time: 11 AM – 7 PM"
   return (
-    <div className="w-full min-h-screen flex justify-center items-center text-4xl text-center ">
-      Home Page is Coming soon
+    <div className="">
+      <h1 className="bg-[#1c1c1c] w-full py-4 text-center font-bold">{homeHeader}</h1>
     </div>
   );
 };

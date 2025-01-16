@@ -11,7 +11,7 @@ export default {
   		},
   		colors: {
   			background: '#000000',
-  			background2: '#1c1c1c',
+  			background2: '#222222',
 			baseColor:'#d4ff00',
   			foreground: 'hsl(var(--foreground))',
   			card: {
