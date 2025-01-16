@@ -173,8 +173,8 @@ const Header = () => {
             <SheetContent className="w-full flex flex-col">
               <SheetHeader>
                 <div className="flex justify-between items-center pt-4 px-2">
-                <SheetTitle className="text-white">MY Carts</SheetTitle>
-                <SheetTitle className="text-white">10</SheetTitle>
+                  <SheetTitle className="text-white">MY Carts</SheetTitle>
+                  <SheetTitle className="text-white">10</SheetTitle>
                 </div>
                 <hr />
               </SheetHeader>
@@ -182,7 +182,9 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button type="submit" className="w-full">Checkout <MdOutlineShoppingCartCheckout/></Button>
+                <Button type="submit" className="w-full">
+                  Checkout <MdOutlineShoppingCartCheckout />
+                </Button>
               </SheetFooter>
             </SheetContent>
           </Sheet>
