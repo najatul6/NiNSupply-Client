@@ -25,8 +25,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-dropdown-menu";
+import MyCart from "@/pages/RootView/MyCart/MyCart";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -173,7 +172,8 @@ const Header = () => {
                 <SheetTitle className="text-white">MY Carts</SheetTitle>
                 <hr />
               </SheetHeader>
-              <div className="grid gap-4 py-4">
+                <MyCart />
+              {/* <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="name" className="text-right">
                     Name
@@ -194,7 +194,7 @@ const Header = () => {
                     className="col-span-3"
                   />
                 </div>
-              </div>
+              </div> */}
             </SheetContent>
           </Sheet>
 
