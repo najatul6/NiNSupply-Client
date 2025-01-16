@@ -1,3 +1,4 @@
+import Container from "@/components/common/Container";
 import { useEffect, useState } from "react";
 
 const CategoryZone = () => {
@@ -8,7 +9,7 @@ const CategoryZone = () => {
         .then(data=>setCategories(data))
     }, []);
   return (
-    <div>
+    <Container>
         <h1 className="text-center text-2xl font-bold mt-4">Categories</h1>
         <div className="grid grid-cols-3 gap-4">
             {categories.map((category) => (
@@ -22,7 +23,7 @@ const CategoryZone = () => {
             </div>
             ))}
         </div>
-    </div>
+    </Container>
   )
 }
 
