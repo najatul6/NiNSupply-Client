@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
-import brandImg from "../../../assets/auth.png";
+import brandImg from "../../../assets/ninSupply.svg";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
@@ -48,7 +48,7 @@ const Header = () => {
     <nav className="overflow-x-clip bg-background2">
       <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <Link to="/" className="logo">
-          <div className="flex justify-center items-center w-[120px] h-[30px]">
+          <div className="flex justify-center items-center w-[150px] h-[30px]">
             <img src={brandImg} alt="" className="w-full h-fit object-center" />
           </div>
         </Link>
