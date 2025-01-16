@@ -1,4 +1,5 @@
 import Container from "@/components/common/Container";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 const CategoryZone = () => {
@@ -12,19 +13,19 @@ const CategoryZone = () => {
   return (
     <Container>
       <h1 className="text-center text-2xl font-bold mt-4">Categories</h1>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((category) => (
-          <div key={category.id} className="bg-[#f0f0f0] text-center relative group overflow-hidden transition duration-300">
+          <div key={category.id} className="bg-background2 rounded-md text-center relative group overflow-hidden transition duration-300">
             <img
               src={category.thumbnail}
               alt={category.packageName}
               className="w-full h-full mx-auto object-cover group-hover:scale-125 transition duration-500"
             />
             <div
-              className="w-full h-full bg-background bg-blend-screen absolute inset-0 flex flex-col justify-center items-start bg-opacity-85" 
+              className="w-full h-full bg-background bg-blend-screen absolute inset-0 flex gap-3 flex-col justify-center items-start px-6 bg-opacity-85 rounded-md" 
             >
-              <h2 className="text-lg font-bold text-white">{category.packageName}</h2>
-              <p className="text-white">{category.description}</p>
+              <h2 className="text-2xl uppercase font-bold text-white">{category.packageName}</h2>
+              <Button className="bg-transparent border-baseColor border-2 uppercase font-semibold text-baseColor hover:bg-baseColor hover:text-black hover:border-white rounded-none">Shop Now</Button>
             </div>
           </div>
         ))}
