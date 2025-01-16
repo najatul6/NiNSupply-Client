@@ -167,7 +167,7 @@ const Header = () => {
                 </p>
               </div>
             </SheetTrigger>
-            <SheetContent className="w-full md:w-auto">
+            <SheetContent className="w-full md:w-1/2">
               <SheetHeader>
                 <SheetTitle className="text-white">MY Carts</SheetTitle>
                 <hr />
