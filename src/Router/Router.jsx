@@ -13,6 +13,9 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminRoute from "./AdminRoute";
 import UnAuthorization from "@/pages/Common/UnAuthorization/UnAuthorization";
 import PrivateRoute from "./PrivateRoute";
+import Shop from "@/pages/RootView/Shop/Shop";
+import GiftCard from "@/pages/RootView/GiftCard/GiftCard";
+import Subscription from "@/pages/RootView/Subscription/Subscription";
 
 const Router = createBrowserRouter([
   {
@@ -25,12 +28,28 @@ const Router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "shop",
+        element: <Shop />,
+      },
+      {
+        path: "gift-card",
+        element: <GiftCard />,
+      },
+      {
+        path: "subscription",
+        element: <Subscription />,
+      },
+      {
         path: "about",
         element: <About />,
       },
       {
         path: "my-profile",
-        element: <PrivateRoute><UserAccount /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <UserAccount />
+          </PrivateRoute>
+        ),
       },
     ],
   },
