@@ -29,6 +29,12 @@
     "description": "A subscription service for premium content, digital products, and exclusive offers, with flexible payment options and renewal settings.",
     "thumbnail": "https://i.ibb.co.com/Q6T6GJB/Subscription.jpg"
   },
+  {
+    "id": "pkg-006",
+    "packageName": "YouTube Zone",
+    "description": "A YouTube account to upload, share, and discover videos, build a channel, and interact with subscribers.",
+    "thumbnail": "https://i.ibb.co.com/yXdqyFR/Youtube.jpg"
+  }
 ]
 
 
