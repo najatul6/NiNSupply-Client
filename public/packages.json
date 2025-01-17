@@ -3,37 +3,43 @@
     "id": "pkg-012",
     "packageName": "Gmail Zone",
     "description": "A Gmail account for sending, receiving, and organizing emails, with Google integration for contacts, calendar, and storage.",
-    "thumbnail": "https://i.ibb.co.com/dWj6VMc/Gmail.jpg"
+    "thumbnail": "https://i.ibb.co.com/dWj6VMc/Gmail.jpg",
+    "category": "email"
   },
   {
     "id": "pkg-011",
     "packageName": "WhatsApp Zone",
     "description": "A WhatsApp account for text messaging, voice calls, and sharing media with contacts in a secure and private environment.",
-    "thumbnail": "https://i.ibb.co.com/g3ZK92b/WhatsApp.jpg"
+    "thumbnail": "https://i.ibb.co.com/g3ZK92b/WhatsApp.jpg",
+    "category": "whatsapp"
   },
   {
     "id": "pkg-001",
     "packageName": "Facebook Zone",
     "description": "A complete Facebook account with premium features, including customizable profile, social interactions, and media sharing capabilities.",
-    "thumbnail": "https://i.ibb.co.com/312D3ZW/facebook.jpg"
+    "thumbnail": "https://i.ibb.co.com/312D3ZW/facebook.jpg",
+    "category": "facebook"
   },
   {
     "id": "pkg-002",
     "packageName": "Gift Card Zone",
     "description": "A gift card for online shopping, entertainment, and digital services, with a customizable value and expiration date.",
-    "thumbnail": "https://i.ibb.co.com/zSkKbXh/Gift-Card.jpg"
+    "thumbnail": "https://i.ibb.co.com/zSkKbXh/Gift-Card.jpg",
+    "category": "giftcard"
   },
   {
     "id": "pkg-003",
     "packageName": "Subscription Zone",
     "description": "A subscription service for premium content, digital products, and exclusive offers, with flexible payment options and renewal settings.",
-    "thumbnail": "https://i.ibb.co.com/Q6T6GJB/Subscription.jpg"
+    "thumbnail": "https://i.ibb.co.com/Q6T6GJB/Subscription.jpg",
+    "category": "subscription"
   },
   {
     "id": "pkg-006",
     "packageName": "YouTube Zone",
     "description": "A YouTube account to upload, share, and discover videos, build a channel, and interact with subscribers.",
-    "thumbnail": "https://i.ibb.co.com/yXdqyFR/Youtube.jpg"
+    "thumbnail": "https://i.ibb.co.com/yXdqyFR/Youtube.jpg",
+    "category": "youtube"
   }
 ]
 
