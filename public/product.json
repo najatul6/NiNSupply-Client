@@ -1,0 +1,228 @@
+[
+  {
+    "id": "prd-00u1",
+    "productName": "Facebook Business Manager (BM)",
+    "description": [
+      "5 pcs BM",
+      "Fresh Inactive Business Manager",
+      "Ready to Create Ad account",
+      "Replacement Guarantee",
+      "1 Hour Delivery Time"
+    ],
+    "price": "100",
+    "discount": "10",
+    "thumbnail": "https://miro.medium.com/v2/resize:fit:2000/1*96kJbTZKvZCwVPm6NTaCWQ.jpeg",
+    "category": "facebook",
+    "stock": "50"
+  },
+  {
+    "id": "prd-00u2",
+    "productName": "Facebook 2-FA ID",
+    "description": [
+      "2-FA Enabled",
+      "Fresh Account",
+      "Replacement Guarantee",
+      "1 Hour Delivery Time"
+    ],
+    "price": "50",
+    "discount": "5",
+    "thumbnail": "https://cdn.logojoy.com/wp-content/uploads/20230921104358/09-18-23_Facebook-Logo-Evolution_Header.jpg",
+    "category": "facebook",
+    "stock": "100"
+  },
+  {
+    "id": "prd-00u3",
+    "productName": "Google Ads Account",
+    "description": [
+      "Verified Google Ads Account",
+      "Fresh and Active",
+      "Replacement Guarantee",
+      "Instant Delivery"
+    ],
+    "price": "120",
+    "discount": "15",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKCNok5J9kM1lw4u2H4pTSXJatN6CE2Ld_4g&s",
+    "category": "google",
+    "stock": "40"
+  },
+  {
+    "id": "prd-00u4",
+    "productName": "Twitter Ads Account",
+    "description": [
+      "Ready to Run Campaigns",
+      "Fresh and Verified",
+      "Replacement Guarantee",
+      "24/7 Support"
+    ],
+    "price": "80",
+    "discount": "10",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIwoHBMV-VjqOZ0mvIJ1wzsIySakMFgLeFw&s",
+    "category": "twitter",
+    "stock": "30"
+  },
+  {
+    "id": "prd-00u5",
+    "productName": "LinkedIn Premium Account",
+    "description": [
+      "1 Year Subscription",
+      "Verified LinkedIn Account",
+      "Replacement Guarantee",
+      "Instant Activation"
+    ],
+    "price": "150",
+    "discount": "20",
+    "thumbnail": "https://media.licdn.com/dms/image/v2/C4D12AQGxF8csWCxTwQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1572442461597?e=2147483647&v=beta&t=KLen6zvgihorO0VhdLV9o_8-VUJzR6HdvAKvLgozjO8",
+    "category": "linkedin",
+    "stock": "20"
+  },
+  {
+    "id": "prd-00u6",
+    "productName": "Instagram Business Account",
+    "description": [
+      "Verified Business Profile",
+      "Ready for Promotions",
+      "Replacement Guarantee",
+      "Instant Delivery"
+    ],
+    "price": "90",
+    "discount": "10",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGAln80GFCnhhoTMN_mTzK-jIfFXHZQ6W5Rw&s",
+    "category": "instagram",
+    "stock": "45"
+  },
+  {
+    "id": "prd-00u7",
+    "productName": "Facebook Verified Page",
+    "description": [
+      "Blue Badge Verified",
+      "Active Page with Followers",
+      "Replacement Guarantee",
+      "1 Day Delivery"
+    ],
+    "price": "200",
+    "discount": "25",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "facebook",
+    "stock": "10"
+  },
+  {
+    "id": "prd-00u8",
+    "productName": "TikTok Business Account",
+    "description": [
+      "Fresh and Verified",
+      "Ready to Create Campaigns",
+      "Replacement Guarantee",
+      "1 Hour Delivery"
+    ],
+    "price": "70",
+    "discount": "8",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "tiktok",
+    "stock": "60"
+  },
+  {
+    "id": "prd-00u9",
+    "productName": "Snapchat Ads Account",
+    "description": [
+      "Verified and Ready",
+      "Fresh and Active Account",
+      "Replacement Guarantee",
+      "24/7 Support"
+    ],
+    "price": "110",
+    "discount": "12",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "snapchat",
+    "stock": "25"
+  },
+  {
+    "id": "prd-00u10",
+    "productName": "YouTube Channel Monetization",
+    "description": [
+      "Monetized Channel",
+      "Eligible for Ad Revenue",
+      "Replacement Guarantee",
+      "Fast Delivery"
+    ],
+    "price": "250",
+    "discount": "30",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "youtube",
+    "stock": "15"
+  },
+  {
+    "id": "prd-00u11",
+    "productName": "Pinterest Ads Account",
+    "description": [
+      "Freshly Created",
+      "Ready for Campaigns",
+      "Replacement Guarantee",
+      "Instant Delivery"
+    ],
+    "price": "60",
+    "discount": "5",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "pinterest",
+    "stock": "35"
+  },
+  {
+    "id": "prd-00u12",
+    "productName": "Amazon Seller Account",
+    "description": [
+      "Verified Seller Account",
+      "Ready to List Products",
+      "Replacement Guarantee",
+      "Fast Activation"
+    ],
+    "price": "300",
+    "discount": "50",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "amazon",
+    "stock": "5"
+  },
+  {
+    "id": "prd-00u13",
+    "productName": "Shopify Store Setup",
+    "description": [
+      "Pre-Built Shopify Store",
+      "Customizable Templates",
+      "Replacement Guarantee",
+      "24/7 Support"
+    ],
+    "price": "400",
+    "discount": "60",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "shopify",
+    "stock": "12"
+  },
+  {
+    "id": "prd-00u14",
+    "productName": "eBay Seller Account",
+    "description": [
+      "Verified eBay Seller Account",
+      "Ready for Listings",
+      "Replacement Guarantee",
+      "Instant Activation"
+    ],
+    "price": "250",
+    "discount": "35",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "ebay",
+    "stock": "8"
+  },
+  {
+    "id": "prd-00u15",
+    "productName": "Facebook Marketplace Account",
+    "description": [
+      "Verified Marketplace Account",
+      "Ready for Selling",
+      "Replacement Guarantee",
+      "1 Hour Delivery"
+    ],
+    "price": "120",
+    "discount": "15",
+    "thumbnail": "https://media.sproutsocial.com/uploads/2022/10/How-to-get-verified-on-Facebook-Final.svg",
+    "category": "facebook",
+    "stock": "50"
+  }
+]
