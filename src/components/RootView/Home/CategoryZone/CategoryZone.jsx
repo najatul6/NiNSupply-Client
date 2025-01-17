@@ -13,7 +13,7 @@ const CategoryZone = () => {
   return (
     <Container>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {categories.map((category) => (
           <div key={category.id} className="bg-background2 rounded-md text-center relative group overflow-hidden transition duration-300">
             <img

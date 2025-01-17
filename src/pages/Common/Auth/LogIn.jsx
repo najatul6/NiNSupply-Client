@@ -54,8 +54,10 @@ const LogIn = () => {
             createdAt: new Date().toISOString(),
           };
           axiosPublic.post("/createUser", userData).then((res) => {
-            console.log(res.data);
-            navigate(form, { replace: true });
+            if (res.data) {
+              console.log(res.data);
+              navigate(form, { replace: true });
+            }
           });
         })
         .catch((error) => {
