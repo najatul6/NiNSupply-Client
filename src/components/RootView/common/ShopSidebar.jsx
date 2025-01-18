@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const ShopSidebar = () => {
+const ShopSidebar = ({openSidebar}) => {
   const menu = [
     {
       name: "Home",
@@ -29,8 +29,7 @@ const ShopSidebar = () => {
     // },
   ];
   return (
-    <div className="hidden lg:flex flex-col  gap-5 p-4 bg-background2">
-        
+    <div className={`${openSidebar && "-translate-x-0"} lg:flex flex-col  gap-5 p-4 bg-background2`}>
       <h3 className="text-xl uppercase">Product categories</h3>
       <ul className="flex flex-col items-start gap-2 capitalize ml-4">
         {menu.map((item) => (

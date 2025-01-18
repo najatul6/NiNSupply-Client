@@ -8,9 +8,9 @@ const Shop = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
     <Container>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full overflow-x-hidden">
         <div className="relative">
-          <ShopSidebar />
+          <ShopSidebar openSidebar={openSidebar} />
           <button onClick={()=>setOpenSidebar(!openSidebar)}>
           <FaCircleChevronRight size={30} className={`absolute top-20 -right-3 text-baseColor ${openSidebar?"":"rotate-180"}`} />
           </button>
