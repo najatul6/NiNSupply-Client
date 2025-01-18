@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import Shop from "@/pages/RootView/Shop/Shop";
 import GiftCard from "@/pages/RootView/GiftCard/GiftCard";
 import Subscription from "@/pages/RootView/Subscription/Subscription";
+import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
 
 const Router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const Router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
       },
       {
         path: "my-profile",
