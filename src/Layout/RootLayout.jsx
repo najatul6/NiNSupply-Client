@@ -1,3 +1,4 @@
+import Footer from "@/components/RootView/common/Footer";
 import Header from "@/components/RootView/common/Header";
 import { Outlet } from "react-router-dom";
 
@@ -8,6 +9,7 @@ const RootLayout = () => {
       <div className="flex flex-col w-full">
         <Outlet />
       </div>
+      <Footer/>
     </div>
   );
 };
