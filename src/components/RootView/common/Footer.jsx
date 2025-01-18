@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
           {/* 1st Column */}
           <div>
-            <h4>About</h4>
+            <h4 className="text-baseColor uppercase font-bold tracking-wide">About</h4>
             <ul>
               <li>
                 <Link>Privacy Policy</Link>
@@ -18,7 +18,7 @@ const Footer = () => {
 
           {/* 2nd Column */}
           <div>
-            <h4>Support</h4>
+            <h4 className="text-baseColor uppercase font-bold tracking-wide">Support</h4>
             <ul>
               <li>
                 <Link>Contact Us</Link>
@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
           {/* 3rd Column */}
           <div>
-            <h4>Follow</h4>
+            <h4 className="text-baseColor uppercase font-bold tracking-wide">Follow</h4>
             <ul>
               <li>
                 <Link>Facebook</Link>
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
           {/* 4th Column */}
           <div>
-            <h4>Over 1,000 5-star reviews</h4>
+            <h4 className="text-baseColor uppercase font-bold tracking-wide">Over 1,000 5-star reviews</h4>
             {/* Avatars */}
             <div className="flex -space-x-1 overflow-hidden">
               <img
