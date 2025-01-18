@@ -1,5 +1,6 @@
 import Container from "@/components/common/Container"
 import ShopSidebar from "@/components/RootView/common/ShopSidebar"
+import { Outlet } from "react-router-dom"
 
 const Shop = () => {
   return (
@@ -8,7 +9,7 @@ const Shop = () => {
         {/* Sidebar */}
         <ShopSidebar/>
         <div className="flex flex-1 flex-col">
-          
+          <Outlet/>
         </div>
       </div>
     </Container>
