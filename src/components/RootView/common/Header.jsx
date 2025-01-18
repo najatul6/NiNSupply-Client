@@ -71,8 +71,8 @@ const Header = () => {
   };
 
   return (
-    <nav className="overflow-x-clip bg-background2">
-      <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
+    <nav className="overflow-x-clip ">
+      <div className="lg:w-11/12 mx-auto py-5 flex justify-between items-center relative">
         <div className="lg:hidden flex items-center gap-1">
           <div className="lg:hidden rounded-md border p-1">
             {!isMenuOpen ? (
@@ -92,7 +92,7 @@ const Header = () => {
 
             {
               <ul
-                className={`capitalize w-full py-5 flex animate__animated flex-col lg:hidden gap-5 absolute z-50 bg-background2 backdrop-blur-md  min-h-screen top-20  left-0 ${
+                className={`capitalize w-full py-5 flex animate__animated flex-col lg:hidden gap-5 absolute z-50  backdrop-blur-2xl px-5 min-h-screen top-20  left-0 ${
                   isMenuOpen
                     ? "animate__fadeInLeft "
                     : isPageLoad

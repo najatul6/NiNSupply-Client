@@ -1,7 +1,7 @@
 import Container from "@/components/common/Container";
 import ShopSidebar from "@/components/RootView/common/ShopSidebar";
 import { Outlet } from "react-router-dom";
-import { FaCircleChevronRight } from "react-icons/fa6";
+// import { FaCircleChevronRight } from "react-icons/fa6";
 import { useState } from "react";
 
 const Shop = () => {
@@ -10,10 +10,10 @@ const Shop = () => {
     <Container>
       <div className="flex min-h-screen w-full overflow-x-hidden">
         <div className="relative">
-          <ShopSidebar openSidebar={openSidebar} />
-          <button onClick={()=>setOpenSidebar(!openSidebar)}>
+          <ShopSidebar open={openSidebar} setOpen={setOpenSidebar} />
+          {/* <button onClick={()=>setOpenSidebar(!openSidebar)}>
           <FaCircleChevronRight size={30} className={`absolute top-20 -right-3 text-baseColor ${openSidebar?"":"rotate-180"}`} />
-          </button>
+          </button> */}
         </div>
         <div className="flex flex-1 flex-col">
           <Outlet />
