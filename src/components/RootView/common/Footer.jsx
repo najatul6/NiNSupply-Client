@@ -5,12 +5,12 @@ const Footer = () => {
   return (
     <footer className="bg-background2 mt-5">
       <Container>
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 py-5">
           {/* 1st Column */}
           <div>
             <h4 className="text-baseColor uppercase font-bold tracking-wide">About</h4>
             <ul>
-              <li>
+              <li className="font-light hover:underline ml-[2px] hover:text-baseColor">
                 <Link>Privacy Policy</Link>
               </li>
             </ul>
@@ -20,7 +20,7 @@ const Footer = () => {
           <div>
             <h4 className="text-baseColor uppercase font-bold tracking-wide">Support</h4>
             <ul>
-              <li>
+              <li className="font-light hover:underline ml-[2px] hover:text-baseColor">
                 <Link>Contact Us</Link>
               </li>
             </ul>
@@ -29,19 +29,19 @@ const Footer = () => {
           <div>
             <h4 className="text-baseColor uppercase font-bold tracking-wide">Follow</h4>
             <ul>
-              <li>
+              <li className="font-light hover:underline ml-[2px] hover:text-baseColor">
                 <Link>Facebook</Link>
               </li>
-              <li>
+              <li className="font-light hover:underline ml-[2px] hover:text-baseColor">
                 <Link>Twitter</Link>
               </li>
-              <li>
+              <li className="font-light hover:underline ml-[2px] hover:text-baseColor">
                 <Link>Instagram</Link>
               </li>
             </ul>
           </div>
           {/* 4th Column */}
-          <div>
+          <div className="flex flex-col items-start space-y-2">
             <h4 className="text-baseColor uppercase font-bold tracking-wide">Over 1,000 5-star reviews</h4>
             {/* Avatars */}
             <div className="flex -space-x-1 overflow-hidden">
@@ -120,7 +120,7 @@ const Footer = () => {
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
               </svg>
             </div>
-            <p>
+            <p className="underline font-merienda ">
               <span>&quot;Buy less, choose well.&quot;</span> - Vivienne
               Westwood
             </p>

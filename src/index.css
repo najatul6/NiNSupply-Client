@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Mooli&family=Poppins:ital,wght@0,400;1,100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,6 +23,10 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.font-merienda {
+  font-family: "Merienda", serif;
 }
 
 
