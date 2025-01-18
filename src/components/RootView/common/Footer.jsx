@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="bg-background2 mt-5">
       <Container>
         <div>
           {/* 1st Column */}
@@ -127,7 +127,12 @@ const Footer = () => {
           </div>
         </div>
       </Container>
-      <p></p>
+      <p className="bg-background mt-5 py-2 text-center">
+        &copy; All Right Reserved by -{" "}
+        <Link to="https://nin-supply.vercel.app/" target="_blank">
+          NiN Supply
+        </Link>
+      </p>
     </footer>
   );
 };
