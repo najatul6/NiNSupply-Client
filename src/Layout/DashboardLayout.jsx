@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen w-full relative">
       {/* Sidebar */}
-      <div className="h-full overflow-y-auto fixed border">
+      <div className="h-full overflow-y-auto fixed ">
         <DashboardSidebar open={openSidebar} setOpen={setOpenSidebar} />
       </div>
 
