@@ -1,7 +1,12 @@
+import Container from "@/components/common/Container"
 
 const Shop = () => {
   return (
-    <div>Shop</div>
+    <Container>
+      <div>
+        
+      </div>
+    </Container>
   )
 }
 
