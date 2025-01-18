@@ -3,7 +3,7 @@ import PopularProducts from "@/components/RootView/Home/PopularProducts/PopularP
 
 const Home = () => {
   const homeHeader =
-    "Order to Get ⚡Fastest Delivery | ";
+    "Your Gateway to ⚡ Ultra-Fast Delivery – Order Now! | Don’t Wait – Super Fast Delivery Awaits!";
   return (
     <div className="space-y-6">
       <h1 className="bg-[#1c1c1c] w-full py-4 text-center font-bold">
