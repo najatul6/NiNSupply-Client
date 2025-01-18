@@ -7,9 +7,11 @@ const DashboardLayout = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
-    <div className="flex min-h-screen w-full ">
+    <div className="flex min-h-screen w-full relative">
       {/* Sidebar */}
-      <DashboardSidebar open={openSidebar} setOpen={setOpenSidebar} />
+      <div className="h-full overflow-y-auto fixed border">
+        <DashboardSidebar open={openSidebar} setOpen={setOpenSidebar} />
+      </div>
 
       <div className="flex flex-1 flex-col">
         {/* Header */}
