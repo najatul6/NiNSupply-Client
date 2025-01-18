@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-background2 mt-5">
       <Container>
-        <div>
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
           {/* 1st Column */}
           <div>
             <h4 className="text-baseColor uppercase font-bold tracking-wide">About</h4>
