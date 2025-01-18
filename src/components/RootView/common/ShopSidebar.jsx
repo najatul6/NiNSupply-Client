@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const ShopSidebar = ({openSidebar}) => {
+const ShopSidebar = ({ open, setOpen }) => {
   const menu = [
     {
       name: "Home",
@@ -29,24 +29,31 @@ const ShopSidebar = ({openSidebar}) => {
     // },
   ];
   return (
-    <div className={`${openSidebar && "-translate-x-0"} lg:flex flex-col  gap-5 p-4 bg-background2`}>
-      <h3 className="text-xl uppercase">Product categories</h3>
-      <ul className="flex flex-col items-start gap-2 capitalize ml-4">
-        {menu.map((item) => (
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "border-b-2 border-baseColor text-baseColor font-medium transition duration-200"
-                : "hover:border-b-2 hover:border-baseColor transition duration-200"
-            }
-            key={item.path}
-            to={item.path}
-          >
-            {item.name}
-          </NavLink>
-        ))}
-      </ul>
-    </div>
+    <Fragment>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="left" className="w-64">
+          <div className="flex flex-col h-full">
+            <SheetHeader className="border-b">
+              <SheetTitle className="flex gap-2 mt-5 mb-5">
+                <ChartNoAxesCombined size={30} />
+                <h1 className="text-2xl font-extrabold">Admin Panel</h1>
+              </SheetTitle>
+            </SheetHeader>
+            <MenuItem setOpen={setOpen} />
+          </div>
+        </SheetContent>
+      </Sheet>
+      <aside className="hidden w-64 flex-col border-r bg-background p-6 lg:flex">
+        <div
+          onClick={() => navigate("/dashboard/overview")}
+          className="flex cursor-pointer items-center gap-2"
+        >
+          <ChartNoAxesCombined size={30} />
+          <h1 className="text-2xl font-extrabold">Admin Panel</h1>
+        </div>
+        <MenuItem />
+      </aside>
+    </Fragment>
   );
 };
 
