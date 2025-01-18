@@ -7,7 +7,9 @@ const Shop = () => {
       <div className="flex min-h-screen w-full">
         {/* Sidebar */}
         <ShopSidebar/>
-        <div className="flex flex-1 flex-col"></div>
+        <div className="flex flex-1 flex-col">
+          
+        </div>
       </div>
     </Container>
   )
