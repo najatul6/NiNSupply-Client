@@ -6,6 +6,7 @@ const Footer = () => {
     <footer>
       <Container>
         <div>
+          {/* 1st Column */}
           <div>
             <h4>About</h4>
             <ul>
@@ -14,6 +15,8 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* 2nd Column */}
           <div>
             <h4>Support</h4>
             <ul>
@@ -22,6 +25,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+          {/* 3rd Column */}
           <div>
             <h4>Follow</h4>
             <ul>
@@ -36,8 +40,10 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+          {/* 4th Column */}
           <div>
             <h4>Over 1,000 5-star reviews</h4>
+            {/* Avatars */}
             <div className="flex -space-x-1 overflow-hidden">
               <img
                 className="inline-block size-6 rounded-full ring-2 ring-white"
@@ -60,6 +66,8 @@ const Footer = () => {
                 alt=""
               />
             </div>
+
+            {/* Rating */}
             <div className="flex items-center">
               <svg
                 className="shrink-0 size-5 text-yellow-400 dark:text-yellow-600"
