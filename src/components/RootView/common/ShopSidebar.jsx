@@ -1,7 +1,10 @@
 
 const ShopSidebar = () => {
   return (
-    <div>ShopSidebar</div>
+    <div>
+        ShopSidebar
+
+    </div>
   )
 }
 
