@@ -8,11 +8,9 @@ const PopularProducts = () => {
     (product) => product.isPopular === true
   );
   return (
-    <Container>
-      <div className="space-y-6 my-10">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Popular Products
-        </h2>
+    <Container className="">
+      <h2 className="text-2xl font-bold text-center mb-6">Popular Products</h2>
+      <div className="">
         <ShopItem item={popularProduct} />
       </div>
     </Container>

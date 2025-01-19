@@ -1,4 +1,4 @@
-import ShopItem from "@/components/RootView/common/ShopItem";
+import ShopItem from "@/components/RootView/Shop/ShopItem";
 import ShopSidebar from "@/components/RootView/Shop/ShopSidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import useProduct from "@/hooks/useProduct";
