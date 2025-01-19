@@ -17,7 +17,6 @@ import Shop from "@/pages/RootView/Shop/Shop";
 import GiftCard from "@/pages/RootView/GiftCard/GiftCard";
 import Subscription from "@/pages/RootView/Subscription/Subscription";
 import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
-import ProductPage from "@/pages/RootView/Shop/ProductPage";
 
 const Router = createBrowserRouter([
   {
@@ -32,12 +31,6 @@ const Router = createBrowserRouter([
       {
         path: "shop",
         element: <Shop />,
-        children: [
-          {
-            path: "category/:name",
-            element: <ProductPage />,
-          },
-        ],
       },
       {
         path: "gift-card",
