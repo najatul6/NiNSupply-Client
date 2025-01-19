@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import brandImg from "../../../assets/ninSupply.svg";
@@ -34,6 +34,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
+  const { pathname } = useLocation();
   const menu = [
     {
       name: "Home",
@@ -55,7 +56,6 @@ const Header = () => {
       path: "/gift-card",
       type: "public",
     },
- 
   ];
 
   const handleLogOut = () => {
@@ -66,6 +66,7 @@ const Header = () => {
     });
   };
 
+  console.log(pathname);
   return (
     <nav className="overflow-x-clip ">
       <div className="lg:w-11/12 px-2 lg:px-0 mx-auto py-5 flex justify-between items-center relative">
@@ -100,7 +101,7 @@ const Header = () => {
                   <NavLink
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
-                      isActive
+                      isActive || (item.path === "/shop/popular" && pathname.startsWith("/shop"))
                         ? "border-b-2 border-baseColor font-medium text-baseColor transition  duration-200"
                         : "hover:border-b-2 hover:border-baseColor transition duration-200"
                     }
@@ -145,7 +146,7 @@ const Header = () => {
           {menu.map((item) => (
             <NavLink
               className={({ isActive }) =>
-                isActive
+                isActive || (item.path === "/shop/popular" && pathname.startsWith("/shop"))
                   ? "border-b-2 border-baseColor text-baseColor font-medium transition duration-200"
                   : "hover:border-b-2 hover:border-baseColor transition duration-200"
               }
