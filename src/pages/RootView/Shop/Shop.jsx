@@ -1,26 +1,30 @@
 import ShopSidebar from "@/components/RootView/Shop/ShopSidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Shop = () => {
-  const [category, setCategory] = useState("password");
-
+  const { category } = useParams();
+  const [activeCategory, setActiveCategory] = useState(category || "popular");
+  useEffect(() => {
+    setActiveCategory(category || "popular");
+  }, [category]);
   return (
     <Tabs
-      value={category}
-      onValueChange={setCategory}
+    value={activeCategory}
+    onValueChange={setActiveCategory}
       className="flex flex-col lg:flex-row min-h-screen w-full"
     >
       {/* Sidebar */}
       <ShopSidebar
-        category={category}
-        setCategory={setCategory}
+        category={activeCategory}
+        setCategory={setActiveCategory}
         className="w-full lg:w-64"
       />
 
       {/* Main Content */}
       <div className="flex-1 p-4">
-        <TabsContent value="password">
+        <TabsContent value="popular">
           <h2 className="text-xl font-bold mb-4">Password</h2>
           <p>
             Password ipsum dolor sit amet, consectetur adipisicing elit. Quos

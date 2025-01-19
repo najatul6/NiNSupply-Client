@@ -1,6 +1,6 @@
 
 const ShopSidebar = ({ category, setCategory }) => {
-  const categories = ["password", "account", "class", "candle"];
+  const categories = ["popular", "account", "class", "candle"];
 
   return (
     <div className="rounded-none lg:w-64 bg-background2 p-4 overflow-hidden">
