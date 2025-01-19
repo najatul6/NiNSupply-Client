@@ -2,35 +2,40 @@ import Container from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import useCategory from "@/hooks/useCategory";
 import { Link } from "react-router-dom";
+import ProductCardSkeleton from "../../common/ProductCardSkeleton";
 
 const CategoryZone = () => {
-  const [categories] = useCategory();
-
+  const [categories, isLoading] = useCategory();
+  
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-        {categories.map((item) => (
-          <div
-            key={item?._id}
-            className="bg-background2 rounded-md text-center relative group overflow-hidden transition duration-300"
-          >
-            <img
-              src={item?.thumbnail}
-              alt={item?.packageName}
-              className="w-full h-full mx-auto object-cover group-hover:scale-125 transition duration-500"
-            />
-            <div className="w-full h-full bg-background bg-blend-screen absolute inset-0 flex gap-3 flex-col justify-center items-start px-6 bg-opacity-85 rounded-md">
-              <h2 className="text-2xl uppercase font-bold text-white">
-                {item?.packageName}
-              </h2>
-              <Link to={`/shop/${item?.category}`}>
-                <Button className="bg-transparent border-baseColor border-2 uppercase font-semibold text-baseColor hover:bg-baseColor hover:text-black hover:border-white rounded-none">
-                  Shop Now
-                </Button>
-              </Link>
-            </div>
-          </div>
-        ))}
+        {isLoading
+          ? Array.from({ length: 4 }).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))
+          : categories.map((item) => (
+              <div
+                key={item?._id}
+                className="bg-background2 rounded-md text-center relative group overflow-hidden transition duration-300"
+              >
+                <img
+                  src={item?.thumbnail}
+                  alt={item?.packageName}
+                  className="w-full h-full mx-auto object-cover group-hover:scale-125 transition duration-500"
+                />
+                <div className="w-full h-full bg-background bg-blend-screen absolute inset-0 flex gap-3 flex-col justify-center items-start px-6 bg-opacity-85 rounded-md">
+                  <h2 className="text-2xl uppercase font-bold text-white">
+                    {item?.packageName}
+                  </h2>
+                  <Link to={`/shop/${item?.category}`}>
+                    <Button className="bg-transparent border-baseColor border-2 uppercase font-semibold text-baseColor hover:bg-baseColor hover:text-black hover:border-white rounded-none">
+                      Shop Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
       </div>
     </Container>
   );

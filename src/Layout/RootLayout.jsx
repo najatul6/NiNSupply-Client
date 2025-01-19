@@ -3,6 +3,8 @@ import Header from "@/components/RootView/common/Header";
 import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
+
+
   const homeHeader =
     "Your Gateway to ⚡ Ultra-Fast Delivery – Order Now! | Don’t Wait – Super Fast Delivery Awaits!";
   return (
@@ -14,7 +16,7 @@ const RootLayout = () => {
       <div className="flex flex-col w-full">
         <Outlet />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
