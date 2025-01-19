@@ -57,7 +57,6 @@ const ShopItem = ({ item }) => {
     </div>
   );
 };
-
 ShopItem.propTypes = {
   item: PropTypes.array
 };

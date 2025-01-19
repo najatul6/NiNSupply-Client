@@ -1,6 +1,6 @@
 import Container from "@/components/common/Container";
 import useProduct from "@/hooks/useProduct";
-import ShopItem from "../../Shop/ShopItem";
+import ShopItem from "../../common/ShopItem";
 
 const PopularProducts = () => {
   const [products] = useProduct();
