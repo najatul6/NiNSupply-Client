@@ -3,6 +3,10 @@ import sorry from "../../../assets/Animations/sorry.json";
 import PropTypes from "prop-types";
 
 const ShopItem = ({ item }) => {
+  const addToCart = (product) => {
+    console.log(product);
+    // Add to cart logic here
+  }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {!item || item.length === 0 ? (
@@ -31,8 +35,8 @@ const ShopItem = ({ item }) => {
                   <h3 className="text-xl font-semibold text-white">
                     {product.productName}
                   </h3>
-                  <span className="text-lg font-bold text-baseColor">
-                    ${product.price || "N/A"}
+                  <span className="text-lg font-bold text-baseColor flex justify-center items-center">
+                 {product.price || "N/A"}৳
                   </span>
                 </div>
                 {/* Description list */}
@@ -45,7 +49,7 @@ const ShopItem = ({ item }) => {
                 </ul>
               </div>
               <button
-                // onClick={() => addToCart(product)}
+                onClick={() => addToCart(product)}
                 disabled={product.stock === 0}
                 className="my-2 inline-block px-6 py-2 bg-baseColor text-background rounded-md hover:bg-baseColor-dark transition-all w-2/3 mx-auto font-medium"
               >
