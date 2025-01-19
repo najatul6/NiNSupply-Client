@@ -42,7 +42,7 @@ const Header = () => {
     },
     {
       name: "Shop",
-      path: "/shop",
+      path: "/shop/popular",
       type: "public",
     },
     {
