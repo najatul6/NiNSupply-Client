@@ -1,8 +1,9 @@
+import useCategory from "@/hooks/useCategory";
 import PropTypes from "prop-types";
 
 const ShopSidebar = ({ category, setCategory }) => {
-  const categories = ["popular", "account", "class", "candle"];
-
+  const [categories] = useCategory();
+  console.log(categories);
   return (
     <div className="rounded-none lg:w-64 bg-background2 p-4 overflow-hidden">
       <h1 className="text-xl font-bold mb-4 text-center lg:text-left">
@@ -12,17 +13,28 @@ const ShopSidebar = ({ category, setCategory }) => {
 
       {/* Desktop Grid */}
       <div className="lg:grid gap-4 bg-background2 rounded-md hidden">
-        {categories.map((cat) => (
+        <button
+          onClick={() => setCategory("popular")}
+          className={`text-left px-4 py-2 text-lg rounded-md transition-colors hover:text-baseColor capitalize ${
+            category === "popular"
+              ? "text-baseColor font-bold border-b-2 border-baseColor" // Active styles
+              : "bg-transparent text-white hover:font-bold" // Default styles
+          }`}
+        >
+          {" "}
+          Popular
+        </button>
+        {categories?.map((item) => (
           <button
-            key={cat}
-            onClick={() => setCategory(cat)}
+            key={item?._id}
+            onClick={() => setCategory(item?.category)}
             className={`text-left px-4 py-2 text-lg rounded-md transition-colors hover:text-baseColor capitalize ${
-              category === cat
+              category === item?.category
                 ? "text-baseColor font-bold border-b-2 border-baseColor" // Active styles
                 : "bg-transparent text-white hover:font-bold" // Default styles
             }`}
           >
-            {cat}
+            {item?.category}
           </button>
         ))}
       </div>
@@ -34,9 +46,9 @@ const ShopSidebar = ({ category, setCategory }) => {
           onChange={(e) => setCategory(e.target.value)}
           className="px-4 py-2 text-sm rounded-md bg-transparent active:bg-transparent focus:bg-gray-600 border border-baseColor text-baseColor"
         >
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          {categories.map((item) => (
+            <option key={item?._id} value={item?.category}>
+              {item?.category}
             </option>
           ))}
         </select>
