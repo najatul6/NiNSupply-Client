@@ -9,7 +9,7 @@ const PopularProducts = () => {
   );
   return (
     <Container className="">
-      <h2 className="text-2xl font-bold text-center mb-6">Popular Products</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">Popular Services</h2>
       <div className="">
         <ShopItem item={popularProduct} />
       </div>
