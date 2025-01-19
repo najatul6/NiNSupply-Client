@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const ShopSidebar = ({ category, setCategory }) => {
   const [categories] = useCategory();
-  console.log(categories);
   return (
     <div className="rounded-none lg:w-64 bg-background2 p-4 overflow-hidden">
       <h1 className="text-xl font-bold mb-4 text-center lg:text-left">
