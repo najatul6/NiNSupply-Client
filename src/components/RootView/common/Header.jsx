@@ -72,7 +72,7 @@ const Header = () => {
 
   return (
     <nav className="overflow-x-clip ">
-      <div className="lg:w-11/12 mx-auto py-5 flex justify-between items-center relative">
+      <div className="lg:w-11/12 px-2 lg:px-0 mx-auto py-5 flex justify-between items-center relative">
         <div className="lg:hidden flex items-center gap-1">
           <div className="lg:hidden rounded-md border p-1">
             {!isMenuOpen ? (
