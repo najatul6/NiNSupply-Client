@@ -10,23 +10,23 @@ const Shop = () => {
   const { category } = useParams();
   const [activeCategory, setActiveCategory] = useState(category || "popular");
   const navigate = useNavigate();
-  const [products,isLoading] = useProduct();
-  
+  const [products, isLoading] = useProduct();
+
   useEffect(() => {
     const updatedCategory = category || "popular";
     setActiveCategory(updatedCategory);
     navigate(`/shop/${updatedCategory}`, { replace: true });
   }, [category, navigate]);
-  
 
   // Filter products based on the active category
   let filteredProducts = [];
   if (activeCategory === "popular") {
-    filteredProducts = products.filter(product => product.isPopular === true);
+    filteredProducts = products.filter((product) => product.isPopular === true);
   } else {
-    filteredProducts = products.filter(product => product.category === activeCategory);
+    filteredProducts = products.filter(
+      (product) => product.category === activeCategory
+    );
   }
-  console.log(filteredProducts);
 
   return (
     <Tabs
@@ -46,17 +46,19 @@ const Shop = () => {
         <TabsContent value={activeCategory}>
           {/* Render filtered products */}
           <h2 className="text-xl font-bold mb-4 capitalize">
-            {activeCategory === "popular" ? "Popular Products" : `${activeCategory} Zone`}
+            {activeCategory === "popular"
+              ? "Popular Products"
+              : `${activeCategory} Zone`}
           </h2>
-          {
-            isLoading
-            ?<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <ProductCardSkeleton key={index} />
-            ))}
-          </div> :<ShopItem item={filteredProducts} />
-          }
-          
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <ShopItem item={filteredProducts} />
+          )}
         </TabsContent>
       </div>
     </Tabs>
