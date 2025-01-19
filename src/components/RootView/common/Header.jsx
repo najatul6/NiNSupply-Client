@@ -29,12 +29,14 @@ import {
 } from "@/components/ui/sheet";
 import MyCart from "@/pages/RootView/MyCart/MyCart";
 import { Button } from "@/components/ui/button";
+import useCart from "@/hooks/useCart";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
+  const {cart}=useCart()
   const menu = [
     {
       name: "Home",
@@ -162,7 +164,7 @@ const Header = () => {
               <div className="flex justify-center items-center relative cursor-pointer">
                 <CiShoppingCart size={40} className="text-baseColor" />
                 <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">
-                  10
+                 {cart?.length}
                 </p>
               </div>
             </SheetTrigger>
@@ -170,7 +172,7 @@ const Header = () => {
               <SheetHeader>
                 <div className="flex justify-between items-center pt-4 px-2">
                   <SheetTitle className="text-white">MY Carts</SheetTitle>
-                  <SheetTitle className="text-white">10</SheetTitle>
+                  <SheetTitle className="text-white">{cart?.length}</SheetTitle>
                 </div>
                 <hr />
               </SheetHeader>

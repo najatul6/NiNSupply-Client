@@ -6,7 +6,7 @@ const updateCartInLocalStorage = (updatedCart) => {
   localStorage.setItem("cart", JSON.stringify(updatedCart));
 };
 
-const OrderCard = ({ product }) => {
+const OrderCard = ({ product, refetch }) => {
   const [quantity, setQuantity] = useState(product.quantity);
 
   // Handle quantity change
@@ -14,6 +14,7 @@ const OrderCard = ({ product }) => {
     const updatedQuantity = quantity + 1;
     setQuantity(updatedQuantity);
     updateCart(product.id, updatedQuantity);
+    refetch();  // Refetch cart after updating
   };
 
   const handleDecrement = () => {
@@ -21,6 +22,7 @@ const OrderCard = ({ product }) => {
       const updatedQuantity = quantity - 1;
       setQuantity(updatedQuantity);
       updateCart(product.id, updatedQuantity);
+      refetch();  // Refetch cart after updating
     }
   };
 
@@ -29,6 +31,7 @@ const OrderCard = ({ product }) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const updatedCart = storedCart.filter(item => item.id !== product.id);
     updateCartInLocalStorage(updatedCart);
+    refetch();  // Refetch cart after removal
   };
 
   // Update cart data in localStorage

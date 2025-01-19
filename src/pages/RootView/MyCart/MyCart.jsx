@@ -1,32 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import OrderCard from "@/components/RootView/MyCart/OrderCard";
-
-// Function to get cart from localStorage
-const getCartFromLocalStorage = () => {
-  const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : [];
-};
-
-// Custom hook to use cart data
-const useCart = () => {
-  const { data: cart = [], isLoading, isError } = useQuery({
-    queryKey: ["cart"], // Cart data query key
-    queryFn: getCartFromLocalStorage, // Fetch from localStorage
-    staleTime: Infinity, // No need to refetch since it's localStorage data
-  });
-
-  return { cart, isLoading, isError };
-};
+import useCart from "@/hooks/useCart";
 
 const MyCart = () => {
-  const { cart, isLoading, isError } = useCart();
+  const { cart, isLoading, refetch } = useCart();
 
   if (isLoading) {
     return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching cart data</div>;
   }
 
   return (
@@ -39,7 +18,7 @@ const MyCart = () => {
             </div>
           ) : (
             cart.map((product) => (
-              <OrderCard key={product.id} product={product} />
+              <OrderCard key={product.id} product={product} refetch={refetch} />
             ))
           )}
         </div>
