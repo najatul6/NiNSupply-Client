@@ -4,9 +4,9 @@ import useProduct from "@/hooks/useProduct";
 const PopularProducts = () => {
   const [products] = useProduct();
   const popularProduct = products.filter(
-    (product) => product.category === "popular"
+    (product) => product.isPopular === true
   );
-
+  const exchangeRate = 120;
   return (
     <Container className="">
       <h2 className="text-2xl font-bold text-center mb-6">Popular Products</h2>
@@ -28,7 +28,7 @@ const PopularProducts = () => {
                   {product.productName}
                 </h3>
                 <p className="text-xl font-bold text-green-500">
-                  ${product.price}
+                ${ (product.price / exchangeRate).toFixed(2) }
                 </p>
               </div>
               <ul className="list-disc list-inside text-sm text-gray-500 marker:text-blue-500 mb-4">
