@@ -26,7 +26,7 @@ const Shop = () => {
   if (activeCategory === "popular") {
     filteredProducts = products.filter(product => product.isPopular === true);
   } else {
-    filteredProducts = products.filter(product => product.category === activeCategory && product.isPopular === false);
+    filteredProducts = products.filter(product => product.category === activeCategory);
   }
   console.log(filteredProducts);
 
@@ -48,7 +48,7 @@ const Shop = () => {
         <TabsContent value={activeCategory}>
           {/* Render filtered products */}
           <h2 className="text-xl font-bold mb-4">
-            {activeCategory === "popular" ? "Popular Products" : `${activeCategory} Zone Products`}
+            {activeCategory === "popular" ? "Popular Products" : `${activeCategory} Zone`}
           </h2>
           <ShopItem item={filteredProducts} />
         </TabsContent>
