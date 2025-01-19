@@ -5,7 +5,7 @@ const ShopSidebar = ({ category, setCategory }) => {
   return (
     <div className="rounded-none lg:w-64 bg-background2 p-4 overflow-hidden">
       <h1 className="text-xl font-bold mb-4 text-center lg:text-left">Categories</h1>
-
+<hr className="hidden lg:block my-5"/>
       {/* Desktop Grid */}
       <div className="lg:grid gap-4 bg-background2 rounded-md hidden">
         {categories.map((cat) => (
@@ -15,7 +15,7 @@ const ShopSidebar = ({ category, setCategory }) => {
             className={`text-left px-4 py-2 text-lg  rounded-md transition-colors hover:text-baseColor capitalize ${
               category === cat
                 ? " text-baseColor font-bold border border-baseColor" // Active styles
-                : "bg-transparent text-white hover:underline" // Default styles
+                : "bg-transparent text-white hover:font-bold" // Default styles
             }`}
           >
             {cat}
