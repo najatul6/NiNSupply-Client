@@ -11,20 +11,24 @@ const Shop = () => {
   const navigate = useNavigate();
   const [products] = useProduct();
   
+  // Effect to update active category from URL
   useEffect(() => {
     setActiveCategory(category || "popular");
   }, [category]);
 
+  // Effect to update URL when active category changes
   useEffect(() => {
-    // Whenever the category changes, update the URL
     navigate(`/shop/${activeCategory}`);
   }, [activeCategory, navigate]);
 
-  const popularProduct = products.filter(
-    (product) => product.category === "popular"
-  );
-
-  const email=products.filter(product=>product.category==="email")
+  // Filter products based on the active category
+  let filteredProducts = [];
+  if (activeCategory === "popular") {
+    filteredProducts = products.filter(product => product.isPopular === true);
+  } else {
+    filteredProducts = products.filter(product => product.category === activeCategory && product.isPopular === false);
+  }
+  console.log(filteredProducts);
 
   return (
     <Tabs
@@ -42,13 +46,11 @@ const Shop = () => {
       {/* Main Content */}
       <div className="flex-1 p-4">
         <TabsContent value={activeCategory}>
-        <ShopItem item={popularProduct}/>
-        </TabsContent>
-        <TabsContent value={activeCategory}>
-        <ShopItem item={email}/>
-        </TabsContent>
-        <TabsContent value={activeCategory}>
-        <ShopItem item={email}/>
+          {/* Render filtered products */}
+          <h2 className="text-xl font-bold mb-4">
+            {activeCategory === "popular" ? "Popular Products" : `${activeCategory} Zone Products`}
+          </h2>
+          <ShopItem item={filteredProducts} />
         </TabsContent>
       </div>
     </Tabs>

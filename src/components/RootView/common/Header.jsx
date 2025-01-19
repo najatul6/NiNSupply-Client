@@ -66,7 +66,6 @@ const Header = () => {
     });
   };
 
-  console.log(pathname);
   return (
     <nav className="overflow-x-clip ">
       <div className="lg:w-11/12 px-2 lg:px-0 mx-auto py-5 flex justify-between items-center relative">

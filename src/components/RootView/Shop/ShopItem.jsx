@@ -1,5 +1,6 @@
 
 const ShopItem = ({item}) => {
+    console.log(item);
   return (
     <div>
         {item?.map((product) => (
