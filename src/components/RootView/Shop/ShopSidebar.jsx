@@ -4,7 +4,7 @@ const ShopSidebar = ({ category, setCategory }) => {
 
   return (
     <div className="rounded-none lg:w-64 bg-background2 p-4 overflow-hidden">
-      <h1 className="text-lg font-bold mb-4 text-center lg:text-left">Categories</h1>
+      <h1 className="text-xl font-bold mb-4 text-center lg:text-left">Categories</h1>
 
       {/* Desktop Grid */}
       <div className="lg:grid gap-4 bg-background2 rounded-md hidden">
@@ -12,13 +12,13 @@ const ShopSidebar = ({ category, setCategory }) => {
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`text-left px-4 py-2 text-sm rounded-md transition-colors ${
+            className={`text-left px-4 py-2 text-lg  rounded-md transition-colors hover:text-baseColor capitalize ${
               category === cat
-                ? "bg-red-600 text-white font-bold" // Active styles
-                : "bg-transparent text-gray-700 hover:bg-gray-200" // Default styles
+                ? " text-baseColor font-bold border border-baseColor" // Active styles
+                : "bg-transparent text-white hover:underline" // Default styles
             }`}
           >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            {cat}
           </button>
         ))}
       </div>
@@ -28,7 +28,7 @@ const ShopSidebar = ({ category, setCategory }) => {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="px-4 py-2 text-sm rounded-md bg-transparent active:bg-transparent focus:bg-gray-600 border border-gray-300"
+          className="px-4 py-2 text-sm rounded-md bg-transparent active:bg-transparent focus:bg-gray-600 border border-baseColor text-baseColor"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
