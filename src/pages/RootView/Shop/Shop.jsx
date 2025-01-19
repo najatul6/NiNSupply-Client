@@ -1,3 +1,4 @@
+import ProductCardSkeleton from "@/components/RootView/common/ProductCardSkeleton";
 import ShopItem from "@/components/RootView/common/ShopItem";
 import ShopSidebar from "@/components/RootView/Shop/ShopSidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
@@ -9,17 +10,14 @@ const Shop = () => {
   const { category } = useParams();
   const [activeCategory, setActiveCategory] = useState(category || "popular");
   const navigate = useNavigate();
-  const [products] = useProduct();
+  const [products,isLoading] = useProduct();
   
-  // Effect to update active category from URL
   useEffect(() => {
-    setActiveCategory(category || "popular");
-  }, [category]);
-
-  // Effect to update URL when active category changes
-  useEffect(() => {
-    navigate(`/shop/${activeCategory}`);
-  }, [activeCategory, navigate]);
+    const updatedCategory = category || "popular";
+    setActiveCategory(updatedCategory);
+    navigate(`/shop/${updatedCategory}`, { replace: true });
+  }, [category, navigate]);
+  
 
   // Filter products based on the active category
   let filteredProducts = [];
@@ -47,10 +45,18 @@ const Shop = () => {
       <div className="flex-1 p-4">
         <TabsContent value={activeCategory}>
           {/* Render filtered products */}
-          <h2 className="text-xl font-bold mb-4">
+          <h2 className="text-xl font-bold mb-4 capitalize">
             {activeCategory === "popular" ? "Popular Products" : `${activeCategory} Zone`}
           </h2>
-          <ShopItem item={filteredProducts} />
+          {
+            isLoading
+            ?<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))}
+          </div> :<ShopItem item={filteredProducts} />
+          }
+          
         </TabsContent>
       </div>
     </Tabs>

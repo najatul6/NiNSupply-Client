@@ -1,16 +1,17 @@
-import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
+import useProduct from "@/hooks/useProduct";
+import ProductCardSkeleton from "../../common/ProductCardSkeleton";
 
 const Wholesale = () => {
-  const [products, loading] = useProduct(); // Assuming `useProduct` provides a loading state
+  const [products, isLoading] = useProduct(); // Assuming `useProduct` provides a loading state
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Wholesale Price Supply Only</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {loading
+        {isLoading
           ? Array.from({ length: 8 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
-            )) // Render 8 skeletons while loading
+            )) 
           : products?.length > 0
           ? products.map((product) => (
               <div
