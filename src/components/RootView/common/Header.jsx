@@ -55,11 +55,7 @@ const Header = () => {
       path: "/gift-card",
       type: "public",
     },
-    // {
-    //   name: "about",
-    //   path: "/about",
-    //   type: "public",
-    // },
+ 
   ];
 
   const handleLogOut = () => {

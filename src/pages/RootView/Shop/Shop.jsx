@@ -32,6 +32,7 @@ const Shop = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-4">
+        
         <TabsContent value="popular">
           <h2 className="text-xl font-bold mb-4">Popular</h2>
           <p>Popular category content...</p>
