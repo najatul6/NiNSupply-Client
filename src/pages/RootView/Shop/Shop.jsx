@@ -1,3 +1,5 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
@@ -10,7 +12,7 @@ const Shop = () => {
         <TabsTrigger value="password">Password</TabsTrigger>
       </TabsList>
       <TabsContent value="account">
-        {/* <Card>
+        <Card>
           <CardHeader>
             <CardTitle>Account</CardTitle>
             <CardDescription>
@@ -30,7 +32,7 @@ const Shop = () => {
           <CardFooter>
             <Button>Save changes</Button>
           </CardFooter>
-        </Card> */}
+        </Card>
       </TabsContent>
       <TabsContent value="password">
         <Card>
