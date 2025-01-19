@@ -21,7 +21,6 @@ const ShopSidebar = ({ category, setCategory }) => {
               : "bg-transparent text-white hover:font-bold" // Default styles
           }`}
         >
-          {" "}
           Popular
         </button>
         {categories?.map((item) => (
@@ -46,6 +45,7 @@ const ShopSidebar = ({ category, setCategory }) => {
           onChange={(e) => setCategory(e.target.value)}
           className="px-4 py-2 text-sm rounded-md bg-transparent active:bg-transparent focus:bg-gray-600 border border-baseColor text-baseColor"
         >
+          <option value="popular">Popular</option>
           {categories.map((item) => (
             <option key={item?._id} value={item?.category}>
               {item?.category}
