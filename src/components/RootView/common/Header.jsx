@@ -36,7 +36,9 @@ const Header = () => {
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
-  const {cart}=useCart()
+  const [cart]=useCart()
+  const totalPrice=cart.reduce((acc,curr)=>acc+curr.price,0)
+  console.log(cart);
   const menu = [
     {
       name: "Home",
@@ -164,15 +166,15 @@ const Header = () => {
               <div className="flex justify-center items-center relative cursor-pointer">
                 <CiShoppingCart size={40} className="text-baseColor" />
                 <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">
-                 {cart?.length}
+                 {cart?.length} 
                 </p>
               </div>
             </SheetTrigger>
             <SheetContent className="w-full flex flex-col">
               <SheetHeader>
                 <div className="flex justify-between items-center pt-4 px-2">
-                  <SheetTitle className="text-white">MY Carts</SheetTitle>
-                  <SheetTitle className="text-white">{cart?.length}</SheetTitle>
+                  <SheetTitle className="text-white">Total Price</SheetTitle>
+                  <SheetTitle className="text-white">{totalPrice}৳</SheetTitle>
                 </div>
                 <hr />
               </SheetHeader>

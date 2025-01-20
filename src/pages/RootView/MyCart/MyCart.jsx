@@ -2,7 +2,7 @@ import OrderCard from "@/components/RootView/MyCart/OrderCard";
 import useCart from "@/hooks/useCart";
 
 const MyCart = () => {
-  const { cart, isLoading, refetch } = useCart();
+  const { cart,refetch,isLoading } = useCart();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -18,7 +18,8 @@ const MyCart = () => {
             </div>
           ) : (
             cart.map((product) => (
-              <OrderCard key={product.id} product={product} refetch={refetch} />
+              // <OrderCard key={product.id} product={product} refetch={refetch} />
+              console.log(product);
             ))
           )}
         </div>

@@ -5,6 +5,7 @@ import useAuth from "@/hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
+import { toast } from "react-toastify";
 
 const ShopItem = ({ item }) => {
   const { user } = useAuth();
@@ -15,14 +16,23 @@ const ShopItem = ({ item }) => {
 
   const addToCart = (product) => {
     if (user && user?.email) {
-      const productInfo = {
+      const cartsItem = {
         itemId: product._id,
+        userEmail: user?.email,
         productName: product.productName,
         price: product.price,
         quantity: 1,
       };
+      axiosSecure.post('/carts', cartsItem)
+      .then(res=>{
+        if(res.data.insertedId){
+          toast.success("Product added to cart successfully");
+          refetch();
+        }
+      })
+    }else{
+      navigate('/auth/login', { state: { from: location } })
     }
-    console.log(product);
   };
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-8">
