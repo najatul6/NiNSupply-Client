@@ -1,6 +1,6 @@
 [
   {
-    "id": "prd-00u1",
+    
     "productName": "Facebook Business Manager (BM)",
     "description": [
       "5 pcs BM",
@@ -13,11 +13,12 @@
     "discount": "10",
     "thumbnail": "https://miro.medium.com/v2/resize:fit:2000/1*96kJbTZKvZCwVPm6NTaCWQ.jpeg",
     "category": "facebook",
-    "stock": 50,
+    "stock":"50",
+    "quantity": "5",
     "isPopular": true
   },
   {
-    "id": "prd-00u2",
+    
     "productName": "Facebook 2-FA ID",
     "description": [
       "2-FA Enabled",
@@ -29,11 +30,12 @@
     "discount": "5",
     "thumbnail": "https://cdn.logojoy.com/wp-content/uploads/20230921104358/09-18-23_Facebook-Logo-Evolution_Header.jpg",
     "category": "facebook",
-    "stock": 100,
+    "stock": "100",
+    "quantity": "5",
     "isPopular": false
   },
   {
-    "id": "prd-00u3",
+    
     "productName": "Google Ads Account",
     "description": [
       "Verified Google Ads Account",
@@ -45,11 +47,12 @@
     "discount": "15",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKCNok5J9kM1lw4u2H4pTSXJatN6CE2Ld_4g&s",
     "category": "google",
-    "stock": 40,
+    "stock": "40",
+    "quantity": "5",
     "isPopular": false
   },
   {
-    "id": "prd-00u4",
+    
     "productName": "Twitter Ads Account",
     "description": [
       "Ready to Run Campaigns",
@@ -61,11 +64,12 @@
     "discount": "10",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIwoHBMV-VjqOZ0mvIJ1wzsIySakMFgLeFw&s",
     "category": "twitter",
-    "stock": 30,
+    "stock": "30",
+    "quantity": "5",
     "isPopular": false
   },
   {
-    "id": "prd-00u5",
+    
     "productName": "LinkedIn Premium Account",
     "description": [
       "1 Year Subscription",
@@ -77,11 +81,12 @@
     "discount": "20",
     "thumbnail": "https://media.licdn.com/dms/image/v2/C4D12AQGxF8csWCxTwQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1572442461597?e=2147483647&v=beta&t=KLen6zvgihorO0VhdLV9o_8-VUJzR6HdvAKvLgozjO8",
     "category": "linkedin",
-    "stock": 20,
+    "stock": "20",
+    "quantity": "5",
     "isPopular": false
   },
   {
-    "id": "prd-00u6",
+    
     "productName": "Instagram Business Account",
     "description": [
       "Verified Business Profile",
@@ -93,7 +98,8 @@
     "discount": "10",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGAln80GFCnhhoTMN_mTzK-jIfFXHZQ6W5Rw&s",
     "category": "instagram",
-    "stock": 45,
+    "stock": "45",
+    "quantity": "5",
     "isPopular": true
   }
 ]

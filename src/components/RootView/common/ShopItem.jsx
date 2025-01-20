@@ -21,39 +21,17 @@ const ShopItem = ({ item }) => {
         userEmail: user?.email,
         productName: product.productName,
         price: parseFloat(product.price),
-        quantity: 1,
-      }
-      try {
-        // Fetch existing cart items
-        const response = await axiosSecure.get(`/carts?email=${user.email}`);
-        const existingCartItem = response.data.find(
-          (item) => item.itemId === product._id
-        );
-  
-        if (existingCartItem) {
-          // If item exists, increment its quantity and update price
-          const updatedItem = {
-            ...existingCartItem,
-            quantity: existingCartItem.quantity + 1,
-            price: parseFloat(product.price), // Ensure price is numeric
-          };
-          await axiosSecure.put(`/carts/${existingCartItem._id}`, updatedItem);
-          toast.success("Product quantity and price updated in the cart");
-        } else {
-          // If item doesn't exist, add it to the cart
-          const res = await axiosSecure.post('/carts', cartsItem);
-          if (res.data.insertedId) {
-            toast.success("Product added to cart successfully");
-          }
+        quantity: product.quantity,
+      };
+      axiosSecure.post('/carts', cartsItem)
+      .then(res=>{
+        if(res.data.insertedId){
+          toast.success("Product added to cart successfully");
+          refetch();
         }
-  
-        refetch(); // Refresh cart data
-      } catch (error) {
-        console.error("Error updating cart:", error);
-        toast.error("Failed to update the cart. Please try again.");
-      }
-    } else {
-      navigate('/auth/login', { state: { from: location } });
+      })
+    }else{
+      navigate('/auth/login', { state: { from: location } })
     }
   };
   return (
@@ -89,7 +67,7 @@ const ShopItem = ({ item }) => {
                   </span>
                 </div>
                 {/* Description list */}
-                <ul className="text-sm text-gray-500 hidden">
+                <ul className="text-sm text-gray-500 hidden md:block">
                   {product.description?.map((desc, index) => (
                     <li key={index} className="list-disc ml-5">
                       {desc}
