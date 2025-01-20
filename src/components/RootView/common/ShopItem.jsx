@@ -20,7 +20,7 @@ const ShopItem = ({ item }) => {
         itemId: product._id,
         userEmail: user?.email,
         productName: product.productName,
-        price: parseFloat(product.price),
+        price: product.price,
         quantity: product.quantity,
       };
       axiosSecure.post('/carts', cartsItem)
