@@ -1,39 +1,37 @@
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const OrderCard = ({ product, refetch }) => {
-
+  const axiosSecure = useAxiosSecure();
+  const handleRemove = (id) => {
+    // axiosSecure.delete(`/carts/${id}`).then((res) => {
+    //   if (res.data.deletedCount > 0) {
+    //     refetch();
+    //     toast.success("Product removed from cart");
+    //   }
+    // });
+    console.log(id);
+  };
   return (
     <div className="border p-2">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-lg font-bold">{product.productName}</h1>
+          <h1 className="text-lg font-bold">{product?.productName}</h1>
         </div>
         <div>
-          <p className="text-lg font-bold">{product.price}৳</p>
+          <p className="text-lg font-bold">{product?.price}৳</p>
         </div>
       </div>
 
       <div className="flex justify-between items-center mt-2">
-        <div>
-          <button
-            className="bg-baseColor text-white px-4 py-1 rounded-md"
-            // onClick={handleDecrement}
-          >
-            -
-          </button>
-          <span className="px-4">{product.quantity}</span>
-          <button
-            className="bg-baseColor text-white px-4 py-1 rounded-md"
-            // onClick={handleIncrement}
-          >
-            +
-          </button>
-        </div>
+        <span className="px-4 capitalize">quantity : {product?.quantity}</span>
 
         <div>
           <button
             className="bg-red-500 text-white px-2 py-1 rounded-md"
-            // onClick={handleRemove}
+            onClick={()=>handleRemove(product._id)}
           >
             <RiDeleteBin2Fill />
           </button>
@@ -41,6 +39,11 @@ const OrderCard = ({ product, refetch }) => {
       </div>
     </div>
   );
+};
+
+OrderCard.propTypes = {
+  product: PropTypes.object,
+  refetch: PropTypes.func,
 };
 
 export default OrderCard;
