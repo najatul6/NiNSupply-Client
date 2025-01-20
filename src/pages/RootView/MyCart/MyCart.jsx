@@ -2,8 +2,8 @@ import OrderCard from "@/components/RootView/MyCart/OrderCard";
 import useCart from "@/hooks/useCart";
 
 const MyCart = () => {
-  const { cart,refetch,isLoading } = useCart();
-
+  const [ cart,refetch,isLoading]  = useCart();
+  console.log(cart?.length);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -12,14 +12,13 @@ const MyCart = () => {
     <div>
       <div className="grid gap-6 py-4 overflow-y-auto overflow-x-hidden">
         <div className="grid grid-cols-1 gap-6">
-          {cart.length === 0 ? (
-            <div className="text-center text-lg text-gray-500">
+          {cart?.length === 0 ? (
+            <div className="text-center text-lg text-red-500">
               Your cart is empty.
             </div>
           ) : (
-            cart.map((product) => (
-              // <OrderCard key={product.id} product={product} refetch={refetch} />
-              console.log(product);
+            cart?.map((product) => (
+              <OrderCard key={product.id} product={product} refetch={refetch} />
             ))
           )}
         </div>

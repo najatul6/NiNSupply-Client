@@ -17,14 +17,14 @@ const OrderCard = ({ product, refetch }) => {
         <div>
           <button
             className="bg-baseColor text-white px-4 py-1 rounded-md"
-            onClick={handleDecrement}
+            // onClick={handleDecrement}
           >
             -
           </button>
-          <span className="px-4">{quantity}</span>
+          <span className="px-4">{product.quantity}</span>
           <button
             className="bg-baseColor text-white px-4 py-1 rounded-md"
-            onClick={handleIncrement}
+            // onClick={handleIncrement}
           >
             +
           </button>
@@ -33,7 +33,7 @@ const OrderCard = ({ product, refetch }) => {
         <div>
           <button
             className="bg-red-500 text-white px-2 py-1 rounded-md"
-            onClick={handleRemove}
+            // onClick={handleRemove}
           >
             <RiDeleteBin2Fill />
           </button>

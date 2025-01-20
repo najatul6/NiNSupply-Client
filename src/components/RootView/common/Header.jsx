@@ -37,8 +37,7 @@ const Header = () => {
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const [cart]=useCart()
-  const totalPrice=cart.reduce((acc,curr)=>acc+curr.price,0)
-  console.log(cart);
+  const totalPrice = cart?.reduce((acc, curr) => acc + parseFloat(curr.price || 0), 0);
   const menu = [
     {
       name: "Home",
