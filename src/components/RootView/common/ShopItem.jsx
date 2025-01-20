@@ -2,9 +2,14 @@ import Lottie from "lottie-react";
 import sorry from "../../../assets/Animations/sorry.json";
 import PropTypes from "prop-types";
 import useAuth from "@/hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const ShopItem = ({ item }) => {
-  const {user}=useAuth()
+  const {user}=useAuth();
+  const location = useLocation();
+  const navigate=useNavigate()
+  const axiosSecure=useAxiosSecure();
   
 
   const addToCart = (product) => {
