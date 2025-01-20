@@ -1,20 +1,13 @@
 import Lottie from "lottie-react";
 import sorry from "../../../assets/Animations/sorry.json";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
 
 const ShopItem = ({ item }) => {
-  // Retrieve cart from localStorage (if any)
-  const getCartFromLocalStorage = () => {
-    const storedCart = localStorage.getItem('cart');
-    return storedCart ? JSON.parse(storedCart) : [];
-  };
-
-  const [cart, setCart] = useState(getCartFromLocalStorage());
+  const {user}=useAuth()
+  
 
   const addToCart = (product) => {
-    console.log("Adding product to cart:", product);
-
     // Create productInfo to save to cart
     const productInfo = {
       id: product._id,
@@ -23,25 +16,7 @@ const ShopItem = ({ item }) => {
       quantity: 1,
     };
 
-    // Check if product already exists in the cart
-    const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex(
-      (item) => item.id === product._id
-    );
-
-    if (existingProductIndex >= 0) {
-      // Product already in the cart, increase quantity
-      updatedCart[existingProductIndex].quantity += 1;
-    } else {
-      // Add new product to the cart
-      updatedCart.push(productInfo);
-    }
-
-    // Save updated cart to localStorage
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
     
-    // Update the state for UI
-    setCart(updatedCart);
   };
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
