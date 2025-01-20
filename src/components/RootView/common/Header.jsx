@@ -160,7 +160,7 @@ const Header = () => {
           ))}
         </ul>
         <div className="flex items-center lg:gap-5">
-          <Sheet>
+          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetTrigger asChild>
               <div className="flex justify-center items-center relative cursor-pointer">
                 <CiShoppingCart size={40} className="text-baseColor" />

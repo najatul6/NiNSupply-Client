@@ -28,6 +28,7 @@ const ShopItem = ({ item }) => {
         if(res.data.insertedId){
           toast.success("Product added to cart successfully");
           refetch();
+          
         }
       })
     }else{
