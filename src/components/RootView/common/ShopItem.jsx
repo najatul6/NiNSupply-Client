@@ -14,14 +14,14 @@ const ShopItem = ({ item }) => {
   const [, refetch] = useCarts();
 
   const addToCart = (product) => {
-    // if (user && user?.email) {
-    //   const productInfo = {
-    //     itemId: product._id,
-    //     productName: product.productName,
-    //     price: product.price,
-    //     quantity: 1,
-    //   };
-    // }
+    if (user && user?.email) {
+      const productInfo = {
+        itemId: product._id,
+        productName: product.productName,
+        price: product.price,
+        quantity: 1,
+      };
+    }
     console.log(product);
   };
   return (
@@ -68,7 +68,7 @@ const ShopItem = ({ item }) => {
               <button
                 onClick={() => addToCart(product)}
                 disabled={product.stock === 0}
-                className="my-2 inline-block px-6 py-2 bg-baseColor text-background rounded-md hover:bg-baseColor-dark transition-all w-2/3 mx-auto font-medium"
+                className="text-xs md:text-base font-bold my-2 inline-block md:px-6 py-2 bg-baseColor text-background rounded-md hover:bg-baseColor-dark transition-all w-2/3 mx-auto"
               >
                 {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
               </button>
