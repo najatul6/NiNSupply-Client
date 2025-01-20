@@ -30,12 +30,14 @@ import {
 import MyCart from "@/pages/RootView/MyCart/MyCart";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
+import { useCartContext } from "@/providers/CartProvider";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
+  const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart]=useCart()
   const totalPrice = cart?.reduce((acc, curr) => acc + parseFloat(curr.price || 0), 0);
   const menu = [

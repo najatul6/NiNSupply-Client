@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import { toast } from "react-toastify";
+import { useCartContext } from "@/providers/CartProvider";
 
 const ShopItem = ({ item }) => {
   const { user } = useAuth();
@@ -13,6 +14,7 @@ const ShopItem = ({ item }) => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCarts();
+  const { setIsCartOpen } = useCartContext();
 
   const addToCart = async (product) => {
     if (user && user?.email) {
@@ -28,7 +30,7 @@ const ShopItem = ({ item }) => {
         if(res.data.insertedId){
           toast.success("Product added to cart successfully");
           refetch();
-          
+          setIsCartOpen(true);
         }
       })
     }else{

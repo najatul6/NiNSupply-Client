@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./providers/AuthProvider";
 import { Bounce, ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CartProvider } from "./providers/CartProvider";
 const queryClient = new QueryClient();
 
 
@@ -15,6 +16,7 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
+      <CartProvider>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
           <RouterProvider router={Router} />
@@ -26,6 +28,7 @@ createRoot(document.getElementById("root")).render(
           />
         </HelmetProvider>
       </QueryClientProvider>
+      </CartProvider>
     </AuthProvider>
   </React.StrictMode>
 );
