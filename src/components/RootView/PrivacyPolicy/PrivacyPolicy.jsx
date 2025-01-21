@@ -86,30 +86,21 @@ const PrivacyPolicy = () => {
                     website among its many uses.
                 </li>
                 <li>
-                  <p>
                     <strong>Country</strong> refers to: Bangladesh
-                  </p>
                 </li>
                 <li>
-                  <p>
                     <strong>Device</strong> means any device that can access the
                     Service such as a computer, a cellphone, or a digital
                     tablet.
-                  </p>
                 </li>
                 <li>
-                  <p>
                     <strong>Personal Data</strong> is any information that
                     relates to an identified or identifiable individual.
-                  </p>
                 </li>
                 <li>
-                  <p>
                     <strong>Service</strong> refers to the Website.
-                  </p>
                 </li>
                 <li>
-                  <p>
                     <strong>Service Provider</strong> means any natural or legal
                     person who processes the data on behalf of the Company. It
                     refers to third-party companies or individuals employed by
@@ -117,7 +108,6 @@ const PrivacyPolicy = () => {
                     Service on behalf of the Company, to perform services
                     related to the Service, or to assist the Company in
                     analyzing how the Service is used.
-                  </p>
                 </li>
                 <li>
                   <p>
