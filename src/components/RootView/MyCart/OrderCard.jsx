@@ -2,9 +2,13 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-const OrderCard = ({ product, refetch }) => {
+const OrderCard = ({ product }) => {
   const axiosSecure = useAxiosSecure();
-  
+  const handleRemove=(id)=>{
+    axiosSecure.delete(`/carts/${id}`).then((res)=>{
+      console.log(res.data)
+    })
+  }
 
 
   return (
