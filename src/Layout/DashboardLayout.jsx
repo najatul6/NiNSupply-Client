@@ -19,7 +19,7 @@ const DashboardLayout = () => {
             id="collapseMenu"
             className={`${
               profileOpen ? "block" : "hidden"
-            } max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50`}
+            } lg:block  max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50`}
           >
             <button
               onClick={() => setProfileOpen(!profileOpen)}
@@ -239,7 +239,7 @@ const DashboardLayout = () => {
             <div
               id="sidebar-collapse-menu"
               style={{ height: "calc(100vh - 72px)" }}
-              className={`${sidebarOpen?"block w-[250px] visible opacity-[1]":"block w-[35px] invisible opacity-0"} bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
+              className={`${sidebarOpen?"block w-[250px] visible opacity-[1]":"block w-[32px] "} bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
             >
               <ul className="space-y-2">
                 <li>
