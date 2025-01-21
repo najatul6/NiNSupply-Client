@@ -8,7 +8,7 @@ const DashboardLayout = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="relative pt-[70px] h-screen">
+    <div className="relative pt-[70px] h-screen scroll-smooth">
      <DashboardHeader profileOpen={profileOpen} setProfileOpen={setProfileOpen}/>
 
       <div>
@@ -16,9 +16,9 @@ const DashboardLayout = () => {
           <DashboardSidebar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen}/>
 
           <section className="main-content w-full overflow-auto p-6">
-            <div className="overflow-x-auto">
               <Outlet/>
-            </div>
+            {/* <div className="overflow-x-auto no-scrollbar">
+            </div> */}
           </section>
         </div>
       </div>
