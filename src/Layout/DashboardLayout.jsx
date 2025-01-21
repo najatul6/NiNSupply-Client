@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const DashboardLayout = () => {
+  const [profileOpen, setProfileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="relative pt-[70px] h-screen">
@@ -17,11 +18,11 @@ const DashboardLayout = () => {
           <div
             id="collapseMenu"
             className={`${
-              sidebarOpen ? "block" : "hidden"
+              profileOpen ? "block" : "hidden"
             } max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50`}
           >
             <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
+              onClick={() => setProfileOpen(!profileOpen)}
               id="toggleClose"
               className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3"
             >
@@ -215,7 +216,7 @@ const DashboardLayout = () => {
               </div>
             </div>
           </div>
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} id="toggleOpen" className="lg:hidden duration-300 !ml-7 outline-none">
+          <button onClick={() => setProfileOpen(!profileOpen)} id="toggleOpen" className="lg:hidden duration-300 !ml-7 outline-none">
             <svg
               className="w-7 h-7"
               fill="#000"
