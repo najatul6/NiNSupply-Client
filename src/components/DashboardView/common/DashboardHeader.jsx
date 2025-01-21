@@ -106,7 +106,7 @@ const DashboardHeader = ({ profileOpen, setProfileOpen }) => {
                   className="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer"
                 />
 
-                <div className="dropdown-content hidden group-hover:block shadow-md p-2 bg-white rounded-md absolute top-9 right-0 w-56">
+                <div className="dropdown-content hidden group-hover:block shadow-xl p-2 bg-background2 rounded-md absolute top-9 lg:right-0 w-56">
                   <div className="w-full">
                     <a
                       href="javascript:void(0)"
