@@ -1,19 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import headerLogo from "../assets/ninSupply.svg"
 
 const DashboardLayout = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="relative pt-[70px] h-screen">
-      <header className="flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
+      <header className="flex shadow-md py-1 px-4 sm:px-7 bg-background2 min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
         <div className="flex flex-wrap items-center justify-between gap-4 w-full relative">
-          <a href="javascript:void(0)">
+          <Link to="/dashboard/overview" className="flex justify-center items-center gap-2">
             <img
-              src="https://readymadeui.com/readymadeui.svg"
+              src={headerLogo}
               alt="logo"
               className="w-36"
             />
-          </a>
+            <p className="text-3xl font-merienda font-bold">Admin Panel</p>
+          </Link>
 
           <div
             id="collapseMenu"
