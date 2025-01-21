@@ -45,7 +45,6 @@ const Header = () => {
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
   );
-  console.log(userRole);
   const menu = [
     {
       name: "Home",

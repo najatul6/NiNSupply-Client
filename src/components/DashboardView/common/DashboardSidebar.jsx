@@ -1,6 +1,19 @@
+import useAuth from "@/hooks/useAuth";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { logOut } = useAuth();
+
+  // Logout function
+  const handleLogout = () => {
+    toast.promise(logOut(), {
+      pending: "Logging out...",
+      success: "Logged out successfully",
+      error: "Error logging out",
+    });
+  };
   return (
     <>
       <nav id="sidebar" className={`lg:min-w-[250px] w-max max-lg:min-w-8`}>
@@ -294,8 +307,8 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <h6 className="text-baseColor text-sm font-bold px-4">Actions</h6>
             <ul className="mt-3 space-y-2">
               <li>
-                <a
-                  href="javascript:void(0)"
+                <Link
+                  to="/dashboard/my-profile"
                   className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                 >
                   <svg
@@ -310,11 +323,11 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     />
                   </svg>
                   <span>Profile</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="javascript:void(0)"
+                <button
+                  onClick={handleLogout}
                   className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                 >
                   <svg
@@ -329,7 +342,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     />
                   </svg>
                   <span>Logout</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
