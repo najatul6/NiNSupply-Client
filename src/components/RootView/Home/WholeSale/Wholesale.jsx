@@ -4,37 +4,40 @@ import Container from "@/components/common/Container";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useCartContext } from "@/providers/CartProvider";
+import useCarts from "@/hooks/useCart";
 
 const Wholesale = () => {
   const [products, isLoading] = useProduct();
-  const {user}=useAuth();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const location=useLocation();
-  const navigate=useNavigate();
-  
-  const addToCart = () => {
-    const addToCart = async (product) => {
-        if (user && user?.email) {
-          const cartsItem = {
-            itemId: product._id,
-            userEmail: user?.email,
-            productName: product.productName,
-            price: product.price,
-            quantity: product.quantity,
-          };
-          axiosSecure.post('/carts', cartsItem)
-          .then(res=>{
-            if(res.data.insertedId){
-              toast.success("Product added to cart successfully");
-              refetch();
-              setIsCartOpen(true);
-            }
-          })
-        }else{
-          navigate('/auth/login', { state: { from: location } })
-        }
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { setIsCartOpen } = useCartContext();
+  const [, refetch] = useCarts();
+
+  const addToCart = async (product) => {
+    if (user && user?.email) {
+      const cartsItem = {
+        itemId: product._id,
+        userEmail: user?.email,
+        productName: product.productName,
+        price: product.price,
+        quantity: product.quantity,
       };
+      axiosSecure.post("/carts", cartsItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Product added to cart successfully");
+          refetch();
+          setIsCartOpen(true);
+        }
+      });
+    } else {
+      navigate("/auth/login", { state: { from: location } });
+    }
   };
+
   return (
     <div className="p-2 md:p-6">
       <h1 className="text-3xl font-bold text-center mb-8">
