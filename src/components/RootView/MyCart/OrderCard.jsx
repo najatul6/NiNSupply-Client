@@ -1,15 +1,18 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import { toast } from "react-toastify";
 
-const OrderCard = ({ product }) => {
+const OrderCard = ({ product, refetch }) => {
   const axiosSecure = useAxiosSecure();
-  const handleRemove=(id)=>{
-    axiosSecure.delete(`/carts/${id}`).then((res)=>{
-      console.log(res.data)
-    })
-  }
-
+  const handleRemove = (id) => {
+    axiosSecure.delete(`/carts/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        toast.success("Product removed from cart successfully");
+        refetch();
+      }
+    });
+  };
 
   return (
     <div className="border p-2">
@@ -28,7 +31,7 @@ const OrderCard = ({ product }) => {
         <div>
           <button
             className="bg-red-500 text-white px-2 py-1 rounded-md"
-            onClick={()=>handleRemove(product._id)}
+            onClick={() => handleRemove(product._id)}
           >
             <RiDeleteBin2Fill />
           </button>
