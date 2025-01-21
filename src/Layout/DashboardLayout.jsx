@@ -235,7 +235,7 @@ const DashboardLayout = () => {
 
       <div>
         <div className="flex items-start">
-          <nav id="sidebar" className="lg:min-w-[250px] w-max max-lg:min-w-8">
+          <nav id="sidebar" className={`${sidebarOpen?"rotate-180":""} lg:min-w-[250px] w-max max-lg:min-w-8`}>
             <div
               id="sidebar-collapse-menu"
               style={{ height: "calc(100vh - 72px)" }}
@@ -568,12 +568,13 @@ const DashboardLayout = () => {
 
           <button
             id="toggle-sidebar"
-            className="lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500"
+            onClick={()=>setSidebarOpen(!sidebarOpen)}
+            className={` lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="#fff"
-              className="w-3 h-3"
+              className={`${sidebarOpen?"rotate-180":""} w-3 h-3`}
               viewBox="0 0 55.752 55.752"
             >
               <path
