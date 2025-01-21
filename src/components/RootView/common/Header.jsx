@@ -6,7 +6,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
 import { CiShoppingCart } from "react-icons/ci";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { MdDashboard, MdOutlineShoppingCartCheckout } from "react-icons/md";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { LayoutDashboard, LogOut, User } from "lucide-react";
 import { toast } from "react-toastify";
 import {
   Sheet,
@@ -31,6 +31,7 @@ import MyCart from "@/pages/RootView/MyCart/MyCart";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
+import useRole from "@/hooks/useRole";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,8 +39,13 @@ const Header = () => {
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
-  const [cart]=useCart()
-  const totalPrice = cart?.reduce((acc, curr) => acc + parseFloat(curr.price || 0), 0);
+  const [cart] = useCart();
+  const [userRole]=useRole();
+  const totalPrice = cart?.reduce(
+    (acc, curr) => acc + parseFloat(curr.price || 0),
+    0
+  );
+  console.log(userRole);
   const menu = [
     {
       name: "Home",
@@ -105,7 +111,9 @@ const Header = () => {
                   <NavLink
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
-                      isActive || (item.path === "/shop/popular" && pathname.startsWith("/shop"))
+                      isActive ||
+                      (item.path === "/shop/popular" &&
+                        pathname.startsWith("/shop"))
                         ? "border-b-2 border-baseColor font-medium text-baseColor transition  duration-200"
                         : "hover:border-b-2 hover:border-baseColor transition duration-200"
                     }
@@ -150,7 +158,8 @@ const Header = () => {
           {menu.map((item) => (
             <NavLink
               className={({ isActive }) =>
-                isActive || (item.path === "/shop/popular" && pathname.startsWith("/shop"))
+                isActive ||
+                (item.path === "/shop/popular" && pathname.startsWith("/shop"))
                   ? "border-b-2 border-baseColor text-baseColor font-medium transition duration-200"
                   : "hover:border-b-2 hover:border-baseColor transition duration-200"
               }
@@ -167,7 +176,7 @@ const Header = () => {
               <div className="flex justify-center items-center relative cursor-pointer">
                 <CiShoppingCart size={40} className="text-baseColor" />
                 <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">
-                 {cart?.length} 
+                  {cart?.length}
                 </p>
               </div>
             </SheetTrigger>
@@ -209,6 +218,22 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    {user && userRole === "admin" && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                          <Link to="/dashboard/overview">
+                            <DropdownMenuItem className="cursor-pointer">
+                              Dashboard
+                              <DropdownMenuShortcut>
+                              <LayoutDashboard />
+                              </DropdownMenuShortcut>
+                            </DropdownMenuItem>
+                          </Link>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                      </>
+                    )}
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <Link to="my-profile">
