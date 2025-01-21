@@ -3,8 +3,7 @@ import Container from "@/components/common/Container";
 const PrivacyPolicy = () => {
   return (
     <Container>
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-gray-900 shadow-lg rounded-lg p-6">
+        <div className="bg-gray-900 shadow-lg rounded-lg px-2 md:px-4 py-4 text-justify">
           {/* <!-- Header --> */}
           <h1 className="text-3xl font-bold mb-4 text-white">Privacy Policy</h1>
           <p className="text-sm text-gray-400 mb-6">
@@ -64,79 +63,77 @@ const PrivacyPolicy = () => {
               </p>
               <ul className="list-disc list-inside text-gray-300 space-y-3">
                 <li>
-                    <strong>Account</strong> means a unique account created for
-                    You to access our Service or parts of our Service.
+                  <strong>Account</strong> means a unique account created for
+                  You to access our Service or parts of our Service.
                 </li>
                 <li>
-                    <strong>Affiliate</strong> means an entity that controls, is
-                    controlled by, or is under common control with a party,
-                    where &quot;control&quot; means ownership of 50% or more of
-                    the shares, equity interest, or other securities entitled to
-                    vote for election of directors or other managing authority.
+                  <strong>Affiliate</strong> means an entity that controls, is
+                  controlled by, or is under common control with a party, where
+                  &quot;control&quot; means ownership of 50% or more of the
+                  shares, equity interest, or other securities entitled to vote
+                  for election of directors or other managing authority.
                 </li>
                 <li>
-                    <strong>Company</strong> (referred to as either &quot;the
-                    Company&quot;, &quot;We&quot;, &quot;Us&quot; or
-                    &quot;Our&quot; in this Agreement) refers to NiN Supply.
+                  <strong>Company</strong> (referred to as either &quot;the
+                  Company&quot;, &quot;We&quot;, &quot;Us&quot; or
+                  &quot;Our&quot; in this Agreement) refers to NiN Supply.
                 </li>
                 <li>
-                    <strong>Cookies</strong> are small files placed on Your
-                    computer, mobile device, or any other device by a website,
-                    containing the details of Your browsing history on that
-                    website among its many uses.
+                  <strong>Cookies</strong> are small files placed on Your
+                  computer, mobile device, or any other device by a website,
+                  containing the details of Your browsing history on that
+                  website among its many uses.
                 </li>
                 <li>
-                    <strong>Country</strong> refers to: Bangladesh
+                  <strong>Country</strong> refers to: Bangladesh
                 </li>
                 <li>
-                    <strong>Device</strong> means any device that can access the
-                    Service such as a computer, a cellphone, or a digital
-                    tablet.
+                  <strong>Device</strong> means any device that can access the
+                  Service such as a computer, a cellphone, or a digital tablet.
                 </li>
                 <li>
-                    <strong>Personal Data</strong> is any information that
-                    relates to an identified or identifiable individual.
+                  <strong>Personal Data</strong> is any information that relates
+                  to an identified or identifiable individual.
                 </li>
                 <li>
-                    <strong>Service</strong> refers to the Website.
+                  <strong>Service</strong> refers to the Website.
                 </li>
                 <li>
-                    <strong>Service Provider</strong> means any natural or legal
-                    person who processes the data on behalf of the Company. It
-                    refers to third-party companies or individuals employed by
-                    the Company to facilitate the Service, to provide the
-                    Service on behalf of the Company, to perform services
-                    related to the Service, or to assist the Company in
-                    analyzing how the Service is used.
+                  <strong>Service Provider</strong> means any natural or legal
+                  person who processes the data on behalf of the Company. It
+                  refers to third-party companies or individuals employed by the
+                  Company to facilitate the Service, to provide the Service on
+                  behalf of the Company, to perform services related to the
+                  Service, or to assist the Company in analyzing how the Service
+                  is used.
                 </li>
                 <li>
-                    <strong>Third-party Social Media Service</strong> refers to
-                    any website or social network website through which a User
-                    can log in or create an account to use the Service.
+                  <strong>Third-party Social Media Service</strong> refers to
+                  any website or social network website through which a User can
+                  log in or create an account to use the Service.
                 </li>
                 <li>
-                    <strong>Usage Data</strong> refers to data collected
-                    automatically, either generated by the use of the Service or
-                    from the Service infrastructure itself (for example, the
-                    duration of a page visit).
+                  <strong>Usage Data</strong> refers to data collected
+                  automatically, either generated by the use of the Service or
+                  from the Service infrastructure itself (for example, the
+                  duration of a page visit).
                 </li>
                 <li>
-                    <strong>Website</strong> refers to NiN Supply, accessible
-                    from{" "}
-                    <a
-                      href="https://nin-supply.vercel.app/"
-                      rel="external nofollow noopener"
-                      target="_blank"
-                      className="text-blue-400 hover:underline"
-                    >
-                      https://nin-supply.vercel.app/
-                    </a>
+                  <strong>Website</strong> refers to NiN Supply, accessible from{" "}
+                  <a
+                    href="https://nin-supply.vercel.app/"
+                    rel="external nofollow noopener"
+                    target="_blank"
+                    className="text-blue-400 hover:underline"
+                  >
+                    https://nin-supply.vercel.app/
+                  </a>
                 </li>
                 <li>
-                    <strong>You</strong> means the individual accessing or using
-                    the Service, or the company or other legal entity on behalf
-                    of which such individual is accessing or using the Service,
-                    as applicable.
+                  <strong>You</strong> means the individual accessing or using
+                  the Service, or the company or other legal entity on behalf of
+                  which such individual is accessing or using the Service, as
+                  applicable.
                 </li>
               </ul>
             </div>
@@ -331,70 +328,70 @@ const PrivacyPolicy = () => {
             regarding cookies, please visit our Cookies Policy or the Cookies
             section of our Privacy Policy.
           </p>
-          <h3>Use of Your Personal Data</h3>
-          <p className="text-gray-300 mb-3">The Company may use Personal Data for the following purposes:</p>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Use of Your Personal Data
+          </h3>
+          <p className="text-gray-300 mb-3">
+            The Company may use Personal Data for the following purposes:
+          </p>
           <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>
-                <strong>To provide and maintain our Service</strong>, including
-                to monitor the usage of our Service.
+              <strong>To provide and maintain our Service</strong>, including to
+              monitor the usage of our Service.
             </li>
             <li>
-                <strong>To manage Your Account:</strong> to manage Your
-                registration as a user of the Service. The Personal Data You
-                provide can give You access to different functionalities of the
-                Service that are available to You as a registered user.
+              <strong>To manage Your Account:</strong> to manage Your
+              registration as a user of the Service. The Personal Data You
+              provide can give You access to different functionalities of the
+              Service that are available to You as a registered user.
             </li>
             <li>
-                <strong>For the performance of a contract:</strong> the
-                development, compliance and undertaking of the purchase contract
-                for the products, items or services You have purchased or of any
-                other contract with Us through the Service.
+              <strong>For the performance of a contract:</strong> the
+              development, compliance and undertaking of the purchase contract
+              for the products, items or services You have purchased or of any
+              other contract with Us through the Service.
             </li>
             <li>
-                <strong>To contact You:</strong> To contact You by email,
-                telephone calls, SMS, or other equivalent forms of electronic
-                communication, such as a mobile application&lsquo;s push
-                notifications regarding updates or informative communications
-                related to the functionalities, products or contracted services,
-                including the security updates, when necessary or reasonable for
-                their implementation.
+              <strong>To contact You:</strong> To contact You by email,
+              telephone calls, SMS, or other equivalent forms of electronic
+              communication, such as a mobile application&lsquo;s push
+              notifications regarding updates or informative communications
+              related to the functionalities, products or contracted services,
+              including the security updates, when necessary or reasonable for
+              their implementation.
             </li>
             <li>
-                <strong>To provide You</strong> with news, special offers and
-                general information about other goods, services and events which
-                we offer that are similar to those that you have already
-                purchased or enquired about unless You have opted not to receive
-                such information.
+              <strong>To provide You</strong> with news, special offers and
+              general information about other goods, services and events which
+              we offer that are similar to those that you have already purchased
+              or enquired about unless You have opted not to receive such
+              information.
             </li>
             <li>
-                <strong>To manage Your requests:</strong> To attend and manage
-                Your requests to Us.
+              <strong>To manage Your requests:</strong> To attend and manage
+              Your requests to Us.
             </li>
             <li>
-              <p>
-                <strong>For business transfers:</strong> We may use Your
-                information to evaluate or conduct a merger, divestiture,
-                restructuring, reorganization, dissolution, or other sale or
-                transfer of some or all of Our assets, whether as a going
-                concern or as part of bankruptcy, liquidation, or similar
-                proceeding, in which Personal Data held by Us about our Service
-                users is among the assets transferred.
-              </p>
+              <strong>For business transfers:</strong> We may use Your
+              information to evaluate or conduct a merger, divestiture,
+              restructuring, reorganization, dissolution, or other sale or
+              transfer of some or all of Our assets, whether as a going concern
+              or as part of bankruptcy, liquidation, or similar proceeding, in
+              which Personal Data held by Us about our Service users is among
+              the assets transferred.
             </li>
             <li>
-              <p>
-                <strong>For other purposes</strong>: We may use Your information
-                for other purposes, such as data analysis, identifying usage
-                trends, determining the effectiveness of our promotional
-                campaigns and to evaluate and improve our Service, products,
-                services, marketing and your experience.
-              </p>
+              <strong>For other purposes</strong>: We may use Your information
+              for other purposes, such as data analysis, identifying usage
+              trends, determining the effectiveness of our promotional campaigns
+              and to evaluate and improve our Service, products, services,
+              marketing and your experience.
             </li>
           </ul>
           <p className="text-gray-300 mb-3">
             We may share Your personal information in the following situations:
           </p>
-          <ul>
+          <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>
               <strong>With Service Providers:</strong> We may share Your
               personal information with Service Providers to monitor and analyze
@@ -436,7 +433,9 @@ const PrivacyPolicy = () => {
               information for any other purpose with Your consent.
             </li>
           </ul>
-          <h3>Retention of Your Personal Data</h3>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Retention of Your Personal Data
+          </h3>
           <p className="text-gray-300 mb-3">
             The Company will retain Your Personal Data only for as long as is
             necessary for the purposes set out in this Privacy Policy. We will
@@ -452,7 +451,9 @@ const PrivacyPolicy = () => {
             improve the functionality of Our Service, or We are legally
             obligated to retain this data for longer time periods.
           </p>
-          <h3>Transfer of Your Personal Data</h3>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Transfer of Your Personal Data
+          </h3>
           <p className="text-gray-300 mb-3">
             Your information, including Personal Data, is processed at the
             Company&lsquo;s operating offices and in any other places where the
@@ -474,7 +475,9 @@ const PrivacyPolicy = () => {
             place including the security of Your data and other personal
             information.
           </p>
-          <h3>Delete Your Personal Data</h3>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Delete Your Personal Data
+          </h3>
           <p className="text-gray-300 mb-3">
             You have the right to delete or request that We assist in deleting
             the Personal Data that We have collected about You.
@@ -494,27 +497,35 @@ const PrivacyPolicy = () => {
             Please note, however, that We may need to retain certain information
             when we have a legal obligation or lawful basis to do so.
           </p>
-          <h3>Disclosure of Your Personal Data</h3>
-          <h4>Business Transactions</h4>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Disclosure of Your Personal Data
+          </h3>
+          <h4 className="text-lg font-medium text-white mb-2">
+            Business Transactions
+          </h4>
           <p className="text-gray-300 mb-3">
             If the Company is involved in a merger, acquisition or asset sale,
             Your Personal Data may be transferred. We will provide notice before
             Your Personal Data is transferred and becomes subject to a different
             Privacy Policy.
           </p>
-          <h4>Law enforcement</h4>
+          <h4 className="text-lg font-medium text-white mb-2">
+            Law enforcement
+          </h4>
           <p className="text-gray-300 mb-3">
             Under certain circumstances, the Company may be required to disclose
             Your Personal Data if required to do so by law or in response to
             valid requests by public authorities (e.g. a court or a government
             agency).
           </p>
-          <h4>Other legal requirements</h4>
+          <h4 className="text-lg font-medium text-white mb-2">
+            Other legal requirements
+          </h4>
           <p className="text-gray-300 mb-3">
             The Company may disclose Your Personal Data in the good faith belief
             that such action is necessary to:
           </p>
-          <ul>
+          <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>Comply with a legal obligation</li>
             <li>Protect and defend the rights or property of the Company</li>
             <li>
@@ -526,7 +537,9 @@ const PrivacyPolicy = () => {
             </li>
             <li>Protect against legal liability</li>
           </ul>
-          <h3>Security of Your Personal Data</h3>
+          <h3 className="text-lg font-medium text-white mb-2">
+            Security of Your Personal Data
+          </h3>
           <p className="text-gray-300 mb-3">
             The security of Your Personal Data is important to Us, but remember
             that no method of transmission over the Internet, or method of
@@ -534,7 +547,9 @@ const PrivacyPolicy = () => {
             commercially acceptable means to protect Your Personal Data, We
             cannot guarantee its absolute security.
           </p>
-          <h2>Children&lsquo;s Privacy</h2>
+          <h2 className="text-lg font-medium text-white mb-2">
+            Children&lsquo;s Privacy
+          </h2>
           <p className="text-gray-300 mb-3">
             Our Service does not address anyone under the age of 13. We do not
             knowingly collect personally identifiable information from anyone
@@ -550,7 +565,9 @@ const PrivacyPolicy = () => {
             require Your parent&lsquo;s consent before We collect and use that
             information.
           </p>
-          <h2>Links to Other Websites</h2>
+          <h2 className="text-lg font-medium text-white mb-2">
+            Links to Other Websites
+          </h2>
           <p className="text-gray-300 mb-3">
             Our Service may contain links to other websites that are not
             operated by Us. If You click on a third party link, You will be
@@ -562,7 +579,9 @@ const PrivacyPolicy = () => {
             content, privacy policies or practices of any third party sites or
             services.
           </p>
-          <h2>Changes to this Privacy Policy</h2>
+          <h2 className="text-lg font-medium text-white mb-2">
+            Changes to this Privacy Policy
+          </h2>
           <p className="text-gray-300 mb-3">
             We may update Our Privacy Policy from time to time. We will notify
             You of any changes by posting the new Privacy Policy on this page.
@@ -577,16 +596,15 @@ const PrivacyPolicy = () => {
             changes. Changes to this Privacy Policy are effective when they are
             posted on this page.
           </p>
-          <h2>Contact Us</h2>
+          <h2 className="text-lg font-medium text-white mb-2">Contact Us</h2>
           <p className="text-gray-300 mb-3">
             If you have any questions about this Privacy Policy, You can contact
             us:
           </p>
-          <ul>
+          <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>By phone number: +8801839046110</li>
           </ul>
         </div>
-      </div>
     </Container>
   );
 };
