@@ -8,14 +8,14 @@ const DashboardLayout = () => {
   return (
     <div className="relative pt-[70px] h-screen">
       <header className="flex shadow-md py-1 px-4 sm:px-7 bg-background2 min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
-        <div className="flex flex-wrap items-center justify-between gap-4 w-full relative">
+        <div className="flex flex-wrap items-center justify-between gap-4 w-full relative bg-background2">
           <Link to="/dashboard/overview" className="flex justify-center items-center gap-2">
             <img
               src={headerLogo}
               alt="logo"
               className="w-36"
             />
-            <p className="text-3xl font-merienda font-bold">Admin Panel</p>
+            {/* <p className="text-3xl font-merienda font-bold">Admin Panel</p> */}
           </Link>
 
           <div
@@ -27,11 +27,11 @@ const DashboardLayout = () => {
             <button
               onClick={() => setProfileOpen(!profileOpen)}
               id="toggleClose"
-              className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3"
+              className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-background  p-3"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-3 fill-black"
+                className="w-3 fill-white"
                 viewBox="0 0 320.591 320.591"
               >
                 <path
@@ -45,9 +45,9 @@ const DashboardLayout = () => {
               </svg>
             </button>
 
-            <div className="max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
+            <div className="max-lg:fixed max-lg:bg-background2 max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
               <div className="flex items-center max-lg:flex-col-reverse max-lg:ml-auto gap-8">
-                <div className="flex w-full bg-gray-100 px-4 py-2.5 rounded outline-none border focus-within:border-blue-600 focus-within:bg-transparent transition-all">
+                <div className="flex w-full bg-transparent px-4 py-2.5 rounded outline-none border focus-within:border-baseColor focus-within:bg-transparent transition-all">
                   <input
                     type="text"
                     placeholder="Search something..."
@@ -57,7 +57,7 @@ const DashboardLayout = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 192.904 192.904"
                     width="16px"
-                    className="cursor-pointer fill-gray-400"
+                    className="cursor-pointer fill-baseColor"
                   >
                     <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
                   </svg>
@@ -65,7 +65,7 @@ const DashboardLayout = () => {
                 <div className="flex items-center space-x-6 max-lg:flex-wrap">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 cursor-pointer fill-[#333] hover:fill-[#077bff]"
+                    className="w-5 h-5 cursor-pointer fill-white hover:fill-baseColor"
                     viewBox="0 0 511 511.999"
                   >
                     <path
@@ -75,7 +75,7 @@ const DashboardLayout = () => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 cursor-pointer fill-[#333] hover:fill-[#077bff]"
+                    className="w-5 h-5 cursor-pointer fill-white hover:fill-baseColor"
                     viewBox="0 0 371.263 371.263"
                   >
                     <path
@@ -85,7 +85,7 @@ const DashboardLayout = () => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 cursor-pointer fill-[#333] hover:fill-[#077bff]"
+                    className="w-5 h-5 cursor-pointer fill-white hover:fill-baseColor"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
                     <div className="w-full">
                       <a
                         href="javascript:void(0)"
-                        className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
+                        className="text-sm text-white cursor-pointer flex items-center p-2 rounded-md hover:bg-background dropdown-item transition duration-300 ease-in-out"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ const DashboardLayout = () => {
 
                       <a
                         href="javascript:void(0)"
-                        className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
+                        className="text-sm text-white cursor-pointer flex items-center p-2 rounded-md hover:bg-background dropdown-item transition duration-300 ease-in-out"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ const DashboardLayout = () => {
                       </a>
                       <a
                         href="javascript:void(0)"
-                        className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
+                        className="text-sm text-white cursor-pointer flex items-center p-2 rounded-md hover:bg-background dropdown-item transition duration-300 ease-in-out"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ const DashboardLayout = () => {
                       </a>
                       <a
                         href="javascript:void(0)"
-                        className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
+                        className="text-sm text-white cursor-pointer flex items-center p-2 rounded-md hover:bg-background dropdown-item transition duration-300 ease-in-out"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +199,7 @@ const DashboardLayout = () => {
                       </a>
                       <a
                         href="javascript:void(0)"
-                        className="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out"
+                        className="text-sm text-white cursor-pointer flex items-center p-2 rounded-md hover:bg-background dropdown-item transition duration-300 ease-in-out"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -242,13 +242,13 @@ const DashboardLayout = () => {
             <div
               id="sidebar-collapse-menu"
               style={{ height: "calc(100vh - 72px)" }}
-              className={`${sidebarOpen?"block w-[250px] visible opacity-[1]":"block w-[32px] "} bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
+              className={`${sidebarOpen?"block w-[250px] visible opacity-[1]":"block w-[32px] "} bg-background2 shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
             >
               <ul className="space-y-2">
                 <li>
                   <a
                     href="javascript:void(0)"
-                    className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                    className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -271,14 +271,14 @@ const DashboardLayout = () => {
               </ul>
 
               <div className="mt-6">
-                <h6 className="text-blue-600 text-sm font-bold px-4">
+                <h6 className="text-baseColor text-sm font-bold px-4">
                   Information
                 </h6>
                 <ul className="mt-3 space-y-2">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -297,7 +297,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -324,7 +324,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -349,7 +349,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -373,12 +373,12 @@ const DashboardLayout = () => {
               </div>
 
               <div className="mt-6">
-                <h6 className="text-blue-600 text-sm font-bold px-4">Income</h6>
+                <h6 className="text-baseColor text-sm font-bold px-4">Income</h6>
                 <ul className="mt-3 space-y-2">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -397,7 +397,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -421,14 +421,14 @@ const DashboardLayout = () => {
               </div>
 
               <div className="mt-6">
-                <h6 className="text-blue-600 text-sm font-bold px-4">
+                <h6 className="text-baseColor text-sm font-bold px-4">
                   General Settings
                 </h6>
                 <ul className="mt-3 space-y-2">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -451,7 +451,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -471,7 +471,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -500,7 +500,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -522,14 +522,14 @@ const DashboardLayout = () => {
               </div>
 
               <div className="mt-6">
-                <h6 className="text-blue-600 text-sm font-bold px-4">
+                <h6 className="text-baseColor text-sm font-bold px-4">
                   Actions
                 </h6>
                 <ul className="mt-3 space-y-2">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -548,7 +548,7 @@ const DashboardLayout = () => {
                   <li>
                     <a
                       href="javascript:void(0)"
-                      className="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all"
+                      className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -572,11 +572,11 @@ const DashboardLayout = () => {
           <button
             id="toggle-sidebar"
             onClick={()=>setSidebarOpen(!sidebarOpen)}
-            className={`${sidebarOpen? "left-[236px]":"left-[10px]"} lg:hidden w-8 h-8 z-[100] fixed top-[74px]  cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500`}
+            className={`${sidebarOpen? "left-[236px]":"left-[10px]"} lg:hidden w-8 h-8 z-[100] fixed top-[74px]  cursor-pointer bg-background2 flex items-center justify-center rounded-full outline-none transition-all duration-500`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="#fff"
+              fill="#d4ff00"
               className={`${sidebarOpen?"rotate-180":""} w-3 h-3`}
               viewBox="0 0 55.752 55.752"
             >
