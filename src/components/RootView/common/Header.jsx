@@ -6,7 +6,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
 import { CiShoppingCart } from "react-icons/ci";
-import { MdDashboard, MdOutlineShoppingCartCheckout } from "react-icons/md";
+import {  MdOutlineShoppingCartCheckout } from "react-icons/md";
 import {
   DropdownMenu,
   DropdownMenuContent,
