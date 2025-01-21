@@ -235,11 +235,11 @@ const DashboardLayout = () => {
 
       <div>
         <div className="flex items-start">
-          <nav id="sidebar" className={`${sidebarOpen?"rotate-180":""} lg:min-w-[250px] w-max max-lg:min-w-8`}>
+          <nav id="sidebar" className={`lg:min-w-[250px] w-max max-lg:min-w-8`}>
             <div
               id="sidebar-collapse-menu"
               style={{ height: "calc(100vh - 72px)" }}
-              className="bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max max-lg:w-0 max-lg:invisible transition-all duration-500"
+              className={`${sidebarOpen?"block w-[250px] visible opacity-[1]":"block w-[35px] invisible opacity-0"} bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
             >
               <ul className="space-y-2">
                 <li>
@@ -569,7 +569,7 @@ const DashboardLayout = () => {
           <button
             id="toggle-sidebar"
             onClick={()=>setSidebarOpen(!sidebarOpen)}
-            className={` lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500`}
+            className={`${sidebarOpen? "left-[236px]":"left-[10px]"} lg:hidden w-8 h-8 z-[100] fixed top-[74px]  cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-none transition-all duration-500`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
