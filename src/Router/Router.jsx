@@ -1,5 +1,5 @@
 import AuthLayout from "@/Layout/AuthLayout";
-import DashboardLayout from "@/Layout/DashboardLayout";
+import DashboardLayout from "@/Layout/DashboardLayout1";
 import RootLayout from "@/Layout/RootLayout";
 import LogIn from "@/pages/Common/Auth/LogIn";
 import Register from "@/pages/Common/Auth/Register";
