@@ -51,22 +51,22 @@ const ShopItem = ({ item }) => {
       ) : (
         item?.map((product) => (
           <div
-            key={product.id}
+            key={product?._id}
             className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
           >
             <div className="relative flex flex-col h-full">
               <img
-                src={product.thumbnail}
-                alt={product.productName}
+                src={product?.thumbnail}
+                alt={product?.productName}
                 className="w-full h-36 md:h-64 object-cover md:rounded-t-lg"
               />
               <div className="p-4 flex-grow">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-xs md:text-xl font-semibold text-white">
-                    {product.productName}
+                    {product?.productName}
                   </h3>
                   <span className="text-xs md:text-lg font-bold text-baseColor flex justify-center items-center">
-                    {product.price || "N/A"}৳
+                    {product?.price || "N/A"}৳
                   </span>
                 </div>
                 {/* Description list */}
@@ -80,10 +80,10 @@ const ShopItem = ({ item }) => {
               </div>
               <button
                 onClick={() => addToCart(product)}
-                disabled={product.stock === 0}
+                disabled={product?.stock === 0}
                 className="text-xs md:text-base font-bold my-2 inline-block md:px-6 py-2 bg-baseColor text-background rounded-md hover:bg-baseColor-dark transition-all w-2/3 mx-auto"
               >
-                {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+                {product?.stock === 0 ? "Out of Stock" : "Add to Cart"}
               </button>
             </div>
             {product.isPopular && (
