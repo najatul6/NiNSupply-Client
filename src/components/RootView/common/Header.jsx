@@ -40,11 +40,12 @@ const Header = () => {
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
-  const [userRole]=useRole();
+  const [userRole]=useRole()
   const totalPrice = cart?.reduce(
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
   );
+  console.log(userRole);
   const menu = [
     {
       name: "Home",
@@ -217,7 +218,7 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    {user && userRole === "admin" && (
+                    {userRole === "admin" && (
                       <>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
