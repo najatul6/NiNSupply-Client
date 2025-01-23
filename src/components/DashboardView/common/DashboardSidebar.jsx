@@ -61,7 +61,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
             sidebarOpen
               ? "block w-[250px] visible opacity-[1]"
               : "block w-[32px] "
-          } bg-background2 shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
+          } bg-background2 flex flex-col justify-between shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
         >
           <ul className="space-y-2">
             {userRole === "user"
@@ -375,6 +375,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </div> */}
 
           <div className="mt-6">
+            <hr className="py-5" />
             <h6 className="text-baseColor text-sm font-bold px-4">Actions</h6>
             <ul className="mt-3 space-y-2">
               <li>
