@@ -69,7 +69,11 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <NavLink
                     key={index}
                     to={item.path}
-                    className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
+                    className={({ isActive }) =>
+                      `text-white text-sm flex items-center rounded-md px-4 py-2 transition-all ${
+                        isActive ? "text-baseColor bg-background" : "hover:bg-background"
+                      }`
+                    }
                   >
                     {item.icon}
                     <span>{item.label}</span>
@@ -80,7 +84,11 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <NavLink
                     key={index}
                     to={item.path}
-                    className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
+                    className={({ isActive }) =>
+                      `text-sm flex items-center rounded-md px-4 py-2 transition-all hover:text-baseColor ${
+                        isActive ? "bg-background text-baseColor" : " text-white hover:bg-background"
+                      }`
+                    }
                   >
                     <p className="mr-3">{item.icon}</p>
                     <span>{item.label}</span>
