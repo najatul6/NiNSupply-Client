@@ -1,13 +1,15 @@
+import {SquareChartGantt,BookA,UserCog} from "lucide-react"
+
 export const userNav=[
     {
         label:"Overview",
         path:"dashboard/overview",
-        icon:""
+        icon:<SquareChartGantt/>
     },
     {
         label:"My Orders",
         path:"dashboard/my-orders",
-        icon:""
+        icon:<BookA />
     }
 ]
 
@@ -15,16 +17,16 @@ export const AdminNav=[
     {
         label:"Overview",
         path:"dashboard/overview",
-        icon:""
+        icon:<SquareChartGantt/>
     },
     {
         label:"Orders",
         path:"dashboard/orders",
-        icon:""
+        icon:<BookA />
     },
     {
         label:"Users Control",
         path:"users-control",
-        icon:""
+        icon:<UserCog />
     }
 ]

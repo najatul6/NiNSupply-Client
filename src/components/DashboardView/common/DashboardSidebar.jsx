@@ -26,7 +26,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               : "block w-[32px] "
           } bg-background2 shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
         >
-          <ul className="space-y-2">
+          {/* <ul className="space-y-2">
             <li>
               <a
                 href="javascript:void(0)"
@@ -301,7 +301,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="mt-6">
             <h6 className="text-baseColor text-sm font-bold px-4">Actions</h6>
