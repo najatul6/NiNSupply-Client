@@ -45,7 +45,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: <BookA />,
     },
     {
-      label: "Users Control",
+      label: "Users Management",
       path: "/dashboard/users-control",
       icon: <UserCog />,
     },
@@ -68,6 +68,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               ? userNav.map((item, index) => (
                   <NavLink
                     key={index}
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
                     to={item.path}
                     className={({ isActive }) =>
                       `text-white text-sm flex items-center rounded-md px-4 py-2 transition-all ${
@@ -84,6 +85,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <NavLink
                     key={index}
                     to={item.path}
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
                     className={({ isActive }) =>
                       `text-sm flex items-center rounded-md px-4 py-2 transition-all hover:text-baseColor ${
                         isActive ? "bg-background text-baseColor" : " text-white hover:bg-background"
