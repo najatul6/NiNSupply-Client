@@ -11,6 +11,7 @@ const useRole = () => {
         const res = await axiosPublic.get(`/users/${user?.email}`);
         return res.data?.role;
       },
+      enabled: !!user?.email,
     });
     return [userRole,isLoading];
 }

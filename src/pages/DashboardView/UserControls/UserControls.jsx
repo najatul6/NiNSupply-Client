@@ -1,11 +1,13 @@
+import useAllUser from "@/hooks/useAllUser";
 import { FaSearch } from "react-icons/fa";
 const UserControls = () => {
+  const [allUsers]=useAllUser()
+  console.log(allUsers);
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
         <h1 className="text-3xl text-white">
-          {/* Total Users : {filteredUsers?.length} */}
-          Total Users : 5
+          Total Users : {allUsers?.length}
         </h1>
         <form className="max-w-[480px] w-full px-4">
           <div className="relative">
