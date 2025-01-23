@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import headerLogo from "../../../assets/ninSupply.svg";
 import PropTypes from "prop-types";
 
-const DashboardHeader = ({ profileOpen, setProfileOpen }) => {
+const DashboardHeader = () => {
   return (
     <header className="flex shadow-md py-1 px-4 sm:px-7 bg-background2 min-h-[70px] tracking-wide z-[110] fixed top-0 w-full">
       <div className="flex flex-wrap items-center justify-between gap-4 w-full relative bg-background2">
@@ -14,7 +14,14 @@ const DashboardHeader = ({ profileOpen, setProfileOpen }) => {
           {/* <p className="text-3xl font-merienda font-bold">Admin Panel</p> */}
         </Link>
 
-        <div
+        <Link to="/dashboard/my-profile">
+          <img
+            src="https://readymadeui.com/team-1.webp"
+            alt="profile-pic"
+            className="w-10 h-10 rounded-full border-2 border-baseColor cursor-pointer"
+          />
+        </Link>
+        {/* <div
           id="collapseMenu"
           className={`${
             profileOpen ? "block" : "hidden"
@@ -232,15 +239,10 @@ const DashboardHeader = ({ profileOpen, setProfileOpen }) => {
               clipRule="evenodd"
             ></path>
           </svg>
-        </button>
+        </button> */}
       </div>
     </header>
   );
-};
-
-DashboardHeader.propTypes = {
-  profileOpen: PropTypes.bool.isRequired,
-  setProfileOpen: PropTypes.func.isRequired,
 };
 
 export default DashboardHeader;
