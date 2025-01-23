@@ -1,10 +1,13 @@
 import useAuth from "@/hooks/useAuth";
+import useRole from "@/hooks/useRole";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SquareChartGantt, BookA, UserCog } from "lucide-react";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
+  const [userRole] = useRole();
 
   // Logout function
   const handleLogout = () => {
@@ -14,6 +17,40 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       error: "Error logging out",
     });
   };
+
+  // Navigation items for users
+  const userNav = [
+    {
+      label: "Overview",
+      path: "/dashboard/overview",
+      icon: <SquareChartGantt />,
+    },
+    {
+      label: "My Orders",
+      path: "/dashboard/my-orders",
+      icon: <BookA />,
+    },
+  ];
+
+  // Navigation items for admins
+  const AdminNav = [
+    {
+      label: "Overview",
+      path: "/dashboard/overview",
+      icon: <SquareChartGantt />,
+    },
+    {
+      label: "Orders",
+      path: "/dashboard/orders",
+      icon: <BookA />,
+    },
+    {
+      label: "Users Control",
+      path: "/dashboard/users-control",
+      icon: <UserCog />,
+    },
+  ];
+
   return (
     <>
       <nav id="sidebar" className={`lg:min-w-[250px] w-max max-lg:min-w-8`}>
@@ -26,6 +63,30 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               : "block w-[32px] "
           } bg-background2 shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
         >
+          <ul className="space-y-2">
+            {userRole === "user"
+              ? userNav.map((item, index) => (
+                  <NavLink
+                    key={index}
+                    to={item.path}
+                    className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </NavLink>
+                ))
+              : userRole === "admin" &&
+                AdminNav.map((item, index) => (
+                  <NavLink
+                    key={index}
+                    to={item.path}
+                    className="text-white text-sm flex items-center hover:bg-background rounded-md px-4 py-2 transition-all"
+                  >
+                    <p className="mr-3">{item.icon}</p>
+                    <span>{item.label}</span>
+                  </NavLink>
+                ))}
+          </ul>
           {/* <ul className="space-y-2">
             <li>
               <a
