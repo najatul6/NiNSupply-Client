@@ -7,7 +7,6 @@ import {
   Wallet,
   WalletCards,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const AdminOverview = () => {
   const [allUser] = useAllUser();
@@ -56,7 +55,7 @@ const AdminOverview = () => {
               </div>
             </div>
             <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">Unpaid</h2>
+              <h2 className="font-bold uppercase text-gray-600">Paid</h2>
               <p className="font-bold text-3xl text-yellow-600">20</p>
             </div>
           </div>
@@ -71,7 +70,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Orders</h2>
-              <p className="font-bold text-3xl text-blue-600">152 days</p>
+              <p className="font-bold text-3xl text-blue-600">152 </p>
             </div>
           </div>
         </div>
@@ -84,7 +83,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
-              <p className="font-bold text-3xl text-indigo-600">7 tasks</p>
+              <p className="font-bold text-3xl text-indigo-600">7</p>
             </div>
           </div>
         </div>
