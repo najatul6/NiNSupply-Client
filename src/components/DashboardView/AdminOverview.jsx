@@ -1,8 +1,8 @@
 import useAllUser from "@/hooks/useAllUser";
 import {
-  ListOrdered,
   PackagePlus,
   Store,
+  Truck,
   Users,
   Wallet,
   WalletCards,
@@ -39,7 +39,9 @@ const AdminOverview = () => {
               </div>
             </div>
             <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">Total Users</h2>
+              <h2 className="font-bold uppercase text-gray-600">
+                Total Customers
+              </h2>
               <p className="font-bold text-3xl text-pink-500">
                 {allUser?.length}
               </p>
@@ -55,11 +57,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Unpaid</h2>
-              <p className="font-bold text-3xl">
-                <span className="text-yellow-600">
-                  <i className="fas fa-caret-up"></i>
-                </span>
-              </p>
+              <p className="font-bold text-3xl text-yellow-600">20</p>
             </div>
           </div>
         </div>
@@ -68,7 +66,7 @@ const AdminOverview = () => {
           <div className="flex flex-row items-center">
             <div className="flex-shrink pr-4">
               <div className="rounded-full p-5 bg-blue-600">
-                <ListOrdered />
+                <Truck />
               </div>
             </div>
             <div className="flex-1 text-right md:text-center">
