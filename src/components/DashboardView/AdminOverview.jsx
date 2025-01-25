@@ -19,6 +19,13 @@ const AdminOverview = () => {
     ["Watch TV", 2],
     ["Sleep", 7],
   ];
+  const anotherData = [
+    ["Element", "Density", { role: "style" }],
+    ["Copper", 8.94, "#b87333"], // RGB value
+    ["Silver", 10.49, "silver"], // English color name
+    ["Gold", 19.3, "gold"],
+    ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
+  ];
   return (
     <div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
@@ -83,7 +90,7 @@ const AdminOverview = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Total Users */}
         <div className="bg-gradient-to-b from-pink-300 to-pink-200 border-b-4 border-pink-500 rounded-lg shadow-xl p-5">
           <div className="flex flex-row items-center">
@@ -117,14 +124,29 @@ const AdminOverview = () => {
           </div>
         </div>
       </section>
-      <section>
-      <Chart
-      chartType="PieChart"
-      data={data}
-    //   options={options}
-      width={"100%"}
-      height={"400px"}
-    />
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <Chart
+            chartType="PieChart"
+            data={data}
+            options={{
+              backgroundColor: "#000000", // Black background for the chart
+            }}
+            width={"100%"}
+            height={"400px"}
+          />
+        </div>
+        <div>
+          <Chart
+            chartType="ColumnChart"
+            width="100%"
+            height="100%"
+            data={anotherData}
+            options={{
+              backgroundColor: "#000000", // Black background for the chart
+            }}
+          />
+        </div>
       </section>
     </div>
   );
