@@ -1,4 +1,6 @@
+import useAllOrders from "@/hooks/useAllOrders";
 import useAllUser from "@/hooks/useAllUser";
+import useProduct from "@/hooks/useProduct";
 import {
   PackagePlus,
   Store,
@@ -11,6 +13,16 @@ import Chart from "react-google-charts";
 
 const AdminOverview = () => {
   const [allUser] = useAllUser();
+  const [allOrders] = useAllOrders();
+    const [products]=useProduct();
+
+
+  const approvedOrders = allOrders?.filter(
+    (order) => order?.status === "approved"
+  );
+  const pendingOrders = allOrders?.filter(
+    (order) => order?.status === "pending"
+  );
   const data = [
     ["Task", "Hours per Day"],
     ["Work", 9],
@@ -26,6 +38,7 @@ const AdminOverview = () => {
     ["Gold", 19.3, "gold"],
     ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
   ];
+
   return (
     <div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
@@ -56,7 +69,9 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Orders</h2>
-              <p className="font-bold text-3xl text-blue-600">152 </p>
+              <p className="font-bold text-3xl text-blue-600">
+                {approvedOrders?.length}
+              </p>
             </div>
           </div>
         </div>
@@ -71,7 +86,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
-              <p className="font-bold text-3xl text-indigo-600">7</p>
+              <p className="font-bold text-3xl text-indigo-600">{pendingOrders?.length}</p>
             </div>
           </div>
         </div>
@@ -109,6 +124,7 @@ const AdminOverview = () => {
             </div>
           </div>
         </div>
+
         {/* Total Products */}
         <div className="bg-gradient-to-b from-orange-200 to-orange-100 border-b-4 border-orange-500 rounded-lg shadow-xl p-5">
           <div className="flex flex-row items-center">
@@ -119,7 +135,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Products</h2>
-              <p className="font-bold text-3xl text-orange-600">3</p>
+              <p className="font-bold text-3xl text-orange-600">{products?.length}</p>
             </div>
           </div>
         </div>

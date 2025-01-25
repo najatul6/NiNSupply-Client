@@ -3,7 +3,7 @@ import useRole from "@/hooks/useRole";
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { SquareChartGantt, BookA, UserCog } from "lucide-react";
+import { SquareChartGantt, BookA, UserCog, Truck, Container } from "lucide-react";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
@@ -40,9 +40,14 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: <SquareChartGantt />,
     },
     {
+      label: "New Orders",
+      path: "/dashboard/new-orders",
+      icon: <Truck />,
+    },
+    {
       label: "Orders",
       path: "/dashboard/orders",
-      icon: <BookA />,
+      icon: <Container />,
     },
     {
       label: "Users Management",
