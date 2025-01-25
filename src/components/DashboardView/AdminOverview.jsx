@@ -71,7 +71,7 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Orders</h2>
-              <p className="font-bold text-3xl">152 days</p>
+              <p className="font-bold text-3xl text-blue-600">152 days</p>
             </div>
           </div>
         </div>
@@ -84,20 +84,20 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
-              <p className="font-bold text-3xl">7 tasks</p>
+              <p className="font-bold text-3xl text-indigo-600">7 tasks</p>
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5">
+        <div className="bg-gradient-to-b from-orange-200 to-orange-100 border-b-4 border-orange-500 rounded-lg shadow-xl p-5">
           <div className="flex flex-row items-center">
             <div className="flex-shrink pr-4">
-              <div className="rounded-full p-5 bg-red-600">
+              <div className="rounded-full p-5 bg-orange-600">
                 <Store />
               </div>
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Products</h2>
-              <p className="font-bold text-3xl text-red-500">3</p>
+              <p className="font-bold text-3xl text-orange-600">3</p>
             </div>
           </div>
         </div>
