@@ -75,7 +75,12 @@ const Header = () => {
   // Checkout
   const handleCheckOut = async() => {
     try{
-      await axiosSecure.post('/bkash-checkout')
+      await axiosSecure.post('/bkash-checkout',{
+        amount:totalPrice,
+        callbackURL:'http://localhost:5000/bkash-callback',
+        orderID:cart.itemId,
+        reference:user.email
+      })
     }catch(error){
       console.log(error)
     }
