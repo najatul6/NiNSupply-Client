@@ -32,10 +32,12 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import useRole from "@/hooks/useRole";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
+  const axiosSecure=useAxiosSecure()
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
@@ -45,7 +47,8 @@ const Header = () => {
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
   );
-  console.log(userRole);
+
+  // Menu 
   const menu = [
     {
       name: "Home",
@@ -69,6 +72,16 @@ const Header = () => {
     },
   ];
 
+  // Checkout
+  const handleCheckOut = async() => {
+    try{
+      await axiosSecure.post('/bkash-checkout')
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  // Logout
   const handleLogOut = () => {
     toast.promise(logOut(), {
       pending: "Logging out...",
@@ -192,7 +205,7 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button type="submit" className="w-full">
+                <Button onClick={handleCheckOut} className="w-full">
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
               </SheetFooter>
