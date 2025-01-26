@@ -82,7 +82,7 @@ const Header = () => {
         reference:user.email
       }).then(res=>{
         console.log(res);
-        window.location.href=res.data
+        window.location.href=res?.data
       }).catch(error=>{
         console.log(error);
       })
