@@ -3,7 +3,7 @@ import useCart from "@/hooks/useCart";
 
 const MyCart = () => {
   const [ cart,refetch,isLoading]  = useCart();
-  console.log(cart?.length);
+  // console.log(cart?.length);
   if (isLoading) {
     return <div>Loading...</div>;
   }

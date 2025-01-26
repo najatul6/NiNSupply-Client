@@ -80,6 +80,11 @@ const Header = () => {
         callbackURL:'http://localhost:5000/bkash-callback',
         orderID:cart.itemId,
         reference:user.email
+      }).then(res=>{
+        console.log(res);
+        window.location.href=res.data
+      }).catch(error=>{
+        console.log(error);
       })
     }catch(error){
       console.log(error)
