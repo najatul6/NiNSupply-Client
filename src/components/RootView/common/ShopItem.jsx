@@ -24,6 +24,7 @@ const ShopItem = ({ item }) => {
         productName: product.productName,
         price: product.price,
         quantity: product.quantity,
+        status: "pending",
       };
       axiosSecure.post('/carts', cartsItem)
       .then(res=>{
