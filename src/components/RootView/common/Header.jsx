@@ -32,12 +32,12 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import useRole from "@/hooks/useRole";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
+// import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
@@ -72,28 +72,7 @@ const Header = () => {
     },
   ];
 
-  const handleCheckOut = async (totalPrice, orderId, userEmail) => {
-    try {
-      const callbackURL = "http://localhost:5000/bkash-callback"; // Replace with your actual callback URL
-
-      const response = await axiosSecure.post("/bkash-checkout", {
-        amount: totalPrice,
-        callbackURL,
-        orderID: orderId,
-        reference: userEmail,
-      });
-
-      console.log(response);
-      if (response.data?.redirectURL) {
-        // Redirect to the Bkash payment page
-        // window.location.href = response.data.redirectURL;
-      } else {
-        console.error("Error in Bkash payment:", response.data);
-      }
-    } catch (error) {
-      console.error("Bkash checkout error:", error);
-    }
-  };
+  
 
   // Logout
   const handleLogOut = () => {
