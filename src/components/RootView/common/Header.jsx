@@ -180,15 +180,22 @@ const Header = () => {
               <div className="flex justify-center items-center relative cursor-pointer">
                 <CiShoppingCart size={40} className="text-baseColor" />
                 <p className="absolute w-full mx-auto text-center font-bold pl-1 text-baseColor text-xs">
-                  {cart?.length}
+                  {cart?.length || 0}
                 </p>
               </div>
             </SheetTrigger>
-            <SheetContent className="w-full flex flex-col">
+            <SheetContent
+              aria-labelledby="cart-sheet-title"
+              className="w-full flex flex-col"
+            >
               <SheetHeader>
                 <div className="flex justify-between items-center pt-4 px-2">
-                  <SheetTitle className="text-white">Total Price</SheetTitle>
-                  <SheetTitle className="text-white">{totalPrice}৳</SheetTitle>
+                  <SheetTitle className="text-white" id="cart-sheet-title">
+                    Total Price
+                  </SheetTitle>
+                  <SheetTitle className="text-white">
+                    {totalPrice || 0}৳{" "}
+                  </SheetTitle>
                 </div>
                 <hr />
               </SheetHeader>
@@ -196,7 +203,13 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button className="w-full">
+                <Button
+                  onClick={() => {
+                    // Add your checkout logic here
+                    console.log("Proceeding to checkout...");
+                  }}
+                  className="w-full"
+                >
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
               </SheetFooter>
