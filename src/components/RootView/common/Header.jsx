@@ -72,24 +72,35 @@ const Header = () => {
     },
   ];
 
-  // Checkout
-  const handleCheckOut = async() => {
-    try{
-      await axiosSecure.post('/bkash-checkout',{
-        amount:totalPrice,
-        callbackURL:'http://localhost:5000/bkash-callback',
-        orderID:cart.itemId,
-        reference:user.email
-      }).then(res=>{
-        console.log(res);
-        window.location.href=res?.data
-      }).catch(error=>{
-        console.log(error);
-      })
-    }catch(error){
-      console.log(error)
+  const handleCheckOut = async () => {
+    const callbackURL = import.meta.env.VITE_APP_BKASH_CALLBACK_URL || 'http://localhost:5000/bkash-callback';
+    
+    if (!totalPrice || !cart.itemId || !user.email) {
+      console.error('Missing required parameters');
+      return;
     }
-  }
+  
+    try {
+      const response = await axiosSecure.post('/bkash-checkout', {
+        amount: totalPrice,
+        callbackURL,
+        orderID: cart.itemId,
+        reference: user.email,
+      });
+  
+      console.log('Response data:', response.data);
+  
+      if (response.data?.redirectURL) {
+        window.location.href = response.data.redirectURL;
+      } else {
+        console.error('No redirect URL found in response:', response.data);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+    }
+  };
+  
+  
 
   // Logout
   const handleLogOut = () => {
