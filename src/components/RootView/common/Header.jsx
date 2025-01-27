@@ -83,9 +83,10 @@ const Header = () => {
         reference: userEmail,
       });
 
+      console.log(response);
       if (response.data?.redirectURL) {
         // Redirect to the Bkash payment page
-        window.location.href = response.data.redirectURL;
+        // window.location.href = response.data.redirectURL;
       } else {
         console.error("Error in Bkash payment:", response.data);
       }
