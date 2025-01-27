@@ -6,7 +6,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
 import { CiShoppingCart } from "react-icons/ci";
-import {  MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,18 +37,18 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
-  const axiosSecure=useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
-  const [userRole]=useRole()
+  const [userRole] = useRole();
   const totalPrice = cart?.reduce(
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
   );
 
-  // Menu 
+  // Menu
   const menu = [
     {
       name: "Home",
@@ -72,35 +72,27 @@ const Header = () => {
     },
   ];
 
-  const handleCheckOut = async () => {
-    const callbackURL = import.meta.env.VITE_APP_BKASH_CALLBACK_URL || 'http://localhost:5000/bkash-callback';
-    
-    if (!totalPrice || !cart.itemId || !user.email) {
-      console.error('Missing required parameters');
-      return;
-    }
-  
+  const handleCheckOut = async (totalPrice, orderId, userEmail) => {
     try {
-      const response = await axiosSecure.post('/bkash-checkout', {
+      const callbackURL = "http://localhost:5000/bkash-callback"; // Replace with your actual callback URL
+
+      const response = await axiosSecure.post("/bkash-checkout", {
         amount: totalPrice,
         callbackURL,
-        orderID: cart.itemId,
-        reference: user.email,
+        orderID: orderId,
+        reference: userEmail,
       });
-  
-      console.log('Response data:', response.data);
-  
+
       if (response.data?.redirectURL) {
+        // Redirect to the Bkash payment page
         window.location.href = response.data.redirectURL;
       } else {
-        console.error('No redirect URL found in response:', response.data);
+        console.error("Error in Bkash payment:", response.data);
       }
     } catch (error) {
-      console.error('Checkout error:', error);
+      console.error("Bkash checkout error:", error);
     }
   };
-  
-  
 
   // Logout
   const handleLogOut = () => {
@@ -226,7 +218,12 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button onClick={handleCheckOut} className="w-full">
+                <Button
+                  onClick={() =>
+                    handleCheckOut(1000, "Order_12345", "najatulislam12@gamil.com")
+                  }
+                  className="w-full"
+                >
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
               </SheetFooter>
@@ -260,7 +257,7 @@ const Header = () => {
                             <DropdownMenuItem className="cursor-pointer">
                               Dashboard
                               <DropdownMenuShortcut>
-                              <LayoutDashboard />
+                                <LayoutDashboard />
                               </DropdownMenuShortcut>
                             </DropdownMenuItem>
                           </Link>
