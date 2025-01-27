@@ -72,8 +72,6 @@ const Header = () => {
     },
   ];
 
-  
-
   // Logout
   const handleLogOut = () => {
     toast.promise(logOut(), {
@@ -198,12 +196,7 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button
-                  onClick={() =>
-                    handleCheckOut(1000, "Order_12345", "najatulislam12@gamil.com")
-                  }
-                  className="w-full"
-                >
+                <Button className="w-full">
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
               </SheetFooter>
