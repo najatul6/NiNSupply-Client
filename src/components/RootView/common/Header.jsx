@@ -87,13 +87,37 @@ const Header = () => {
   const handleOrder = async () => {
     try {
       await axiosPublic.post("/bkash-checkout", {
-        amount:20,
+        amount:totalPrice,
         callbackURL:'http://localhost:5000/bkash-callback',
-        orderID:'12345',
-        reference:'12121',
+        orderID:cart?.map((item)=>item.id).join(','),
+        reference:user?.email,
       }).then((res)=>{
-        console.log(res);
-        window.location.href =res?.data
+        const bkashURL = res?.data;
+
+        if (bkashURL) {
+          // Open the payment URL in a popup
+          const popup = window.open(
+            bkashURL,
+            "bKash Payment",
+            "width=600,height=700"
+          );
+
+          // Check if the popup was blocked
+          if (!popup || popup.closed || typeof popup.closed === "undefined") {
+            toast.success("Popup was blocked. Please allow popups for this site.");
+          }
+
+          // Optional: Poll to check if the popup is closed
+          const popupInterval = setInterval(() => {
+            if (popup.closed) {
+              clearInterval(popupInterval);
+              console.log("Popup closed");
+
+              // You can fetch the payment status here
+              // Example: Call your backend to confirm payment status
+            }
+          }, 500);
+        }
       }).catch((err)=>{
         console.log(err);
       })
