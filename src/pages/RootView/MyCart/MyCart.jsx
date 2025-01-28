@@ -18,7 +18,7 @@ const MyCart = () => {
             </div>
           ) : (
             cart?.map((product) => (
-              <OrderCard key={product.id} product={product} refetch={refetch} />
+              <OrderCard key={product._id} product={product} refetch={refetch} />
             ))
           )}
         </div>

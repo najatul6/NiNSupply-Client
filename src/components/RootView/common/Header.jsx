@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation,  } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import brandImg from "../../../assets/ninSupply.svg";
@@ -32,19 +32,19 @@ import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import useRole from "@/hooks/useRole";
 import { Button } from "@/components/ui/button";
-
-import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+// import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
   const [userRole] = useRole();
-  // const navigate = useNavigate();
   const totalPrice = cart?.reduce(
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
@@ -91,11 +91,11 @@ const Header = () => {
         itemId: item?.itemId,
         quantity: item?.quantity,
       }));
-      await axiosSecure
+      await axiosPublic
         .post("/bkash-checkout", {
           amount: totalPrice,
           callbackURL: "http://localhost:5000/bkash-callback",
-          orderID: JSON.stringify(orderDetails),
+          orderID: orderDetails?.map((item) => item).join(","),
           reference: user?.email,
         })
         .then((res) => {
@@ -111,7 +111,7 @@ const Header = () => {
 
             // Check if the popup was blocked
             if (!popup || popup.closed || typeof popup.closed === "undefined") {
-              toast.error(
+              toast.success(
                 "Popup was blocked. Please allow popups for this site."
               );
             }
@@ -121,6 +121,7 @@ const Header = () => {
               if (popup.closed) {
                 clearInterval(popupInterval);
                 console.log("Popup closed");
+
                 // You can fetch the payment status here
                 // Example: Call your backend to confirm payment status
               }
