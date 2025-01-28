@@ -203,15 +203,12 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button
-                  onClick={() => {
-                    // Add your checkout logic here
-                    console.log("Proceeding to checkout...");
-                  }}
+                <NavLink to="/checkout">
+                  
                   className="w-full"
                 >
                   Checkout <MdOutlineShoppingCartCheckout />
-                </Button>
+                </NavLink>
               </SheetFooter>
             </SheetContent>
           </Sheet>
