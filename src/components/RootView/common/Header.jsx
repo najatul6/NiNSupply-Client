@@ -86,41 +86,51 @@ const Header = () => {
   // Order
   const handleOrder = async () => {
     try {
-      await axiosPublic.post("/bkash-checkout", {
-        amount:totalPrice,
-        callbackURL:'http://localhost:5000/bkash-callback',
-        orderID:cart?.map((item)=>item.id).join(','),
-        reference:user?.email,
-      }).then((res)=>{
-        const bkashURL = res?.data;
+      // Prepare the order details including item IDs and quantities
+      const orderDetails = cart?.map((item) => ({
+        itemId: item?.itemId,
+        quantity: item?.quantity,
+      }));
+      await axiosPublic
+        .post("/bkash-checkout", {
+          amount: totalPrice,
+          callbackURL: "http://localhost:5000/bkash-callback",
+          orderID: orderDetails?.map((item) => item).join(","),
+          reference: user?.email,
+        })
+        .then((res) => {
+          const bkashURL = res?.data;
 
-        if (bkashURL) {
-          // Open the payment URL in a popup
-          const popup = window.open(
-            bkashURL,
-            "bKash Payment",
-            "width=600,height=700"
-          );
+          if (bkashURL) {
+            // Open the payment URL in a popup
+            const popup = window.open(
+              bkashURL,
+              "bKash Payment",
+              "width=600,height=700"
+            );
 
-          // Check if the popup was blocked
-          if (!popup || popup.closed || typeof popup.closed === "undefined") {
-            toast.success("Popup was blocked. Please allow popups for this site.");
-          }
-
-          // Optional: Poll to check if the popup is closed
-          const popupInterval = setInterval(() => {
-            if (popup.closed) {
-              clearInterval(popupInterval);
-              console.log("Popup closed");
-
-              // You can fetch the payment status here
-              // Example: Call your backend to confirm payment status
+            // Check if the popup was blocked
+            if (!popup || popup.closed || typeof popup.closed === "undefined") {
+              toast.success(
+                "Popup was blocked. Please allow popups for this site."
+              );
             }
-          }, 500);
-        }
-      }).catch((err)=>{
-        console.log(err);
-      })
+
+            // Optional: Poll to check if the popup is closed
+            const popupInterval = setInterval(() => {
+              if (popup.closed) {
+                clearInterval(popupInterval);
+                console.log("Popup closed");
+
+                // You can fetch the payment status here
+                // Example: Call your backend to confirm payment status
+              }
+            }, 500);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log("error form handleOrder", error);
     }
