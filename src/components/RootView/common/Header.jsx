@@ -122,7 +122,6 @@ const Header = () => {
                 clearInterval(popupInterval);
                 console.log("Popup closed");
                 toast.error("Payment was cancelled");
-
                 // You can fetch the payment status here
                 // Example: Call your backend to confirm payment status
               }
