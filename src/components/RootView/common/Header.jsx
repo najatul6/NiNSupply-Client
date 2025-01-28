@@ -93,6 +93,8 @@ const Header = () => {
         reference:'12121',
       }).then((res)=>{
         console.log(res);
+      }).catch((err)=>{
+        console.log(err);
       })
     } catch (error) {
       console.log("error form handleOrder", error);
