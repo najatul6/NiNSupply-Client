@@ -93,6 +93,7 @@ const Header = () => {
         reference:'12121',
       }).then((res)=>{
         console.log(res);
+        window.location.href =res?.data
       }).catch((err)=>{
         console.log(err);
       })
