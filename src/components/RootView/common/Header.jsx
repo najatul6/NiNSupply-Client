@@ -28,16 +28,18 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import MyCart from "@/pages/RootView/MyCart/MyCart";
-import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import useRole from "@/hooks/useRole";
+import { Button } from "@/components/ui/button";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 // import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   // const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
@@ -79,6 +81,22 @@ const Header = () => {
       success: "Logged out successfully",
       error: "Error logging out",
     });
+  };
+
+  // Order
+  const handleOrder = async () => {
+    try {
+      await axiosPublic.post("/bkash-checkout", {
+        amount:20,
+        callbackURL:'http://localhost:5000/bkash-callback',
+        orderID:'12345',
+        reference:'12121',
+      }).then((res)=>{
+        console.log(res);
+      })
+    } catch (error) {
+      console.log("error form handleOrder", error);
+    }
   };
 
   return (
@@ -203,12 +221,9 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <NavLink to="/checkout">
-                  
-                  className="w-full"
-                >
+                <Button onClick={handleOrder} className="w-full">
                   Checkout <MdOutlineShoppingCartCheckout />
-                </NavLink>
+                </Button>
               </SheetFooter>
             </SheetContent>
           </Sheet>
