@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation,  } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import brandImg from "../../../assets/ninSupply.svg";
@@ -44,7 +44,7 @@ const Header = () => {
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
   const [userRole] = useRole();
-  const navigate=useNavigate()
+  // const navigate = useNavigate();
   const totalPrice = cart?.reduce(
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
@@ -95,7 +95,7 @@ const Header = () => {
         .post("/bkash-checkout", {
           amount: totalPrice,
           callbackURL: "http://localhost:5000/bkash-callback",
-          orderID:  JSON.stringify(orderDetails),
+          orderID: JSON.stringify(orderDetails),
           reference: user?.email,
         })
         .then((res) => {
@@ -111,7 +111,9 @@ const Header = () => {
 
             // Check if the popup was blocked
             if (!popup || popup.closed || typeof popup.closed === "undefined") {
-              toast.error("Popup was blocked. Please allow popups for this site.");
+              toast.error(
+                "Popup was blocked. Please allow popups for this site."
+              );
             }
 
             // Optional: Poll to check if the popup is closed
@@ -119,7 +121,6 @@ const Header = () => {
               if (popup.closed) {
                 clearInterval(popupInterval);
                 console.log("Popup closed");
-                fetchPaymentStatus();
                 // You can fetch the payment status here
                 // Example: Call your backend to confirm payment status
               }
@@ -133,26 +134,6 @@ const Header = () => {
       console.log("error form handleOrder", error);
     }
   };
-
-  // Function to check payment status and save to DB
-const fetchPaymentStatus = async () => {
-  try {
-    const response = await axiosSecure.get("/payment-status", {
-      params: { paymentID: paymentID }, // You need to send paymentID
-    });
-
-    if (response.data.status === "success") {
-      // If payment is successful, redirect the user to the dashboard
-      toast.success("Payment successful! Redirecting to dashboard...");
-      navigate( "/dashboard/overview"); // Adjust this as per your routing setup
-    } else {
-      toast.error("Payment failed! Please try again.");
-    }
-  } catch (err) {
-    console.error("Error fetching payment status:", err);
-    toast.error("Error checking payment status. Please try again.");
-  }
-};
 
   return (
     <nav className="overflow-x-clip ">
