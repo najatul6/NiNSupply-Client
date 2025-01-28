@@ -111,7 +111,7 @@ const Header = () => {
 
             // Check if the popup was blocked
             if (!popup || popup.closed || typeof popup.closed === "undefined") {
-              toast.success(
+              toast.error(
                 "Popup was blocked. Please allow popups for this site."
               );
             }
@@ -121,6 +121,7 @@ const Header = () => {
               if (popup.closed) {
                 clearInterval(popupInterval);
                 console.log("Popup closed");
+                toast.error("Payment was cancelled");
 
                 // You can fetch the payment status here
                 // Example: Call your backend to confirm payment status
