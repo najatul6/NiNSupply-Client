@@ -32,14 +32,11 @@ import MyCart from "@/pages/RootView/MyCart/MyCart";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import { Button } from "@/components/ui/button";
-import useAxiosPublic from "@/hooks/useAxiosPublic";
 // import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
-  // const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
