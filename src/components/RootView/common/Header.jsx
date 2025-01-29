@@ -87,50 +87,55 @@ const Header = () => {
   // Order
   const handleOrder = async () => {
     try {
-      await axiosPublic
-        .post("/bkash-checkout", {
-          amount: totalPrice,
-          callbackURL: "http://localhost:5000/bkash-callback",
-          orderID: cart.map((item) => item.itemId).join(","),
-          reference: user?.email,
-        })
-        .then((res) => {
-          const bkashURL = res?.data;
-
-          if (bkashURL) {
-            // Open the payment URL in a popup
-            const popup = window.open(
-              bkashURL,
-              "bKash Payment",
-              "width=600,height=700"
-            );
-
-            // Check if the popup was blocked
-            if (!popup || popup.closed || typeof popup.closed === "undefined") {
-              toast.error(
-                "Popup was blocked. Please allow popups for this site."
-              );
-            }
-
-            // Optional: Poll to check if the popup is closed
-            const popupInterval = setInterval(() => {
-              if (popup.closed) {
-                clearInterval(popupInterval);
-                console.log("Popup closed");
-                toast.error("Payment was cancelled");
-                // You can fetch the payment status here
-                // Example: Call your backend to confirm payment status
-              }
-            }, 500);
+      const res = await axiosPublic.post("/bkash-checkout", {
+        amount: totalPrice,
+        callbackURL: "http://localhost:5000/bkash-callback",
+        orderID: cart.map((item) => item.itemId).join(","),
+        reference: user?.email,
+      });
+  
+      const bkashURL = res?.data;
+  
+      if (bkashURL) {
+        const popup = window.open(bkashURL, "bKash Payment", "width=600,height=700");
+  
+        if (!popup || popup.closed || typeof popup.closed === "undefined") {
+          toast.error("Popup was blocked. Please allow popups for this site.");
+          return;
+        }
+  
+        // Listen for a message from the popup
+        const handleMessage = (event) => {
+          if (event.origin !== "http://localhost:5000") return; // Only accept messages from the backend
+  
+          if (event.data.status === "success") {
+            toast.success("Payment successful!");
+            popup.close();
+            window.location.href = "/"; // Redirect to home
+          } else {
+            toast.error("Payment failed or was cancelled.");
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  
+          // Remove event listener after message received
+          window.removeEventListener("message", handleMessage);
+        };
+  
+        window.addEventListener("message", handleMessage);
+  
+        // Poll to check if the popup is closed manually
+        const popupInterval = setInterval(() => {
+          if (popup.closed) {
+            clearInterval(popupInterval);
+            console.log("Popup closed");
+            toast.error("Payment was cancelled");
+          }
+        }, 500);
+      }
     } catch (error) {
-      console.log("error form handleOrder", error);
+      console.log("Error from handleOrder:", error);
     }
   };
+  
 
   return (
     <nav className="overflow-x-clip ">
@@ -249,7 +254,7 @@ const Header = () => {
                   </SheetTitle>
                 </div>
                 <SheetDescription>
-                  This section contains your cart details and total price.
+                  Your cart details and total price.
                 </SheetDescription>
                 <hr />
               </SheetHeader>
