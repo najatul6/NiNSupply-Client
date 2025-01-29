@@ -3,7 +3,6 @@ import useAllUser from "@/hooks/useAllUser";
 import { FaSearch } from "react-icons/fa";
 const UserControls = () => {
   const [allUsers] = useAllUser();
-  console.log(allUsers);
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
@@ -53,12 +52,20 @@ const UserControls = () => {
             <tbody className="whitespace-nowrap">
               {allUsers?.map((user) => (
                 <tr key={user?._id} className="even:bg-blue-50">
-                  <td className="p-4 text-sm text-black overflow-hidden ">
-                    <img src={user.photoURL} alt="" className="rounded-full h-10"/>
+                  <td className="p-4 text-sm text-black">
+                    <div className="flex items-center  overflow-hidden rounded-full w-10 h-10">
+                      <img
+                        src={user?.photoURL}
+                        alt={user?.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </td>
                   <td className="p-4 text-sm text-black">{user?.name}</td>
                   <td className="p-4 text-sm text-black">{user?.email}</td>
-                  <td className="p-4 text-sm text-black capitalize">{user?.role}</td>
+                  <td className="p-4 text-sm text-black capitalize">
+                    {user?.role}
+                  </td>
                   <td className="p-4 text-sm text-black">
                     <DateComponent createdAt={user?.createdAt} />
                   </td>

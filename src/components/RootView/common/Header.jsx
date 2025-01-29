@@ -31,7 +31,6 @@ import {
 import MyCart from "@/pages/RootView/MyCart/MyCart";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
-import useRole from "@/hooks/useRole";
 import { Button } from "@/components/ui/button";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 // import useAxiosSecure from "@/hooks/useAxiosSecure";
@@ -45,7 +44,6 @@ const Header = () => {
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
-  const [userRole] = useRole();
   const totalPrice = cart?.reduce(
     (acc, curr) => acc + parseFloat(curr.price || 0),
     0
@@ -93,21 +91,25 @@ const Header = () => {
         orderID: cart.map((item) => item.itemId).join(","),
         reference: user?.email,
       });
-  
+
       const bkashURL = res?.data;
-  
+
       if (bkashURL) {
-        const popup = window.open(bkashURL, "bKash Payment", "width=600,height=700");
-  
+        const popup = window.open(
+          bkashURL,
+          "bKash Payment",
+          "width=600,height=700"
+        );
+
         if (!popup || popup.closed || typeof popup.closed === "undefined") {
           toast.error("Popup was blocked. Please allow popups for this site.");
           return;
         }
-  
+
         // Listen for a message from the popup
         const handleMessage = (event) => {
           if (event.origin !== "http://localhost:5000") return; // Only accept messages from the backend
-  
+
           if (event.data.status === "success") {
             toast.success("Payment successful!");
             popup.close();
@@ -115,13 +117,13 @@ const Header = () => {
           } else {
             toast.error("Payment failed or was cancelled.");
           }
-  
+
           // Remove event listener after message received
           window.removeEventListener("message", handleMessage);
         };
-  
+
         window.addEventListener("message", handleMessage);
-  
+
         // Poll to check if the popup is closed manually
         const popupInterval = setInterval(() => {
           if (popup.closed) {
@@ -135,7 +137,6 @@ const Header = () => {
       console.log("Error from handleOrder:", error);
     }
   };
-  
 
   return (
     <nav className="overflow-x-clip ">
@@ -288,22 +289,22 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    {userRole === "admin" && (
-                      <>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                          <Link to="/dashboard/overview">
-                            <DropdownMenuItem className="cursor-pointer">
-                              Dashboard
-                              <DropdownMenuShortcut>
-                                <LayoutDashboard />
-                              </DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                          </Link>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                      </>
-                    )}
+
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuGroup>
+                        <Link to="/dashboard/overview">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Dashboard
+                            <DropdownMenuShortcut>
+                              <LayoutDashboard />
+                            </DropdownMenuShortcut>
+                          </DropdownMenuItem>
+                        </Link>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                    </>
+
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <Link to="my-profile">

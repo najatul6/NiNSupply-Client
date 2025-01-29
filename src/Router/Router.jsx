@@ -61,9 +61,9 @@ const Router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <AdminRoute>
+      <PrivateRoute>
         <DashboardLayout />
-      </AdminRoute>
+      </PrivateRoute>
     ),
     children: [
       {
@@ -72,7 +72,27 @@ const Router = createBrowserRouter([
       },
       {
         path: "users-control",
-        element: <UserControls />,
+        element: (
+          <AdminRoute>
+            <UserControls />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "orders",
+        element: (
+          <AdminRoute>
+            <UserControls />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "new-orders",
+        element: (
+          <AdminRoute>
+            <UserControls />
+          </AdminRoute>
+        ),
       },
       {
         path: "my-profile",
