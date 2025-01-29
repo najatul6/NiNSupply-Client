@@ -86,16 +86,12 @@ const Header = () => {
   // Order
   const handleOrder = async () => {
     try {
-      // Prepare the order details including item IDs and quantities
-      const orderDetails = cart?.map((item) => ({
-        itemId: item?.itemId,
-        quantity: item?.quantity,
-      }));
+      
       await axiosPublic
         .post("/bkash-checkout", {
           amount: totalPrice,
           callbackURL: "http://localhost:5000/bkash-callback",
-          orderID: orderDetails?.map((item) => item).join(","),
+          orderID: cart.map((item) => item.itemId).join(","),
           reference: user?.email,
         })
         .then((res) => {
