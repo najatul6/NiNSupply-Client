@@ -89,54 +89,18 @@ const Header = () => {
         toast.error("Cart is empty");
         return;
       }
-      const res = await axiosPublic.post("/bkash-checkout", {
+     await axiosPublic.post("/bkash-checkout", {
         amount: totalPrice,
         callbackURL: `${import.meta.env.VITE_BASE_URL}/bkash-callback`,
         orderID: cart.map((item) => item.itemId).join(","),
         reference: user?.email,
-      });
-
-      const bkashURL = res?.data;
-
-      if (bkashURL) {
-        const popup = window.open(
-          bkashURL,
-          "bKash Payment",
-          "width=600,height=700"
-        );
-
-        if (!popup || popup.closed || typeof popup.closed === "undefined") {
-          toast.error("Popup was blocked. Please allow popups for this site.");
-          return;
+      }).then((res) => {
+        if (res.data) {
+          window.location.href = res.data;
         }
-
-        // Listen for a message from the popup
-        const handleMessage = (event) => {
-          if (event.origin !== import.meta.env.VITE_BASE_URL) return; // Only accept messages from the backend
-
-          if (event.data.status === "success") {
-            toast.success("Payment successful!");
-            popup.close();
-            window.location.href = "/"; // Redirect to home
-          } else {
-            toast.error("Payment failed or was cancelled.");
-          }
-
-          // Remove event listener after message received
-          window.removeEventListener("message", handleMessage);
-        };
-
-        window.addEventListener("message", handleMessage);
-
-        // Poll to check if the popup is closed manually
-        const popupInterval = setInterval(() => {
-          if (popup.closed) {
-            clearInterval(popupInterval);
-            console.log("Popup closed");
-            toast.error("Payment was cancelled");
-          }
-        }, 500);
-      }
+      }).catch((error) => {
+        console.log("Error from handleOrder:", error);
+      });
     } catch (error) {
       console.log("Error from handleOrder:", error);
     }
