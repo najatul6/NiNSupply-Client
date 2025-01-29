@@ -85,9 +85,13 @@ const Header = () => {
   // Order
   const handleOrder = async () => {
     try {
+      if (cart.length === 0) {
+        toast.error("Cart is empty");
+        return;
+      }
       const res = await axiosPublic.post("/bkash-checkout", {
         amount: totalPrice,
-        callbackURL: "http://localhost:5000/bkash-callback",
+        callbackURL: `${import.meta.env.VITE_BASE_URL}/bkash-callback`,
         orderID: cart.map((item) => item.itemId).join(","),
         reference: user?.email,
       });
@@ -108,7 +112,7 @@ const Header = () => {
 
         // Listen for a message from the popup
         const handleMessage = (event) => {
-          if (event.origin !== "http://localhost:5000") return; // Only accept messages from the backend
+          if (event.origin !== import.meta.env.VITE_BASE_URL) return; // Only accept messages from the backend
 
           if (event.data.status === "success") {
             toast.success("Payment successful!");
