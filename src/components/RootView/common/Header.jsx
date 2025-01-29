@@ -83,27 +83,8 @@ const Header = () => {
   };
 
   // Order
-  const handleOrder = async () => {
-    try {
-      if (cart.length === 0) {
-        toast.error("Cart is empty");
-        return;
-      }
-     await axiosPublic.post("/bkash-checkout", {
-        amount: totalPrice,
-        callbackURL: `${import.meta.env.VITE_BASE_URL}/bkash-callback`,
-        orderID: cart.map((item) => item.itemId).join(","),
-        reference: user?.email,
-      }).then((res) => {
-        if (res.data) {
-          window.location.href = res.data;
-        }
-      }).catch((error) => {
-        console.log("Error from handleOrder:", error);
-      });
-    } catch (error) {
-      console.log("Error from handleOrder:", error);
-    }
+  const handleOrder =  () => {
+   console.log("data is processing");
   };
 
   return (
