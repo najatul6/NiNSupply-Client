@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -86,7 +87,6 @@ const Header = () => {
   // Order
   const handleOrder = async () => {
     try {
-      
       await axiosPublic
         .post("/bkash-checkout", {
           amount: totalPrice,
@@ -248,6 +248,9 @@ const Header = () => {
                     {totalPrice || 0}৳{" "}
                   </SheetTitle>
                 </div>
+                <SheetDescription>
+                  This section contains your cart details and total price.
+                </SheetDescription>
                 <hr />
               </SheetHeader>
               <div className="h-full overflow-y-auto scroll-smooth flex-grow no-scrollbar">
