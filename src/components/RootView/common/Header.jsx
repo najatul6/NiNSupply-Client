@@ -83,26 +83,30 @@ const Header = () => {
   // Order
 
   const handleOrder = () => {
-    if (cart.length === 0) {
-      toast.error("Your cart is empty!");
-      return;
-    }
-  
-    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const orderID = Date.now().toString(); // Unique order ID
-    const reference = orderID;
-  
-    // Prepare product details
-    const productDetails = cart.map(item => ({
-      productName: item.productName,
-      quantity: item.quantity
-    }));
-  
-    axiosSecure.post("/bkash-checkout", {
-      userEmail: user?.email,  // Ensure the user's email is sent
+  if (cart.length === 0) {
+    toast.error("Your cart is empty!");
+    return;
+  }
+
+  const totalAmount = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const orderID = Date.now().toString(); // Unique order ID
+  const reference = orderID;
+
+  // Prepare product details
+  const productDetails = cart.map((item) => ({
+    productName: item.productName,
+    quantity: item.quantity,
+  }));
+
+  axiosSecure
+    .post("/bkash-checkout", {
+      userEmail: user?.email, // Ensure the user's email is sent
       products: productDetails, // Send structured product data
       amount: totalAmount,
-      callbackURL: "http://localhost:5000/bkash-callback",
+      callbackURL: "http://localhost:5000/bkash-callback", // Make sure this is correct
       orderID: orderID,
       reference: reference,
     })
@@ -118,7 +122,8 @@ const Header = () => {
       console.error("Bkash checkout error:", err);
       toast.error("Payment failed. Please try again.");
     });
-  };
+};
+
   
 
   return (
