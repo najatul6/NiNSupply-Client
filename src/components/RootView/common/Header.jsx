@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import brandImg from "../../../assets/ninSupply.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { Avatar } from "@/components/ui/avatar";
 import { CiShoppingCart } from "react-icons/ci";
@@ -81,44 +81,72 @@ const Header = () => {
   };
 
   // Order
-  
   const handleOrder = () => {
     if (cart.length === 0) {
       toast.error("Your cart is empty!");
       return;
     }
-  
-    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    const totalAmount = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
     const orderID = Date.now().toString(); // Unique order ID
     const reference = orderID;
-  
+
     // Prepare product details
-    const productDetails = cart.map(item => ({
+    const productDetails = cart.map((item) => ({
       productName: item.productName,
-      quantity: item.quantity
+      quantity: item.quantity,
     }));
-  
-    axiosSecure.post("/bkash-checkout", {
-      userEmail: user?.email,  // Ensure the user's email is sent
-      products: productDetails, // Send structured product data
-      amount: totalAmount,
-      callbackURL: "http://localhost:5000/bkash-callback",
-      orderID: orderID,
-      reference: reference,
-    })
-    .then((res) => {
-      if (res.data.bkashURL) {
-        window.location.href = res.data.bkashURL;
-      } else {
-        toast.error("Bkash URL not received.");
-      }
-    })
-    .catch((err) => {
-      console.error("Bkash checkout error:", err);
-      toast.error("Payment failed. Please try again.");
-    });
+
+    axiosSecure
+      .post("/bkash-checkout", {
+        userEmail: user?.email, // Ensure the user's email is sent
+        products: productDetails, // Send structured product data
+        amount: totalAmount,
+        callbackURL: "http://localhost:5000/bkash-callback",
+        orderID: orderID,
+        reference: reference,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.bkashURL) {
+          window.location.href = res.data.bkashURL;
+        } else {
+          toast.error("Bkash URL not received.");
+        }
+      })
+      .catch((err) => {
+        console.error("Bkash checkout error:", err);
+        toast.error("Payment failed. Please try again.");
+      });
   };
-  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("status");
+    const paymentID = urlParams.get("paymentID");
+
+    if (status === "success") {
+      // Verify the payment status by calling backend
+      axiosSecure.get(`/bkash-callback?status=${status}&paymentID=${paymentID}`)
+        .then((response) => {
+          if (response.data.statusCode === "2000") {
+            toast.success("Payment Successful, Order Placed!");
+            // Navigate to the dashboard upon success
+            history.push("/dashboard"); // Using react-router for navigation
+          } else {
+            toast.error("Payment failed. Please try again.");
+          }
+        })
+        .catch((err) => {
+          console.error("Payment verification error:", err);
+          toast.error("Payment failed. Please try again.");
+        });
+    } else {
+      toast.error("Payment failed or cancelled.");
+    }
+  }, []);
 
   return (
     <nav className="overflow-x-clip ">
