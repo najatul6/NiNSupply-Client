@@ -32,13 +32,14 @@ import MyCart from "@/pages/RootView/MyCart/MyCart";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import { Button } from "@/components/ui/button";
-// import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
+  const axiosSecure = useAxiosSecure();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
   const totalPrice = cart?.reduce(
@@ -80,8 +81,23 @@ const Header = () => {
   };
 
   // Order
-  const handleOrder =  () => {
-   console.log("data is processing");
+  const handleOrder = () => {
+    if (cart.length < 0) {
+      toast.error("Order is not available right now")
+      return;
+    }
+    
+    axiosSecure.post("/bkash-checkout", {
+      product:cart.map(item=>item).join(","),
+      amount:10,
+      callbackURL:"http://localhost:5000/bkash-callback",
+      orderID:"123456",
+      reference:"123456",
+    }).then((res) => {
+      window.location.href=res.data.bkashURL
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
