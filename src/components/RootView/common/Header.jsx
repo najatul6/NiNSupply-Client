@@ -95,7 +95,6 @@ const Header = () => {
     // Prepare product details
     const productDetails = cart.map(item => ({
       productName: item.productName,
-      userEmail:item.userEmail,
       quantity: item.quantity
     }));
   
