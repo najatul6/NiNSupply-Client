@@ -83,42 +83,7 @@ const Header = () => {
   // Order
 
   const handleOrder = () => {
-    if (cart.length === 0) {
-      toast.error("Your cart is empty!");
-      return;
-    }
-  
-    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const orderID = Date.now().toString(); // Unique order ID
-    const reference = orderID;
-    const callbackURL=import.meta.env.VITE_BASE_URL + "/bkash-callback";
-  
-    // Prepare product details
-    const productDetails = cart.map(item => ({
-      productName: item.productName,
-      quantity: item.quantity
-    }));
-  
-    axiosSecure.post("/bkash-checkout", {
-      userEmail: user?.email,  // Ensure the user's email is sent
-      products: productDetails, // Send structured product data
-      amount: totalAmount,
-      callbackURL: callbackURL,
-      orderID: orderID,
-      reference: reference,
-    })
-    .then((res) => {
-      console.log(res.data);
-      if (res.data.bkashURL) {
-        window.location.href = res.data.bkashURL;
-      } else {
-        toast.error("Bkash URL not received.");
-      }
-    })
-    .catch((err) => {
-      console.error("Bkash checkout error:", err);
-      toast.error("Payment failed. Please try again.");
-    });
+    
   };
   
 
