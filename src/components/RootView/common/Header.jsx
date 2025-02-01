@@ -32,8 +32,10 @@ import MyCart from "@/pages/RootView/MyCart/MyCart";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import { Button } from "@/components/ui/button";
+import CheckoutModal from "../CheckOut/CheckoutModal";
 
 const Header = () => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
@@ -77,13 +79,6 @@ const Header = () => {
       error: "Error logging out",
     });
   };
-
-  // Order
-
-  const handleOrder = () => {
-    
-  };
-  
 
   return (
     <nav className="overflow-x-clip ">
@@ -210,9 +205,18 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button onClick={handleOrder} className="w-full">
+                <Button
+                  onClick={() => setIsCheckoutOpen(true)}
+                  className="w-full"
+                >
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
+                <CheckoutModal
+                  isOpen={isCheckoutOpen}
+                  setIsOpen={setIsCheckoutOpen}
+                  totalPrice={totalPrice}
+                  userId={user?.id}
+                />
               </SheetFooter>
             </SheetContent>
           </Sheet>
