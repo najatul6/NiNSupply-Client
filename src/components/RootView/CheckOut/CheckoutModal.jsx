@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/com
 import { Button } from "@/components/ui/button";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import PropTypes from "prop-types";
 
 const CheckoutModal = ({ isOpen, setIsOpen, totalPrice, userId }) => {
   const axiosSecure = useAxiosSecure();
@@ -35,6 +36,14 @@ const CheckoutModal = ({ isOpen, setIsOpen, totalPrice, userId }) => {
       </SheetContent>
     </Sheet>
   );
+};
+
+
+CheckoutModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  totalPrice: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default CheckoutModal;
