@@ -5,7 +5,7 @@ const CheckOut = () => {
     <div>
       CheckOut
       <Button>Pay with Bkash</Button>
-      <Button>Pay with Bkash</Button>
+      <Button>Pay with Card</Button>
       </div>
   )
 }
