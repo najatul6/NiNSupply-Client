@@ -17,6 +17,7 @@ import Shop from "@/pages/RootView/Shop/Shop";
 import GiftCard from "@/pages/RootView/GiftCard/GiftCard";
 import Subscription from "@/pages/RootView/Subscription/Subscription";
 import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
+import CheckOut from "@/components/RootView/CheckOut/CheckOut";
 
 const Router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ const Router = createBrowserRouter([
   {
     path: "/un-auth",
     element: <UnAuthorization />,
+  },
+  {
+    path: "/checkout",
+    element: <CheckOut />,
   },
 ]);
 
