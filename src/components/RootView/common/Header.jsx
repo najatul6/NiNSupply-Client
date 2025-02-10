@@ -32,20 +32,18 @@ import MyCart from "@/pages/RootView/MyCart/MyCart";
 import useCart from "@/hooks/useCart";
 import { useCartContext } from "@/providers/CartProvider";
 import { Button } from "@/components/ui/button";
-import CheckoutModal from "../CheckOut/CheckoutModal";
 
 const Header = () => {
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageLoad, setIsPageLoad] = useState(false);
   const { user, logOut } = useAuth();
   const { pathname } = useLocation();
   const { isCartOpen, setIsCartOpen } = useCartContext();
   const [cart] = useCart();
-  const totalPrice = cart?.reduce(
-    (acc, curr) => acc + parseFloat(curr.price || 0),
-    0
-  );
+  // const totalPrice = cart?.reduce(
+  //   (acc, curr) => acc + parseFloat(curr.price || 0),
+  //   0
+  // );
 
   // Menu
   const menu = [
@@ -207,18 +205,11 @@ const Header = () => {
               <SheetFooter>
                 <Link to="/checkout" className="w-full">
                   <Button
-                    onClick={() => setIsCheckoutOpen(true)}
                     className="w-full"
                   >
                     Checkout <MdOutlineShoppingCartCheckout />
                   </Button>
                 </Link>
-                <CheckoutModal
-                  isOpen={isCheckoutOpen}
-                  setIsOpen={setIsCheckoutOpen}
-                  totalPrice={totalPrice}
-                  userId={user?.id}
-                />
               </SheetFooter>
             </SheetContent>
           </Sheet>
