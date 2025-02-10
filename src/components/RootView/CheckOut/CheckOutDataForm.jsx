@@ -25,9 +25,9 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center pattern p-6">
-      <div className="p-6 sm:p-8 rounded-3xl shadow-lg w-full max-w-3xl">
-        <h2 className="text-2xl sm:text-3xl font-medium text-center text-white mb-6 sm:mb-8">
+    <div className="min-h-screen flex justify-center items-center pattern md:p-6">
+      <div className="p-4 rounded-3xl shadow-2xl w-full ">
+        <h2 className="text-xl sm:text-3xl font-medium text-center text-white mb-6 sm:mb-8">
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -47,7 +47,7 @@ const BillingAddressForm = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent "
                 placeholder="Your full name"
               />
             </div>
@@ -118,54 +118,56 @@ const BillingAddressForm = () => {
             </div>
           </div>
 
-          {/* Company URL */}
-          <div className="flex flex-col gap-4">
-            <label
-              htmlFor="companyUrl"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              Company URL
-            </label>
-            <input
-              id="companyUrl"
-              name="companyUrl"
-              type="url"
-              value={formData.companyUrl}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-              placeholder="Your company website URL"
-            />
-          </div>
+          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
+            {/* Company URL */}
+            <div className="flex flex-col gap-4 w-full">
+              <label
+                htmlFor="companyUrl"
+                className="text-sm sm:text-base font-medium text-gray-200"
+              >
+                Company URL
+              </label>
+              <input
+                id="companyUrl"
+                name="companyUrl"
+                type="url"
+                value={formData.companyUrl}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                placeholder="Your company website URL"
+              />
+            </div>
 
-          {/* Review Type */}
-          <div className="flex flex-col gap-4">
-            <label
-              htmlFor="reviewType"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              Review Type
-            </label>
-            <select
-              id="reviewType"
-              name="reviewType"
-              value={formData.reviewType}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-            >
-              <option value="">Select review type</option>
-              <option value="Product Review">Product Review</option>
-              <option value="Service Review">Service Review</option>
-              <option value="Website Review">Website Review</option>
-            </select>
+            {/* Review Type */}
+            <div className="flex flex-col gap-4 w-full">
+              <label
+                htmlFor="reviewType"
+                className="text-sm sm:text-base font-medium text-gray-200"
+              >
+                Review Type
+              </label>
+              <select
+                id="reviewType"
+                name="reviewType"
+                value={formData.reviewType}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              >
+                <option value="">Select review type</option>
+                <option value="Product Review">Product Review</option>
+                <option value="Service Review">Service Review</option>
+                <option value="Website Review">Website Review</option>
+              </select>
+            </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-6 w-full">
             <button
               type="submit"
-              className="bg-pink-600 text-white px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-500"
+              className="bg-transparent border-2 border-baseColor text-baseColor font-bold tracking-wider uppercase w-full px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-baseColor focus:outline-none focus:ring-4 focus:ring-baseColor"
             >
               Submit
             </button>
