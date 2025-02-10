@@ -190,14 +190,14 @@ const Header = () => {
               <SheetHeader>
                 <div className="flex justify-between items-center pt-4 px-2">
                   <SheetTitle className="text-white" id="cart-sheet-title">
-                    Total Price
+                    Total products
                   </SheetTitle>
                   <SheetTitle className="text-white">
-                    {totalPrice || 0}৳{" "}
+                    {cart?.length || 0}
                   </SheetTitle>
                 </div>
                 <SheetDescription>
-                  Your cart details and total price.
+                  Your selection product is below.
                 </SheetDescription>
                 <hr />
               </SheetHeader>
@@ -205,12 +205,14 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Button
-                  onClick={() => setIsCheckoutOpen(true)}
-                  className="w-full"
-                >
-                  Checkout <MdOutlineShoppingCartCheckout />
-                </Button>
+                <Link to="/checkout">
+                  <Button
+                    onClick={() => setIsCheckoutOpen(true)}
+                    className="w-full"
+                  >
+                    Checkout <MdOutlineShoppingCartCheckout />
+                  </Button>
+                </Link>
                 <CheckoutModal
                   isOpen={isCheckoutOpen}
                   setIsOpen={setIsCheckoutOpen}
