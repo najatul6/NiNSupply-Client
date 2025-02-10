@@ -95,7 +95,7 @@ const BillingAddressForm = () => {
                 required
                 pattern="^\+[1-9]{1}[0-9]{3,14}$"
                 placeholder="+1 234 567 890"
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm "
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
               />
             </div>
             {/* Skype ID */}
@@ -112,7 +112,7 @@ const BillingAddressForm = () => {
                 type="text"
                 value={formData.skypeId}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
                 placeholder="Your Skype ID"
               />
             </div>
@@ -134,7 +134,7 @@ const BillingAddressForm = () => {
                 value={formData.companyUrl}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 border-2 bg-transparent border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
                 placeholder="Your company website URL"
               />
             </div>
@@ -153,7 +153,7 @@ const BillingAddressForm = () => {
                 value={formData.reviewType}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 bg-transparent py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               >
                 <option value="">Select review type</option>
                 <option value="Product Review">Product Review</option>
@@ -167,7 +167,7 @@ const BillingAddressForm = () => {
           <div className="flex justify-center mt-6 w-full">
             <button
               type="submit"
-              className="bg-transparent border-2 border-baseColor text-baseColor font-bold tracking-wider uppercase w-full px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-baseColor focus:outline-none focus:ring-4 focus:ring-baseColor"
+              className="bg-transparent border-2 border-baseColor text-baseColor hover:text-black font-bold tracking-wider uppercase w-full px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-baseColor focus:outline-none focus:ring-4 focus:ring-baseColor"
             >
               Submit
             </button>
