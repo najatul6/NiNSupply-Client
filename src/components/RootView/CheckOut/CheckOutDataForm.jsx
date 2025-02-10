@@ -25,14 +25,14 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-indigo-600 via-pink-500 to-purple-600 p-6">
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-t from-purple-600 to-baseColor/45 p-6">
       <div className="p-6 sm:p-8 rounded-3xl shadow-lg w-full max-w-3xl">
         <h2 className="text-2xl sm:text-3xl font-medium text-center text-white mb-6 sm:mb-8">
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Full Name */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
+          <div className="flex flex-col gap-4">
             <label
               htmlFor="fullName"
               className="text-sm sm:text-base font-medium text-gray-200"
@@ -46,13 +46,13 @@ const BillingAddressForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your full name"
             />
           </div>
 
           {/* Email Address */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
+          <div className="flex flex-col gap-4">
             <label
               htmlFor="email"
               className="text-sm sm:text-base font-medium text-gray-200"
@@ -67,35 +67,58 @@ const BillingAddressForm = () => {
               onChange={handleChange}
               required
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your email address"
             />
           </div>
 
-          {/* WhatsApp Number */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
-            <label
-              htmlFor="whatsappNumber"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              WhatsApp Number (
-              <span className="text-red-500 font-semibold">With Country Code</span>)
-            </label>
-            <input
-              id="whatsappNumber"
-              name="whatsappNumber"
-              type="tel"
-              value={formData.whatsappNumber}
-              onChange={handleChange}
-              required
-              pattern="^\+[1-9]{1}[0-9]{3,14}$"
-              placeholder="+1 234 567 890"
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-            />
+          <div className="grid grid-cols-2 gap-2">
+            {/* WhatsApp Number */}
+            <div className="flex flex-col gap-4">
+              <label
+                htmlFor="whatsappNumber"
+                className="text-sm font-medium text-gray-200"
+              >
+                WhatsApp Number (
+                <span className="text-baseColor font-semibold">
+                  With Country Code
+                </span>
+                )
+              </label>
+              <input
+                id="whatsappNumber"
+                name="whatsappNumber"
+                type="tel"
+                value={formData.whatsappNumber}
+                onChange={handleChange}
+                required
+                pattern="^\+[1-9]{1}[0-9]{3,14}$"
+                placeholder="+1 234 567 890"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              />
+            </div>
+            {/* Skype ID */}
+            <div className="flex flex-col gap-4">
+              <label
+                htmlFor="skypeId"
+                className="text-sm sm:text-base font-medium text-gray-200"
+              >
+                Skype ID
+              </label>
+              <input
+                id="skypeId"
+                name="skypeId"
+                type="text"
+                value={formData.skypeId}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                placeholder="Your Skype ID"
+              />
+            </div>
           </div>
 
           {/* Company URL */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
+          <div className="flex flex-col gap-4">
             <label
               htmlFor="companyUrl"
               className="text-sm sm:text-base font-medium text-gray-200"
@@ -109,13 +132,13 @@ const BillingAddressForm = () => {
               value={formData.companyUrl}
               onChange={handleChange}
               required
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your company website URL"
             />
           </div>
 
           {/* Review Type */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
+          <div className="flex flex-col gap-4">
             <label
               htmlFor="reviewType"
               className="text-sm sm:text-base font-medium text-gray-200"
@@ -128,32 +151,13 @@ const BillingAddressForm = () => {
               value={formData.reviewType}
               onChange={handleChange}
               required
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
             >
               <option value="">Select review type</option>
               <option value="Product Review">Product Review</option>
               <option value="Service Review">Service Review</option>
               <option value="Website Review">Website Review</option>
             </select>
-          </div>
-
-          {/* Skype ID */}
-          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
-            <label
-              htmlFor="skypeId"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              Skype ID
-            </label>
-            <input
-              id="skypeId"
-              name="skypeId"
-              type="text"
-              value={formData.skypeId}
-              onChange={handleChange}
-              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-              placeholder="Your Skype ID"
-            />
           </div>
 
           {/* Submit Button */}
@@ -172,9 +176,6 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
-
-
-
 
 // import { useState } from 'react';
 
