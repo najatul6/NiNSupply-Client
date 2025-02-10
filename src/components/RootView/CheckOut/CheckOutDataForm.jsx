@@ -164,7 +164,7 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-6 w-full transition-colors duration-300 ease-in-out">
+          <div className="flex justify-center mt-6 w-full">
             <button
               type="submit"
               className="bg-transparent border-2 border-baseColor text-baseColor hover:text-black font-bold tracking-wider uppercase w-full px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-baseColor focus:outline-none focus:ring-4 focus:ring-baseColor"
