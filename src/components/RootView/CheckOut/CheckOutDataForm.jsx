@@ -65,12 +65,12 @@ const BillingAddressForm = () => {
           {/* WhatsApp Number */}
           <div className="mb-4">
             <label htmlFor="whatsappNumber" className="block text-sm font-medium text-gray-700">
-              WhatsApp Number
+              WhatsApp Number(<span className="text-red-600 font-bold">With Country Code</span>)
             </label>
             <input
               id="whatsappNumber"
               name="whatsappNumber"
-              type="text"
+              type="tel"
               value={formData.whatsappNumber}
               onChange={handleChange}
               required
