@@ -140,7 +140,7 @@ const BillingAddressForm = () => {
             </div>
 
             {/* Review Type */}
-            <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-4 w-full bg-transparent">
               <label
                 htmlFor="reviewType"
                 className="text-sm sm:text-base font-medium text-gray-200"
