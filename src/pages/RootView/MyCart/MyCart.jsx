@@ -10,7 +10,7 @@ const MyCart = () => {
 
   return (
     <div>
-      <div className="grid gap-6 py-4 overflow-y-auto overflow-x-hidden minh">
+      <div className="grid gap-6 py-4 overflow-y-auto overflow-x-hidden ">
         <div className="grid grid-cols-1 gap-6">
           {cart?.length === 0 ? (
             <div className="text-center text-lg text-red-500">
