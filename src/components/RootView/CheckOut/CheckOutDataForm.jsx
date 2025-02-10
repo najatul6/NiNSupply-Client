@@ -26,13 +26,13 @@ const BillingAddressForm = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 p-6">
-      <div className="p-4 rounded-3xl shadow-xl w-full">
+      <div className="p-8 rounded-3xl shadow-xl w-full max-w-3xl">
         <h2 className="text-3xl font-semibold text-center text-purple-800 mb-8">
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Full Name */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="fullName"
               className="text-lg font-medium text-blue-600"
@@ -52,7 +52,7 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Email Address */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="email"
               className="text-lg font-medium text-blue-600"
@@ -73,13 +73,13 @@ const BillingAddressForm = () => {
           </div>
 
           {/* WhatsApp Number */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="whatsappNumber"
               className="text-lg font-medium text-blue-600"
             >
               WhatsApp Number (
-              <span className="text-red-600 font-bold">With Country Code</span>)
+              <span className="text-red-600 font-bold">With Country Code</span> )
             </label>
             <input
               id="whatsappNumber"
@@ -95,7 +95,7 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Company URL */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="companyUrl"
               className="text-lg font-medium text-blue-600"
@@ -115,7 +115,7 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Review Type */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="reviewType"
               className="text-lg font-medium text-blue-600"
@@ -138,7 +138,7 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Skype ID */}
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
             <label
               htmlFor="skypeId"
               className="text-lg font-medium text-blue-600"
@@ -172,6 +172,7 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
+
 
 
 
