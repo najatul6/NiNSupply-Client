@@ -31,50 +31,51 @@ const BillingAddressForm = () => {
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-          {/* Full Name */}
-          <div className="flex flex-col gap-4">
-            <label
-              htmlFor="fullName"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              Full Name
-            </label>
-            <input
-              id="fullName"
-              name="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-              placeholder="Your full name"
-            />
-          </div>
+          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
+            {/* Full Name */}
+            <div className="flex flex-col gap-4 w-full">
+              <label
+                htmlFor="fullName"
+                className="text-sm sm:text-base font-medium text-gray-200"
+              >
+                Full Name
+              </label>
+              <input
+                id="fullName"
+                name="fullName"
+                type="text"
+                value={formData.fullName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                placeholder="Your full name"
+              />
+            </div>
 
-          {/* Email Address */}
-          <div className="flex flex-col gap-4">
-            <label
-              htmlFor="email"
-              className="text-sm sm:text-base font-medium text-gray-200"
-            >
-              Email Address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-              placeholder="Your email address"
-            />
+            {/* Email Address */}
+            <div className="flex flex-col gap-4 w-full">
+              <label
+                htmlFor="email"
+                className="text-sm sm:text-base font-medium text-gray-200"
+              >
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                placeholder="Your email address"
+              />
+            </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
             {/* WhatsApp Number */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <label
                 htmlFor="whatsappNumber"
                 className="text-sm font-medium text-gray-200"
@@ -98,7 +99,7 @@ const BillingAddressForm = () => {
               />
             </div>
             {/* Skype ID */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <label
                 htmlFor="skypeId"
                 className="text-sm sm:text-base font-medium text-gray-200"
