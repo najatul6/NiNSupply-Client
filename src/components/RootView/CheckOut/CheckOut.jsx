@@ -11,7 +11,9 @@ const CheckOut = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col flex-1 justify-center items-center bg-gray-200 px-4 py-12 sm:px-6 lg:px-8"></div>
+      <div className="flex flex-col flex-1 justify-center items-center bg-gray-200 px-4 py-12 sm:px-6 lg:px-8">
+        
+      </div>
     </div>
   );
 };
