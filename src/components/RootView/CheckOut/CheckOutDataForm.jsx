@@ -25,8 +25,8 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500">
-      <div className="p-10 rounded-3xl shadow-xl w-full max-w-lg">
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 p-6">
+      <div className="p-4 rounded-3xl shadow-xl w-full">
         <h2 className="text-3xl font-semibold text-center text-purple-800 mb-8">
           Billing and Contact Information
         </h2>
