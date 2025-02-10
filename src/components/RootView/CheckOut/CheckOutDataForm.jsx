@@ -140,7 +140,7 @@ const BillingAddressForm = () => {
             </div>
 
             {/* Review Type */}
-            <div className="flex flex-col gap-4 w-full ">
+            <div className="flex flex-col gap-4 w-full">
               <label
                 htmlFor="reviewType"
                 className="text-sm sm:text-base font-medium text-gray-200"
@@ -153,7 +153,7 @@ const BillingAddressForm = () => {
                 value={formData.reviewType}
                 onChange={handleChange}
                 required
-                className="w-full px-4 bg-background py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm focus:bg-indigo-50 transition duration-300 ease-in-out"
               >
                 <option value="">Select review type</option>
                 <option value="Product Review">Product Review</option>
