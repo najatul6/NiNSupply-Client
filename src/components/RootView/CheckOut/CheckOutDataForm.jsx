@@ -1,3 +1,137 @@
+import { useState } from "react";
+
+const BillingAddressForm = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    whatsappNumber: "",
+    companyUrl: "",
+    reviewType: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission, e.g., send form data to a server
+    console.log("Form submitted:", formData);
+  };
+
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-gray-200 w-full py-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-6">Billing and Contact Information</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Full Name */}
+          <div className="mb-4">
+            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+              Full Name
+            </label>
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              placeholder="Your full name"
+            />
+          </div>
+
+          {/* Email Address */}
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              placeholder="Your email address"
+            />
+          </div>
+
+          {/* WhatsApp Number */}
+          <div className="mb-4">
+            <label htmlFor="whatsappNumber" className="block text-sm font-medium text-gray-700">
+              WhatsApp Number
+            </label>
+            <input
+              id="whatsappNumber"
+              name="whatsappNumber"
+              type="text"
+              value={formData.whatsappNumber}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              placeholder="Your WhatsApp number"
+            />
+          </div>
+
+          {/* Company URL */}
+          <div className="mb-4">
+            <label htmlFor="companyUrl" className="block text-sm font-medium text-gray-700">
+              Company URL
+            </label>
+            <input
+              id="companyUrl"
+              name="companyUrl"
+              type="url"
+              value={formData.companyUrl}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              placeholder="Your company website URL"
+            />
+          </div>
+
+          {/* Review Type */}
+          <div className="mb-4">
+            <label htmlFor="reviewType" className="block text-sm font-medium text-gray-700">
+              Review Type
+            </label>
+            <select
+              id="reviewType"
+              name="reviewType"
+              value={formData.reviewType}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+            >
+              <option value="">Select review type</option>
+              <option value="Product Review">Product Review</option>
+              <option value="Service Review">Service Review</option>
+              <option value="Website Review">Website Review</option>
+            </select>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-6 py-3 rounded-md text-lg"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default BillingAddressForm;
 
 
 
