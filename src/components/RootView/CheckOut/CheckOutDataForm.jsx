@@ -25,17 +25,17 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 p-6">
-      <div className="p-8 rounded-3xl shadow-xl w-full max-w-3xl">
-        <h2 className="text-3xl font-semibold text-center text-purple-800 mb-8">
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-indigo-600 via-pink-500 to-purple-600 p-6">
+      <div className="p-6 sm:p-8 rounded-3xl shadow-lg w-full max-w-3xl">
+        <h2 className="text-2xl sm:text-3xl font-medium text-center text-white mb-6 sm:mb-8">
           Billing and Contact Information
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Full Name */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="fullName"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               Full Name
             </label>
@@ -46,16 +46,16 @@ const BillingAddressForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your full name"
             />
           </div>
 
           {/* Email Address */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="email"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               Email Address
             </label>
@@ -67,19 +67,19 @@ const BillingAddressForm = () => {
               onChange={handleChange}
               required
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your email address"
             />
           </div>
 
           {/* WhatsApp Number */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="whatsappNumber"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               WhatsApp Number (
-              <span className="text-red-600 font-bold">With Country Code</span> )
+              <span className="text-red-500 font-semibold">With Country Code</span>)
             </label>
             <input
               id="whatsappNumber"
@@ -90,15 +90,15 @@ const BillingAddressForm = () => {
               required
               pattern="^\+[1-9]{1}[0-9]{3,14}$"
               placeholder="+1 234 567 890"
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
             />
           </div>
 
           {/* Company URL */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="companyUrl"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               Company URL
             </label>
@@ -109,16 +109,16 @@ const BillingAddressForm = () => {
               value={formData.companyUrl}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your company website URL"
             />
           </div>
 
           {/* Review Type */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="reviewType"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               Review Type
             </label>
@@ -128,7 +128,7 @@ const BillingAddressForm = () => {
               value={formData.reviewType}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
             >
               <option value="">Select review type</option>
               <option value="Product Review">Product Review</option>
@@ -138,10 +138,10 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Skype ID */}
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
             <label
               htmlFor="skypeId"
-              className="text-lg font-medium text-blue-600"
+              className="text-sm sm:text-base font-medium text-gray-200"
             >
               Skype ID
             </label>
@@ -151,16 +151,16 @@ const BillingAddressForm = () => {
               type="text"
               value={formData.skypeId}
               onChange={handleChange}
-              className="w-full px-4 py-3 mt-2 border-2 border-indigo-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full sm:w-2/3 px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
               placeholder="Your Skype ID"
             />
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="bg-pink-600 text-white px-6 py-3 rounded-full text-lg transition duration-300 ease-in-out hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-500"
+              className="bg-pink-600 text-white px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-500"
             >
               Submit
             </button>
