@@ -205,7 +205,7 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Link to="/checkout">
+                <Link to="/checkout" className="w-full">
                   <Button
                     onClick={() => setIsCheckoutOpen(true)}
                     className="w-full"
