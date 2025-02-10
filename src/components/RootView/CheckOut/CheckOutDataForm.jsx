@@ -68,7 +68,7 @@ const BillingAddressForm = () => {
                 onChange={handleChange}
                 required
                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
                 placeholder="Your email address"
               />
             </div>
@@ -95,7 +95,7 @@ const BillingAddressForm = () => {
                 required
                 pattern="^\+[1-9]{1}[0-9]{3,14}$"
                 placeholder="+1 234 567 890"
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm "
               />
             </div>
             {/* Skype ID */}
