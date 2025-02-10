@@ -30,7 +30,7 @@ const OrderCard = ({ product, refetch }) => {
           quantity :{" "}
           <select
             name="quantity"
-            selected={product?.quantity}
+            value={product?.quantity}
             onChange={(e) => {
               axiosSecure
                 .put(`/carts/${product._id}`, {
@@ -41,6 +41,7 @@ const OrderCard = ({ product, refetch }) => {
                     toast.success("Quantity updated successfully");
                     refetch();
                   }
+                  console.log(res.data);
                 });
             }}
             className="px-2 bg-background border cursor-pointer"
