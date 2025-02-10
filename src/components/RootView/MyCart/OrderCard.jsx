@@ -26,7 +26,32 @@ const OrderCard = ({ product, refetch }) => {
       </div>
 
       <div className="flex justify-between items-center mt-2">
-        <span className="px-4 capitalize">quantity : {product?.quantity}</span>
+        <span className="px-4 capitalize">
+          quantity :{" "}
+          <select
+            name="quantity"
+            selected={product?.quantity}
+            onChange={(e) => {
+              axiosSecure
+                .put(`/carts/${product._id}`, {
+                  quantity: e.target.value,
+                })
+                .then((res) => {
+                  if (res.data.updated) {
+                    refetch();
+                  }
+                });
+            }}
+            className="px-2 bg-background border cursor-pointer"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </span>
 
         <div>
           <button
