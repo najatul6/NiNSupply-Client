@@ -73,9 +73,10 @@ const BillingAddressForm = () => {
               type="tel"
               value={formData.whatsappNumber}
               onChange={handleChange}
+              pattern="^\+[1-9]{1}[0-9]{3,14}$"
+              placeholder="+1 234 567 890"
               required
               className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
-              placeholder="Your WhatsApp number"
             />
           </div>
 
