@@ -156,9 +156,8 @@ const BillingAddressForm = () => {
                 className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm focus:bg-black transition duration-300 ease-in-out"
               >
                 <option value="">Select review type</option>
-                <option value="Product Review">Product Review</option>
-                <option value="Service Review">Service Review</option>
-                <option value="Website Review">Website Review</option>
+                <option value="Product Review">Positive Review</option>
+                <option value="Service Review">Negative Review</option>
               </select>
             </div>
           </div>
