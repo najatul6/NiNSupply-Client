@@ -38,6 +38,7 @@ const OrderCard = ({ product, refetch }) => {
                 })
                 .then((res) => {
                   if (res.data.updated) {
+                    toast.success("Quantity updated successfully");
                     refetch();
                   }
                 });
