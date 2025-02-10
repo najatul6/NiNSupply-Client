@@ -23,7 +23,6 @@ const BillingAddressForm = () => {
     // Handle form submission, e.g., send form data to a server
     console.log("Form submitted:", formData);
   };
-  
 
   return (
     <div className="min-h-screen flex justify-center items-center pattern md:p-6">
@@ -154,7 +153,7 @@ const BillingAddressForm = () => {
                 value={formData.reviewType}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm peer-focus:bg-black  transition duration-300 ease-in-out"
+                className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm focus:bg-black transition duration-300 ease-in-out"
               >
                 <option value="">Select review type</option>
                 <option value="Product Review">Product Review</option>
