@@ -133,7 +133,6 @@ const BillingAddressForm = () => {
                 type="url"
                 value={formData.companyUrl}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-3 border-2 bg-transparent border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
                 placeholder="Your company website URL"
               />
@@ -152,7 +151,6 @@ const BillingAddressForm = () => {
                 name="reviewType"
                 value={formData.reviewType}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm focus:bg-black transition duration-300 ease-in-out"
               >
                 <option value="">Select review type</option>
