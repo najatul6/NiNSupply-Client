@@ -7,6 +7,7 @@ const BillingAddressForm = () => {
     whatsappNumber: "",
     companyUrl: "",
     reviewType: "",
+    skypeId: "",
   });
 
   const handleChange = (e) => {
@@ -57,6 +58,7 @@ const BillingAddressForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  // Regex pattern for email
               className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
               placeholder="Your email address"
             />
@@ -65,7 +67,7 @@ const BillingAddressForm = () => {
           {/* WhatsApp Number */}
           <div className="mb-4">
             <label htmlFor="whatsappNumber" className="block text-sm font-medium text-gray-700">
-              WhatsApp Number(<span className="text-red-600 font-bold">With Country Code</span>)
+              WhatsApp Number (<span className="text-red-600 font-bold">With Country Code</span>)
             </label>
             <input
               id="whatsappNumber"
@@ -73,9 +75,9 @@ const BillingAddressForm = () => {
               type="tel"
               value={formData.whatsappNumber}
               onChange={handleChange}
-              pattern="^\+[1-9]{1}[0-9]{3,14}$"
-              placeholder="+1 234 567 890"
               required
+              pattern="^\+[1-9]{1}[0-9]{3,14}$"  // Regex pattern for phone number with country code
+              placeholder="+1 234 567 890"
               className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
             />
           </div>
@@ -117,6 +119,22 @@ const BillingAddressForm = () => {
             </select>
           </div>
 
+          {/* Skype ID */}
+          <div className="mb-4">
+            <label htmlFor="skypeId" className="block text-sm font-medium text-gray-700">
+              Skype ID
+            </label>
+            <input
+              id="skypeId"
+              name="skypeId"
+              type="text"
+              value={formData.skypeId}
+              onChange={handleChange}
+              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              placeholder="Your Skype ID"
+            />
+          </div>
+
           {/* Submit Button */}
           <div className="flex justify-center">
             <button
@@ -133,6 +151,7 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
+
 
 
 
