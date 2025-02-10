@@ -25,17 +25,17 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center  w-full py-5 px-2 lg:px-8">
-      <div className="bg-white p-2 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">
+    <div className="min-h-screen flex justify-center items-center w-full py-5 px-2 lg:px-8 bg-gradient-to-r from-blue-500 to-teal-500">
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md space-y-6">
+        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           Billing and Contact Information
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Full Name */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="fullName"
-              className="block text-sm font-medium text-gray-700 "
+              className="block text-sm font-medium text-gray-800"
             >
               Full Name
             </label>
@@ -46,16 +46,16 @@ const BillingAddressForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
               placeholder="Your full name"
             />
           </div>
 
           {/* Email Address */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Email Address
             </label>
@@ -67,16 +67,16 @@ const BillingAddressForm = () => {
               onChange={handleChange}
               required
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" // Regex pattern for email
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
               placeholder="Your email address"
             />
           </div>
 
           {/* WhatsApp Number */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="whatsappNumber"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               WhatsApp Number (
               <span className="text-red-600 font-bold">With Country Code</span>)
@@ -90,15 +90,15 @@ const BillingAddressForm = () => {
               required
               pattern="^\+[1-9]{1}[0-9]{3,14}$" // Regex pattern for phone number with country code
               placeholder="+1 234 567 890"
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
             />
           </div>
 
           {/* Company URL */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="companyUrl"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Company URL
             </label>
@@ -109,16 +109,16 @@ const BillingAddressForm = () => {
               value={formData.companyUrl}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
               placeholder="Your company website URL"
             />
           </div>
 
           {/* Review Type */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="reviewType"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Review Type
             </label>
@@ -128,7 +128,7 @@ const BillingAddressForm = () => {
               value={formData.reviewType}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
             >
               <option value="">Select review type</option>
               <option value="Product Review">Product Review</option>
@@ -138,10 +138,10 @@ const BillingAddressForm = () => {
           </div>
 
           {/* Skype ID */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="skypeId"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Skype ID
             </label>
@@ -151,7 +151,7 @@ const BillingAddressForm = () => {
               type="text"
               value={formData.skypeId}
               onChange={handleChange}
-              className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
+              className="w-full px-4 py-3 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
               placeholder="Your Skype ID"
             />
           </div>
@@ -160,7 +160,7 @@ const BillingAddressForm = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-6 py-3 rounded-md text-lg"
+              className="bg-blue-600 text-white px-6 py-3 rounded-md text-lg transition duration-300 ease-in-out hover:bg-blue-700"
             >
               Submit
             </button>
@@ -172,6 +172,7 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
+
 
 // import { useState } from 'react';
 
