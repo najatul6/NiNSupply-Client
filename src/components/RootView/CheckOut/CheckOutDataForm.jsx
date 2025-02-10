@@ -25,13 +25,18 @@ const BillingAddressForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-200 w-full py-12 px-4 sm:px-6 lg:px-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Billing and Contact Information</h2>
+    <div className="min-h-screen flex justify-center items-center  w-full py-5 px-2 lg:px-8">
+      <div className="bg-white p-2 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          Billing and Contact Information
+        </h2>
         <form onSubmit={handleSubmit}>
           {/* Full Name */}
           <div className="mb-4">
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-gray-700 "
+            >
               Full Name
             </label>
             <input
@@ -48,7 +53,10 @@ const BillingAddressForm = () => {
 
           {/* Email Address */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email Address
             </label>
             <input
@@ -58,7 +66,7 @@ const BillingAddressForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  // Regex pattern for email
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" // Regex pattern for email
               className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
               placeholder="Your email address"
             />
@@ -66,8 +74,12 @@ const BillingAddressForm = () => {
 
           {/* WhatsApp Number */}
           <div className="mb-4">
-            <label htmlFor="whatsappNumber" className="block text-sm font-medium text-gray-700">
-              WhatsApp Number (<span className="text-red-600 font-bold">With Country Code</span>)
+            <label
+              htmlFor="whatsappNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              WhatsApp Number (
+              <span className="text-red-600 font-bold">With Country Code</span>)
             </label>
             <input
               id="whatsappNumber"
@@ -76,7 +88,7 @@ const BillingAddressForm = () => {
               value={formData.whatsappNumber}
               onChange={handleChange}
               required
-              pattern="^\+[1-9]{1}[0-9]{3,14}$"  // Regex pattern for phone number with country code
+              pattern="^\+[1-9]{1}[0-9]{3,14}$" // Regex pattern for phone number with country code
               placeholder="+1 234 567 890"
               className="w-full px-4 py-2 mt-2 border rounded-md text-gray-700"
             />
@@ -84,7 +96,10 @@ const BillingAddressForm = () => {
 
           {/* Company URL */}
           <div className="mb-4">
-            <label htmlFor="companyUrl" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="companyUrl"
+              className="block text-sm font-medium text-gray-700"
+            >
               Company URL
             </label>
             <input
@@ -101,7 +116,10 @@ const BillingAddressForm = () => {
 
           {/* Review Type */}
           <div className="mb-4">
-            <label htmlFor="reviewType" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="reviewType"
+              className="block text-sm font-medium text-gray-700"
+            >
               Review Type
             </label>
             <select
@@ -121,7 +139,10 @@ const BillingAddressForm = () => {
 
           {/* Skype ID */}
           <div className="mb-4">
-            <label htmlFor="skypeId" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="skypeId"
+              className="block text-sm font-medium text-gray-700"
+            >
               Skype ID
             </label>
             <input
@@ -151,10 +172,6 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
-
-
-
-
 
 // import { useState } from 'react';
 
@@ -199,7 +216,6 @@ export default BillingAddressForm;
 //             <li>Click on &quot;Confirm Payment&quot; to complete your process.</li>
 //           </ol>
 //         </div>
-
 
 //         {/* Payment Confirmation Form */}
 //         <div className="bg-white p-6 rounded-md shadow-lg w-full">
@@ -274,8 +290,6 @@ export default BillingAddressForm;
 // };
 
 // export default CheckOutDataForm;
-
-
 
 // import { useState } from 'react';
 
@@ -399,25 +413,22 @@ export default BillingAddressForm;
 
 // export default CheckOutDataForm;
 
-
-
-
 // const CheckOutDataForm = () => {
 //     return (
 //       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-200 w-full p-6">
 //         <div className="text-center text-xl font-bold text-black mb-4">
 //           Please pay your bill via:
 //         </div>
-  
+
 //         <div className="flex flex-col items-center space-y-4">
 //           <button className="bg-blue-500 text-white px-6 py-3 rounded-md text-lg w-full md:w-3/4">
 //             Bank Transfer
 //           </button>
-  
+
 //           <p className="text-md text-gray-700 mt-2">
 //             For Bank Transfer, use the following details:
 //           </p>
-          
+
 //           <div className="bg-white p-4 rounded-md shadow-lg mt-3">
 //             <p className="text-sm text-black">
 //               <strong>Bank Name:</strong> [Your Bank&apos;s Name]
@@ -438,7 +449,7 @@ export default BillingAddressForm;
 //               <strong>Bank Address:</strong> [Bank Address]
 //             </p>
 //           </div>
-  
+
 //           <button className="bg-green-500 text-white px-6 py-3 rounded-md text-lg w-full md:w-3/4 mt-4">
 //             Confirm Payment
 //           </button>
@@ -446,6 +457,5 @@ export default BillingAddressForm;
 //       </div>
 //     );
 //   };
-  
+
 //   export default CheckOutDataForm;
-  
