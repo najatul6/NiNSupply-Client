@@ -2,13 +2,17 @@ import useCarts from "@/hooks/useCart";
 
 const CheckOut = () => {
   const [cart] = useCarts();
-  const totalPrice=cart.reduce((acc,curr)=>acc+curr.price*curr.quantity,0)
+  const totalPrice = cart.reduce(
+    (acc, curr) => acc + curr.price * curr.quantity,
+    0
+  );
   return (
     <div className="flex flex-col-reverse lg:flex-row  w-full min-h-screen">
-      <div className="flex justify-center items-center bg-black lg:w-1/2 px-12 py-2">
+      <div className="flex justify-center items-center bg-black lg:w-1/2 px-12 py-12">
         <div className="w-full space-y-6 text-center text-primary-foreground">
-          <h1 className="text-4xl font-extrabold tracking-tight ">
-            Your selected Products: {cart.length || 0}
+          <h1 className="text-2xl font-extrabold tracking-tight flex justify-between items-center">
+            Your selected Products: {cart.length || 0}{" "}
+            <span>Total: {totalPrice}৳</span>
           </h1>
           <hr />
           <div className="h-full overflow-y-auto scroll-smooth flex-grow no-scrollbar">
