@@ -11,7 +11,7 @@ const CheckOut = () => {
   return (
     <div className="flex flex-col lg:flex-row w-full min-h-screen">
       {/* Left Side - Cart Items */}
-      <div className="bg-black lg:w-1/2 px-4 sm:px-6 lg:px-12 py-6 lg:py-12 flex flex-col overflow-y-auto h-screen">
+      <div className="bg-black lg:w-1/2 px-4 sm:px-6 lg:px-12 py-6 lg:py-12 flex flex-col overflow-y-auto h-72 lg:h-screen">
         <div className="w-full space-y-6 text-center text-primary-foreground">
           {/* Title */}
           <h1 className="text-2xl font-extrabold tracking-tight flex justify-between items-center">
