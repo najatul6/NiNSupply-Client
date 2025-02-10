@@ -22,19 +22,22 @@ const useAxiosSecure = () => {
     }
   );
 
-   // Add a response interceptor
-   axiosSecure.interceptors.response.use(function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response;
-}, async (error) => {
-    const status = error?.response?.status;
-    if (status === 401 || status === 403) {
+  // Add a response interceptor
+  axiosSecure.interceptors.response.use(
+    function (response) {
+      // Any status code that lie within the range of 2xx cause this function to trigger
+      // Do something with response data
+      return response;
+    },
+    async (error) => {
+      const status = error?.response?.status;
+      if (status === 401 || status === 403) {
         await logOut();
-        navigate('/auth/login');
+        navigate("/auth/login");
+      }
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
-});
+  );
   return axiosSecure;
 };
 
