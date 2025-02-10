@@ -37,11 +37,10 @@ const OrderCard = ({ product, refetch }) => {
                   quantity: e.target.value,
                 })
                 .then((res) => {
-                  if (res.data.updated) {
+                  if (res.data.matchedCount > 0) {
                     toast.success("Quantity updated successfully");
                     refetch();
                   }
-                  console.log(res.data);
                 });
             }}
             className="px-2 bg-background border cursor-pointer"
