@@ -90,7 +90,7 @@ const BillingAddressForm = () => {
       const response = await axiosSecure.post("/orders", orderData);
 
       if (response.data.insertedId) {
-        console.log("Order placed successfully:", response.data);
+        console.log("Order placed successfully:", response.data); // TODO: Remove this line
 
         // Delete all cart items for the user
         const deleteCartRequests = carts.map((cartItem) =>
