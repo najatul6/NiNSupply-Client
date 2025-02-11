@@ -113,6 +113,7 @@ const UserOverview = () => {
                   >
                     <span>Order #{order._id.slice(0, 8)}</span>
                     <span>{order.status}</span>
+                    <span className={`${order.status === "Pending" ? "text-red-500" : "text-green-500"}`}> {order.status === "Pending" ? "Unpaid" : "Paid"}</span>
                     <span>
                       $
                       {order.cartItems
