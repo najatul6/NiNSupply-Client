@@ -4,14 +4,15 @@ import useAllUser from "@/hooks/useAllUser";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const UserControls = () => {
-  const [allUsers, setAllUsers] = useAllUser();
+  const [allUsers, , refetch] = useAllUser();
   const [searchQuery, setSearchQuery] = useState("");
   const axiosSecure = useAxiosSecure();
   const [newRole, setNewRole] = useState("");
 
-  const handleChangeRole = ({userId}) => {
+  const handleChangeRole = ({ userId }) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -19,13 +20,13 @@ const UserControls = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",
-          icon: "success"
+          icon: "success",
         });
       }
     });
@@ -39,21 +40,19 @@ const UserControls = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${userId}`)
-        .then((res) => {
-          console.log(res.data);
-        })
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success"
-        // });
+        axiosSecure.delete(`/users/${userId}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            toast.success("User deleted successfully");
+          } else {
+            toast.error("User not deleted");
+          }
+        });
       }
     });
-   
   };
 
   const filteredUsers = allUsers?.filter(
@@ -132,7 +131,7 @@ const UserControls = () => {
                   </td>
                   <td className="p-4">
                     <button
-                      onClick={()=>handleChangeRole(user._id)}
+                      onClick={() => handleChangeRole(user._id)}
                       className="mr-4"
                       title="Save"
                     >
