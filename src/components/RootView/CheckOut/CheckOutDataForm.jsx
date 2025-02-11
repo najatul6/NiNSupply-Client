@@ -2,11 +2,15 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BillingAddressForm = () => {
   const { user } = useAuth();
   const [carts, refetch] = useCarts(); // Added refetch to refresh cart after deletion
   const axiosSecure = useAxiosSecure();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     whatsappNumber: "",
@@ -24,7 +28,8 @@ const BillingAddressForm = () => {
     switch (name) {
       case "fullName":
         if (!value.trim()) errorMsg = "Full Name is required.";
-        else if (value.length < 3) errorMsg = "Full Name must be at least 3 characters.";
+        else if (value.length < 3)
+          errorMsg = "Full Name must be at least 3 characters.";
         break;
       case "whatsappNumber":
         if (!value.trim()) errorMsg = "WhatsApp number is required.";
@@ -32,11 +37,15 @@ const BillingAddressForm = () => {
           errorMsg = "Invalid WhatsApp number format. Example: +1234567890";
         break;
       case "companyUrl":
-        if (value && !/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/.test(value))
+        if (
+          value &&
+          !/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/.test(value)
+        )
           errorMsg = "Invalid URL format.";
         break;
       case "skypeId":
-        if (value && value.length < 3) errorMsg = "Skype ID must be at least 3 characters.";
+        if (value && value.length < 3)
+          errorMsg = "Skype ID must be at least 3 characters.";
         break;
       case "reviewType":
         if (!value.trim()) errorMsg = "Please select a review type.";
@@ -57,17 +66,17 @@ const BillingAddressForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     // Validate all fields before submission
     Object.keys(formData).forEach((key) => validateField(key, formData[key]));
-  
+
     // Check if there are any errors
     if (Object.values(errors).some((err) => err)) {
       console.log("Form submission blocked due to validation errors.", errors);
       setIsSubmitting(false);
       return;
     }
-  
+
     // Create the order payload including cart items
     const orderData = {
       ...formData,
@@ -76,31 +85,33 @@ const BillingAddressForm = () => {
       orderDate: new Date().toISOString(),
       status: "Pending",
     };
-  
+
     try {
       // Send order data to the backend
       const response = await axiosSecure.post("/orders", orderData);
-  
+
       if (response.data.insertedId) {
         console.log("Order placed successfully:", response.data);
-  
+
         // Delete all cart items for the user
         const deleteCartRequests = carts.map((cartItem) =>
           axiosSecure.delete(`/carts/${cartItem._id}`)
         );
-  
+
         await Promise.all(deleteCartRequests);
-        
-        console.log("Cart cleared successfully");
+
+        // Show success toast after deleting cart items
+        refetch();
+        navigate("/");
+        toast.success("Order placed successfully!");
       }
-  
     } catch (error) {
       console.error("Error placing order:", error);
+      toast.error("Something went wrong. Please try again.");
     }
-  
+
     setIsSubmitting(false);
   };
-  
 
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
@@ -111,7 +122,9 @@ const BillingAddressForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Full Name */}
           <div className="flex flex-col">
-            <label htmlFor="fullName" className="text-sm font-medium">Full Name</label>
+            <label htmlFor="fullName" className="text-sm font-medium">
+              Full Name
+            </label>
             <input
               id="fullName"
               name="fullName"
@@ -123,12 +136,16 @@ const BillingAddressForm = () => {
               }`}
               placeholder="Your full name"
             />
-            {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
+            {errors.fullName && (
+              <p className="text-red-500 text-sm">{errors.fullName}</p>
+            )}
           </div>
 
           {/* WhatsApp Number */}
           <div className="flex flex-col">
-            <label htmlFor="whatsappNumber" className="text-sm font-medium">WhatsApp Number (With Country Code)</label>
+            <label htmlFor="whatsappNumber" className="text-sm font-medium">
+              WhatsApp Number (With Country Code)
+            </label>
             <input
               id="whatsappNumber"
               name="whatsappNumber"
@@ -140,12 +157,16 @@ const BillingAddressForm = () => {
               }`}
               placeholder="+1 234 567 890"
             />
-            {errors.whatsappNumber && <p className="text-red-500 text-sm">{errors.whatsappNumber}</p>}
+            {errors.whatsappNumber && (
+              <p className="text-red-500 text-sm">{errors.whatsappNumber}</p>
+            )}
           </div>
 
           {/* Company URL */}
           <div className="flex flex-col">
-            <label htmlFor="companyUrl" className="text-sm font-medium">Company URL</label>
+            <label htmlFor="companyUrl" className="text-sm font-medium">
+              Company URL
+            </label>
             <input
               id="companyUrl"
               name="companyUrl"
@@ -157,12 +178,16 @@ const BillingAddressForm = () => {
               }`}
               placeholder="Your company website URL"
             />
-            {errors.companyUrl && <p className="text-red-500 text-sm">{errors.companyUrl}</p>}
+            {errors.companyUrl && (
+              <p className="text-red-500 text-sm">{errors.companyUrl}</p>
+            )}
           </div>
 
           {/* Skype ID */}
           <div className="flex flex-col">
-            <label htmlFor="skypeId" className="text-sm font-medium">Skype ID</label>
+            <label htmlFor="skypeId" className="text-sm font-medium">
+              Skype ID
+            </label>
             <input
               id="skypeId"
               name="skypeId"
@@ -174,12 +199,16 @@ const BillingAddressForm = () => {
               }`}
               placeholder="Your Skype ID"
             />
-            {errors.skypeId && <p className="text-red-500 text-sm">{errors.skypeId}</p>}
+            {errors.skypeId && (
+              <p className="text-red-500 text-sm">{errors.skypeId}</p>
+            )}
           </div>
 
           {/* Review Type */}
           <div className="flex flex-col">
-            <label htmlFor="reviewType" className="text-sm font-medium">Review Type</label>
+            <label htmlFor="reviewType" className="text-sm font-medium">
+              Review Type
+            </label>
             <select
               id="reviewType"
               name="reviewType"
@@ -193,11 +222,17 @@ const BillingAddressForm = () => {
               <option value="Positive Review">Positive Review</option>
               <option value="Negative Review">Negative Review</option>
             </select>
-            {errors.reviewType && <p className="text-red-500 text-sm">{errors.reviewType}</p>}
+            {errors.reviewType && (
+              <p className="text-red-500 text-sm">{errors.reviewType}</p>
+            )}
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>
@@ -207,8 +242,6 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
-
-
 
 // import { useState } from 'react';
 
