@@ -32,7 +32,8 @@ const UserControls = () => {
   };
 
   const filteredUsers = allUsers?.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
