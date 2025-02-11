@@ -106,7 +106,7 @@ const BillingAddressForm = () => {
               type="text"
               value={formData.fullName}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.fullName ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="Your full name"
@@ -125,7 +125,7 @@ const BillingAddressForm = () => {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.email ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="Your email address"
@@ -144,7 +144,7 @@ const BillingAddressForm = () => {
               type="tel"
               value={formData.whatsappNumber}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.whatsappNumber ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="+1 234 567 890"
@@ -165,7 +165,7 @@ const BillingAddressForm = () => {
               type="url"
               value={formData.companyUrl}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.companyUrl ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="Your company website URL"
@@ -184,7 +184,7 @@ const BillingAddressForm = () => {
               type="text"
               value={formData.skypeId}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.skypeId ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="Your Skype ID"
@@ -202,7 +202,7 @@ const BillingAddressForm = () => {
               name="reviewType"
               value={formData.reviewType}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:bg-black text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor focus:bg-black text-white ${
                 errors.reviewType ? "border-red-500" : "border-gray-600"
               }`}
             >
