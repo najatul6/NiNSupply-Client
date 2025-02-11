@@ -4,6 +4,7 @@ import useProduct from "@/hooks/useProduct";
 import { PackagePlus, Store, Truck, Users, WalletCards } from "lucide-react";
 import Chart from "react-google-charts";
 import TotalRevenue from "./TotalRevenue";
+import PendingRevenue from "./PendingRevenue";
 
 const AdminOverview = () => {
   const [allUser] = useAllUser();
@@ -37,6 +38,9 @@ const AdminOverview = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {/* Total Revenue */}
         <TotalRevenue />
+
+        {/* Pending Revenue */}
+        <PendingRevenue />
 
         {/* Orders */}
         <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
