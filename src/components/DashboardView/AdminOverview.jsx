@@ -35,6 +35,17 @@ const AdminOverview = () => {
     ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
   ];
 
+  // TODO:
+  //   Total Revenue - from-purple-500 to-purple-300
+  // Total Revenue (Alternative) - from-indigo-500 to-indigo-300
+  // UpComing Revenue - from-blue-500 to-blue-300
+  // Owned Revenue - from-green-500 to-green-300
+  // Orders - from-yellow-500 to-yellow-300
+  // New Orders - from-orange-500 to-orange-300
+  // Paid - from-teal-500 to-teal-300
+  // Total Customers - from-red-500 to-red-300
+  // Products - from-pink-500 to-pink-300
+
   return (
     <div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
