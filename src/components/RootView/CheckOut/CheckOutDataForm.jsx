@@ -1,12 +1,12 @@
 import useAuth from "@/hooks/useAuth";
-import { useState, useEffect } from "react";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useState } from "react";
 
 const BillingAddressForm = () => {
   const { user } = useAuth();
-
+const axiosSecure=useAxiosSecure()
   const [formData, setFormData] = useState({
     fullName: "",
-    email: user?.email || "",
     whatsappNumber: "",
     companyUrl: "",
     reviewType: "",
@@ -16,11 +16,6 @@ const BillingAddressForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (user?.email) {
-      setFormData((prev) => ({ ...prev, email: user.email }));
-    }
-  }, [user]);
 
   const validateField = (name, value) => {
     let errorMsg = "";
@@ -29,12 +24,6 @@ const BillingAddressForm = () => {
       case "fullName":
         if (!value.trim()) errorMsg = "Full Name is required.";
         else if (value.length < 3) errorMsg = "Full Name must be at least 3 characters.";
-        break;
-
-      case "email":
-        if (!value.trim()) errorMsg = "Email is required.";
-        else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value))
-          errorMsg = "Invalid email format.";
         break;
 
       case "whatsappNumber":
@@ -85,6 +74,11 @@ const BillingAddressForm = () => {
 
     // Submit form if no errors
     console.log("Form submitted successfully:", formData);
+    axiosSecure.post("/orders", formData).then((res) => {
+      console.log(res.data);
+    });
+      
+
     setIsSubmitting(false);
   };
 
@@ -112,25 +106,6 @@ const BillingAddressForm = () => {
               placeholder="Your full name"
             />
             {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
-          </div>
-
-          {/* Email */}
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium">
-              Email Address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
-                errors.email ? "border-red-500" : "border-gray-600"
-              }`}
-              placeholder="Your email address"
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
 
           {/* WhatsApp Number */}
