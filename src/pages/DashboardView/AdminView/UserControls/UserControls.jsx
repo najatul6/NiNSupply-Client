@@ -3,6 +3,9 @@ import useAllUser from "@/hooks/useAllUser";
 import { FaSearch } from "react-icons/fa";
 const UserControls = () => {
   const [allUsers] = useAllUser();
+  const handleChangeRole = () => {
+
+  }
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
@@ -64,13 +67,16 @@ const UserControls = () => {
                   <td className="p-4 text-sm text-black">{user?.name}</td>
                   <td className="p-4 text-sm text-black">{user?.email}</td>
                   <td className="p-4 text-sm text-black capitalize">
-                    {user?.role}
+                    <select name="" id="" value={user?.role}>
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
                   </td>
                   <td className="p-4 text-sm text-black">
                     <DateComponent createdAt={user?.createdAt} />
                   </td>
                   <td className="p-4">
-                    <button className="mr-4" title="Save">
+                    <button onClick={handleChangeRole} className="mr-4" title="Save">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
