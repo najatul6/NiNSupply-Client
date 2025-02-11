@@ -29,23 +29,40 @@ const MyOrders = () => {
           <table className="w-full border-collapse shadow-md rounded-lg border border-white">
             <thead>
               <tr className="bg-baseColor text-gray-700">
-                <th className="py-3 px-4 text-left border-r border-black">Order ID</th>
-                <th className="py-3 px-4 text-left border-r border-black">Total Items</th>
-                <th className="py-3 px-4 text-left border-r border-black">Total Price</th>
-                <th className="py-3 px-4 text-left border-r border-black">Status</th>
+                <th className="py-3 px-4 text-left border-r border-black">
+                  Items
+                </th>
+                <th className="py-3 px-4 text-left border-r border-black">
+                  Total Price
+                </th>
+                <th className="py-3 px-4 text-left border-r border-black">
+                  Status
+                </th>
                 <th className="py-3 px-4 text-left ">Date</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id} className="border-b hover:bg-gray-500">
-                  <td className="py-3 px-4 border border-white text-wrap">{order._id}</td>
-                  <td className="py-3 px-4 border border-white text-wrap">&</td>
+                  <td className="py-3 px-4 border border-white text-wrap text-xs">
+                    {order.cartItems.map((item) => {
+                      return (
+                        <ul key={item._id} className="list-disc pl-1">
+                          <li>
+                            {item?.productName}{" "}
+                            <span className="italic"> - </span>{item?.quantity}
+                          </li>
+                        </ul>
+                      );
+                    })}
+                  </td>
                   <td className="py-3 px-4 border border-white text-wrap">$</td>
                   <td className="py-3 px-4 border border-white text-indigo-600 font-semibold">
                     {order.status}
                   </td>
-                  <td className="py-3 px-4 text-wrap">{formatDate(order?.orderDate)}</td>
+                  <td className="py-3 px-4 text-wrap">
+                    {formatDate(order?.orderDate)}
+                  </td>
                 </tr>
               ))}
             </tbody>
