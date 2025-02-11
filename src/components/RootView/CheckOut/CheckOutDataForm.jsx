@@ -3,7 +3,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const BillingAddressForm = ({totalPrice}) => {
@@ -11,6 +11,7 @@ const BillingAddressForm = ({totalPrice}) => {
   const [carts, refetch] = useCarts(); // Added refetch to refresh cart after deletion
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     fullName: "",
     whatsappNumber: "",
@@ -103,7 +104,7 @@ const BillingAddressForm = ({totalPrice}) => {
 
         // Show success toast after deleting cart items
         refetch();
-        navigate("/");
+        navigate("/",{ state: { from: location } });
         toast.success("Order placed successfully!");
       }
     } catch (error) {
