@@ -4,10 +4,10 @@ import { ChartScatter } from "lucide-react"
 const ProcessingRevenue = () => {
     const {processingRevenue}=useTotalRevenue()
     return (
-      <div className="bg-gradient-to-b from-green-300 to-green-200 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
+      <div className="bg-gradient-to-b from-blue-300 to-blue-200 border-b-4 border-blue-600 rounded-lg shadow-xl p-5">
       <div className="flex flex-row items-center">
         <div className="flex-shrink pr-4">
-          <div className="rounded-full p-5 bg-green-600">
+          <div className="rounded-full p-5 bg-blue-600">
           <ChartScatter />
           </div>
         </div>
