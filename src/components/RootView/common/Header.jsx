@@ -203,13 +203,11 @@ const Header = () => {
                 <MyCart />
               </div>
               <SheetFooter>
-                <Link to="/checkout" className="w-full">
-                  <Button
-                    className="w-full"
-                  >
+                <Button className="w-full cursor-pointer" disabled={!cart?.length}>
+                  <Link to="/checkout" className="w-full flex justify-center items-center gap-2">
                     Checkout <MdOutlineShoppingCartCheckout />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </SheetFooter>
             </SheetContent>
           </Sheet>

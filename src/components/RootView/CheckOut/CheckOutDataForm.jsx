@@ -1,173 +1,196 @@
-import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
+import { useState, useEffect } from "react";
 
 const BillingAddressForm = () => {
+  const { user } = useAuth();
+
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
+    email: user?.email || "",
     whatsappNumber: "",
     companyUrl: "",
     reviewType: "",
     skypeId: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (user?.email) {
+      setFormData((prev) => ({ ...prev, email: user.email }));
+    }
+  }, [user]);
+
+  const validateField = (name, value) => {
+    let errorMsg = "";
+
+    switch (name) {
+      case "fullName":
+        if (!value.trim()) errorMsg = "Full Name is required.";
+        else if (value.length < 3) errorMsg = "Full Name must be at least 3 characters.";
+        break;
+
+      case "email":
+        if (!value.trim()) errorMsg = "Email is required.";
+        else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value))
+          errorMsg = "Invalid email format.";
+        break;
+
+      case "whatsappNumber":
+        if (!value.trim()) errorMsg = "WhatsApp number is required.";
+        else if (!/^\+[1-9]{1}[0-9]{3,14}$/.test(value))
+          errorMsg = "Invalid WhatsApp number format. Example: +1234567890";
+        break;
+
+      case "companyUrl":
+        if (value && !/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/.test(value))
+          errorMsg = "Invalid URL format.";
+        break;
+
+      case "skypeId":
+        if (value && value.length < 3) errorMsg = "Skype ID must be at least 3 characters.";
+        break;
+
+      case "reviewType":
+        if (!value.trim()) errorMsg = "Please select a review type.";
+        break;
+
+      default:
+        break;
+    }
+
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMsg }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission, e.g., send form data to a server
-    console.log("Form submitted:", formData);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    validateField(name, value);
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center pattern md:p-6">
-      <div className="p-4 rounded-3xl shadow-2xl w-full ">
-        <h2 className="text-xl sm:text-3xl font-medium text-center text-white mb-6 sm:mb-8">
+    <div className="min-h-screen flex justify-center items-center md:p-6">
+      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl bg-gray-900 text-white">
+        <h2 className="text-2xl font-semibold text-center mb-6">
           Billing and Contact Information
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
-            {/* Full Name */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="fullName"
-                className="text-sm sm:text-base font-medium text-gray-200"
-              >
-                Full Name
-              </label>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent "
-                placeholder="Your full name"
-              />
-            </div>
-
-            {/* Email Address */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="email"
-                className="text-sm sm:text-base font-medium text-gray-200"
-              >
-                Email Address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
-                placeholder="Your email address"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
-            {/* WhatsApp Number */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="whatsappNumber"
-                className="text-sm font-medium text-gray-200"
-              >
-                WhatsApp Number (
-                <span className="text-baseColor font-semibold">
-                  With Country Code
-                </span>
-                )
-              </label>
-              <input
-                id="whatsappNumber"
-                name="whatsappNumber"
-                type="tel"
-                value={formData.whatsappNumber}
-                onChange={handleChange}
-                required
-                pattern="^\+[1-9]{1}[0-9]{3,14}$"
-                placeholder="+1 234 567 890"
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
-              />
-            </div>
-            {/* Skype ID */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="skypeId"
-                className="text-sm sm:text-base font-medium text-gray-200"
-              >
-                Skype ID
-              </label>
-              <input
-                id="skypeId"
-                name="skypeId"
-                type="text"
-                value={formData.skypeId}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm bg-transparent"
-                placeholder="Your Skype ID"
-              />
-            </div>
+        <form className="space-y-4">
+          {/* Full Name */}
+          <div className="flex flex-col">
+            <label htmlFor="fullName" className="text-sm font-medium">
+              Full Name
+            </label>
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              value={formData.fullName}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.fullName ? "border-red-500" : "border-gray-600"
+              }`}
+              placeholder="Your full name"
+            />
+            {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
           </div>
 
-          <div className="flex flex-col md:flex-row justify-center items-center w-full gap-4">
-            {/* Company URL */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="companyUrl"
-                className="text-sm sm:text-base font-medium text-gray-200"
-              >
-                Company URL
-              </label>
-              <input
-                id="companyUrl"
-                name="companyUrl"
-                type="url"
-                value={formData.companyUrl}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border-2 bg-transparent border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
-                placeholder="Your company website URL"
-              />
-            </div>
-
-            {/* Review Type */}
-            <div className="flex flex-col gap-4 w-full">
-              <label
-                htmlFor="reviewType"
-                className="text-sm sm:text-base font-medium text-gray-200"
-              >
-                Review Type
-              </label>
-              <select
-                id="reviewType"
-                name="reviewType"
-                value={formData.reviewType}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-transparent border-2 border-indigo-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm focus:bg-black transition duration-300 ease-in-out"
-              >
-                <option value="">Select review type</option>
-                <option value="Product Review">Positive Review</option>
-                <option value="Service Review">Negative Review</option>
-              </select>
-            </div>
+          {/* Email */}
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-sm font-medium">
+              Email Address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.email ? "border-red-500" : "border-gray-600"
+              }`}
+              placeholder="Your email address"
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-center mt-6 w-full">
-            <button
-              type="submit"
-              className="bg-transparent border-2 border-baseColor text-baseColor hover:text-black font-bold tracking-wider uppercase w-full px-6 py-3 rounded-full text-sm sm:text-base transition duration-300 ease-in-out hover:bg-baseColor focus:outline-none focus:ring-4 focus:ring-baseColor"
+          {/* WhatsApp Number */}
+          <div className="flex flex-col">
+            <label htmlFor="whatsappNumber" className="text-sm font-medium">
+              WhatsApp Number (With Country Code)
+            </label>
+            <input
+              id="whatsappNumber"
+              name="whatsappNumber"
+              type="tel"
+              value={formData.whatsappNumber}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.whatsappNumber ? "border-red-500" : "border-gray-600"
+              }`}
+              placeholder="+1 234 567 890"
+            />
+            {errors.whatsappNumber && (
+              <p className="text-red-500 text-sm">{errors.whatsappNumber}</p>
+            )}
+          </div>
+
+          {/* Company URL */}
+          <div className="flex flex-col">
+            <label htmlFor="companyUrl" className="text-sm font-medium">
+              Company URL
+            </label>
+            <input
+              id="companyUrl"
+              name="companyUrl"
+              type="url"
+              value={formData.companyUrl}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.companyUrl ? "border-red-500" : "border-gray-600"
+              }`}
+              placeholder="Your company website URL"
+            />
+            {errors.companyUrl && <p className="text-red-500 text-sm">{errors.companyUrl}</p>}
+          </div>
+
+          {/* Skype ID */}
+          <div className="flex flex-col">
+            <label htmlFor="skypeId" className="text-sm font-medium">
+              Skype ID
+            </label>
+            <input
+              id="skypeId"
+              name="skypeId"
+              type="text"
+              value={formData.skypeId}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.skypeId ? "border-red-500" : "border-gray-600"
+              }`}
+              placeholder="Your Skype ID"
+            />
+            {errors.skypeId && <p className="text-red-500 text-sm">{errors.skypeId}</p>}
+          </div>
+
+          {/* Review Type */}
+          <div className="flex flex-col">
+            <label htmlFor="reviewType" className="text-sm font-medium">
+              Review Type
+            </label>
+            <select
+              id="reviewType"
+              name="reviewType"
+              value={formData.reviewType}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-gray-800 text-white ${
+                errors.reviewType ? "border-red-500" : "border-gray-600"
+              }`}
             >
-              Submit
-            </button>
+              <option value="">Select review type</option>
+              <option value="Product Review">Positive Review</option>
+              <option value="Service Review">Negative Review</option>
+            </select>
+            {errors.reviewType && <p className="text-red-500 text-sm">{errors.reviewType}</p>}
           </div>
         </form>
       </div>
@@ -176,6 +199,7 @@ const BillingAddressForm = () => {
 };
 
 export default BillingAddressForm;
+
 
 // import { useState } from 'react';
 

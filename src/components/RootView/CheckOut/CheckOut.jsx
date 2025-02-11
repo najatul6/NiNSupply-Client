@@ -23,30 +23,33 @@ const CheckOut = () => {
 
         {/* Cart Items Section - This will be scrollable */}
         <div className="flex-grow overflow-y-auto no-scrollbar mt-5 p-2">
-  <div className="grid gap-4 py-4">
-    {cart.map((product, index) => (
-      <div key={product._id} className="flex items-center gap-2">
-        {/* Item Number */}
-        <span className="text-lg font-bold">{index + 1}.</span>
+          <div className="grid gap-4 py-4">
+            {cart.map((product, index) => (
+              <div key={product._id} className="flex items-center gap-2">
+                {/* Item Number */}
+                <span className="text-lg font-bold">{index + 1}.</span>
 
-        {/* Product Details */}
-        <div className="border p-2 rounded-md flex-grow">
-          <div className="flex justify-between items-center">
-            <h1 className="text-lg font-bold">{product?.productName}</h1>
-            <p className="text-lg font-bold">{product?.price}৳</p>
-          </div>
-          <div className="flex justify-between items-center mt-2">
-            <span className="px-4 capitalize">Quantity: {product.quantity}</span>
-            <span className="px-4 capitalize">
-              Total Price: {product.price * product.quantity}৳
-            </span>
+                {/* Product Details */}
+                <div className="border p-2 rounded-md flex-grow">
+                  <div className="flex justify-between items-center">
+                    <h1 className="text-lg font-bold">
+                      {product?.productName}
+                    </h1>
+                    <p className="text-lg font-bold">{product?.price}৳</p>
+                  </div>
+                  <div className="flex justify-between items-center mt-2">
+                    <span className="px-4 capitalize">
+                      Quantity: {product.quantity}
+                    </span>
+                    <span className="px-4 capitalize">
+                      Total Price: {product.price * product.quantity}৳
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-</div>
-
       </div>
 
       {/* Right Side - Checkout Form */}
