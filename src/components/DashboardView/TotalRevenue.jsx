@@ -1,8 +1,25 @@
 import useAxiosSecure from '@/hooks/useAxiosSecure'
 import { Wallet } from 'lucide-react'
+import { useEffect, useState } from 'react';
 
 const TotalRevenue = () => {
-    const axiosSecure=useAxiosSecure()
+    const [totalRevenue, setTotalRevenue] = useState(0);
+  const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    const fetchTotalRevenue = async () => {
+      try {
+        const response = await axiosSecure.get('/totalRevenue');
+        setTotalRevenue(response.data.totalRevenue);
+      } catch (error) {
+        console.error("Error fetching total revenue", error);
+      }
+    };
+
+    fetchTotalRevenue();
+  }, [axiosSecure]);
+  console.log(totalRevenue);
+
   return (
     <div className="bg-gradient-to-b from-green-300 to-green-200 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
     <div className="flex flex-row items-center">
@@ -15,7 +32,7 @@ const TotalRevenue = () => {
         <h2 className="font-bold uppercase text-gray-600">
           Total Revenue
         </h2>
-        <p className="font-bold text-3xl text-green-500">$3249 </p>
+        <p className="font-bold text-3xl text-green-500">${totalRevenue.toLocaleString()} </p>
       </div>
     </div>
   </div>
