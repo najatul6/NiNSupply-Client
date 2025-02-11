@@ -104,7 +104,7 @@ const BillingAddressForm = ({totalPrice}) => {
 
         // Show success toast after deleting cart items
         refetch();
-        navigate("/",{ state: { from: location } });
+        navigate("/dashboard/my-orders",{ state: { from: location } });
         toast.success("Order placed successfully!");
       }
     } catch (error) {
