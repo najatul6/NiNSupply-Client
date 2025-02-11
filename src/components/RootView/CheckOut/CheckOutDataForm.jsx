@@ -2,14 +2,13 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const BillingAddressForm = () => {
   const { user } = useAuth();
   const [carts, refetch] = useCarts(); // Added refetch to refresh cart after deletion
   const axiosSecure = useAxiosSecure();
-  const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
