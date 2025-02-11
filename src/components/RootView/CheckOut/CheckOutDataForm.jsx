@@ -1,9 +1,11 @@
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useCarts from "@/hooks/useCart";
 import { useState } from "react";
 
 const BillingAddressForm = () => {
   const { user } = useAuth();
+  const [carts]=useCarts()
 const axiosSecure=useAxiosSecure()
   const [formData, setFormData] = useState({
     fullName: "",
