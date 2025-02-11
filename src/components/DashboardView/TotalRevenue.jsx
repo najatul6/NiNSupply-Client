@@ -1,6 +1,8 @@
+import useAxiosSecure from '@/hooks/useAxiosSecure'
 import { Wallet } from 'lucide-react'
 
 const TotalRevenue = () => {
+    const axiosSecure=useAxiosSecure()
   return (
     <div className="bg-gradient-to-b from-green-300 to-green-200 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
     <div className="flex flex-row items-center">
