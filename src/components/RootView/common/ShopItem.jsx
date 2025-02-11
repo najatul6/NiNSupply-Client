@@ -26,16 +26,15 @@ const ShopItem = ({ item }) => {
         quantity: product.quantity,
         status: "pending",
       };
-      axiosSecure.post('/carts', cartsItem)
-      .then(res=>{
-        if(res.data.insertedId){
+      axiosSecure.post("/carts", cartsItem).then((res) => {
+        if (res.data.insertedId) {
           toast.success("Product added to cart successfully");
           refetch();
           setIsCartOpen(true);
         }
-      })
-    }else{
-      navigate('/auth/login', { state: { from: location } })
+      });
+    } else {
+      navigate("/auth/login", { state: { from: location } });
     }
   };
   return (
