@@ -68,7 +68,7 @@ const MyOrders = () => {
                   <td className="py-3 px-4 text-wrap border border-white">
                     {formatDate(order?.orderDate)}
                   </td>
-                  <td className="py-3 px-4 text-wrap">
+                  <td className="py-3 px-4 text-center">
                     {order.status === "Pending" ? "Unpaid" : "Paid"}
                   </td>
                 </tr>
