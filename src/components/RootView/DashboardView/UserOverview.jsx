@@ -2,18 +2,32 @@ import useAuth from "@/hooks/useAuth";
 import useCarts from "@/hooks/useCart";
 import useOrders from "@/hooks/useOrders";
 
-
 const UserOverview = () => {
   const { user } = useAuth();
-  const [orders, ,isLoading] =useOrders()
-  const [cart] = useCarts
+  const [orders, , isLoading] = useOrders();
+  const [cart] = useCarts();
+  console.log(user);
 
-  
+  // Format timestamps
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "N/A";
+
+    const date = new Date(parseInt(timestamp));
+    return date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "long", // Full month name (e.g., January)
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true, // Ensures 12-hour format
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-800 text-white p-6">
       <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
-      
+
       {isLoading ? (
         <div className="flex justify-center items-center">
           <span className="loader"></span>
@@ -21,10 +35,37 @@ const UserOverview = () => {
       ) : (
         <div className="space-y-6">
           {/* User Info Section */}
-          <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4">Welcome, {user?.name}!</h2>
-            <p className="text-sm">Email: {user?.email}</p>
-            <p className="text-sm">Member since: {new Date(user?.createdAt).toLocaleDateString()}</p>
+          <div className="bg-gray-900 p-6 rounded-lg shadow-lg flex flex-col lg:flex-row justify-between items-center">
+            <div>
+              <h2 className="text-2xl font-semibold mb-4">
+                Welcome, {user?.displayName}!
+              </h2>
+              <p className="text-sm">
+                <span>
+                  Email:
+                </span>
+                 {user?.email}</p>
+              <p className="text-sm">
+                <span>
+                  Email Validation:{" "}
+                </span>
+                {user?.emailVerified ? "Unverified" : "Verified"}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm">
+                <span className="font-bold">Account Created:</span>{" "}
+                {formatDate(user?.metadata?.createdAt)}
+              </p>
+              <p className="text-sm">
+                <span>Last Login:</span>
+                {formatDate(user?.metadata?.lastLoginAt)}
+              </p>
+              <p className="text-sm">
+                <span>Last Sign-In:</span>
+                {user?.metadata?.lastSignInTime}
+              </p>
+            </div>
           </div>
 
           {/* Cart Summary Section */}
@@ -33,15 +74,26 @@ const UserOverview = () => {
             {cart.length > 0 ? (
               <div className="space-y-4">
                 {cart.map((cartItem) => (
-                  <div key={cartItem._id} className="flex justify-between items-center">
+                  <div
+                    key={cartItem._id}
+                    className="flex justify-between items-center"
+                  >
                     <span>{cartItem.productName}</span>
-                    <span>{cartItem.quantity} x ${cartItem.price}</span>
+                    <span>
+                      {cartItem.quantity} x ${cartItem.price}
+                    </span>
                   </div>
                 ))}
                 <div className="flex justify-between items-center mt-4">
                   <strong>Total: </strong>
                   <span>
-                    ${cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2)}
+                    $
+                    {cart
+                      .reduce(
+                        (total, item) => total + item.quantity * item.price,
+                        0
+                      )
+                      .toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -56,14 +108,20 @@ const UserOverview = () => {
             {orders.length > 0 ? (
               <div className="space-y-4">
                 {orders.map((order) => (
-                  <div key={order._id} className="flex justify-between items-center">
+                  <div
+                    key={order._id}
+                    className="flex justify-between items-center"
+                  >
                     <span>Order #{order._id.slice(0, 8)}</span>
                     <span>{order.status}</span>
                     <span>
-                      ${order.cartItems.reduce(
-                        (total, item) => total + item.quantity * item.price,
-                        0
-                      ).toFixed(2)}
+                      $
+                      {order.cartItems
+                        .reduce(
+                          (total, item) => total + item.quantity * item.price,
+                          0
+                        )
+                        .toFixed(2)}
                     </span>
                   </div>
                 ))}
