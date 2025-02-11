@@ -3,43 +3,71 @@ import DateComponent from "@/components/common/DateComponent";
 import useAllUser from "@/hooks/useAllUser";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const UserControls = () => {
   const [allUsers, setAllUsers] = useAllUser();
   const [searchQuery, setSearchQuery] = useState("");
   const axiosSecure = useAxiosSecure();
+  const [newRole, setNewRole] = useState("");
 
-  const handleChangeRole = async (userId, newRole) => {
-    try {
-      await axiosSecure.patch(`/users/${userId}/role`, { role: newRole });
-      setAllUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user._id === userId ? { ...user, role: newRole } : user
-        )
-      );
-    } catch (error) {
-      console.error("Failed to update role", error);
-    }
+  const handleChangeRole = ({userId}) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
   };
 
   const handleDeleteUser = async (userId) => {
-    try {
-      await axiosSecure.delete(`/users/${userId}`);
-      setAllUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
-    } catch (error) {
-      console.error("Failed to delete user", error);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${userId}`)
+        .then((res) => {
+          console.log(res.data);
+        })
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success"
+        // });
+      }
+    });
+   
   };
 
-  const filteredUsers = allUsers?.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredUsers = allUsers?.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
-        <h1 className="text-3xl text-white">Total Users: {filteredUsers?.length}</h1>
+        <h1 className="text-3xl text-white">
+          Total Users: {filteredUsers?.length}
+        </h1>
         <form className="max-w-[480px] w-full px-4">
           <div className="relative">
             <input
@@ -58,26 +86,42 @@ const UserControls = () => {
           <table className="min-w-full bg-white">
             <thead className="bg-gray-800 whitespace-nowrap">
               <tr>
-                <th className="p-4 text-left text-sm font-medium text-white">Profile</th>
-                <th className="p-4 text-left text-sm font-medium text-white">Name</th>
-                <th className="p-4 text-left text-sm font-medium text-white">Email</th>
-                <th className="p-4 text-left text-sm font-medium text-white">Role</th>
-                <th className="p-4 text-left text-sm font-medium text-white">Joined At</th>
-                <th className="p-4 text-left text-sm font-medium text-white">Actions</th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Profile
+                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Name
+                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Email
+                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Role
+                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Joined At
+                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="whitespace-nowrap">
               {filteredUsers?.map((user) => (
                 <tr key={user?._id} className="even:bg-blue-50">
                   <td className="p-4 text-sm text-black">
-                    <img src={user?.photoURL} alt={user?.name} className="w-10 h-10 rounded-full object-cover" />
+                    <img
+                      src={user?.photoURL}
+                      alt={user?.name}
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
                   </td>
                   <td className="p-4 text-sm text-black">{user?.name}</td>
                   <td className="p-4 text-sm text-black">{user?.email}</td>
                   <td className="p-4 text-sm text-black capitalize">
                     <select
                       value={user?.role}
-                      onChange={(e) => handleChangeRole(user._id, e.target.value)}
+                      onChange={(e) => setNewRole(e.target.value)}
                     >
                       <option value="user">User</option>
                       <option value="admin">Admin</option>
@@ -87,7 +131,33 @@ const UserControls = () => {
                     <DateComponent createdAt={user?.createdAt} />
                   </td>
                   <td className="p-4">
-                    <button onClick={() => handleDeleteUser(user._id)} className="mr-4" title="Delete">
+                    <button
+                      onClick={()=>handleChangeRole(user._id)}
+                      className="mr-4"
+                      title="Save"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-save fill-green-500 hover:fill-green-700"
+                      >
+                        <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+                        <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+                        <path d="M7 3v4a1 1 0 0 0 1 1h7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(user._id)}
+                      className="mr-4"
+                      title="Delete"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 fill-red-500 hover:fill-red-700"
