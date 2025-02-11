@@ -1,45 +1,20 @@
 import useAuth from "@/hooks/useAuth";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useCarts from "@/hooks/useCart";
+import useOrders from "@/hooks/useOrders";
 
 
 const UserOverview = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-  const [orders, setOrders] = useState([]);
-  const [carts, setCarts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [orders, ,isLoading] =useOrders()
+  const [cart] = useCarts
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        setLoading(true);
-
-        // Fetch the user's orders
-        const ordersResponse = await axiosSecure.get(`/orders?email=${user?.email}`);
-        setOrders(ordersResponse.data);
-
-        // Fetch the user's cart items
-        const cartsResponse = await axiosSecure.get(`/carts?email=${user?.email}`);
-        setCarts(cartsResponse.data);
-        
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        toast.error("Failed to load dashboard data.");
-        console.error(error);
-      }
-    };
-
-    if (user) {
-      fetchDashboardData();
-    }
-  }, [user, axiosSecure]);
+  
 
   return (
     <div className="min-h-screen bg-gray-800 text-white p-6">
       <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
       
-      {loading ? (
+      {isLoading ? (
         <div className="flex justify-center items-center">
           <span className="loader"></span>
         </div>
@@ -55,9 +30,9 @@ const UserOverview = () => {
           {/* Cart Summary Section */}
           <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
-            {carts.length > 0 ? (
+            {cart.length > 0 ? (
               <div className="space-y-4">
-                {carts.map((cartItem) => (
+                {cart.map((cartItem) => (
                   <div key={cartItem._id} className="flex justify-between items-center">
                     <span>{cartItem.productName}</span>
                     <span>{cartItem.quantity} x ${cartItem.price}</span>
@@ -66,7 +41,7 @@ const UserOverview = () => {
                 <div className="flex justify-between items-center mt-4">
                   <strong>Total: </strong>
                   <span>
-                    ${carts.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2)}
+                    ${cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2)}
                   </span>
                 </div>
               </div>
