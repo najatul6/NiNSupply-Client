@@ -16,13 +16,12 @@ const MyOrders = () => {
     });
   };
 
-
   return (
     <div className="p-6 min-h-screen">
       <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
         <p>Loading orders...</p>
-      ) : orders.length === 0 ? ( 
+      ) : orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
@@ -38,7 +37,10 @@ const MyOrders = () => {
                 <th className="py-3 px-4 text-left border-r border-black">
                   Status
                 </th>
-                <th className="py-3 px-4 text-left ">Date</th>
+                <th className="py-3 px-4 text-left border-r border-black ">
+                  Date
+                </th>
+                <th className="py-3 px-4 text-left ">Payment Status</th>
               </tr>
             </thead>
             <tbody>
@@ -63,8 +65,11 @@ const MyOrders = () => {
                   <td className="py-3 px-4 border border-white text-indigo-600 font-semibold">
                     {order?.status}
                   </td>
-                  <td className="py-3 px-4 text-wrap">
+                  <td className="py-3 px-4 text-wrap border border-white">
                     {formatDate(order?.orderDate)}
+                  </td>
+                  <td className="py-3 px-4 text-wrap">
+                    {order.status === "Pending" ? "Unpaid" : "Paid"}
                   </td>
                 </tr>
               ))}
