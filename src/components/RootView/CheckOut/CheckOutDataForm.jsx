@@ -207,8 +207,8 @@ const BillingAddressForm = () => {
               }`}
             >
               <option value="">Select review type</option>
-              <option value="Product Review">Positive Review</option>
-              <option value="Service Review">Negative Review</option>
+              <option value="Positive Review">Positive Review</option>
+              <option value="Negative Review">Negative Review</option>
             </select>
             {errors.reviewType && <p className="text-red-500 text-sm">{errors.reviewType}</p>}
           </div>
