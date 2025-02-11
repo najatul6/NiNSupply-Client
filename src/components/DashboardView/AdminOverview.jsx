@@ -5,6 +5,8 @@ import { PackagePlus, Store, Truck, Users, WalletCards } from "lucide-react";
 import Chart from "react-google-charts";
 import TotalRevenue from "./TotalRevenue";
 import PendingRevenue from "./PendingRevenue";
+import ProcessingRevenue from "./ProcessingRevenue";
+import CompletedRevenue from "./CompletedRevenue";
 
 const AdminOverview = () => {
   const [allUser] = useAllUser();
@@ -41,6 +43,12 @@ const AdminOverview = () => {
 
         {/* Pending Revenue */}
         <PendingRevenue />
+
+        {/* Processing Revenue */}
+        <ProcessingRevenue />
+
+        {/* Completed Revenue */}
+        <CompletedRevenue />
 
         {/* Orders */}
         <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
