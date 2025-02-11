@@ -55,7 +55,7 @@ const CheckOut = () => {
       {/* Right Side - Checkout Form */}
       <div className="flex flex-col flex-1 justify-center items-center bg-gray-200">
         <div className="w-full">
-          <CheckOutDataForm />
+          <CheckOutDataForm totalPrice={totalPrice} />
         </div>
       </div>
     </div>

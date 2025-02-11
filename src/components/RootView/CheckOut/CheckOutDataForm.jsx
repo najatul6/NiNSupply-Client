@@ -5,7 +5,7 @@ import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BillingAddressForm = () => {
+const BillingAddressForm = ({totalPrice}) => {
   const { user } = useAuth();
   const [carts, refetch] = useCarts(); // Added refetch to refresh cart after deletion
   const axiosSecure = useAxiosSecure();
@@ -82,6 +82,7 @@ const BillingAddressForm = () => {
       userEmail: user?.email,
       cartItems: carts, // Include cart items in the order
       orderDate: new Date().toISOString(),
+      totalPrice:totalPrice,
       status: "Pending",
     };
 

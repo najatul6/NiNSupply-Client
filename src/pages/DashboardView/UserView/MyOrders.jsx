@@ -2,7 +2,6 @@ import useOrders from "@/hooks/useOrders";
 
 const MyOrders = () => {
   const [orders, , isLoading] = useOrders();
-  console.log(orders, orders.length);
   const formatDate = (timestamp) => {
     if (!timestamp) return "N/A";
     const date = new Date(timestamp); // No need for Number() conversion
@@ -16,6 +15,11 @@ const MyOrders = () => {
       hour12: true,
     });
   };
+
+  const totalPrice = orders?.cartItems.reduce(
+    (acc, curr) => acc + curr.price * curr.quantity,
+    0
+  );
 
   return (
     <div className="p-6 min-h-screen">
@@ -56,7 +60,7 @@ const MyOrders = () => {
                       );
                     })}
                   </td>
-                  <td className="py-3 px-4 border border-white text-wrap">$</td>
+                  <td className="py-3 px-4 border border-white text-wrap">$ {totalPrice}</td>
                   <td className="py-3 px-4 border border-white text-indigo-600 font-semibold">
                     {order.status}
                   </td>
