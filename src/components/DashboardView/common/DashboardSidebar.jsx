@@ -3,7 +3,13 @@ import useRole from "@/hooks/useRole";
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { SquareChartGantt, BookA, UserCog, Truck, Container } from "lucide-react";
+import {
+  SquareChartGantt,
+  BookA,
+  UserCog,
+  Truck,
+  Container,
+} from "lucide-react";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
@@ -69,7 +75,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           } bg-background2 flex flex-col justify-between shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max  transition-all duration-500`}
         >
           <ul className="space-y-2">
-            {userRole === "user"
+            {userRole !== "User"
               ? userNav.map((item, index) => (
                   <NavLink
                     key={index}
@@ -77,7 +83,9 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     to={item.path}
                     className={({ isActive }) =>
                       `text-white text-sm flex items-center rounded-md px-4 py-2 transition-all ${
-                        isActive ? "text-baseColor bg-background" : "hover:bg-background"
+                        isActive
+                          ? "text-baseColor bg-background"
+                          : "hover:bg-background"
                       }`
                     }
                   >
@@ -85,15 +93,16 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <span>{item.label}</span>
                   </NavLink>
                 ))
-              : userRole === "admin" &&
-                AdminNav.map((item, index) => (
+              : AdminNav.map((item, index) => (
                   <NavLink
                     key={index}
                     to={item.path}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                     className={({ isActive }) =>
                       `text-sm flex items-center rounded-md px-4 py-2 transition-all hover:text-baseColor ${
-                        isActive ? "bg-background text-baseColor" : " text-white hover:bg-background"
+                        isActive
+                          ? "bg-background text-baseColor"
+                          : " text-white hover:bg-background"
                       }`
                     }
                   >
