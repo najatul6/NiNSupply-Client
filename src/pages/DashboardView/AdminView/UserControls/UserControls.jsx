@@ -12,10 +12,10 @@ const UserControls = () => {
   const axiosSecure = useAxiosSecure();
   const [newRole, setNewRole] = useState("");
 
-  const handleChangeRole = ({ userId }) => {
+  const handleChangeRole = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: `You want to change his role to ${newRole}!`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -23,10 +23,13 @@ const UserControls = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
+        axiosSecure.patch(`/users/${id}`, { role: newRole }).then((res) => {
+          if (res.data?.modifiedCount > 0) {
+            refetch();
+            toast.success("User role updated successfully");
+          } else {
+            toast.error("User role not updated");
+          }
         });
       }
     });
@@ -153,7 +156,7 @@ const UserControls = () => {
                       </svg>
                     </button>
                     <button
-                      onClick={() => handleDeleteUser(user._id)}
+                      onClick={() => handleDeleteUser(user?._id)}
                       className="mr-4"
                       title="Delete"
                     >
