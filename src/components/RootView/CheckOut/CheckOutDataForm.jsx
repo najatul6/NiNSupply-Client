@@ -14,6 +14,7 @@ const BillingAddressForm = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (user?.email) {
@@ -68,13 +69,32 @@ const BillingAddressForm = () => {
     validateField(name, value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Validate all fields before submission
+    Object.keys(formData).forEach((key) => validateField(key, formData[key]));
+
+    // Check if there are any errors
+    if (Object.values(errors).some((err) => err)) {
+      console.log("Form submission blocked due to validation errors.", errors);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Submit form if no errors
+    console.log("Form submitted successfully:", formData);
+    setIsSubmitting(false);
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6">
       <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl bg-gray-900 text-white">
         <h2 className="text-2xl font-semibold text-center mb-6">
           Billing and Contact Information
         </h2>
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Full Name */}
           <div className="flex flex-col">
             <label htmlFor="fullName" className="text-sm font-medium">
@@ -192,6 +212,15 @@ const BillingAddressForm = () => {
             </select>
             {errors.reviewType && <p className="text-red-500 text-sm">{errors.reviewType}</p>}
           </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </button>
         </form>
       </div>
     </div>
