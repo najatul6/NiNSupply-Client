@@ -18,6 +18,7 @@ import GiftCard from "@/pages/RootView/GiftCard/GiftCard";
 import Subscription from "@/pages/RootView/Subscription/Subscription";
 import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
 import CheckOut from "@/components/RootView/CheckOut/CheckOut";
+import MyOrders from "@/pages/DashboardView/UserView/MyOrders";
 
 const Router = createBrowserRouter([
   {
@@ -72,8 +73,8 @@ const Router = createBrowserRouter([
         element: <Overview />,
       },
       {
-        path:"my-orders",
-
+        path: "my-orders",
+        element: <MyOrders />,
       },
       {
         path: "users-control",
