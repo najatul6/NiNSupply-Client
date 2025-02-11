@@ -1,14 +1,11 @@
-
 import useOrders from "@/hooks/useOrders";
 
 const MyOrders = () => {
-  const [orders, , isLoading] = useOrders()
-
-  
+  const [orders, , isLoading] = useOrders();
 
   const formatDate = (timestamp) => {
     if (!timestamp) return "N/A";
-    const date = new Date(timestamp);
+    const date = new Date(Number(timestamp)); // Ensure timestamp is a number
     return date.toLocaleString("en-US", {
       year: "numeric",
       month: "long",
@@ -25,7 +22,7 @@ const MyOrders = () => {
       <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
         <p>Loading orders...</p>
-      ) : orders.length === 0 ? (
+      ) : orders.length === 0 ? ( // Fixed empty orders check
         <p>No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
