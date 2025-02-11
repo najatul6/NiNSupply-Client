@@ -21,8 +21,8 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-2xl font-semibold mb-6">Your Orders</h2>
+    <div className="p-6 min-h-screen">
+      <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
         <p>Loading orders...</p>
       ) : orders.length === 0 ? (
