@@ -5,8 +5,8 @@ import { useState } from "react";
 
 const BillingAddressForm = () => {
   const { user } = useAuth();
-  const [carts]=useCarts()
-const axiosSecure=useAxiosSecure()
+  const [carts, refetch] = useCarts(); // Added refetch to refresh cart after deletion
+  const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
     fullName: "",
     whatsappNumber: "",
@@ -18,7 +18,6 @@ const axiosSecure=useAxiosSecure()
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
   const validateField = (name, value) => {
     let errorMsg = "";
 
@@ -27,26 +26,21 @@ const axiosSecure=useAxiosSecure()
         if (!value.trim()) errorMsg = "Full Name is required.";
         else if (value.length < 3) errorMsg = "Full Name must be at least 3 characters.";
         break;
-
       case "whatsappNumber":
         if (!value.trim()) errorMsg = "WhatsApp number is required.";
         else if (!/^\+[1-9]{1}[0-9]{3,14}$/.test(value))
           errorMsg = "Invalid WhatsApp number format. Example: +1234567890";
         break;
-
       case "companyUrl":
         if (value && !/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/.test(value))
           errorMsg = "Invalid URL format.";
         break;
-
       case "skypeId":
         if (value && value.length < 3) errorMsg = "Skype ID must be at least 3 characters.";
         break;
-
       case "reviewType":
         if (!value.trim()) errorMsg = "Please select a review type.";
         break;
-
       default:
         break;
     }
@@ -60,42 +54,64 @@ const axiosSecure=useAxiosSecure()
     validateField(name, value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     // Validate all fields before submission
     Object.keys(formData).forEach((key) => validateField(key, formData[key]));
-
+  
     // Check if there are any errors
     if (Object.values(errors).some((err) => err)) {
       console.log("Form submission blocked due to validation errors.", errors);
       setIsSubmitting(false);
       return;
     }
-
-    // Submit form if no errors
-    console.log("Form submitted successfully:", formData);
-    axiosSecure.post("/orders", formData).then((res) => {
-      console.log(res.data);
-    });
-      
-
+  
+    // Create the order payload including cart items
+    const orderData = {
+      ...formData,
+      userEmail: user?.email,
+      cartItems: carts, // Include cart items in the order
+      orderDate: new Date().toISOString(),
+      status: "Pending",
+    };
+  
+    try {
+      // Send order data to the backend
+      const response = await axiosSecure.post("/orders", orderData);
+  
+      if (response.data.insertedId) {
+        console.log("Order placed successfully:", response.data);
+  
+        // Delete all cart items for the user
+        const deleteCartRequests = carts.map((cartItem) =>
+          axiosSecure.delete(`/carts/${cartItem._id}`)
+        );
+  
+        await Promise.all(deleteCartRequests);
+        
+        console.log("Cart cleared successfully");
+      }
+  
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  
     setIsSubmitting(false);
   };
+  
 
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
-      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl  text-white">
+      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl text-white">
         <h2 className="text-2xl font-semibold text-center mb-6">
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Full Name */}
           <div className="flex flex-col">
-            <label htmlFor="fullName" className="text-sm font-medium">
-              Full Name
-            </label>
+            <label htmlFor="fullName" className="text-sm font-medium">Full Name</label>
             <input
               id="fullName"
               name="fullName"
@@ -112,9 +128,7 @@ const axiosSecure=useAxiosSecure()
 
           {/* WhatsApp Number */}
           <div className="flex flex-col">
-            <label htmlFor="whatsappNumber" className="text-sm font-medium">
-              WhatsApp Number (With Country Code)
-            </label>
+            <label htmlFor="whatsappNumber" className="text-sm font-medium">WhatsApp Number (With Country Code)</label>
             <input
               id="whatsappNumber"
               name="whatsappNumber"
@@ -126,16 +140,12 @@ const axiosSecure=useAxiosSecure()
               }`}
               placeholder="+1 234 567 890"
             />
-            {errors.whatsappNumber && (
-              <p className="text-red-500 text-sm">{errors.whatsappNumber}</p>
-            )}
+            {errors.whatsappNumber && <p className="text-red-500 text-sm">{errors.whatsappNumber}</p>}
           </div>
 
           {/* Company URL */}
           <div className="flex flex-col">
-            <label htmlFor="companyUrl" className="text-sm font-medium">
-              Company URL
-            </label>
+            <label htmlFor="companyUrl" className="text-sm font-medium">Company URL</label>
             <input
               id="companyUrl"
               name="companyUrl"
@@ -152,9 +162,7 @@ const axiosSecure=useAxiosSecure()
 
           {/* Skype ID */}
           <div className="flex flex-col">
-            <label htmlFor="skypeId" className="text-sm font-medium">
-              Skype ID
-            </label>
+            <label htmlFor="skypeId" className="text-sm font-medium">Skype ID</label>
             <input
               id="skypeId"
               name="skypeId"
@@ -171,9 +179,7 @@ const axiosSecure=useAxiosSecure()
 
           {/* Review Type */}
           <div className="flex flex-col">
-            <label htmlFor="reviewType" className="text-sm font-medium">
-              Review Type
-            </label>
+            <label htmlFor="reviewType" className="text-sm font-medium">Review Type</label>
             <select
               id="reviewType"
               name="reviewType"
@@ -191,11 +197,7 @@ const axiosSecure=useAxiosSecure()
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg" disabled={isSubmitting}>
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>
@@ -205,6 +207,7 @@ const axiosSecure=useAxiosSecure()
 };
 
 export default BillingAddressForm;
+
 
 
 // import { useState } from 'react';
