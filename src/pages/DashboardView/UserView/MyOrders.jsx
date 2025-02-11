@@ -16,10 +16,6 @@ const MyOrders = () => {
     });
   };
 
-  const totalPrice = orders?.cartItems.reduce(
-    (acc, curr) => acc + curr.price * curr.quantity,
-    0
-  );
 
   return (
     <div className="p-6 min-h-screen">

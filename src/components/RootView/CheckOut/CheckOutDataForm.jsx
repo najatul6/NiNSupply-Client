@@ -1,6 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
+import PropTypes from "prop-types";
 import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -240,6 +241,10 @@ const BillingAddressForm = ({totalPrice}) => {
     </div>
   );
 };
+
+BillingAddressForm.propTypes={
+  totalPrice:PropTypes.number.isRequired
+}
 
 export default BillingAddressForm;
 
