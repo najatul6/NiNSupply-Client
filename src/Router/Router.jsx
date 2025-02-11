@@ -6,7 +6,7 @@ import Register from "@/pages/Common/Auth/Register";
 import Error from "@/pages/Common/Error/Error";
 import UserAccount from "@/pages/Common/UserAccount/UserAccount";
 import Overview from "@/pages/DashboardView/Overview/Overview";
-import UserControls from "@/pages/DashboardView/UserControls/UserControls";
+import UserControls from "@/pages/DashboardView/AdminView/UserControls/UserControls";
 import About from "@/pages/RootView/About/About";
 import Home from "@/pages/RootView/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
@@ -70,6 +70,10 @@ const Router = createBrowserRouter([
       {
         path: "overview",
         element: <Overview />,
+      },
+      {
+        path:"my-orders",
+
       },
       {
         path: "users-control",

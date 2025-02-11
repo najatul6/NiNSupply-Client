@@ -9,14 +9,14 @@ const UserAccount = () => {
       <div className="rounded-t-lg h-32 overflow-hidden">
         <img
           className="object-cover object-top w-full"
-          src="https://i.ibb.co.com/pRWqSTN/canva-colorful-festive-shapes-facebook-cover-42-Svf-FCPOhs.jpg"
+          src="https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467_1280.jpg"
           alt="Banner Image"
         />
       </div>
       <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-center items-center bg-gray-600">
         <img
           className="object-cover object-center h-32"
-          src={user?.photoURL || "https://icons.veryicon.com/png/o/system/ali-mom-icon-library/random-user.png"}
+          src={user?.photoURL}
           alt={`${user?.displayName} Profile Picture`}
         />
       </div>
