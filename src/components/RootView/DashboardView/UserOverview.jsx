@@ -1,7 +1,6 @@
 import useAuth from "@/hooks/useAuth";
 import useCarts from "@/hooks/useCart";
 import useOrders from "@/hooks/useOrders";
-import ProductCardSkeleton from "../common/ProductCardSkeleton";
 
 const UserOverview = () => {
   const { user } = useAuth();
