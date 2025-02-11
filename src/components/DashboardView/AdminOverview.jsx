@@ -14,8 +14,7 @@ import Chart from "react-google-charts";
 const AdminOverview = () => {
   const [allUser] = useAllUser();
   const [allOrders] = useAllOrders();
-    const [products]=useProduct();
-
+  const [products] = useProduct();
 
   const approvedOrders = allOrders?.filter(
     (order) => order?.status === "approved"
@@ -43,21 +42,7 @@ const AdminOverview = () => {
     <div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {/* Total Revenue */}
-        <div className="bg-gradient-to-b from-green-300 to-green-200 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
-          <div className="flex flex-row items-center">
-            <div className="flex-shrink pr-4">
-              <div className="rounded-full p-5 bg-green-600">
-                <Wallet />
-              </div>
-            </div>
-            <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">
-                Total Revenue
-              </h2>
-              <p className="font-bold text-3xl text-green-500">$3249 </p>
-            </div>
-          </div>
-        </div>
+       
 
         {/* Orders */}
         <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
@@ -86,7 +71,9 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
-              <p className="font-bold text-3xl text-indigo-600">{pendingOrders?.length}</p>
+              <p className="font-bold text-3xl text-indigo-600">
+                {pendingOrders?.length}
+              </p>
             </div>
           </div>
         </div>
@@ -135,7 +122,9 @@ const AdminOverview = () => {
             </div>
             <div className="flex-1 text-right md:text-center">
               <h2 className="font-bold uppercase text-gray-600">Products</h2>
-              <p className="font-bold text-3xl text-orange-600">{products?.length}</p>
+              <p className="font-bold text-3xl text-orange-600">
+                {products?.length}
+              </p>
             </div>
           </div>
         </div>
