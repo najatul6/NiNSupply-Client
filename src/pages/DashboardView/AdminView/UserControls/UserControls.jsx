@@ -1,28 +1,54 @@
+import { useState } from "react";
 import DateComponent from "@/components/common/DateComponent";
 import useAllUser from "@/hooks/useAllUser";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
-const UserControls = () => {
-  const [allUsers] = useAllUser();
-  const handleChangeRole = () => {
 
-  }
+const UserControls = () => {
+  const [allUsers, setAllUsers] = useAllUser();
+  const [searchQuery, setSearchQuery] = useState("");
+  const axiosSecure = useAxiosSecure();
+
+  const handleChangeRole = async (userId, newRole) => {
+    try {
+      await axiosSecure.patch(`/users/${userId}/role`, { role: newRole });
+      setAllUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, role: newRole } : user
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update role", error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      await axiosSecure.delete(`/users/${userId}`);
+      setAllUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.error("Failed to delete user", error);
+    }
+  };
+
+  const filteredUsers = allUsers?.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div>
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
-        <h1 className="text-3xl text-white">
-          Total Users : {allUsers?.length}
-        </h1>
+        <h1 className="text-3xl text-white">Total Users: {filteredUsers?.length}</h1>
         <form className="max-w-[480px] w-full px-4">
           <div className="relative">
             <input
               type="text"
-              name="q"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full border h-12 shadow border-lightTeal p-4 rounded-full bg-transparent focus:outline-none"
-              placeholder="search"
+              placeholder="Search users"
             />
-            <button>
-              <FaSearch className="text-lightTeal h-5 w-5 absolute top-3.5 right-3 fill-current " />
-            </button>
+            <FaSearch className="text-lightTeal h-5 w-5 absolute top-3.5 right-3 fill-current" />
           </div>
         </form>
       </div>
@@ -31,43 +57,27 @@ const UserControls = () => {
           <table className="min-w-full bg-white">
             <thead className="bg-gray-800 whitespace-nowrap">
               <tr>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Profile
-                </th>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Name
-                </th>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Email
-                </th>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Role
-                </th>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Joined At
-                </th>
-                <th className="p-4 text-left text-sm font-medium text-white">
-                  Actions
-                </th>
+                <th className="p-4 text-left text-sm font-medium text-white">Profile</th>
+                <th className="p-4 text-left text-sm font-medium text-white">Name</th>
+                <th className="p-4 text-left text-sm font-medium text-white">Email</th>
+                <th className="p-4 text-left text-sm font-medium text-white">Role</th>
+                <th className="p-4 text-left text-sm font-medium text-white">Joined At</th>
+                <th className="p-4 text-left text-sm font-medium text-white">Actions</th>
               </tr>
             </thead>
-
             <tbody className="whitespace-nowrap">
-              {allUsers?.map((user) => (
+              {filteredUsers?.map((user) => (
                 <tr key={user?._id} className="even:bg-blue-50">
                   <td className="p-4 text-sm text-black">
-                    <div className="flex items-center  overflow-hidden rounded-full w-10 h-10">
-                      <img
-                        src={user?.photoURL}
-                        alt={user?.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <img src={user?.photoURL} alt={user?.name} className="w-10 h-10 rounded-full object-cover" />
                   </td>
                   <td className="p-4 text-sm text-black">{user?.name}</td>
                   <td className="p-4 text-sm text-black">{user?.email}</td>
                   <td className="p-4 text-sm text-black capitalize">
-                    <select name="" id="" value={user?.role}>
+                    <select
+                      value={user?.role}
+                      onChange={(e) => handleChangeRole(user._id, e.target.value)}
+                    >
                       <option value="user">User</option>
                       <option value="admin">Admin</option>
                     </select>
@@ -76,38 +86,14 @@ const UserControls = () => {
                     <DateComponent createdAt={user?.createdAt} />
                   </td>
                   <td className="p-4">
-                    <button onClick={handleChangeRole} className="mr-4" title="Save">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-save fill-green-500 hover:fill-green-700"
-                      >
-                        <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-                        <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
-                        <path d="M7 3v4a1 1 0 0 0 1 1h7" />
-                      </svg>
-                    </button>
-                    <button className="mr-4" title="Delete">
+                    <button onClick={() => handleDeleteUser(user._id)} className="mr-4" title="Delete">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 fill-red-500 hover:fill-red-700"
                         viewBox="0 0 24 24"
                       >
-                        <path
-                          d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                          data-original="#000000"
-                        />
-                        <path
-                          d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                          data-original="#000000"
-                        />
+                        <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" />
+                        <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" />
                       </svg>
                     </button>
                   </td>
@@ -122,456 +108,3 @@ const UserControls = () => {
 };
 
 export default UserControls;
-
-{
-  /* <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jane Smith</td>
-                <td className="p-4 text-sm text-black">jane@example.com</td>
-                <td className="p-4 text-sm text-black">User</td>
-                <td className="p-4 text-sm text-black">2022-07-20</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Alen Doe</td>
-                <td className="p-4 text-sm text-black">alen@example.com</td>
-                <td className="p-4 text-sm text-black">User</td>
-                <td className="p-4 text-sm text-black">2022-07-21</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Kelwin mark</td>
-                <td className="p-4 text-sm text-black">kelwin@example.com</td>
-                <td className="p-4 text-sm text-black">User</td>
-                <td className="p-4 text-sm text-black">2020-07-06</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Dustin</td>
-                <td className="p-4 text-sm text-black">dustin@example.com</td>
-                <td className="p-4 text-sm text-black">User</td>
-                <td className="p-4 text-sm text-black">2021-07-06</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="even:bg-blue-50">
-                <td className="p-4 text-sm text-black">Jams david</td>
-                <td className="p-4 text-sm text-black">jams@example.com</td>
-                <td className="p-4 text-sm text-black">Candidate</td>
-                <td className="p-4 text-sm text-black">2018-09-04</td>
-                <td className="p-4">
-                  <button className="mr-4" title="Edit">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-blue-500 hover:fill-blue-700"
-                      viewBox="0 0 348.882 348.882"
-                    >
-                      <path
-                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                  <button className="mr-4" title="Delete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 fill-red-500 hover:fill-red-700"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                        data-original="#000000"
-                      />
-                      <path
-                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                        data-original="#000000"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr> */
-}
