@@ -5,7 +5,7 @@ const UserAccount = () => {
   const { user } = useAuth();
   console.log(user);
   return (
-    <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-2xl xl:max-w-2xl sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-16 bg-muted shadow-2xl rounded-lg text-gray-900">
+    <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-2xl xl:max-w-2xl sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-16 bg-transparent shadow-inner shadow-baseColor rounded-lg text-gray-900">
       <div className="rounded-t-lg h-32 overflow-hidden">
         <img
           className="object-cover object-top w-full"
@@ -21,8 +21,8 @@ const UserAccount = () => {
         />
       </div>
       <div className="text-center mt-2">
-        <h2 className="font-semibold">{user?.displayName || "Anonymous"} </h2>
-        <p>{user?.email}</p>
+        <h2 className="font-semibold text-white">{user?.displayName || "Anonymous"} </h2>
+        <p className="text-gray-400">{user?.email}</p>
         {/* <p className="text-gray-500">User</p> */}
       </div>
       <div className="p-4 border-t mx-8 mt-2 flex justify-center items-center">
