@@ -3,7 +3,6 @@ import useAuth from "@/hooks/useAuth";
 
 const UserAccount = () => {
   const { user } = useAuth();
-  console.log(user);
   return (
     <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-2xl xl:max-w-2xl sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-16 bg-transparent shadow-inner shadow-baseColor rounded-lg text-gray-900">
       <div className="rounded-t-lg h-32 overflow-hidden">
