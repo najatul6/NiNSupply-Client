@@ -46,23 +46,26 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id} className="border-b hover:bg-gray-500">
+              {orders?.map((order) => (
+                <tr key={order?._id} className="border-b hover:bg-gray-500">
                   <td className="py-3 px-4 border border-white text-wrap text-xs">
                     {order.cartItems.map((item) => {
                       return (
                         <ul key={item._id} className="list-disc pl-1">
                           <li>
                             {item?.productName}{" "}
-                            <span className="italic"> - </span>{item?.quantity}
+                            <span className="italic"> - </span>
+                            {item?.quantity}
                           </li>
                         </ul>
                       );
                     })}
                   </td>
-                  <td className="py-3 px-4 border border-white text-wrap">$ {totalPrice}</td>
+                  <td className="py-3 px-4 border border-white text-wrap">
+                    $ {order?.totalPrice}
+                  </td>
                   <td className="py-3 px-4 border border-white text-indigo-600 font-semibold">
-                    {order.status}
+                    {order?.status}
                   </td>
                   <td className="py-3 px-4 text-wrap">
                     {formatDate(order?.orderDate)}
