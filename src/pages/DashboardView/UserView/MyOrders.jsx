@@ -2,7 +2,7 @@ import useOrders from "@/hooks/useOrders";
 
 const MyOrders = () => {
   const [orders, , isLoading] = useOrders();
-
+console.log(orders);
   const formatDate = (timestamp) => {
     if (!timestamp) return "N/A";
     const date = new Date(Number(timestamp)); // Ensure timestamp is a number
@@ -39,13 +39,13 @@ const MyOrders = () => {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id} className="border-b hover:bg-gray-100">
-                  <td className="py-3 px-4">{order._id}</td>
+                  {/* <td className="py-3 px-4">{order._id}</td>
                   <td className="py-3 px-4">{order.items.length}</td>
                   <td className="py-3 px-4">${order.totalPrice.toFixed(2)}</td>
                   <td className="py-3 px-4 text-indigo-600 font-semibold">
                     {order.status}
                   </td>
-                  <td className="py-3 px-4">{formatDate(order.createdAt)}</td>
+                  <td className="py-3 px-4">{formatDate(order.createdAt)}</td> */}
                 </tr>
               ))}
             </tbody>
