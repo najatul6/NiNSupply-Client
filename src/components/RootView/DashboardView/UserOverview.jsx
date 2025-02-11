@@ -6,7 +6,6 @@ const UserOverview = () => {
   const { user } = useAuth();
   const [orders, , isLoading] = useOrders();
   const [cart] = useCarts();
-  console.log(user);
 
   // Format timestamps
   const formatDate = (timestamp) => {
@@ -41,28 +40,25 @@ const UserOverview = () => {
                 Welcome, {user?.displayName}!
               </h2>
               <p className="text-sm">
-                <span>
-                  Email:
-                </span>
-                 {user?.email}</p>
+                <span className="font-bold">Email : </span>
+                {user?.email}
+              </p>
               <p className="text-sm">
-                <span>
-                  Email Validation:{" "}
-                </span>
+                <span className="font-bold">Email Validation : </span>
                 {user?.emailVerified ? "Unverified" : "Verified"}
               </p>
             </div>
             <div>
               <p className="text-sm">
-                <span className="font-bold">Account Created:</span>{" "}
+                <span className="font-bold">Account Created : </span>
                 {formatDate(user?.metadata?.createdAt)}
               </p>
               <p className="text-sm">
-                <span>Last Login:</span>
+                <span className="font-bold">Last Login : </span>
                 {formatDate(user?.metadata?.lastLoginAt)}
               </p>
               <p className="text-sm">
-                <span>Last Sign-In:</span>
+                <span className="font-bold">Last Sign-In : </span>
                 {user?.metadata?.lastSignInTime}
               </p>
             </div>
@@ -84,6 +80,7 @@ const UserOverview = () => {
                     </span>
                   </div>
                 ))}
+                <hr />
                 <div className="flex justify-between items-center mt-4">
                   <strong>Total: </strong>
                   <span>
