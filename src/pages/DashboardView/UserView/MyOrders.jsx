@@ -22,7 +22,7 @@ const MyOrders = () => {
       <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
         <p>Loading orders...</p>
-      ) : orders.length === 0 ? ( // Fixed empty orders check
+      ) : orders.length === 0 ? ( 
         <p>No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
@@ -58,7 +58,7 @@ const MyOrders = () => {
                     })}
                   </td>
                   <td className="py-3 px-4 border border-white text-wrap">
-                    $ {order?.totalPrice}
+                    $ {order?.totalPrice || 0}
                   </td>
                   <td className="py-3 px-4 border border-white text-indigo-600 font-semibold">
                     {order?.status}
