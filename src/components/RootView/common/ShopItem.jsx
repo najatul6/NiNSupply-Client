@@ -17,34 +17,45 @@ const ShopItem = ({ item }) => {
   const { setIsCartOpen } = useCartContext();
 
   const addToCart = async (product) => {
-    if (user && user?.email) {
+    if (!user || !user?.email) {
+      return navigate("/auth/login", { state: { from: location } });
+    }
+  
+    try {
+      // Check if the product already exists in the cart
+      const { data: existingCart } = await axiosSecure.get(`/carts?email=${user.email}`);
+  
+      const isAlreadyInCart = existingCart.some(item => item.itemId === product._id);
+  
+      if (isAlreadyInCart) {
+        return toast.error("Product already in cart");
+      }
+  
+      // If not in cart, add the product
       const cartsItem = {
         itemId: product._id,
-        userEmail: user?.email,
+        userEmail: user.email,
         productName: product.productName,
         price: product.price,
         quantity: product.quantity,
         status: "pending",
       };
-      const existingCart= await axiosSecure.get(`/carts/${product._id}?userEmail=${user?.email}`);
-      if(existingCart.data.length>0){
-        toast.error("Product already in cart");
-        return;
+  
+      const { data } = await axiosSecure.post("/carts", cartsItem);
+      if (data.insertedId) {
+        toast.success("Product added to cart successfully");
+        refetch(); // Refresh cart data
+        setIsCartOpen(true);
       }
-      
-      axiosSecure.post("/carts", cartsItem).then((res) => {
-        if (res.data.insertedId) {
-          toast.success("Product added to cart successfully");
-          refetch();
-          setIsCartOpen(true);
-        }
-      });
-    } else {
-      navigate("/auth/login", { state: { from: location } });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Something went wrong! Please try again.");
     }
   };
+  
+
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-8">
+    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {!item || item.length === 0 ? (
         <div className="flex flex-col justify-center items-center col-span-full">
           <div className="w-40 h-40 mb-4">
@@ -55,54 +66,67 @@ const ShopItem = ({ item }) => {
           </p>
         </div>
       ) : (
-        item?.map((product) => (
-          <div
-            key={product?._id}
-            className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
-          >
-            <div className="relative flex flex-col h-full">
-              <img
-                src={product?.thumbnail}
-                alt={product?.productName}
-                className="w-full h-36 md:h-64 object-cover md:rounded-t-lg"
-              />
-              <div className="p-4 flex-grow">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-xs md:text-xl font-semibold text-white">
-                    {product?.productName}
-                  </h3>
-                  <span className="text-xs md:text-lg font-bold text-baseColor flex justify-center items-center">
-                    {product?.price || "N/A"}৳
-                  </span>
+        item.map((product) => {
+          const isOutOfStock = product?.stock === 0;
+          return (
+            <div
+              key={product?._id}
+              className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
+            >
+              <div className="relative flex flex-col h-full">
+                <img
+                  src={product?.thumbnail}
+                  alt={product?.productName}
+                  className="w-full h-36 md:h-64 object-cover md:rounded-t-lg"
+                />
+                <div className="p-4 flex-grow">
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-xs md:text-xl font-semibold text-white">
+                      {product?.productName}
+                    </h3>
+                    <span className="text-xs md:text-lg font-bold text-baseColor flex justify-center items-center">
+                      {product?.price || "N/A"}৳
+                    </span>
+                  </div>
+                  {/* Description list */}
+                  {product.description?.length > 0 && (
+                    <ul className="text-sm text-gray-500 hidden md:block">
+                      {product.description.map((desc, index) => (
+                        <li key={index} className="list-disc ml-5">
+                          {desc}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {/* Description list */}
-                <ul className="text-sm text-gray-500 hidden md:block">
-                  {product.description?.map((desc, index) => (
-                    <li key={index} className="list-disc ml-5">
-                      {desc}
-                    </li>
-                  ))}
-                </ul>
+
+                <button
+                  onClick={() => addToCart(product)}
+                  disabled={isOutOfStock}
+                  aria-disabled={isOutOfStock}
+                  className={`text-xs md:text-base font-bold my-2 inline-block md:px-6 py-2 rounded-md transition-all w-2/3 mx-auto ${
+                    isOutOfStock
+                      ? "bg-gray-400 text-white cursor-not-allowed"
+                      : "bg-baseColor text-background hover:bg-baseColor-dark"
+                  }`}
+                >
+                  {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+                </button>
               </div>
-              <button
-                onClick={() => addToCart(product)}
-                disabled={product?.stock === 0}
-                className="text-xs md:text-base font-bold my-2 inline-block md:px-6 py-2 bg-baseColor text-background rounded-md hover:bg-baseColor-dark transition-all w-2/3 mx-auto"
-              >
-                {product?.stock === 0 ? "Out of Stock" : "Add to Cart"}
-              </button>
+
+              {product.isPopular && (
+                <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full">
+                  Popular
+                </div>
+              )}
             </div>
-            {product.isPopular && (
-              <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full">
-                Popular
-              </div>
-            )}
-          </div>
-        ))
+          );
+        })
       )}
     </div>
   );
 };
+
 ShopItem.propTypes = {
   item: PropTypes.array,
 };
