@@ -3,7 +3,7 @@ import { PackagePlus } from "lucide-react"
 
 const NewOrders = () => {
     const [allOrders] = useAllOrders();
-    const newOrder=allOrders?.filter((order) => order?.status === "pending") || [];
+    const newOrder=allOrders?.filter((order) => order?.status === "Pending") || [];
   return (
     <div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
     <div className="flex flex-row items-center">

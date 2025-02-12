@@ -1,6 +1,6 @@
 import useAllOrders from "@/hooks/useAllOrders";
 import useAllUser from "@/hooks/useAllUser";
-import { PackagePlus, Users, WalletCards } from "lucide-react";
+import {  Users, WalletCards } from "lucide-react";
 import Chart from "react-google-charts";
 import TotalRevenue from "./TotalRevenue";
 import PendingRevenue from "./PendingRevenue";
@@ -8,13 +8,11 @@ import ProcessingRevenue from "./ProcessingRevenue";
 import CompletedRevenue from "./CompletedRevenue";
 import TotalProducts from "./TotalProducts";
 import TotalOrders from "./TotalOrders";
+import NewOrders from "./NewOrders";
 
 const AdminOverview = () => {
   const [allUser] = useAllUser();
   const [allOrders] = useAllOrders();
-  const pendingOrders = allOrders?.filter(
-    (order) => order?.status === "pending"
-  );
   const data = [
     ["Task", "Hours per Day"],
     ["Work", 9],
@@ -61,7 +59,7 @@ const AdminOverview = () => {
         <TotalOrders />
 
         {/* New Orders */}
-        
+        <NewOrders/>
 
         {/* Total Sales */}
         <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
