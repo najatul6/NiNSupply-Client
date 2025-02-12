@@ -6,7 +6,7 @@ import useTotalRevenue from "@/hooks/useTotalRevenue";
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 const PieChart = () => {
-    const { totalRevenue } = useTotalRevenue();
+    const { totalRevenue,pendingRevenue,processingRevenue,completedRevenue } = useTotalRevenue();
   // Example data for the pie chart
   const data = {
     labels: ["Total Revenue", "Pending Revenue", "Processing Revenue", "Completed Revenue"],
