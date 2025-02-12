@@ -3,7 +3,7 @@ import { Weight } from "lucide-react"
 
 const TotalSales = () => {
     const [allOrders]=useAllOrders()
-    const totalSale=allOrders.filter(order=>order.status==="completed")
+    const totalSale=allOrders.filter(order=>order.status==="Processing")
   return (
     <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
           <div className="flex flex-row items-center">
@@ -13,7 +13,7 @@ const TotalSales = () => {
               </div>
             </div>
             <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">Total Sales</h2>
+              <h2 className="font-bold uppercase text-gray-600">Processing Sales</h2>
               <p className="font-bold text-3xl text-yellow-600">{totalSale?.length}</p>
             </div>
           </div>

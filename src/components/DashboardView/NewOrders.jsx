@@ -13,7 +13,7 @@ const NewOrders = () => {
         </div>
       </div>
       <div className="flex-1 text-right md:text-center">
-        <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
+        <h2 className="font-bold uppercase text-gray-600">Pending Orders</h2>
         <p className="font-bold text-3xl text-indigo-600">
           {newOrder?.length}
         </p>

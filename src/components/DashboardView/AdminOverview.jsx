@@ -26,14 +26,14 @@ const AdminOverview = () => {
         {/* Completed Revenue */}
         <CompletedRevenue />
 
-        {/* Orders */}
-        <TotalOrders />
-
-        {/* New Orders */}
+        {/* Pending Orders */}
         <NewOrders />
 
-        {/* Total Sales */}
+        {/* Processing Orders */}
         <TotalSales />
+
+        {/* Complete Orders */}
+        <TotalOrders />
 
         {/* Total Customers */}
         <TotalCustomer />

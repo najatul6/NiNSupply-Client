@@ -4,7 +4,7 @@ import { Truck } from "lucide-react";
 const TotalOrders = () => {
   const [allOrders] = useAllOrders();
   const totalOrder =
-    allOrders?.filter((order) => order?.status && order.status !== "Pending") ||
+    allOrders?.filter((order) => order?.status && order.status === "Complete") ||
     [];
   return (
     <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
@@ -15,7 +15,7 @@ const TotalOrders = () => {
           </div>
         </div>
         <div className="flex-1 text-right md:text-center">
-          <h2 className="font-bold uppercase text-gray-600">Orders</h2>
+          <h2 className="font-bold uppercase text-gray-600">Complete Orders</h2>
           <p className="font-bold text-3xl text-blue-600">
             {totalOrder?.length}
           </p>
