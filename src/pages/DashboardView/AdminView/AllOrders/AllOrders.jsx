@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/table";
 
 const AllOrders = () => {
-    const [allOrders] = useAllOrders();
-    const totalOrder =
-      allOrders?.filter((order) => order?.status && order.status !== "Pending") ||
-      [];
+  const [allOrders] = useAllOrders();
+  const totalOrder =
+    allOrders?.filter((order) => order?.status && order.status !== "Pending") ||
+    [];
+  const [search, setSearch] = useState("");
   // Filter orders based on search input
   const filteredOrders =
-  totalOrder?.filter((order) => {
+    totalOrder?.filter((order) => {
       const customerName = order.customer ? order.customer.toLowerCase() : "";
       const orderId = order._id ? order._id.toString() : "";
       return (
