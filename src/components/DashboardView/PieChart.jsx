@@ -23,6 +23,7 @@ ChartJS.register(
 const PieChart = () => {
   const { totalRevenue, pendingRevenue, processingRevenue, completedRevenue } =
     useTotalRevenue();
+    console.log(processingRevenue);
 
   // Ensure values are numbers and default to 0 if undefined
   const revenueData = [
