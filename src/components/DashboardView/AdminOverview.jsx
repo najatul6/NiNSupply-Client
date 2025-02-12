@@ -41,11 +41,11 @@ const AdminOverview = () => {
         {/* Total Products */}
         <TotalProducts />
       </section>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="h-[400px] flex items-center justify-center bg-white p-4 rounded-lg shadow-md">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <div className="flex items-center justify-center w-full">
           <PieChart />
         </div>
-        <div className="h-[400px] flex items-center justify-center bg-white p-4 rounded-lg shadow-md">
+        <div className="items-center justify-center w-full">
           <ColumnChart />
         </div>
       </section>

@@ -1,12 +1,28 @@
 import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from "chart.js";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 import useTotalRevenue from "@/hooks/useTotalRevenue";
 
 // Register chart.js components
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale
+);
 
 const PieChart = () => {
-  const { totalRevenue, pendingRevenue, processingRevenue, completedRevenue } = useTotalRevenue();
+  const { totalRevenue, pendingRevenue, processingRevenue, completedRevenue } =
+    useTotalRevenue();
 
   // Ensure values are numbers and default to 0 if undefined
   const revenueData = [
@@ -18,7 +34,12 @@ const PieChart = () => {
 
   // Updated data with dynamic values
   const data = {
-    labels: ["Total Revenue", "Pending Revenue", "Processing Revenue", "Completed Revenue"],
+    labels: [
+      "Total Revenue",
+      "Pending Revenue",
+      "Processing Revenue",
+      "Completed Revenue",
+    ],
     datasets: [
       {
         data: revenueData, // Use fetched revenue data
@@ -33,7 +54,7 @@ const PieChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: "right",
       },
     },
   };
