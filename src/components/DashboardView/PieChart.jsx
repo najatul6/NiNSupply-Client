@@ -39,7 +39,7 @@ const PieChart = () => {
   };
 
   return (
-    <div className="pie-chart-container max-w-md">
+    <div className="pie-chart-container max-w-sm">
       <h3 className="text-lg font-semibold mb-2">Total Revenue Distribution</h3>
       <Pie data={data} options={options} />
     </div>
