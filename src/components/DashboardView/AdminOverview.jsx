@@ -61,21 +61,7 @@ const AdminOverview = () => {
         <TotalOrders />
 
         {/* New Orders */}
-        <div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
-          <div className="flex flex-row items-center">
-            <div className="flex-shrink pr-4">
-              <div className="rounded-full p-5 bg-indigo-600">
-                <PackagePlus />
-              </div>
-            </div>
-            <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">New Orders</h2>
-              <p className="font-bold text-3xl text-indigo-600">
-                {pendingOrders?.length}
-              </p>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Total Sales */}
         <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
