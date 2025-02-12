@@ -51,7 +51,7 @@ const ColumnChart = () => {
   };
 
   return (
-    <div className="column-chart-container max-w-lg">
+    <div className="column-chart-container">
       <h3 className="text-lg font-semibold mb-2">Revenue Breakdown</h3>
       <Bar data={data} options={options} />
     </div>

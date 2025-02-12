@@ -42,8 +42,12 @@ const AdminOverview = () => {
         <TotalProducts />
       </section>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <PieChart />
-        <ColumnChart />
+        <div className="h-[400px] flex items-center justify-center bg-white p-4 rounded-lg shadow-md">
+          <PieChart />
+        </div>
+        <div className="h-[400px] flex items-center justify-center bg-white p-4 rounded-lg shadow-md">
+          <ColumnChart />
+        </div>
       </section>
     </div>
   );
