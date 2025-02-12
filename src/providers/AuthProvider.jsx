@@ -69,6 +69,18 @@ const AuthProvider = ({ children }) => {
     return deleteUser(auth.currentUser);
   };
 
+  // Check Token Expiry
+  const isTokenExpired = (token) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiryTime = payload.exp * 1000;
+      return Date.now() > expiryTime;
+    } catch (error) {
+      console.log(error);
+      return true;
+    }
+  };
+
   // Listen for user auth state changes
 
   useEffect(() => {
@@ -81,7 +93,11 @@ const AuthProvider = ({ children }) => {
         axiosPublic.post("/jwt", userData).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data?.token);
-            setLoading(false);
+            if (isTokenExpired(res.data.token)) {
+              logOut();  // Automatically log out if the token is expired
+            } else {
+              setLoading(false);
+            }
           }
         });
       } else {

@@ -16,28 +16,65 @@ const Wholesale = () => {
   const navigate = useNavigate();
   const { setIsCartOpen } = useCartContext();
   const [, refetch] = useCarts();
-
   const addToCart = async (product) => {
-    if (user && user?.email) {
+    if (!user || !user?.email) {
+      return navigate("/auth/login", { state: { from: location } });
+    }
+  
+    try {
+      // Check if the product already exists in the cart
+      const { data: existingCart } = await axiosSecure.get(`/carts?email=${user.email}`);
+  
+      const isAlreadyInCart = existingCart.some(item => item.itemId === product._id);
+  
+      if (isAlreadyInCart) {
+        return toast.error("Product already in cart");
+      }
+  
+      // If not in cart, add the product
       const cartsItem = {
         itemId: product._id,
-        userEmail: user?.email,
+        userEmail: user.email,
         productName: product.productName,
         price: product.price,
         quantity: product.quantity,
         status: "pending",
       };
-      axiosSecure.post("/carts", cartsItem).then((res) => {
-        if (res.data.insertedId) {
-          toast.success("Product added to cart successfully");
-          refetch();
-          setIsCartOpen(true);
-        }
-      });
-    } else {
-      navigate("/auth/login", { state: { from: location } });
+  
+      const { data } = await axiosSecure.post("/carts", cartsItem);
+      if (data.insertedId) {
+        toast.success("Product added to cart successfully");
+        refetch(); // Refresh cart data
+        setIsCartOpen(true);
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Something went wrong! Please try again.");
     }
   };
+
+
+  // const addToCart = async (product) => {
+  //   if (user && user?.email) {
+  //     const cartsItem = {
+  //       itemId: product._id,
+  //       userEmail: user?.email,
+  //       productName: product.productName,
+  //       price: product.price,
+  //       quantity: product.quantity,
+  //       status: "pending",
+  //     };
+  //     axiosSecure.post("/carts", cartsItem).then((res) => {
+  //       if (res.data.insertedId) {
+  //         toast.success("Product added to cart successfully");
+  //         refetch();
+  //         setIsCartOpen(true);
+  //       }
+  //     });
+  //   } else {
+  //     navigate("/auth/login", { state: { from: location } });
+  //   }
+  // };
 
   return (
     <div className="p-2 md:p-6">
