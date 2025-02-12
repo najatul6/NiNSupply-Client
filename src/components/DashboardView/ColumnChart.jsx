@@ -1,43 +1,59 @@
-import Chart from "react-google-charts";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+// Register the necessary chart.js components
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 const ColumnChart = () => {
-  const revenueByCategory = [
-    ["Category", "Revenue (USD)", { role: "style" }],
-    ["Electronics", 15000, "#4CAF50"], // Green
-    ["Clothing", 12000, "#FF9800"], // Orange
-    ["Home & Kitchen", 18000, "#2196F3"], // Blue
-    ["Beauty & Health", 9000, "#E91E63"], // Pink
-    ["Sports", 11000, "#9C27B0"], // Purple
-  ];
+  // Example data for the column chart
+  const data = {
+    labels: ["January", "February", "March", "April", "May"], // Labels for the x-axis (e.g., months)
+    datasets: [
+      {
+        label: "Revenue (in USD)", // Label for the data series
+        data: [400, 600, 800, 1200, 1500], // Values for each month
+        backgroundColor: "#36A2EB", // Color of the bars
+        borderColor: "#1E75D8", // Border color of the bars
+        borderWidth: 1, // Border width for each bar
+      },
+    ],
+  };
+
+  // Options for the column chart
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top", // Position the legend at the top
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // Ensure the y-axis starts from zero
+      },
+    },
+  };
 
   return (
-    <>
-      <Chart
-        chartType="ColumnChart"
-        data={revenueByCategory}
-        options={{
-          title: "Revenue by Product Category",
-          backgroundColor: "#000",
-          legend: { position: "none" },
-          chartArea: { width: "80%", height: "70%" }, // Adjust chart size
-          hAxis: {
-            textStyle: { color: "#FFF", fontSize: 12 }, // White x-axis labels
-            title: "Categories",
-            titleTextStyle: { color: "#FFF", fontSize: 14 },
-          },
-          vAxis: {
-            textStyle: { color: "#FFF", fontSize: 12 }, // White y-axis labels
-            title: "Revenue (USD)",
-            titleTextStyle: { color: "#FFF", fontSize: 14 },
-            gridlines: { color: "#555" }, // Dark gray gridlines
-          },
-          bar: { groupWidth: "60%" }, // Adjust bar width
-          titleTextStyle: { color: "#FFF", fontSize: 18 }, // White title
-        }}
-        width={"100%"}
-        height={"400px"}
-      />
-    </>
+    <div className="column-chart-container border">
+      <h3>Monthly Revenue</h3>
+      <Bar data={data} options={options} />
+    </div>
   );
 };
 
