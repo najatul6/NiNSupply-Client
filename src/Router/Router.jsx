@@ -19,6 +19,7 @@ import Subscription from "@/pages/RootView/Subscription/Subscription";
 import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
 import CheckOut from "@/components/RootView/CheckOut/CheckOut";
 import MyOrders from "@/pages/DashboardView/UserView/MyOrders";
+import NewOrders from "@/pages/DashboardView/AdminView/NewOrders/NewOrders";
 
 const Router = createBrowserRouter([
   {
@@ -96,7 +97,7 @@ const Router = createBrowserRouter([
         path: "new-orders",
         element: (
           <AdminRoute>
-            <UserControls />
+            <NewOrders />
           </AdminRoute>
         ),
       },
