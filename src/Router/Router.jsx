@@ -128,7 +128,11 @@ const Router = createBrowserRouter([
   },
   {
     path: "/checkout",
-    element: <CheckOut />,
+    element: (
+      <PrivateRoute>
+        <CheckOut />
+      </PrivateRoute>
+    ),
   },
 ]);
 

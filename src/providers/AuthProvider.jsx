@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
   const isTokenExpired = (token) => {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const expiryTime = payload.exp * 1000;
+      const expiryTime = payload.exp * 1000; // Expiry time in milliseconds
       return Date.now() > expiryTime;
     } catch (error) {
       console.log(error);
@@ -87,19 +87,18 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        const userData = {
-          email: currentUser.email,
-        };
-        axiosPublic.post("/jwt", userData).then((res) => {
-          if (res.data.token) {
-            localStorage.setItem("access-token", res.data?.token);
-            if (isTokenExpired(res.data.token)) {
-              logOut();  // Automatically log out if the token is expired
-            } else {
+        const token = localStorage.getItem("access-token");
+        if (token && isTokenExpired(token)) {
+          logOut();  // Automatically log out if the token is expired
+        } else {
+          // Handle case where token is valid, e.g., refresh the user session
+          axiosPublic.post("/jwt", { email: currentUser.email }).then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("access-token", res.data?.token);
               setLoading(false);
             }
-          }
-        });
+          });
+        }
       } else {
         localStorage.removeItem("access-token");
         setLoading(false);
