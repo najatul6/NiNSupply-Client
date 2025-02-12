@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button"; // Assuming you're using a UI library like ShadCN
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useAllOrders from "@/hooks/useAllOrders";
 import {
@@ -9,12 +9,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
+
 
 const NewOrders = () => {
   const [allOrders] = useAllOrders();
-  const newOrder =
-    allOrders?.filter((order) => order?.status === "Pending") || [];
+  const newOrder = allOrders?.filter((order) => order?.status === "Pending") || [];
   const [search, setSearch] = useState("");
 
   // Filter orders based on search input
@@ -22,51 +22,59 @@ const NewOrders = () => {
     newOrder?.filter((order) => {
       const customerName = order.customer ? order.customer.toLowerCase() : "";
       const orderId = order._id ? order._id.toString() : "";
-      return (
-        customerName.includes(search.toLowerCase()) || orderId.includes(search)
-      );
+      return customerName.includes(search.toLowerCase()) || orderId.includes(search);
     }) || [];
 
   return (
     <div className="p-6 w-full">
-        <h2 className="text-2xl font-semibold mb-4 w-full">Orders Management</h2>
+      <h2 className="text-2xl font-semibold mb-6">Orders Management</h2>
 
-        {/* Search Bar */}
-        <div className="flex justify-end items-end mb-4 gap-3">
-          <Input
-            type="text"
-            placeholder="Search by order ID or customer"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-1/2"
-          />
-        </div>
+      {/* Search Bar */}
+      <div className="flex justify-end items-center mb-4">
+        <Input
+          type="text"
+          placeholder="Search by order ID or customer"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-1/3 border border-gray-300 rounded-lg p-2"
+        />
+      </div>
 
       {/* Orders Table */}
-      <div className="overflow-x-auto p-4 rounded-lg shadow">
-        <Table>
-          <TableHead>
+      <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-lg">
+        <Table className="w-full border-collapse">
+          <TableHeader className="border-b">
             <TableRow>
-              <TableHeader>Order ID</TableHeader>
-              <TableHeader>Customer</TableHeader>
-              <TableHeader>Total ($)</TableHeader>
-              <TableHeader>Status</TableHeader>
-              <TableHeader>Date</TableHeader>
-              <TableHeader>Actions</TableHeader>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[120px]">
+                Order ID
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[150px]">
+                Customer
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[120px]">
+                Total ($)
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[120px]">
+                Status
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[150px]">
+                Date
+              </TableHead>
+              <TableHead className="py-3 px-4 text-left font-semibold min-w-[120px]">
+                Actions
+              </TableHead>
             </TableRow>
-          </TableHead>
+          </TableHeader>
           <TableBody>
             {filteredOrders.length > 0 ? (
               filteredOrders.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell>{order.id}</TableCell>
-                  <TableCell>{order.customer}</TableCell>
-                  <TableCell>
-                    ${order.total ? order.total.toFixed(2) : "0.00"}
-                  </TableCell>
-                  <TableCell>
+                <TableRow key={order.id} className="border-b hover:bg-gray-50 transition-all">
+                  <TableCell className="py-3 px-4">{order.id}</TableCell>
+                  <TableCell className="py-3 px-4">{order.customer}</TableCell>
+                  <TableCell className="py-3 px-4">${order.total ? order.total.toFixed(2) : "0.00"}</TableCell>
+                  <TableCell className="py-3 px-4">
                     <span
-                      className={`px-2 py-1 rounded text-white ${
+                      className={`px-3 py-1 rounded text-white text-sm font-medium ${
                         order.status === "Pending"
                           ? "bg-yellow-500"
                           : order.status === "Processing"
@@ -77,11 +85,15 @@ const NewOrders = () => {
                       {order.status}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    {new Date(order.date).toLocaleDateString()}
+                  <TableCell className="py-3 px-4">
+                    {order.date ? new Date(order.date).toLocaleDateString() : "N/A"}
                   </TableCell>
-                  <TableCell>
-                    <Button variant="outline" size="sm">
+                  <TableCell className="py-3 px-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-gray-300 rounded-lg px-4 py-2 text-sm hover:bg-gray-100"
+                    >
                       View
                     </Button>
                   </TableCell>
@@ -89,7 +101,7 @@ const NewOrders = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan="6" className="text-center text-gray-500">
+                <TableCell colSpan="6" className="text-center text-gray-500 py-4">
                   No orders found
                 </TableCell>
               </TableRow>
