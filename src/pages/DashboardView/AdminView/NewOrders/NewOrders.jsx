@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button"; // Assuming you're using a UI library like ShadCN
 import { Input } from "@/components/ui/input";
 import useAllOrders from "@/hooks/useAllOrders";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const NewOrders = () => {
   const [allOrders] = useAllOrders(); 
