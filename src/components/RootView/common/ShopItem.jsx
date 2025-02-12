@@ -26,6 +26,12 @@ const ShopItem = ({ item }) => {
         quantity: product.quantity,
         status: "pending",
       };
+      const existingCart= await axiosSecure.get(`/carts/${product._id}?userEmail=${user?.email}`);
+      if(existingCart.data.length>0){
+        toast.error("Product already in cart");
+        return;
+      }
+      
       axiosSecure.post("/carts", cartsItem).then((res) => {
         if (res.data.insertedId) {
           toast.success("Product added to cart successfully");

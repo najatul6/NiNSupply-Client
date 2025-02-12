@@ -14,7 +14,6 @@ import {
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
   const [userRole] = useRole();
-  console.log(userRole);
   // Logout function
   const handleLogout = () => {
     toast.promise(logOut(), {
