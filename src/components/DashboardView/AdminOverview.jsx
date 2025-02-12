@@ -1,6 +1,3 @@
-import useAllUser from "@/hooks/useAllUser";
-import {  Users, WalletCards } from "lucide-react";
-import Chart from "react-google-charts";
 import TotalRevenue from "./TotalRevenue";
 import PendingRevenue from "./PendingRevenue";
 import ProcessingRevenue from "./ProcessingRevenue";
@@ -8,36 +5,12 @@ import CompletedRevenue from "./CompletedRevenue";
 import TotalProducts from "./TotalProducts";
 import TotalOrders from "./TotalOrders";
 import NewOrders from "./NewOrders";
+import TotalCustomer from "./TotalCustomer";
+import TotalSales from "./TotalSales";
+import PieChart from "./PieChart";
+import ColumnChart from "./ColumnChart";
 
 const AdminOverview = () => {
-  
-  const data = [
-    ["Task", "Hours per Day"],
-    ["Work", 9],
-    ["Eat", 2],
-    ["Commute", 2],
-    ["Watch TV", 2],
-    ["Sleep", 7],
-  ];
-  const anotherData = [
-    ["Element", "Density", { role: "style" }],
-    ["Copper", 8.94, "#b87333"], // RGB value
-    ["Silver", 10.49, "silver"], // English color name
-    ["Gold", 19.3, "gold"],
-    ["Platinum", 21.45, "color: #e5e4e2"], // CSS-style declaration
-  ];
-
-  // TODO:
-  //   Total Revenue - from-purple-500 to-purple-300
-  // Total Revenue (Alternative) - from-indigo-500 to-indigo-300
-  // UpComing Revenue - from-blue-500 to-blue-300
-  // Owned Revenue - from-green-500 to-green-300
-  // Orders - from-yellow-500 to-yellow-300
-  // New Orders - from-orange-500 to-orange-300
-  // Paid - from-teal-500 to-teal-300
-  // Total Customers - from-red-500 to-red-300
-  // Products - from-pink-500 to-pink-300
-
   return (
     <div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
@@ -57,52 +30,20 @@ const AdminOverview = () => {
         <TotalOrders />
 
         {/* New Orders */}
-        <NewOrders/>
+        <NewOrders />
 
         {/* Total Sales */}
-        <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
-          <div className="flex flex-row items-center">
-            <div className="flex-shrink pr-4">
-              <div className="rounded-full p-5 bg-yellow-600">
-                <WalletCards />
-              </div>
-            </div>
-            <div className="flex-1 text-right md:text-center">
-              <h2 className="font-bold uppercase text-gray-600">Paid</h2>
-              <p className="font-bold text-3xl text-yellow-600">20</p>
-            </div>
-          </div>
-        </div>
+        <TotalSales />
 
-        {/* Total Users */}
-       
+        {/* Total Customers */}
+        <TotalCustomer />
 
         {/* Total Products */}
         <TotalProducts />
       </section>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <Chart
-            chartType="PieChart"
-            data={data}
-            options={{
-              backgroundColor: "#000000", // Black background for the chart
-            }}
-            width={"100%"}
-            height={"400px"}
-          />
-        </div>
-        <div>
-          <Chart
-            chartType="ColumnChart"
-            width="100%"
-            height="100%"
-            data={anotherData}
-            options={{
-              backgroundColor: "#000000", // Black background for the chart
-            }}
-          />
-        </div>
+        <PieChart />
+        <ColumnChart />
       </section>
     </div>
   );
