@@ -6,15 +6,24 @@ import useTotalRevenue from "@/hooks/useTotalRevenue";
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 const PieChart = () => {
-    const { totalRevenue,pendingRevenue,processingRevenue,completedRevenue } = useTotalRevenue();
-  // Example data for the pie chart
+  const { totalRevenue, pendingRevenue, processingRevenue, completedRevenue } = useTotalRevenue();
+
+  // Ensure values are numbers and default to 0 if undefined
+  const revenueData = [
+    totalRevenue || 0,
+    pendingRevenue || 0,
+    processingRevenue || 0,
+    completedRevenue || 0,
+  ];
+
+  // Updated data with dynamic values
   const data = {
     labels: ["Total Revenue", "Pending Revenue", "Processing Revenue", "Completed Revenue"],
     datasets: [
       {
-        data: [300, 50, 150, 500], // The data values for each slice of the pie
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"], // Colors for each slice
-        hoverBackgroundColor: ["#FF4C5B", "#28A8D7", "#FFD54F", "#34D2D4"], // Hover colors for each slice
+        data: revenueData, // Use fetched revenue data
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+        hoverBackgroundColor: ["#FF4C5B", "#28A8D7", "#FFD54F", "#34D2D4"],
       },
     ],
   };
@@ -24,14 +33,14 @@ const PieChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top", // Position the legend at the top
+        position: "top",
       },
     },
   };
 
   return (
     <div className="pie-chart-container max-w-md">
-      <h3>Total Revenue Distribution</h3>
+      <h3 className="text-lg font-semibold mb-2">Total Revenue Distribution</h3>
       <Pie data={data} options={options} />
     </div>
   );
