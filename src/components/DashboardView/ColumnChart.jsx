@@ -23,7 +23,7 @@ const ColumnChart = () => {
       {
         label: "Revenue (USD)",
         data: revenueData, // Use fetched revenue data dynamically
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#008000"],
+        backgroundColor: ["#FF6384", "#36A2EB", "#d4ff00", "#008000"],
         borderColor: ["#D8435D", "#1E75D8", "#D6A20A", "#008000"],
         borderWidth: 1,
       },

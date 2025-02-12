@@ -44,7 +44,7 @@ const PieChart = () => {
     datasets: [
       {
         data: revenueData, // Use fetched revenue data
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#008000"],
+        backgroundColor: ["#FF6384", "#36A2EB", "#d4ff00", "#008000"],
         hoverBackgroundColor: ["#FF4C5B", "#28A8D7", "#FFD54F", "#008000"],
       },
     ],
