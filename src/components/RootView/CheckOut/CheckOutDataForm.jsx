@@ -29,7 +29,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
               aria-invalid={errors.fullName ? "true" : "false"}
             />
             {errors.fullName?.type === "required" && (
-              <p role="alert">First name is required</p>
+              <p className="text-red-500 text-sm" role="alert">First name is required</p>
             )}
           </div>
 
