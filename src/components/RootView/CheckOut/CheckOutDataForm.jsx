@@ -2,6 +2,7 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,6 +13,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     watch,
@@ -29,21 +31,19 @@ const CheckOutDataForm = ({ totalPrice }) => {
       totalPrice: totalPrice,
       status: "Pending",
     };
-    axiosSecure.post("/orders", orderData)
-    .then((response) => {
+    axiosSecure.post("/orders", orderData).then((response) => {
       if (response.data.insertedId) {
         console.log("Order placed successfully:", response.data);
         const deleteCartRequests = carts?.map((cartItem) =>
           axiosSecure.delete(`/carts/${cartItem._id}`)
         );
-        Promise.all(deleteCartRequests)
-        .then(() => {
+        Promise.all(deleteCartRequests).then(() => {
           refetch();
           navigate("/dashboard/my-orders", { state: { from: location } });
           toast.success("Order placed successfully!");
         });
       }
-    })
+    });
   };
 
   return (
@@ -162,9 +162,14 @@ const CheckOutDataForm = ({ totalPrice }) => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
+            className={`w-full px-4 py-3 mt-4 font-semibold rounded-lg transition ${
+              loading
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            }`}
+            disabled={loading}
           >
-            Submit
+            {loading ? "Processing..." : "Submit"}
           </button>
         </form>
       </div>
