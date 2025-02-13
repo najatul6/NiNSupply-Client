@@ -22,28 +22,34 @@ const CheckOutDataForm = ({ totalPrice }) => {
     trigger,
   } = useForm();
 
-  const onSubmit = (data) => {
-    const orderData = {
-      ...data,
-      userEmail: user?.email,
-      cartItems: carts, // Include cart items in the order
-      orderDate: new Date().toISOString(),
-      totalPrice: totalPrice,
-      status: "Pending",
-    };
-    axiosSecure.post("/orders", orderData).then((response) => {
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const orderData = {
+        ...data,
+        userEmail: user?.email,
+        cartItems: carts,
+        orderDate: new Date().toISOString(),
+        totalPrice: totalPrice,
+        status: "Pending",
+      };
+
+      const response = await axiosSecure.post("/orders", orderData);
       if (response.data.insertedId) {
         console.log("Order placed successfully:", response.data);
-        const deleteCartRequests = carts?.map((cartItem) =>
-          axiosSecure.delete(`/carts/${cartItem._id}`)
+        await Promise.all(
+          carts.map((cartItem) => axiosSecure.delete(`/carts/${cartItem._id}`))
         );
-        Promise.all(deleteCartRequests).then(() => {
-          refetch();
-          navigate("/dashboard/my-orders", { state: { from: location } });
-          toast.success("Order placed successfully!");
-        });
+        refetch();
+        navigate("/dashboard/my-orders", { state: { from: location } });
+        toast.success("Order placed successfully!");
       }
-    });
+    } catch (error) {
+      console.error("Order placement failed:", error);
+      toast.error("Failed to place order. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
