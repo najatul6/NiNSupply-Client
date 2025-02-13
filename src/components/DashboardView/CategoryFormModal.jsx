@@ -17,7 +17,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
   useEffect(() => {
     if (category) {
       setFormData({
-        id: category.id || "",
+        id: category._id || "",
         packageName: category.packageName || "",
         category: category.category || "",
         thumbnail: category.thumbnail || "",
@@ -76,6 +76,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
           {category ? "Edit Category" : "Add Category"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
+          <label className="text-sm">Category Details</label>
           <input
             type="text"
             name="id"
@@ -83,8 +84,10 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
             onChange={handleChange}
             placeholder="ID"
             className="w-full p-2 border rounded bg-gray-800 text-white"
-            required
+            readOnly
           />
+
+          
           <input
             type="text"
             name="packageName"
