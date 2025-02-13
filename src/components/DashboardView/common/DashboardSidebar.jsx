@@ -10,6 +10,8 @@ import {
   Truck,
   PackageOpen,
   PackageCheck,
+  Newspaper,
+  PackageSearch,
 } from "lucide-react";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -59,6 +61,16 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       label: "Completed Orders",
       path: "/dashboard/complete-orders",
       icon: <PackageCheck />,
+    },
+    {
+      label: "Categories Management",
+      path: "/dashboard/categories-control",
+      icon: <Newspaper />,
+    },
+    {
+      label: "Products Management",
+      path: "/dashboard/products-control",
+      icon: <PackageSearch />,
     },
     {
       label: "Users Management",
