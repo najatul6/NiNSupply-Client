@@ -76,37 +76,44 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
           {category ? "Edit Category" : "Add Category"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <label className="text-sm">Category Details</label>
-          <input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            placeholder="ID"
-            className="w-full p-2 border rounded bg-gray-800 text-white"
-            readOnly
-          />
+          <div className="flex flex-col space-y-1">
+            <label className="text-sm">Category ID</label>
+            <input
+              type="text"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+              placeholder="ID"
+              className="w-full p-2 border rounded bg-gray-800 text-white"
+              readOnly
+            />
+          </div>
 
-          
-          <input
-            type="text"
-            name="packageName"
-            value={formData.packageName}
-            onChange={handleChange}
-            placeholder="Package Name"
-            className="w-full p-2 border rounded bg-gray-800 text-white"
-            required
-          />
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            placeholder="Category"
-            className="w-full p-2 border rounded bg-gray-800 text-white"
-            required
-          />
+          <div className="flex flex-col space-y-1">
+            <label className="text-sm">Package Name</label>
+            <input
+              type="text"
+              name="packageName"
+              value={formData.packageName}
+              onChange={handleChange}
+              placeholder="Package Name"
+              className="w-full p-2 border rounded bg-gray-800 text-white"
+              required
+            />
+          </div>
 
+          <div className="flex flex-col space-y-1">
+            <label className="text-sm">Category</label>
+            <input
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              placeholder="Category"
+              className="w-full p-2 border rounded bg-gray-800 text-white"
+              required
+            />
+          </div>
           {/* Thumbnail Upload */}
           <div className="flex flex-col space-y-2">
             <label className="text-sm">Thumbnail</label>
