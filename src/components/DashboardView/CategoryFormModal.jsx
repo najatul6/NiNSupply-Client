@@ -24,7 +24,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
       });
       setImagePreview(category.thumbnail || null);
     } else {
-      setFormData({ id: "", packageName: "", category: "", thumbnail: "" });
+      setFormData({  packageName: "", category: "", thumbnail: "" });
       setImagePreview(null);
     }
   }, [category]);
@@ -83,7 +83,6 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
               type="text"
               name="id"
               value={formData.id}
-              onChange={handleChange}
               placeholder="ID"
               className="w-full p-2 border rounded bg-gray-800 text-white"
               readOnly
