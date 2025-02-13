@@ -20,7 +20,8 @@ import PrivacyPolicy from "@/components/RootView/PrivacyPolicy/PrivacyPolicy";
 import CheckOut from "@/components/RootView/CheckOut/CheckOut";
 import MyOrders from "@/pages/DashboardView/UserView/MyOrders";
 import NewOrders from "@/pages/DashboardView/AdminView/NewOrders/NewOrders";
-import AllOrders from "@/pages/DashboardView/AdminView/AllOrders/AllOrders";
+import ProcessingOrders from "@/pages/DashboardView/AdminView/ProcessingOrders/ProcessingOrders";
+import CompletedOrders from "@/pages/DashboardView/AdminView/CompletedOrders/CompletedOrders";
 
 const Router = createBrowserRouter([
   {
@@ -87,10 +88,18 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "orders",
+        path: "process-orders",
         element: (
           <AdminRoute>
-            <AllOrders />
+            <ProcessingOrders />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "complete-orders",
+        element: (
+          <AdminRoute>
+            <CompletedOrders />
           </AdminRoute>
         ),
       },

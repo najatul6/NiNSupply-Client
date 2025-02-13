@@ -8,7 +8,8 @@ import {
   BookA,
   UserCog,
   Truck,
-  Container,
+  PackageOpen,
+  PackageCheck,
 } from "lucide-react";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -45,14 +46,19 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: <SquareChartGantt />,
     },
     {
-      label: "New Orders",
+      label: "Pending Orders",
       path: "/dashboard/new-orders",
+      icon: <PackageOpen />,
+    },
+    {
+      label: "Processing Orders",
+      path: "/dashboard/process-orders",
       icon: <Truck />,
     },
     {
-      label: "All Orders",
-      path: "/dashboard/orders",
-      icon: <Container />,
+      label: "Completed Orders",
+      path: "/dashboard/complete-orders",
+      icon: <PackageCheck />,
     },
     {
       label: "Users Management",

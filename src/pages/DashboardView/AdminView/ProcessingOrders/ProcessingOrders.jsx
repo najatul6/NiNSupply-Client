@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import useAllOrders from "@/hooks/useAllOrders";
 import {
   Table,
   TableBody,
@@ -10,11 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useAllOrders from "@/hooks/useAllOrders";
+import { useState } from "react";
 
-const AllOrders = () => {
+const ProcessingOrders = () => {
   const [allOrders] = useAllOrders();
   const totalOrder =
-    allOrders?.filter((order) => order?.status && order.status !== "Pending") ||
+    allOrders?.filter((order) => order?.status && order.status === "Processing") ||
     [];
   const [search, setSearch] = useState("");
   // Filter orders based on search input
@@ -113,4 +113,4 @@ const AllOrders = () => {
   );
 };
 
-export default AllOrders;
+export default ProcessingOrders;
