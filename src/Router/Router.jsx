@@ -22,6 +22,8 @@ import MyOrders from "@/pages/DashboardView/UserView/MyOrders";
 import NewOrders from "@/pages/DashboardView/AdminView/NewOrders/NewOrders";
 import ProcessingOrders from "@/pages/DashboardView/AdminView/ProcessingOrders/ProcessingOrders";
 import CompletedOrders from "@/pages/DashboardView/AdminView/CompletedOrders/CompletedOrders";
+import CategoriesControl from "@/pages/DashboardView/AdminView/CategoriesControl/CategoriesControl";
+import ProductsControl from "@/pages/DashboardView/AdminView/ProductsControl/ProductsControl";
 
 const Router = createBrowserRouter([
   {
@@ -91,7 +93,15 @@ const Router = createBrowserRouter([
         path: "categories-control",
         element: (
           <AdminRoute>
-            <UserControls />
+            <CategoriesControl />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "products-control",
+        element: (
+          <AdminRoute>
+            <ProductsControl />
           </AdminRoute>
         ),
       },
