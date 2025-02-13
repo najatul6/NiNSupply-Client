@@ -4,6 +4,7 @@ import useCarts from "@/hooks/useCart";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CheckOutDataForm = ({ totalPrice }) => {
   const { user } = useAuth();
@@ -20,7 +21,6 @@ const CheckOutDataForm = ({ totalPrice }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     const orderData = {
       ...data,
       userEmail: user?.email,
@@ -29,7 +29,21 @@ const CheckOutDataForm = ({ totalPrice }) => {
       totalPrice: totalPrice,
       status: "Pending",
     };
-    console.log(orderData);
+    axiosSecure.post("/orders", orderData)
+    .then((response) => {
+      if (response.data.insertedId) {
+        console.log("Order placed successfully:", response.data);
+        const deleteCartRequests = carts?.map((cartItem) =>
+          axiosSecure.delete(`/carts/${cartItem._id}`)
+        );
+        Promise.all(deleteCartRequests)
+        .then(() => {
+          refetch();
+          navigate("/dashboard/my-orders", { state: { from: location } });
+          toast.success("Order placed successfully!");
+        });
+      }
+    })
   };
 
   return (
@@ -45,9 +59,12 @@ const CheckOutDataForm = ({ totalPrice }) => {
               Full Name
             </label>
             <input
-              {...register("fullName", { 
-                required: "Full Name is required", 
-                minLength: { value: 3, message: "Must be at least 3 characters" } 
+              {...register("fullName", {
+                required: "Full Name is required",
+                minLength: {
+                  value: 3,
+                  message: "Must be at least 3 characters",
+                },
               })}
               width={watch("fullName")}
               onBlur={() => trigger("fullName")}
@@ -67,12 +84,12 @@ const CheckOutDataForm = ({ totalPrice }) => {
               WhatsApp Number (With Country Code)
             </label>
             <input
-              {...register("whatsappNumber", { 
-                required: "WhatsApp number is required", 
+              {...register("whatsappNumber", {
+                required: "WhatsApp number is required",
                 pattern: {
                   value: /^\+[1-9]{1}[0-9]{3,14}$/,
-                  message: "Invalid format. Example: +1234567890"
-                }
+                  message: "Invalid format. Example: +1234567890",
+                },
               })}
               width={watch("whatsappNumber")}
               onBlur={() => trigger("whatsappNumber")}
@@ -82,7 +99,9 @@ const CheckOutDataForm = ({ totalPrice }) => {
               placeholder="+1 234 567 890"
             />
             {errors.whatsappNumber && (
-              <p className="text-red-500 text-sm">{errors.whatsappNumber.message}</p>
+              <p className="text-red-500 text-sm">
+                {errors.whatsappNumber.message}
+              </p>
             )}
           </div>
 
@@ -92,11 +111,11 @@ const CheckOutDataForm = ({ totalPrice }) => {
               Company URL
             </label>
             <input
-              {...register("companyUrl", { 
+              {...register("companyUrl", {
                 pattern: {
                   value: /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/\S*)?$/,
-                  message: "Invalid URL format"
-                }
+                  message: "Invalid URL format",
+                },
               })}
               onBlur={() => trigger("companyUrl")}
               className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
@@ -105,14 +124,16 @@ const CheckOutDataForm = ({ totalPrice }) => {
               placeholder="https://yourcompany.com"
             />
             {errors.companyUrl && (
-              <p className="text-red-500 text-sm">{errors.companyUrl.message}</p>
+              <p className="text-red-500 text-sm">
+                {errors.companyUrl.message}
+              </p>
             )}
           </div>
 
           {/* Skype ID */}
           <div className="flex flex-col gap-1">
             <label htmlFor="skypeId" className="text-sm font-medium">
-              Skype ID 
+              Skype ID
             </label>
             <input
               {...register("skypeId")}
@@ -124,13 +145,15 @@ const CheckOutDataForm = ({ totalPrice }) => {
           {/* Review Type */}
           <div className="flex flex-col gap-1">
             <label htmlFor="reviewType" className="text-sm font-medium">
-              Review Type 
+              Review Type
             </label>
             <select
               {...register("reviewType")}
               className="w-full px-4 py-3 border-2 rounded-lg bg-transparent border-gray-600 text-white focus:bg-black"
             >
-              <option value="" disabled>Select Review Type</option>
+              <option value="" disabled>
+                Select Review Type
+              </option>
               <option value="positive">Positive</option>
               <option value="negative">Negative</option>
             </select>
