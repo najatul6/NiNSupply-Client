@@ -29,7 +29,7 @@ const ProcessingOrders = () => {
 
   return (
     <div className="p-6 w-full">
-      <h2 className="text-2xl font-semibold mb-6">Orders Management</h2>
+      <h2 className="text-2xl font-semibold mb-6">Orders Processing Management</h2>
 
       {/* Search Bar */}
       <div className="flex justify-end items-center mb-4">

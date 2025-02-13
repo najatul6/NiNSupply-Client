@@ -14,8 +14,9 @@ import {
 const CompletedOrders = () => {
   const [allOrders] = useAllOrders();
   const totalOrder =
-    allOrders?.filter((order) => order?.status && order.status === "Complete") ||
-    [];
+    allOrders?.filter(
+      (order) => order?.status && order.status === "Complete"
+    ) || [];
   const [search, setSearch] = useState("");
   // Filter orders based on search input
   const filteredOrders =
@@ -29,7 +30,7 @@ const CompletedOrders = () => {
 
   return (
     <div className="p-6 w-full">
-      <h2 className="text-2xl font-semibold mb-6">Orders Management</h2>
+      <h2 className="text-2xl font-semibold mb-6"> Completed Orders</h2>
 
       {/* Search Bar */}
       <div className="flex justify-end items-center mb-4">
