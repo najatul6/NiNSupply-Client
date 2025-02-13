@@ -1,4 +1,5 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { imageUpload } from "@/lib/imageUpload";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -11,8 +12,8 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
     category: "",
     thumbnail: "",
   });
+  const [imagePreview, setImagePreview] = useState(null);
 
-  // Populate form when editing a category
   useEffect(() => {
     if (category) {
       setFormData({
@@ -21,8 +22,10 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
         category: category.category || "",
         thumbnail: category.thumbnail || "",
       });
+      setImagePreview(category.thumbnail || null);
     } else {
       setFormData({ id: "", packageName: "", category: "", thumbnail: "" });
+      setImagePreview(null);
     }
   }, [category]);
 
@@ -30,26 +33,41 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Show preview
+    setImagePreview(URL.createObjectURL(file));
+
+    // Upload to ImgBB
+    const uploadResponse = await imageUpload(file);
+    if (uploadResponse && uploadResponse.success) {
+      setFormData({ ...formData, thumbnail: uploadResponse.data.url });
+      toast.success("Image uploaded successfully!");
+    } else {
+      toast.error("Image upload failed. Try again.");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (category) {
-        // Update existing category
         await axiosSecure.put(`/api/categories/${category._id}`, formData);
         toast.success("Category updated successfully!");
       } else {
-        // Add new category
         await axiosSecure.post("/api/categories", formData);
         toast.success("Category added successfully!");
       }
       refetch();
       onClose();
     } catch (error) {
-      toast.error(`Failed to save category. Please try again. ${error.message}`);
+      toast.error("Failed to save category. Please try again.");
     }
   };
 
-  if (!isOpen) return null; // Prevent rendering if modal is closed
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -85,15 +103,25 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
             className="w-full p-2 border rounded bg-gray-800 text-white"
             required
           />
-          <input
-            type="text"
-            name="thumbnail"
-            value={formData.thumbnail}
-            onChange={handleChange}
-            placeholder="Thumbnail URL"
-            className="w-full p-2 border rounded bg-gray-800 text-white"
-            required
-          />
+
+          {/* Thumbnail Upload */}
+          <div className="flex flex-col space-y-2">
+            <label className="text-sm">Thumbnail</label>
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Thumbnail Preview"
+                className="w-full h-28 object-cover rounded border"
+              />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full p-2 border rounded bg-gray-800 text-white"
+            />
+          </div>
+
           <div className="flex justify-between mt-4">
             <button
               type="button"
