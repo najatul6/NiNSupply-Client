@@ -63,7 +63,7 @@ const NewOrders = () => {
                   className="border-b hover:bg-gray-600 transition-all"
                 >
                   <TableCell className="py-3 px-4">{order.id}</TableCell>
-                  <TableCell className="py-3 px-4">{order.customer}</TableCell>
+                  <TableCell className="py-3 px-4">{order.fullName}</TableCell>
                   <TableCell className="py-3 px-4">
                     ${order.total ? order.total.toFixed(2) : "0.00"}
                   </TableCell>
