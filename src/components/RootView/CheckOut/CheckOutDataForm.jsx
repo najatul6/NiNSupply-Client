@@ -118,7 +118,6 @@ const CheckOutDataForm = ({ totalPrice }) => {
           <button
             type="submit"
             className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
-           
           >
             {/* {isSubmitting ? "Submitting..." : "Submit"} */}
             submit
