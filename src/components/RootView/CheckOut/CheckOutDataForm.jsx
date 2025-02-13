@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const CheckOutDataForm = ({ totalPrice }) => {
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
@@ -10,4 +12,8 @@ const CheckOutDataForm = ({ totalPrice }) => {
   );
 };
 
+
+CheckOutDataForm.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
+};
 export default CheckOutDataForm;
