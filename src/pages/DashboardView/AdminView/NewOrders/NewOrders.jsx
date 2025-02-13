@@ -10,10 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
+import Swal from "sweetalert2";
+import { Dialog, DialogContent, DialogHeader } from "@radix-ui/react-dialog";
 
 const NewOrders = () => {
-  const [allOrders] = useAllOrders();
+  const [allOrders,refetch] = useAllOrders();
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const newOrder =
     allOrders?.filter((order) => order?.status === "Pending") || [];
   const [search, setSearch] = useState("");
@@ -30,6 +33,46 @@ const NewOrders = () => {
         userEmailId.includes(search.toLowerCase())
       );
     }) || [];
+
+    const handleView = (order) => {
+      setSelectedOrder(order);
+      Swal.fire({
+        title: `Order Details - ${order._id}`,
+        html: `<div style='text-align:left'>
+          <p><strong>Customer:</strong> ${order.fullName}</p>
+          <p><strong>Email:</strong> ${order.userEmail}</p>
+          <p><strong>Total Price:</strong> $${order.totalPrice.toFixed(2)}</p>
+          <p><strong>Status:</strong> ${order.status}</p>
+          <p><strong>Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
+          <p><strong>Items:</strong></p>
+          <ul>${order.cartItems
+            .map((item) => `<li>${item.productName} - ${item.quantity}</li>`)
+            .join("")}</ul>
+        </div>`,
+        confirmButtonText: "Close",
+      });
+    };
+  
+    const handleStatusUpdate = async (order) => {
+      const { value: newStatus } = await Swal.fire({
+        title: "Update Order Status",
+        input: "select",
+        inputOptions: {
+          Pending: "Pending",
+          Processing: "Processing",
+          Completed: "Completed",
+        },
+        inputValue: order.status,
+        showCancelButton: true,
+      });
+      
+      if (newStatus && newStatus !== order.status) {
+        // Update status logic here (e.g., API call)
+        console.log(`Updating status of ${order._id} to ${newStatus}`);
+        refetch(); // Refresh orders after update
+        Swal.fire("Updated!", "Order status has been updated.", "success");
+      }
+    };
 
   return (
     <div className="p-6 w-full">
@@ -101,20 +144,15 @@ const NewOrders = () => {
                       ? new Date(order.orderDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
-                  <TableCell className="py-3 px-4 flex justify-center items-center gap-4">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-gray-300 rounded-lg px-4 py-2 text-sm hover:bg-gray-100"
-                    >
-                      View
+                  <TableCell className="flex gap-2">
+                    <Button variant="outline" size="sm" onClick={() => handleView(order)}>
+                      <Eye size={16} />
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-gray-300 rounded-lg py-2 text-sm hover:bg-red-600"
-                    >
-                     <Trash2 />
+                    <Button variant="outline" size="sm" onClick={() => handleStatusUpdate(order)}>
+                      <Edit size={16} />
+                    </Button>
+                    <Button variant="outline" size="sm" className="hover:bg-red-600">
+                      <Trash2 size={16} />
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -132,8 +170,40 @@ const NewOrders = () => {
           </TableBody>
         </Table>
       </div>
+      {selectedOrder && (
+        <Dialog open={!!selectedOrder} onOpenChange={() => setSelectedOrder(null)}>
+          <DialogContent className="bg-gray-900 text-white">
+            <DialogHeader>
+              <h2 className="text-lg font-semibold">Order Details</h2>
+            </DialogHeader>
+            <div className="mt-4">
+              <p><strong>Customer:</strong> {selectedOrder.fullName}</p>
+              <p><strong>Email:</strong> {selectedOrder.userEmail}</p>
+              <p><strong>Total Price:</strong> ${selectedOrder.totalPrice.toFixed(2)}</p>
+              <p><strong>Status:</strong> {selectedOrder.status}</p>
+              <p><strong>Order Date:</strong> {new Date(selectedOrder.orderDate).toLocaleDateString()}</p>
+              <h3 className="mt-4 font-semibold">Items:</h3>
+              <ul className="list-disc ml-4">
+                {selectedOrder.cartItems.map((item) => (
+                  <li key={item._id}>
+                    {item.productName} - {item.quantity}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Button
+              onClick={() => setSelectedOrder(null)}
+              className="mt-4 w-full bg-blue-500"
+            >
+              Close
+            </Button>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };
+
+
 
 export default NewOrders;
