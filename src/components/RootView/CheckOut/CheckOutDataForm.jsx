@@ -31,7 +31,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
               })}
               width={watch("fullName")}
               onBlur={() => trigger("fullName")}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.fullName ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="Your full name"
@@ -56,7 +56,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
               })}
               width={watch("whatsappNumber")}
               onBlur={() => trigger("whatsappNumber")}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.whatsappNumber ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="+1 234 567 890"
@@ -79,7 +79,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
                 }
               })}
               onBlur={() => trigger("companyUrl")}
-              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-white ${
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
                 errors.companyUrl ? "border-red-500" : "border-gray-600"
               }`}
               placeholder="https://yourcompany.com"
