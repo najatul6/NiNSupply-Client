@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 const CheckOutDataForm = ({ totalPrice }) => {
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm()
-  const onSubmit = (data) => console.log(data)
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
       <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl text-white">
@@ -15,27 +16,35 @@ const CheckOutDataForm = ({ totalPrice }) => {
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register("firstName", { required: true })}
-        aria-invalid={errors.firstName ? "true" : "false"}
-      />
-      {errors.firstName?.type === "required" && (
-        <p role="alert">First name is required</p>
-      )}
+          <div className="flex flex-col">
+          <label htmlFor="fullName" className="text-sm font-medium">
+              Full Name
+            </label>
+            <input
+              {...register("fullName", { required: true })}
+              value={watch("fullName", "")}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
+                errors.fullName ? "border-red-500" : "border-gray-600"
+              }`}
+              aria-invalid={errors.fullName ? "true" : "false"}
+            />
+            {errors.fullName?.type === "required" && (
+              <p role="alert">First name is required</p>
+            )}
+          </div>
 
-      <input
-        {...register("mail", { required: "Email Address is required" })}
-        aria-invalid={errors.mail ? "true" : "false"}
-      />
-      {errors.mail && <p role="alert">{errors.mail.message}</p>}
+          <input
+            {...register("mail", { required: "Email Address is required" })}
+            aria-invalid={errors.mail ? "true" : "false"}
+          />
+          {errors.mail && <p role="alert">{errors.mail.message}</p>}
 
-      <input type="submit" />
-    </form>
+          <input type="submit" />
+        </form>
       </div>
     </div>
   );
 };
-
 
 CheckOutDataForm.propTypes = {
   totalPrice: PropTypes.number.isRequired,
