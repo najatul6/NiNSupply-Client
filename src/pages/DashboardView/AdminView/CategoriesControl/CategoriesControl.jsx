@@ -62,10 +62,10 @@ const CategoriesControl = () => {
           <TableBody>
             {categories.map((category) => (
               <TableRow key={category._id}>
-                <TableCell className="border-r">{category.packageName}</TableCell>
-                <TableCell className="border-r">{category.category}</TableCell>
-                <TableCell className="border-r">{category.id}</TableCell>
-                <TableCell className="border-r h-28">
+                <TableCell className="border-r capitalize">{category.packageName}</TableCell>
+                <TableCell className="border-r capitalize">{category.category}</TableCell>
+                <TableCell className="border-r capitalize">{category.id}</TableCell>
+                <TableCell className="border-r capitalize h-28">
                   <img src={category.thumbnail} alt={category.packageName} className="w-full h-full object-cover rounded" />
                 </TableCell>
                 <TableCell className="flex gap-2 justify-center items-center h-28">
