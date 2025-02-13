@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
 const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
@@ -98,6 +99,13 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
       </div>
     )
   );
+};
+
+CategoryFormModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  category: PropTypes.object,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default CategoryFormModal;
