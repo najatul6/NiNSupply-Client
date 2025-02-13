@@ -1,7 +1,11 @@
 
-const CheckOutDataForm = () => {
+const CheckOutDataForm = ({totalPrice}) => {
   return (
-    <div>CheckOutDataForm</div>
+    <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
+      <div>
+        
+      </div>
+    </div>
   )
 }
 
