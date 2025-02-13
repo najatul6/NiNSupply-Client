@@ -38,7 +38,7 @@ const CategoriesControl = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axiosSecure.delete(`/api/categories/${id}`);
+          const response = await axiosSecure.delete(`/category/${id}`);
           if (response.status === 200) {
             Swal.fire("Deleted!", "Category has been deleted.", "success");
             refetch();
