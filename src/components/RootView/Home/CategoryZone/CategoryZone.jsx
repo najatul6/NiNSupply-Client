@@ -17,7 +17,7 @@ const CategoryZone = () => {
           : categories.map((item) => (
               <div
                 key={item?._id}
-                className="bg-background2 rounded-md text-center relative group overflow-hidden transition duration-300"
+                className="bg-background2 h-[200px] rounded-md text-center relative group overflow-hidden transition duration-300"
               >
                 <img
                   src={item?.thumbnail}
