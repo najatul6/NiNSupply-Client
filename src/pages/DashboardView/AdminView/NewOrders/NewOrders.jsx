@@ -22,8 +22,11 @@ const NewOrders = () => {
     newOrder?.filter((order) => {
       const customerName = order.fullName ? order.fullName.toLowerCase() : "";
       const orderId = order._id ? order._id.toString() : "";
+      const userEmailId = order.userEmail ? order.userEmail.toLowerCase() : "";
       return (
-        customerName.includes(search.toLowerCase()) || orderId.includes(search)
+        customerName.includes(search.toLowerCase()) ||
+        orderId.includes(search) ||
+        userEmailId.includes(search.toLowerCase())
       );
     }) || [];
 
@@ -47,11 +50,11 @@ const NewOrders = () => {
         <Table className="w-full border-collapse">
           <TableHeader className="border-b bg-gray-500 text-white">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="text-baseColor">Order ID</TableHead>
-              <TableHead className="text-baseColor">Customer</TableHead>
-              <TableHead className="text-baseColor">Total ($)</TableHead>
-              <TableHead className="text-baseColor">Status</TableHead>
-              <TableHead className="text-baseColor">Date</TableHead>
+              <TableHead className="text-baseColor border-r">Order ID</TableHead>
+              <TableHead className="text-baseColor border-r">Customer</TableHead>
+              <TableHead className="text-baseColor border-r">Total ($)</TableHead>
+              <TableHead className="text-baseColor border-r">Status</TableHead>
+              <TableHead className="text-baseColor border-r">Date</TableHead>
               <TableHead className="text-baseColor">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -62,12 +65,14 @@ const NewOrders = () => {
                   key={order._id}
                   className="border-b hover:bg-gray-600 transition-all"
                 >
-                  <TableCell className="py-3 px-4">#{order._id.slice(0,6)}...</TableCell>
-                  <TableCell className="py-3 px-4">{order?.fullName}</TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="py-3 px-4 border-r">
+                    #{order._id.slice(0, 6)}...
+                  </TableCell>
+                  <TableCell className="py-3 px-4 border-r">{order?.fullName}</TableCell>
+                  <TableCell className="py-3 px-4 border-r">
                     ${order.totalPrice ? order.totalPrice.toFixed(2) : "0.00"}
                   </TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="py-3 px-4 border-r">
                     <span
                       className={`px-3 py-1 rounded text-white text-sm font-medium ${
                         order.status === "Pending"
@@ -80,9 +85,9 @@ const NewOrders = () => {
                       {order.status}
                     </span>
                   </TableCell>
-                  <TableCell className="py-3 px-4">
-                    {order.date
-                      ? new Date(order.date).toLocaleDateString()
+                  <TableCell className="py-3 px-4 border-r">
+                    {order.orderDate
+                      ? new Date(order.orderDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
                   <TableCell className="py-3 px-4">
