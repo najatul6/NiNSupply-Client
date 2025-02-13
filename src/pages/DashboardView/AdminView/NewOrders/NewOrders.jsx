@@ -20,7 +20,7 @@ const NewOrders = () => {
   // Filter orders based on search input
   const filteredOrders =
     newOrder?.filter((order) => {
-      const customerName = order.customer ? order.customer.toLowerCase() : "";
+      const customerName = order.fullName ? order.fullName.toLowerCase() : "";
       const orderId = order._id ? order._id.toString() : "";
       return (
         customerName.includes(search.toLowerCase()) || orderId.includes(search)
@@ -59,13 +59,13 @@ const NewOrders = () => {
             {filteredOrders.length > 0 ? (
               filteredOrders.map((order) => (
                 <TableRow
-                  key={order.id}
+                  key={order._id}
                   className="border-b hover:bg-gray-600 transition-all"
                 >
-                  <TableCell className="py-3 px-4">{order.id}</TableCell>
-                  <TableCell className="py-3 px-4">{order.fullName}</TableCell>
+                  <TableCell className="py-3 px-4">#{order._id.slice(0,6)}...</TableCell>
+                  <TableCell className="py-3 px-4">{order?.fullName}</TableCell>
                   <TableCell className="py-3 px-4">
-                    ${order.total ? order.total.toFixed(2) : "0.00"}
+                    ${order.totalPrice ? order.totalPrice.toFixed(2) : "0.00"}
                   </TableCell>
                   <TableCell className="py-3 px-4">
                     <span
