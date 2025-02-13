@@ -1,15 +1,20 @@
 import { useState } from "react";
 import useCategory from "@/hooks/useCategory";
+import useProduct from "@/hooks/useProduct";
 import { AiOutlineEdit, AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import CategoryFormModal from "@/components/DashboardView/CategoryFormModal";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const CategoriesControl = () => {
   const [categories, isLoading, refetch] = useCategory();
+  const [products] = useProduct();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
+  const axiosSecure = useAxiosSecure();
 
   const handleAdd = () => {
     setEditCategory(null);
@@ -22,23 +27,33 @@ const CategoriesControl = () => {
   };
 
   const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this category?")) {
-      try {
-        const response = await fetch(`/api/categories/${id}`, { method: "DELETE" });
-        if (response.ok) {
-          toast.success("Category deleted successfully!");
-          refetch();
-        } else {
-          toast.error("Failed to delete category.");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axiosSecure.delete(`/api/categories/${id}`);
+          if (response.status === 200) {
+            Swal.fire("Deleted!", "Category has been deleted.", "success");
+            refetch();
+          } else {
+            Swal.fire("Error!", "Failed to delete category.", "error");
+          }
+        } catch (error) {
+         toast.error(error.message);
         }
-      } catch (error) {
-        toast.error("An error occurred.");
       }
-    }
+    });
   };
 
   return (
-    <div className="p-6  text-white rounded-lg shadow-lg ">
+    <div className="p-6 text-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">Categories</h2>
         <Button onClick={handleAdd} className="flex items-center gap-2">
@@ -54,30 +69,35 @@ const CategoriesControl = () => {
             <TableRow className="hover:bg-transparent">
               <TableHead className="text-baseColor border-r">Package Name</TableHead>
               <TableHead className="text-baseColor border-r">Category</TableHead>
-              <TableHead className="text-baseColor border-r">Total Product</TableHead>
+              <TableHead className="text-baseColor border-r">Total Products</TableHead>
               <TableHead className="text-baseColor border-r w-36">Thumbnail</TableHead>
               <TableHead className="text-baseColor w-5">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories.map((category) => (
-              <TableRow key={category._id}>
-                <TableCell className="border-r capitalize">{category.packageName}</TableCell>
-                <TableCell className="border-r capitalize">{category.category}</TableCell>
-                <TableCell className="border-r capitalize">{category.id}</TableCell>
-                <TableCell className="border-r capitalize h-28">
-                  <img src={category.thumbnail} alt={category.packageName} className="w-full h-full object-cover rounded" />
-                </TableCell>
-                <TableCell className="flex gap-2 justify-center items-center h-28">
-                  <Button variant="outline" size="icon" onClick={() => handleEdit(category)}>
-                    <AiOutlineEdit className="text-yellow-400" size={20} />
-                  </Button>
-                  <Button variant="outline" size="icon" onClick={() => handleDelete(category._id)}>
-                    <AiOutlineDelete className="text-red-500" size={20} />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {categories.map((category) => {
+              // Count the total products belonging to the current category
+              const totalProduct = products.filter(product => product.category === category.category)
+console.log(totalProduct);
+              return (
+                <TableRow key={category._id}>
+                  <TableCell className="border-r capitalize">{category.packageName}</TableCell>
+                  <TableCell className="border-r capitalize">{category.category}</TableCell>
+                  <TableCell className="border-r capitalize">{totalProduct?.length}</TableCell>
+                  <TableCell className="border-r capitalize h-28">
+                    <img src={category.thumbnail} alt={category.packageName} className="w-full h-full object-cover rounded" />
+                  </TableCell>
+                  <TableCell className="flex gap-2 justify-center items-center h-28">
+                    <Button variant="outline" size="icon" onClick={() => handleEdit(category)}>
+                      <AiOutlineEdit className="text-yellow-400" size={20} />
+                    </Button>
+                    <Button variant="outline" size="icon" onClick={() => handleDelete(category._id)}>
+                      <AiOutlineDelete className="text-red-500" size={20} />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       )}
