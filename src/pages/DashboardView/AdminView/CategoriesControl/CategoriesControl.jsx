@@ -39,7 +39,7 @@ const CategoriesControl = () => {
       if (result.isConfirmed) {
         try {
           const response = await axiosSecure.delete(`/category/${id}`);
-          if (response.status === 200) {
+          if (response.data.deletedCount > 0) {
             Swal.fire("Deleted!", "Category has been deleted.", "success");
             refetch();
           } else {
@@ -78,7 +78,6 @@ const CategoriesControl = () => {
             {categories.map((category) => {
               // Count the total products belonging to the current category
               const totalProduct = products.filter(product => product.category === category.category)
-console.log(totalProduct);
               return (
                 <TableRow key={category._id}>
                   <TableCell className="border-r capitalize">{category.packageName}</TableCell>

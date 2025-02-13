@@ -26,7 +26,7 @@ const LogIn = () => {
       signInUser(data?.email, data?.password)
         .then((user) => {
           navigate(form, { replace: true });
-          console.log("User Signed In:", user);
+          toast.success(`Welcome back! ${user?.displayName}`);
         })
         .catch((error) => {
           console.error("Error Signing In:", error);
@@ -55,7 +55,6 @@ const LogIn = () => {
           };
           axiosPublic.post("/createUser", userData).then((res) => {
             if (res.data) {
-              console.log(res.data);
               navigate(form, { replace: true });
             }
           });

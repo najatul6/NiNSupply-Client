@@ -25,7 +25,7 @@ const Register = () => {
     toast.promise(
       createUser(data.email, data.password)
         .then((result) => {
-          console.log("User Created:", result);
+          console.log("User Created:");
           updateUserProfile(data.name);
           const userData = {
             name: data.name,

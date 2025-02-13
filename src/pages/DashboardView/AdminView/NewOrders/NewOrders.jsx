@@ -80,6 +80,34 @@ const NewOrders = () => {
     }
   };
 
+
+  // Delete Order with SweetAlert2
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axiosSecure.delete(`/orders/${id}`);
+          if (response.data.deletedCount > 0) {
+            Swal.fire("Deleted!", "Order has been deleted.", "success");
+            refetch();
+          } else {
+            Swal.fire("Error!", "Failed to delete order.", "error");
+          }
+        } catch (error) {
+          Swal.fire("Error!", "Failed to delete order.", error);
+        }
+      }
+    });
+  };
+
   return (
     <div className="p-6 w-full">
       <h2 className="text-2xl font-semibold mb-6">Orders Pending Management</h2>
@@ -144,7 +172,7 @@ const NewOrders = () => {
                     <Button variant="outline" size="sm" className="hover:bg-baseColor" onClick={() => handleStatusUpdate(order)}>
                       <Edit size={16} />
                     </Button>
-                    <Button variant="outline" size="sm" className="hover:bg-red-600" onClick={() => handleStatusUpdate(order)}>
+                    <Button variant="outline" size="sm" className="hover:bg-red-600" onClick={() => handleDelete(order._id)}>
                       <Trash2 size={16} />
                     </Button>
                   </TableCell>

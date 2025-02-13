@@ -36,7 +36,6 @@ const CheckOutDataForm = ({ totalPrice }) => {
 
       const response = await axiosSecure.post("/orders", orderData);
       if (response.data.insertedId) {
-        console.log("Order placed successfully:", response.data);
         await Promise.all(
           carts.map((cartItem) => axiosSecure.delete(`/carts/${cartItem._id}`))
         );

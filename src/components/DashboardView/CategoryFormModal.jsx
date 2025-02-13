@@ -63,8 +63,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
       refetch();
       onClose();
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to save category. Please try again.");
+      toast.error(`Failed to save category. Please try again.|| ${error.message}`);
     }
   };
 
