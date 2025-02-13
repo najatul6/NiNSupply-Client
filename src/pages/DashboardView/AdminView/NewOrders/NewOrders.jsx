@@ -139,7 +139,7 @@ const NewOrders = () => {
           <TableBody>
             {filteredOrders.length > 0 ? (
               filteredOrders.map((order) => (
-                <TableRow key={order._id} className="border-b hover:bg-gray-600 transition-all">
+                <TableRow  key={order._id} className="border-b hover:bg-background2 transition-all">
                   <TableCell className="py-3 px-4 border-r">
                     {order.cartItems.map((item) => (
                       <ul key={item._id} className="list-disc pl-1">
