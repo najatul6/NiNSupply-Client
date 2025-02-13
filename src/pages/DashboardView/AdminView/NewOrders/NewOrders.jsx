@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Trash2 } from "lucide-react";
 
 const NewOrders = () => {
   const [allOrders] = useAllOrders();
@@ -50,12 +51,12 @@ const NewOrders = () => {
         <Table className="w-full border-collapse">
           <TableHeader className="border-b bg-gray-500 text-white">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="text-baseColor border-r">Order ID</TableHead>
-              <TableHead className="text-baseColor border-r">Customer</TableHead>
+              <TableHead className="text-baseColor border-r">Items</TableHead>
+              <TableHead className="text-baseColor border-r">Customer Name</TableHead>
               <TableHead className="text-baseColor border-r">Total ($)</TableHead>
               <TableHead className="text-baseColor border-r">Status</TableHead>
               <TableHead className="text-baseColor border-r">Date</TableHead>
-              <TableHead className="text-baseColor">Actions</TableHead>
+              <TableHead className="text-baseColor w-20">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -66,7 +67,17 @@ const NewOrders = () => {
                   className="border-b hover:bg-gray-600 transition-all"
                 >
                   <TableCell className="py-3 px-4 border-r">
-                    #{order._id.slice(0, 6)}...
+                  {order.cartItems.map((item) => {
+                      return (
+                        <ul key={item._id} className="list-disc pl-1">
+                          <li>
+                            {item?.productName}{" "}
+                            <span className="italic"> - </span>
+                            {item?.quantity}
+                          </li>
+                        </ul>
+                      );
+                    })}
                   </TableCell>
                   <TableCell className="py-3 px-4 border-r">{order?.fullName}</TableCell>
                   <TableCell className="py-3 px-4 border-r">
@@ -90,13 +101,20 @@ const NewOrders = () => {
                       ? new Date(order.orderDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="py-3 px-4 flex justify-center items-center gap-4">
                     <Button
                       variant="outline"
                       size="sm"
                       className="border-gray-300 rounded-lg px-4 py-2 text-sm hover:bg-gray-100"
                     >
                       View
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-gray-300 rounded-lg py-2 text-sm hover:bg-red-600"
+                    >
+                     <Trash2 />
                     </Button>
                   </TableCell>
                 </TableRow>
