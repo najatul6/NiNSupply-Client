@@ -93,8 +93,8 @@ const CheckOutDataForm = ({ totalPrice }) => {
               {...register("whatsappNumber", {
                 required: "WhatsApp number is required",
                 pattern: {
-                  value: /^\+[1-9]{1}[0-9]{3,14}$/,
-                  message: "Invalid format. Example: +1234567890",
+                  value: /^\+(?:[1-9]\d{0,2})?[1-9]\d{6,14}$/, 
+                  message: "Invalid phone number. Example: +123456789012"
                 },
               })}
               width={watch("whatsappNumber")}
