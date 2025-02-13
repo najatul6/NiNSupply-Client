@@ -88,6 +88,14 @@ const Router = createBrowserRouter([
         ),
       },
       {
+        path: "categories-control",
+        element: (
+          <AdminRoute>
+            <UserControls />
+          </AdminRoute>
+        ),
+      },
+      {
         path: "process-orders",
         element: (
           <AdminRoute>
