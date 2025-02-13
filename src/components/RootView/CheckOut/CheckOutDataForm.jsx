@@ -1,7 +1,16 @@
+import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useCarts from "@/hooks/useCart";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CheckOutDataForm = ({ totalPrice }) => {
+  const { user } = useAuth();
+  const [carts, refetch] = useCarts();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     watch,
@@ -10,7 +19,18 @@ const CheckOutDataForm = ({ totalPrice }) => {
     trigger,
   } = useForm();
 
-  const onSubmit = (data) => console.log("Form Submitted:", data);
+  const onSubmit = (data) => {
+    console.log(data);
+    const orderData = {
+      ...data,
+      userEmail: user?.email,
+      cartItems: carts, // Include cart items in the order
+      orderDate: new Date().toISOString(),
+      totalPrice: totalPrice,
+      status: "Pending",
+    };
+    console.log(orderData);
+  };
 
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
