@@ -16,8 +16,9 @@ const CheckOutDataForm = ({ totalPrice }) => {
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Full Name */}
           <div className="flex flex-col">
-          <label htmlFor="fullName" className="text-sm font-medium">
+            <label htmlFor="fullName" className="text-sm font-medium">
               Full Name
             </label>
             <input
@@ -29,15 +30,49 @@ const CheckOutDataForm = ({ totalPrice }) => {
               aria-invalid={errors.fullName ? "true" : "false"}
             />
             {errors.fullName?.type === "required" && (
-              <p className="text-red-500 text-sm" role="alert">First name is required</p>
+              <p className="text-red-500 text-sm" role="alert">
+                First name is required
+              </p>
             )}
           </div>
-
-          <input
-            {...register("mail", { required: "Email Address is required" })}
-            aria-invalid={errors.mail ? "true" : "false"}
-          />
-          {errors.mail && <p role="alert">{errors.mail.message}</p>}
+          {/* WhatsApp Number */}
+          <div className="flex flex-col">
+            <label htmlFor="whatsappNumber" className="text-sm font-medium">
+              WhatsApp Number (With Country Code)
+            </label>
+            <input
+              {...register("whatsappNumber", { required: true })}
+              value={watch("whatsappNumber", "")}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
+                errors.whatsappNumber ? "border-red-500" : "border-gray-600"
+              }`}
+              aria-invalid={errors.whatsappNumber ? "true" : "false"}
+            />
+            {errors.whatsappNumber?.type === "required" && (
+              <p className="text-red-500 text-sm" role="alert">
+                WhatsApp number is required
+              </p>
+            )}
+          </div>
+          {/* Company URL */}
+          <div className="flex flex-col">
+            <label htmlFor="companyUrl" className="text-sm font-medium">
+              Company URL
+            </label>
+            <input
+              {...register("companyUrl", { required: true })}
+              value={watch("companyUrl", "")}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
+                errors.companyUrl ? "border-red-500" : "border-gray-600"
+              }`}
+              aria-invalid={errors.companyUrl ? "true" : "false"}
+            />
+            {errors.companyUrl?.type === "required" && (
+              <p className="text-red-500 text-sm" role="alert">
+                Company URL is required
+              </p>
+            )}
+          </div>
 
           <input type="submit" />
         </form>
