@@ -54,10 +54,10 @@ const CategoryFormModal = ({ isOpen, onClose, category, refetch }) => {
     e.preventDefault();
     try {
       if (category) {
-        await axiosSecure.put(`/api/categories/${category._id}`, formData);
+        await axiosSecure.put(`/category/${category._id}`, formData);
         toast.success("Category updated successfully!");
       } else {
-        await axiosSecure.post("/api/categories", formData);
+        await axiosSecure.post("/category", formData);
         toast.success("Category added successfully!");
       }
       refetch();
