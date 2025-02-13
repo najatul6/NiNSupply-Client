@@ -14,13 +14,13 @@ const CheckOutDataForm = ({ totalPrice }) => {
 
   return (
     <div className="min-h-screen flex justify-center items-center md:p-6 pattern">
-      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-2xl text-white">
+      <div className="p-4 rounded-3xl shadow-2xl backdrop-blur-sm w-full max-w-2xl text-white">
         <h2 className="text-2xl font-semibold text-center mb-6">
           Billing and Contact Information
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Full Name (Required) */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="fullName" className="text-sm font-medium">
               Full Name
             </label>
@@ -42,7 +42,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
           </div>
 
           {/* WhatsApp Number (Required) */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="whatsappNumber" className="text-sm font-medium">
               WhatsApp Number (With Country Code)
             </label>
@@ -67,7 +67,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
           </div>
 
           {/* Company URL */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="companyUrl" className="text-sm font-medium">
               Company URL
             </label>
@@ -90,7 +90,7 @@ const CheckOutDataForm = ({ totalPrice }) => {
           </div>
 
           {/* Skype ID */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="skypeId" className="text-sm font-medium">
               Skype ID 
             </label>
@@ -102,17 +102,17 @@ const CheckOutDataForm = ({ totalPrice }) => {
           </div>
 
           {/* Review Type */}
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="reviewType" className="text-sm font-medium">
               Review Type 
             </label>
             <select
               {...register("reviewType")}
-              className="w-full px-4 py-3 border-2 rounded-lg bg-transparent border-gray-600 text-white"
+              className="w-full px-4 py-3 border-2 rounded-lg bg-transparent border-gray-600 text-white focus:bg-black"
             >
-              <option value="">Select Review Type</option>
-              <option value="single">Single</option>
-              <option value="multiple">Multiple</option>
+              <option value="" disabled>Select Review Type</option>
+              <option value="positive">Positive</option>
+              <option value="negative">Negative</option>
             </select>
           </div>
 
