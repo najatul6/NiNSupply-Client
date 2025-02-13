@@ -11,7 +11,6 @@ const Shop = () => {
   const navigate = useNavigate();
   const [products, isLoading] = useProduct();
 
-  // ✅ Ensure `activeCategory` syncs with the URL
   const activeCategory = category || "popular";
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const Shop = () => {
     }
   }, [category, navigate]);
 
-  // ✅ Update URL when tabs change
   const handleTabChange = (newCategory) => {
     navigate(`/shop/${newCategory}`, { replace: true });
   };
