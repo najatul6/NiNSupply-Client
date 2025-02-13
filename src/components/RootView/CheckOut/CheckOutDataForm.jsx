@@ -92,8 +92,37 @@ const CheckOutDataForm = ({ totalPrice }) => {
               </p>
             )}
           </div>
+          {/* Review Type */}
+          <div className="flex flex-col">
+            <label htmlFor="reviewType" className="text-sm font-medium">
+              Review Type
+            </label>
+            <select
+              {...register("reviewType", { required: true })}
+              value={watch("reviewType", "")}
+              className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent focus:ring-2 focus:ring-baseColor text-white ${
+                errors.reviewType ? "border-red-500" : "border-gray-600"
+              }`}
+              aria-invalid={errors.reviewType ? "true" : "false"}
+            >
+              <option value="single">Single</option>
+              <option value="multiple">Multiple</option>
+            </select>
+            {errors.reviewType?.type === "required" && (
+              <p className="text-red-500 text-sm" role="alert">
+                Review type is required
+              </p>
+            )}
+          </div>
 
-          <input type="submit" />
+          <button
+            type="submit"
+            className="w-full px-4 py-3 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg"
+           
+          >
+            {/* {isSubmitting ? "Submitting..." : "Submit"} */}
+            submit
+          </button>
         </form>
       </div>
     </div>
