@@ -23,7 +23,9 @@ const CategoriesControl = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
   const axiosSecure = useAxiosSecure();
-
+  const popularProduct = products.filter(
+    (product) => product.isPopular === true
+  );
   const handleAdd = () => {
     setEditCategory(null);
     setIsModalOpen(true);
@@ -148,6 +150,33 @@ const CategoriesControl = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {/* Default Row */}
+            <TableRow>
+              <TableCell className="border-r capitalize">
+                Popular Zone
+              </TableCell>
+              <TableCell className="border-r capitalize">Popular</TableCell>
+              <TableCell className="border-r capitalize">
+                {popularProduct?.length}
+              </TableCell>
+              <TableCell className="border-r capitalize h-28">
+                <img
+                  src="https://static.vecteezy.com/system/resources/thumbnails/024/119/881/small_2x/most-popular-banner-design-modern-label-icon-popularity-concept-modern-style-illustration-vector.jpg"
+                  alt="Popular Zone"
+                  className="w-full h-full object-cover rounded"
+                />
+              </TableCell>
+              <TableCell className="flex gap-2 justify-center items-center h-28">
+                <Button variant="outline" size="icon">
+                  <AiOutlineEdit className="text-yellow-400" size={20} />
+                </Button>
+                <Button variant="outline" size="icon">
+                  <AiOutlineDelete className="text-red-500" size={20} />
+                </Button>
+              </TableCell>
+            </TableRow>
+
+            {/* Dynamic Rows */}
             {categories.map((category) => {
               // Count the total products belonging to the current category
               const totalProduct = products.filter(
