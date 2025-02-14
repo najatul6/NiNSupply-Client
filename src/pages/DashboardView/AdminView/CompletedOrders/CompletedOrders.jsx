@@ -34,9 +34,59 @@ const CompletedOrders = () => {
       {/* Helmet for title and meta tags Start here */}
       <Helmet>
         <title>Completed Orders | NiN Supply</title>
+        <meta
+          name="description"
+          content="View and manage completed orders on NiN Supply with detailed order history and tracking."
+        />
+        <meta
+          name="keywords"
+          content="completed orders, order history, order tracking, NiN Supply, ecommerce, fulfilled orders"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media previews */}
+        <meta property="og:title" content="Completed Orders | NiN Supply" />
+        <meta
+          property="og:description"
+          content="View and manage completed orders on NiN Supply with detailed order history and tracking."
+        />
+        <meta
+          property="og:image"
+          content="https://nin-supply.vercel.app/completed-orders-og.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://nin-supply.vercel.app/completed-orders"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Completed Orders | NiN Supply" />
+        <meta
+          name="twitter:description"
+          content="View and manage completed orders on NiN Supply with detailed order history and tracking."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nin-supply.vercel.app/twitter-completed-orders.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://nin-supply.vercel.app/completed-orders"
+        />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://nin-supply.vercel.app/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
 
       {/* Helmet for title and meta tags End here */}
-
 
       <h2 className="text-2xl font-semibold mb-6"> Completed Orders</h2>
 

@@ -10,12 +10,14 @@ import {
 } from "@/components/ui/table";
 import useAllOrders from "@/hooks/useAllOrders";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ProcessingOrders = () => {
   const [allOrders] = useAllOrders();
   const totalOrder =
-    allOrders?.filter((order) => order?.status && order.status === "Processing") ||
-    [];
+    allOrders?.filter(
+      (order) => order?.status && order.status === "Processing"
+    ) || [];
   const [search, setSearch] = useState("");
   // Filter orders based on search input
   const filteredOrders =
@@ -29,7 +31,66 @@ const ProcessingOrders = () => {
 
   return (
     <div className="p-6 w-full">
-      <h2 className="text-2xl font-semibold mb-6">Orders Processing Management</h2>
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>Processing Orders | NiN Supply</title>
+        <meta
+          name="description"
+          content="Track and manage processing orders on NiN Supply to ensure timely fulfillment."
+        />
+        <meta
+          name="keywords"
+          content="processing orders, order management, order tracking, ecommerce, NiN Supply, pending fulfillment"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media previews */}
+        <meta property="og:title" content="Processing Orders | NiN Supply" />
+        <meta
+          property="og:description"
+          content="Track and manage processing orders on NiN Supply to ensure timely fulfillment."
+        />
+        <meta
+          property="og:image"
+          content="https://nin-supply.vercel.app/processing-orders-og.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://nin-supply.vercel.app/processing-orders"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Processing Orders | NiN Supply" />
+        <meta
+          name="twitter:description"
+          content="Track and manage processing orders on NiN Supply to ensure timely fulfillment."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nin-supply.vercel.app/twitter-processing-orders.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://nin-supply.vercel.app/processing-orders"
+        />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://nin-supply.vercel.app/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
+
+      {/* Helmet for title and meta tags End here */}
+
+      <h2 className="text-2xl font-semibold mb-6">
+        Orders Processing Management
+      </h2>
 
       {/* Search Bar */}
       <div className="flex justify-end items-center mb-4">

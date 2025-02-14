@@ -5,6 +5,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const UserControls = () => {
   const [allUsers, , refetch] = useAllUser();
@@ -66,6 +67,63 @@ const UserControls = () => {
 
   return (
     <div>
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>User Controls | NiN Supply</title>
+        <meta
+          name="description"
+          content="Manage user roles, permissions, and account settings on NiN Supply."
+        />
+        <meta
+          name="keywords"
+          content="user controls, user management, account settings, roles, permissions, NiN Supply"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media previews */}
+        <meta property="og:title" content="User Controls | NiN Supply" />
+        <meta
+          property="og:description"
+          content="Manage user roles, permissions, and account settings on NiN Supply."
+        />
+        <meta
+          property="og:image"
+          content="https://nin-supply.vercel.app/user-controls-og.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://nin-supply.vercel.app/user-controls"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="User Controls | NiN Supply" />
+        <meta
+          name="twitter:description"
+          content="Manage user roles, permissions, and account settings on NiN Supply."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nin-supply.vercel.app/twitter-user-controls.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://nin-supply.vercel.app/user-controls"
+        />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://nin-supply.vercel.app/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
+
+      {/* Helmet for title and meta tags End here */}
+
       <div className="flex flex-col md:flex-row lg:gap-6 justify-between items-center py-5">
         <h1 className="text-3xl text-white">
           Total Users: {filteredUsers?.length}
