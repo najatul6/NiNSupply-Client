@@ -23,11 +23,15 @@ const Shop = () => {
     navigate(`/shop/${newCategory}`, { replace: true });
   };
 
+  const normalizedCategory = activeCategory.toLowerCase();
+
   // ✅ Filter products based on the updated active category
   const filteredProducts =
     activeCategory === "popular"
       ? products.filter((product) => product.isPopular === true)
-      : products.filter((product) => product.category === activeCategory);
+      :  products.filter(
+        (product) => product.category.toLowerCase() === normalizedCategory
+      );
 
   return (
     <Tabs value={activeCategory} onValueChange={handleTabChange} className="flex flex-col lg:flex-row min-h-screen w-full">

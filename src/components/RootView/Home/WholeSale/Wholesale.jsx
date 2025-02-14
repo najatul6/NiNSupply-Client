@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCartContext } from "@/providers/CartProvider";
 import useCarts from "@/hooks/useCart";
+import useRole from "@/hooks/useRole";
 
 const Wholesale = () => {
   const [products, isLoading] = useProduct();
@@ -16,9 +17,14 @@ const Wholesale = () => {
   const navigate = useNavigate();
   const { setIsCartOpen } = useCartContext();
   const [, refetch] = useCarts();
+  const [userRole] = useRole();
   const addToCart = async (product) => {
     if (!user || !user?.email) {
       return navigate("/auth/login", { state: { from: location } });
+    }
+    if (userRole !== "user") {
+      toast.error("Only customers can add products to cart");
+      return navigate("/dashboard/overview", { state: { from: location } });
     }
   
     try {

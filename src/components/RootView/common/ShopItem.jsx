@@ -7,6 +7,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCarts from "@/hooks/useCart";
 import { toast } from "react-toastify";
 import { useCartContext } from "@/providers/CartProvider";
+import useRole from "@/hooks/useRole";
 
 const ShopItem = ({ item }) => {
   const { user } = useAuth();
@@ -15,22 +16,31 @@ const ShopItem = ({ item }) => {
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCarts();
   const { setIsCartOpen } = useCartContext();
+  const [userRole] = useRole();
 
   const addToCart = async (product) => {
     if (!user || !user?.email) {
       return navigate("/auth/login", { state: { from: location } });
     }
-  
+    if (userRole !== "user") {
+      toast.error("Only customers can add products to cart");
+      return navigate("/dashboard/overview", { state: { from: location } });
+    }
+
     try {
       // Check if the product already exists in the cart
-      const { data: existingCart } = await axiosSecure.get(`/carts?email=${user.email}`);
-  
-      const isAlreadyInCart = existingCart.some(item => item.itemId === product._id);
-  
+      const { data: existingCart } = await axiosSecure.get(
+        `/carts?email=${user.email}`
+      );
+
+      const isAlreadyInCart = existingCart.some(
+        (item) => item.itemId === product._id
+      );
+
       if (isAlreadyInCart) {
         return toast.error("Product already in cart");
       }
-  
+
       // If not in cart, add the product
       const cartsItem = {
         itemId: product._id,
@@ -40,7 +50,7 @@ const ShopItem = ({ item }) => {
         quantity: product.quantity,
         status: "pending",
       };
-  
+
       const { data } = await axiosSecure.post("/carts", cartsItem);
       if (data.insertedId) {
         toast.success("Product added to cart successfully");
@@ -52,7 +62,6 @@ const ShopItem = ({ item }) => {
       toast.error("Something went wrong! Please try again.");
     }
   };
-  
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
