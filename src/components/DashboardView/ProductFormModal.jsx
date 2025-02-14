@@ -1,5 +1,6 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { imageUpload } from "@/lib/imageUpload";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -247,6 +248,13 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
       </div>
     </div>
   );
+};
+
+ProductFormModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  product: PropTypes.object,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default ProductFormModal;
