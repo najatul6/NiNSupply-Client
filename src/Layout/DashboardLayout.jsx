@@ -9,6 +9,7 @@ const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="relative pt-[70px] h-screen scroll-smooth">
+      
      <DashboardHeader profileOpen={profileOpen} setProfileOpen={setProfileOpen}/>
 
       <div>
