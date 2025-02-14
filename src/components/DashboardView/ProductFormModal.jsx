@@ -97,7 +97,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
         await axiosSecure.put(`/products/${product._id}`, formData);
         toast.success("Product updated successfully!");
       } else {
-        await axiosSecure.post("/products", formData);
+        await axiosSecure.post("/createProduct", formData);
         toast.success("Product added successfully!");
       }
       refetch();
