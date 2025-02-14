@@ -4,6 +4,7 @@ import ShopSidebar from "@/components/RootView/Shop/ShopSidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import useProduct from "@/hooks/useProduct";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Shop = () => {
@@ -35,6 +36,57 @@ const Shop = () => {
 
   return (
     <Tabs value={activeCategory} onValueChange={handleTabChange} className="flex flex-col lg:flex-row min-h-screen w-full">
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>Shop | E-commerce</title>
+        <meta
+          name="description"
+          content="Discover the best deals on our e-commerce platform for buying and selling high-quality products."
+        />
+        <meta
+          name="keywords"
+          content="e-commerce, online shopping, buy and sell, best deals, online store"
+        />
+        <meta name="author" content="Your Brand Name" />
+
+        {/* Open Graph for social media */}
+        <meta property="og:title" content="Shop | E-commerce" />
+        <meta
+          property="og:description"
+          content="Shop the latest products and enjoy exclusive discounts on our e-commerce platform."
+        />
+        <meta
+          property="og:image"
+          content="https://www.najatulislam.me/og-image.jpg"
+        />
+        <meta property="og:url" content="https://www.najatulislam.me/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Shop | E-commerce" />
+        <meta
+          name="twitter:description"
+          content="Shop the latest products and enjoy exclusive discounts on our e-commerce platform."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.najatulislam.me/twitter-image.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.najatulislam.me/" />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://www.najatulislam.me/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
+      
+
+
       {/* Sidebar */}
       <ShopSidebar category={activeCategory} setCategory={handleTabChange} className="w-full lg:w-64" />
 
