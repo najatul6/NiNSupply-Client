@@ -22,7 +22,6 @@ const ProductsControl = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
 
-
   const handleAdd = () => {
     setEditProduct(null);
     setIsModalOpen(true);
@@ -72,14 +71,17 @@ const ProductsControl = () => {
         </Button>
       </div>
 
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search products..."
-        className="w-full p-2 mb-4 bg-transparent border rounded-lg text-white"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <div className="flex justify-between items-center gap-6 w-full mb-4">
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="w-full p-2  bg-transparent border rounded-lg text-white"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <h2 className="text-xl font-semibold flex-shrink-0">Total Products : {filteredProducts?.length || 0}</h2>
+      </div>
 
       {isLoading ? (
         <p className="text-center text-gray-400">Loading products...</p>
@@ -89,7 +91,7 @@ const ProductsControl = () => {
             <TableHeader className="bg-gray-500 text-white">
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-baseColor border-r">#</TableHead>
-                <TableHead className="text-baseColor border-r">
+                <TableHead className="text-baseColor border-r w-20">
                   Thumbnail
                 </TableHead>
                 <TableHead className="text-baseColor border-r">
@@ -117,7 +119,7 @@ const ProductsControl = () => {
                       <img
                         src={product.thumbnail}
                         alt={product.productName}
-                        className="w-12 h-12 rounded"
+                        className="w-20 h-14 rounded"
                       />
                     </TableCell>
                     <TableCell className="text-baseColor border-r">
@@ -136,7 +138,12 @@ const ProductsControl = () => {
                       {product.discount}%
                     </TableCell>
                     <TableCell className="text-baseColor ">
-                      <Button onClick={() => handleEdit(product)} variant="outline" size="sm" className="mr-2">
+                      <Button
+                        onClick={() => handleEdit(product)}
+                        variant="outline"
+                        size="sm"
+                        className="mr-2"
+                      >
                         Edit
                       </Button>
                       <Button
@@ -161,13 +168,13 @@ const ProductsControl = () => {
         </div>
       )}
       {isModalOpen && (
-              <ProductFormModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                product={editProduct}
-                refetch={refetch}
-              />
-            )}
+        <ProductFormModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          product={editProduct}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };
