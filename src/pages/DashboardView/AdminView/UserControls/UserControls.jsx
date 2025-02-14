@@ -167,7 +167,7 @@ const UserControls = () => {
               </tr>
             </thead>
             <tbody className="whitespace-nowrap">
-              {filteredUsers?.map((user) => (
+              {filteredUsers?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((user) => (
                 <tr key={user?._id} className="even:bg-blue-50">
                   <td className="p-4 text-sm text-black">
                     <img

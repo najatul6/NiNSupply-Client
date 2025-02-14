@@ -206,7 +206,7 @@ const NewOrders = () => {
           </TableHeader>
           <TableBody>
             {filteredOrders.length > 0 ? (
-              filteredOrders.map((order) => (
+              filteredOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => (
                 <TableRow
                   key={order._id}
                   className="border-b hover:bg-background2 transition-all"

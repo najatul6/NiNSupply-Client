@@ -13,14 +13,16 @@ import {
 import { Helmet } from "react-helmet-async";
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const CompletedOrders = () => {
-  const [allOrders] = useAllOrders();
+  const [allOrders, refetch] = useAllOrders();
+  const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
   const totalOrder =
     allOrders?.filter(
       (order) => order?.status && order.status === "Complete"
     ) || [];
-  const [search, setSearch] = useState("");
   // Filter orders based on search input
   const filteredOrders =
     totalOrder?.filter((order) => {
@@ -197,7 +199,7 @@ const CompletedOrders = () => {
           </TableHeader>
           <TableBody>
             {filteredOrders.length > 0 ? (
-              filteredOrders.map((order) => (
+              filteredOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => (
                 <TableRow
                   key={order._id}
                   className="border-b hover:bg-background2 transition-all"

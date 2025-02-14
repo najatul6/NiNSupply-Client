@@ -8,7 +8,7 @@ const Home = () => {
     <div className="space-y-6">
       {/* Helmet for title and meta tags Start here */}
       <Helmet>
-        <title>Home | Official Site</title>
+        <title>NiN Supply | Official Site</title>
         <meta
           name="description"
           content="Discover the best deals on our e-commerce platform for buying and selling high-quality products."

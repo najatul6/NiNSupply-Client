@@ -106,7 +106,7 @@ const UserOverview = () => {
             <h2 className="text-2xl font-semibold mb-4">Recent Orders</h2>
             {orders.length > 0 ? (
               <div className="space-y-4">
-                {orders.map((order) => (
+                {orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => (
                   <div
                     key={order._id}
                     className="flex justify-between items-center"
