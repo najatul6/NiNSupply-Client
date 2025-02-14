@@ -3,7 +3,7 @@ import { imageUpload } from "@/lib/imageUpload";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import LoadingEffect from "../common/LoadingEffect";
+import Loading from "../common/Loading";
 
 const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
   const axiosSecure = useAxiosSecure();
@@ -117,7 +117,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
   };
 
   if (!isOpen) return null;
-  if (loading) return <LoadingEffect />;
+  if (loading) return  <Loading/>;
 
   return (
     <div className="fixed inset-0 z-[500] bg-black bg-opacity-50 flex justify-center items-center overflow-hidden  min-h-screen">

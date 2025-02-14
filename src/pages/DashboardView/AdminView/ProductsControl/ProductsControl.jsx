@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductFormModal from "@/components/DashboardView/ProductFormModal";
 import { Edit, Trash2 } from "lucide-react";
+import Loading from "@/components/common/Loading";
 
 const ProductsControl = () => {
   const [products, isLoading, refetch] = useProduct();
@@ -81,17 +82,17 @@ const ProductsControl = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <h2 className="text-xl font-semibold flex-shrink-0">Total Products : {filteredProducts?.length || 0}</h2>
+        <h2 className="text-xl font-semibold flex-shrink-0">Total Products : {filteredProducts?.length.toString().padStart(2, '0') || 0}</h2>
       </div>
 
       {isLoading ? (
-        <p className="text-center text-gray-400">Loading products...</p>
+        <Loading/>
       ) : (
         <div className="overflow-x-auto">
           <Table className="border rounded-xl">
             <TableHeader className="bg-gray-500 text-white">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="text-baseColor border-r text-center">##</TableHead>
+                <TableHead className="text-baseColor border-r text-center">No.</TableHead>
                 <TableHead className="text-baseColor border-r w-20">
                   Thumbnail
                 </TableHead>
