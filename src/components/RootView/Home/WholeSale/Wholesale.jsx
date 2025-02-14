@@ -85,7 +85,9 @@ const Wholesale = () => {
   return (
     <div className="p-2 md:p-6">
       <h1 className="text-3xl font-bold text-center mb-8">
+      <span className=" border-b-2 rounded-md border-baseColor">
         Wholesale Price Supply Only
+      </span>
       </h1>
       <Container>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-8">

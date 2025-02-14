@@ -73,10 +73,44 @@ const LogIn = () => {
   };
   return (
     <div className="bg-white rounded-xl sm:px-6 px-4 py-8 max-w-md w-full h-max shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-lg:mx-auto">
+      {/* Helmet for title and meta tags Start here */}
       <Helmet>
-        <title>Log in</title>
-        <link rel="najatul islam" href="https://www.najatulislam.me/" />
+        <title>NiN Supply | Log in</title>
+        <meta
+          name="description"
+          content="Log in to NiN Supply to access exclusive deals and manage your account securely."
+        />
+        <meta
+          name="keywords"
+          content="NiN Supply, login, ecommerce, secure access, online store"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media */}
+        <meta property="og:title" content="NiN Supply | Log in" />
+        <meta
+          property="og:description"
+          content="Log in to NiN Supply to access exclusive deals and manage your account securely."
+        />
+        <meta
+          property="og:image"
+          content="https://www.najatulislam.me/og-image.jpg"
+        />
+        <meta property="og:url" content="https://www.najatulislam.me/" />
+        <meta property="og:type" content="website" />
+
+        {/* Favicon (if available) */}
+        <link
+          rel="icon"
+          href="https://www.najatulislam.me/favicon.ico"
+          type="image/x-icon"
+        />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.najatulislam.me/login" />
       </Helmet>
+      {/* Helmet for title and meta tags End here */}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-8">
           <h3 className="text-3xl font-extrabold text-gray-800 text-center">
