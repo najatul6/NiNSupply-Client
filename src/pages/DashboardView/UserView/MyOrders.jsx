@@ -1,4 +1,5 @@
 import useOrders from "@/hooks/useOrders";
+import { Helmet } from "react-helmet-async";
 
 const MyOrders = () => {
   const [orders, , isLoading] = useOrders();
@@ -18,6 +19,62 @@ const MyOrders = () => {
 
   return (
     <div className="p-6 min-h-screen">
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>My Orders | NiN Supply</title>
+        <meta
+          name="description"
+          content="View all your orders on NiN Supply, including order details, status, and payment information."
+        />
+        <meta
+          name="keywords"
+          content="orders, order history, order status, payment status, NiN Supply"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media previews */}
+        <meta property="og:title" content="My Orders | NiN Supply" />
+        <meta
+          property="og:description"
+          content="View all your orders on NiN Supply, including order details, status, and payment information."
+        />
+        <meta
+          property="og:image"
+          content="https://nin-supply.vercel.app/orders-og.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://nin-supply.vercel.app/dashboard/orders"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="My Orders | NiN Supply" />
+        <meta
+          name="twitter:description"
+          content="View all your orders on NiN Supply, including order details, status, and payment information."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nin-supply.vercel.app/twitter-orders.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://nin-supply.vercel.app/dashboard/orders"
+        />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://nin-supply.vercel.app/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
+
+      {/* Helmet for title and meta tags End here */}
       <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
         <p>Loading orders...</p>
@@ -68,7 +125,13 @@ const MyOrders = () => {
                   <td className="py-3 px-4 text-wrap border border-white">
                     {formatDate(order?.orderDate)}
                   </td>
-                  <td className={`py-3 px-4 text-center ${order.status === "Pending" ? "text-red-500" : "text-green-500"}`}>
+                  <td
+                    className={`py-3 px-4 text-center ${
+                      order.status === "Pending"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }`}
+                  >
                     {order.status === "Pending" ? "Unpaid" : "Paid"}
                   </td>
                 </tr>

@@ -13,11 +13,13 @@ import {
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const NewOrders = () => {
   const [allOrders, refetch] = useAllOrders();
   const axiosSecure = useAxiosSecure();
-  const newOrder = allOrders?.filter((order) => order?.status === "Pending") || [];
+  const newOrder =
+    allOrders?.filter((order) => order?.status === "Pending") || [];
   const [search, setSearch] = useState("");
 
   // Filter orders based on search input
@@ -80,7 +82,6 @@ const NewOrders = () => {
     }
   };
 
-
   // Delete Order with SweetAlert2
   const handleDelete = async (id) => {
     Swal.fire({
@@ -110,6 +111,69 @@ const NewOrders = () => {
 
   return (
     <div className="p-6 w-full">
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>Orders Pending Management | NiN Supply</title>
+        <meta
+          name="description"
+          content="Efficiently manage and process pending orders on NiN Supply to ensure smooth transactions."
+        />
+        <meta
+          name="keywords"
+          content="orders, pending orders, order management, NiN Supply, ecommerce, order tracking"
+        />
+        <meta name="author" content="NiN Supply" />
+
+        {/* Open Graph for social media previews */}
+        <meta
+          property="og:title"
+          content="Orders Pending Management | NiN Supply"
+        />
+        <meta
+          property="og:description"
+          content="Efficiently manage and process pending orders on NiN Supply to ensure smooth transactions."
+        />
+        <meta
+          property="og:image"
+          content="https://nin-supply.vercel.app/orders-og.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://nin-supply.vercel.app/orders-pending"
+        />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for better previews on Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Orders Pending Management | NiN Supply"
+        />
+        <meta
+          name="twitter:description"
+          content="Efficiently manage and process pending orders on NiN Supply to ensure smooth transactions."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nin-supply.vercel.app/twitter-orders.jpg"
+        />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://nin-supply.vercel.app/orders-pending"
+        />
+
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="https://nin-supply.vercel.app/favicon.ico"
+          type="image/x-icon"
+        />
+      </Helmet>
+
+      {/* Helmet for title and meta tags End here */}
+
       <h2 className="text-2xl font-semibold mb-6">Orders Pending Management</h2>
 
       {/* Search Bar */}
@@ -129,8 +193,12 @@ const NewOrders = () => {
           <TableHeader className="border-b bg-gray-500 text-white">
             <TableRow className="hover:bg-transparent">
               <TableHead className="text-baseColor border-r">Items</TableHead>
-              <TableHead className="text-baseColor border-r">Customer Name</TableHead>
-              <TableHead className="text-baseColor border-r">Total ($)</TableHead>
+              <TableHead className="text-baseColor border-r">
+                Customer Name
+              </TableHead>
+              <TableHead className="text-baseColor border-r">
+                Total ($)
+              </TableHead>
               <TableHead className="text-baseColor border-r">Status</TableHead>
               <TableHead className="text-baseColor border-r">Date</TableHead>
               <TableHead className="text-baseColor w-20">Actions</TableHead>
@@ -139,24 +207,36 @@ const NewOrders = () => {
           <TableBody>
             {filteredOrders.length > 0 ? (
               filteredOrders.map((order) => (
-                <TableRow  key={order._id} className="border-b hover:bg-background2 transition-all">
+                <TableRow
+                  key={order._id}
+                  className="border-b hover:bg-background2 transition-all"
+                >
                   <TableCell className="py-3 px-4 border-r">
                     {order.cartItems.map((item) => (
                       <ul key={item._id} className="list-disc pl-1">
-                        <li>{item?.productName} - {item?.quantity}</li>
+                        <li>
+                          {item?.productName} - {item?.quantity}
+                        </li>
                       </ul>
                     ))}
                   </TableCell>
-                  <TableCell className="py-3 px-4 border-r">{order?.fullName}</TableCell>
+                  <TableCell className="py-3 px-4 border-r">
+                    {order?.fullName}
+                  </TableCell>
                   <TableCell className="py-3 px-4 border-r">
                     ${order.totalPrice ? order.totalPrice.toFixed(2) : "0.00"}
                   </TableCell>
                   <TableCell className="py-3 px-4 border-r">
-                    <span className={`px-3 py-1 rounded text-white text-sm font-medium 
-                      ${order.status === "Pending" ? "bg-yellow-500"
-                        : order.status === "Processing" ? "bg-blue-500"
-                        : "bg-green-500"
-                      }`}>
+                    <span
+                      className={`px-3 py-1 rounded text-white text-sm font-medium 
+                      ${
+                        order.status === "Pending"
+                          ? "bg-yellow-500"
+                          : order.status === "Processing"
+                          ? "bg-blue-500"
+                          : "bg-green-500"
+                      }`}
+                    >
                       {order.status}
                     </span>
                   </TableCell>
@@ -166,13 +246,28 @@ const NewOrders = () => {
                       : "N/A"}
                   </TableCell>
                   <TableCell className="flex flex-grow gap-2">
-                    <Button variant="outline" size="sm" className="hover:bg-green-600" onClick={() => handleView(order)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hover:bg-green-600"
+                      onClick={() => handleView(order)}
+                    >
                       <Eye size={16} />
                     </Button>
-                    <Button variant="outline" size="sm" className="hover:bg-baseColor" onClick={() => handleStatusUpdate(order)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hover:bg-baseColor"
+                      onClick={() => handleStatusUpdate(order)}
+                    >
                       <Edit size={16} />
                     </Button>
-                    <Button variant="outline" size="sm" className="hover:bg-red-600" onClick={() => handleDelete(order._id)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hover:bg-red-600"
+                      onClick={() => handleDelete(order._id)}
+                    >
                       <Trash2 size={16} />
                     </Button>
                   </TableCell>
@@ -180,7 +275,10 @@ const NewOrders = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan="6" className="text-center text-gray-500 py-4">
+                <TableCell
+                  colSpan="6"
+                  className="text-center text-gray-500 py-4"
+                >
                   No orders found
                 </TableCell>
               </TableRow>

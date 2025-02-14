@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Helmet } from "react-helmet-async";
 
 const CompletedOrders = () => {
   const [allOrders] = useAllOrders();
@@ -30,6 +31,13 @@ const CompletedOrders = () => {
 
   return (
     <div className="p-6 w-full">
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+        <title>Completed Orders | NiN Supply</title>
+
+      {/* Helmet for title and meta tags End here */}
+
+
       <h2 className="text-2xl font-semibold mb-6"> Completed Orders</h2>
 
       {/* Search Bar */}
