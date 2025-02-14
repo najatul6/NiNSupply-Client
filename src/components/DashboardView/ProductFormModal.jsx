@@ -111,8 +111,8 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-gray-900 p-6 rounded-lg text-white w-[900px] mx-auto">
+    <div className="fixed inset-0 z-[500] bg-black bg-opacity-50 flex justify-center items-center overflow-hidden border border-red-600">
+      <div className="bg-gray-900 p-6 rounded-lg text-white w-[900px] mx-auto overflow-y-auto">
         <h2 className="text-lg font-semibold mb-4">
           {product ? "Edit Product" : "Add Product"}
         </h2>
