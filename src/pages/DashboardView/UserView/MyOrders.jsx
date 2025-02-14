@@ -18,7 +18,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 w-full">
       {/* Helmet for title and meta tags Start here */}
       <Helmet>
         <title>My Orders | NiN Supply</title>

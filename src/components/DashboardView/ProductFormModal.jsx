@@ -3,9 +3,11 @@ import { imageUpload } from "@/lib/imageUpload";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import LoadingEffect from "../common/LoadingEffect";
 
 const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
     productName: "",
@@ -95,6 +97,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (product) {
         await axiosSecure.put(`/products/${product._id}`, formData);
@@ -104,6 +107,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
         toast.success("Product added successfully!");
       }
       refetch();
+      setLoading(false);
       onClose();
     } catch (error) {
       toast.error(
@@ -113,10 +117,11 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
   };
 
   if (!isOpen) return null;
+  if (loading) return <LoadingEffect />;
 
   return (
     <div className="fixed inset-0 z-[500] bg-black bg-opacity-50 flex justify-center items-center overflow-hidden  min-h-screen">
-      <div className="bg-gray-900 p-6 rounded-lg text-white w-9/12 mx-auto max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-900 p-6 rounded-lg text-white w-9/12 mx-auto max-h-[90vh] overflow-y-auto no-scrollbar">
         <h2 className="text-lg font-semibold mb-4">
           {product ? "Edit Product" : "Add Product"}
         </h2>
@@ -229,7 +234,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
               className="w-full p-2 border rounded bg-gray-800 text-white"
             />
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
@@ -247,7 +252,7 @@ const ProductFormModal = ({ isOpen, onClose, product, refetch }) => {
               <img
                 src={imagePreview}
                 alt="Thumbnail"
-                className="w-full h-28 object-cover rounded border"
+                className="w-full  object-cover rounded border"
               />
             )}
             <input

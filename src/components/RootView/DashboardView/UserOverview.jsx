@@ -24,7 +24,7 @@ const UserOverview = () => {
   };
 
   return (
-    <div className="min-h-screen text-white p-6">
+    <div className=" text-white p-6">
       <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
 
       {isLoading ? (
