@@ -91,7 +91,7 @@ const ProductsControl = () => {
           <Table className="border rounded-xl">
             <TableHeader className="bg-gray-500 text-white">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="text-baseColor border-r">#</TableHead>
+                <TableHead className="text-baseColor border-r text-center">##</TableHead>
                 <TableHead className="text-baseColor border-r w-20">
                   Thumbnail
                 </TableHead>
@@ -114,7 +114,7 @@ const ProductsControl = () => {
                 filteredProducts.map((product, index) => (
                   <TableRow key={product._id}>
                     <TableCell className="text-baseColor border-r text-center">
-                      {index + 1}
+                    {(index + 1).toString().padStart(2, '0')}
                     </TableCell>
                     <TableCell className="border-r">
                       <img
