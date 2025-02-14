@@ -1,8 +1,39 @@
 import Container from "@/components/common/Container";
+import { Helmet } from "react-helmet-async";
 
 const PrivacyPolicy = () => {
   return (
     <Container>
+      {/* Helmet for title and meta tags Start here */}
+      <Helmet>
+  <title>Privacy Policy | NiN Supply</title>
+  <meta name="description" content="Read the privacy policy of NiN Supply to understand how we collect, use, and protect your data." />
+  <meta name="keywords" content="privacy policy, data protection, user privacy, NiN Supply, security" />
+  <meta name="author" content="NiN Supply" />
+
+  {/* Open Graph for better social media previews */}
+  <meta property="og:title" content="Privacy Policy | NiN Supply" />
+  <meta property="og:description" content="Understand how NiN Supply handles and protects your personal data." />
+  <meta property="og:image" content="https://www.najatulislam.me/privacy-policy-og.jpg" />
+  <meta property="og:url" content="https://www.najatulislam.me/privacy-policy" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter Card for better previews on Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy | NiN Supply" />
+  <meta name="twitter:description" content="Understand how NiN Supply handles and protects your personal data." />
+  <meta name="twitter:image" content="https://www.najatulislam.me/twitter-privacy-policy.jpg" />
+
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://www.najatulislam.me/privacy-policy" />
+
+  {/* Favicon */}
+  <link rel="icon" href="https://www.najatulislam.me/favicon.ico" type="image/x-icon" />
+</Helmet>
+
+
+      {/* Helmet for title and meta tags End here */}
+
       <div className="bg-gray-900 shadow-lg rounded-lg px-2 md:px-4 py-4 text-justify">
         {/* <!-- Header --> */}
         <h1 className="text-3xl font-bold mb-4 text-white">Privacy Policy</h1>
