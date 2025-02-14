@@ -76,7 +76,7 @@ const ProductsControl = () => {
       <input
         type="text"
         placeholder="Search products..."
-        className="w-full p-2 mb-4 border rounded-lg text-black"
+        className="w-full p-2 mb-4 bg-transparent border rounded-lg text-white"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
