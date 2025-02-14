@@ -84,7 +84,7 @@ const Shop = () => {
           type="image/x-icon"
         />
       </Helmet>
-      
+      {/* Helmet for title and meta tags End here */}
 
 
       {/* Sidebar */}
