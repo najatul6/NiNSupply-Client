@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProductFormModal from "@/components/DashboardView/ProductFormModal";
+import { Edit, Trash2 } from "lucide-react";
 
 const ProductsControl = () => {
   const [products, isLoading, refetch] = useProduct();
@@ -105,53 +106,54 @@ const ProductsControl = () => {
                 <TableHead className="text-baseColor border-r">
                   Discount
                 </TableHead>
-                <TableHead className="text-baseColor">Actions</TableHead>
+                <TableHead className="text-baseColor w-20">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, index) => (
                   <TableRow key={product._id}>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className="text-baseColor border-r text-center">
                       {index + 1}
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className="border-r">
                       <img
                         src={product.thumbnail}
                         alt={product.productName}
                         className="w-20 h-14 rounded"
                       />
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className="border-r">
                       {product.productName}
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className="border-r">
                       {product.category}
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className=" border-r">
                       {product.stock}
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className=" border-r">
                       ${product.price}
                     </TableCell>
-                    <TableCell className="text-baseColor border-r">
+                    <TableCell className="border-r">
                       {product.discount}%
                     </TableCell>
-                    <TableCell className="text-baseColor ">
+                    <TableCell className="flex gap-2 justify-center items-center min-h-14">
                       <Button
                         onClick={() => handleEdit(product)}
                         variant="outline"
                         size="sm"
-                        className="mr-2"
+                        className="hover:bg-baseColor"
                       >
-                        Edit
+                        <Edit size={16} />
                       </Button>
                       <Button
-                        variant="destructive"
+                        variant="outline"
                         size="sm"
                         onClick={() => handleDelete(product._id)}
+                        className="hover:bg-red-600"
                       >
-                        Delete
+                       <Trash2 size={16} />
                       </Button>
                     </TableCell>
                   </TableRow>

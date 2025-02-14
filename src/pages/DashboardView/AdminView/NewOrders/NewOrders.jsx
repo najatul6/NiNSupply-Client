@@ -238,7 +238,7 @@ const NewOrders = () => {
                       ? new Date(order.orderDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
-                  <TableCell className="flex flex-grow gap-2">
+                  <TableCell className="flex gap-2 justify-center items-center min-h-14">
                     <Button
                       variant="outline"
                       size="sm"
