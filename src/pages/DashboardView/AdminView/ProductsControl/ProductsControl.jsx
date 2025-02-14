@@ -124,10 +124,10 @@ const ProductsControl = () => {
                         className="w-20 h-14 rounded"
                       />
                     </TableCell>
-                    <TableCell className="border-r">
+                    <TableCell className="border-r capitalize">
                       {product.productName}
                     </TableCell>
-                    <TableCell className="border-r">
+                    <TableCell className="border-r capitalize">
                       {product.category}
                     </TableCell>
                     <TableCell className=" border-r">

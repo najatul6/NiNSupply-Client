@@ -1,3 +1,4 @@
+import Loading from "@/components/common/Loading";
 import useOrders from "@/hooks/useOrders";
 import { Helmet } from "react-helmet-async";
 
@@ -77,7 +78,7 @@ const MyOrders = () => {
       {/* Helmet for title and meta tags End here */}
       <h2 className="text-2xl font-semibold mb-6">My Orders</h2>
       {isLoading ? (
-        <p>Loading orders...</p>
+         <Loading/>
       ) : orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (

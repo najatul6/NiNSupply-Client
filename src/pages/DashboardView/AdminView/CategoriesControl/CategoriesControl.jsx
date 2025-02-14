@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import Loading from "@/components/common/Loading";
 
 const CategoriesControl = () => {
   const [categories, isLoading, refetch] = useCategory();
@@ -129,7 +130,7 @@ const CategoriesControl = () => {
       </div>
 
       {isLoading ? (
-        <p className="text-white">Loading categories...</p>
+         <Loading/>
       ) : (
         <Table className="border rounded-xl">
           <TableHeader className="bg-gray-500 text-white">

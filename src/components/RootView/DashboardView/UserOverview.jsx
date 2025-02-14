@@ -1,3 +1,4 @@
+import Loading from "@/components/common/Loading";
 import useAuth from "@/hooks/useAuth";
 import useCarts from "@/hooks/useCart";
 import useOrders from "@/hooks/useOrders";
@@ -28,11 +29,7 @@ const UserOverview = () => {
       <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
 
       {isLoading ? (
-        <div className="flex flex-col justify-between items-center space-y-4">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full h-full" key={index}></div>
-          ))}
-        </div>
+         <Loading/>
       ) : (
         <div className="space-y-6">
           {/* User Info Section */}
