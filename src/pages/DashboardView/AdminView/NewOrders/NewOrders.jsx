@@ -228,14 +228,7 @@ const NewOrders = () => {
                   </TableCell>
                   <TableCell className="py-3 px-4 border-r">
                     <span
-                      className={`px-3 py-1 rounded text-white text-sm font-medium 
-                      ${
-                        order.status === "Pending"
-                          ? "bg-yellow-500"
-                          : order.status === "Processing"
-                          ? "bg-blue-500"
-                          : "bg-green-500"
-                      }`}
+                      className={`px-3 py-1 rounded text-white text-sm font-medium bg-yellow-500 `}
                     >
                       {order.status}
                     </span>
