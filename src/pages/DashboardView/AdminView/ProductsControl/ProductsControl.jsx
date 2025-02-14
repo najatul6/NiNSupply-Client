@@ -12,15 +12,26 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useProduct from "@/hooks/useProduct";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import ProductFormModal from "@/components/DashboardView/ProductFormModal";
 
 const ProductsControl = () => {
   const [products, isLoading, refetch] = useProduct();
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState(null);
 
+
+  const handleAdd = () => {
+    setEditProduct(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEdit = (category) => {
+    setEditProduct(category);
+    setIsModalOpen(true);
+  };
   // Handle Delete Product with SweetAlert
   const handleDelete = async (productId) => {
     Swal.fire({
@@ -125,7 +136,7 @@ const ProductsControl = () => {
                       {product.discount}%
                     </TableCell>
                     <TableCell className="text-baseColor ">
-                      <Button variant="outline" size="sm" className="mr-2">
+                      <Button onClick={() => handleEdit(product)} variant="outline" size="sm" className="mr-2">
                         Edit
                       </Button>
                       <Button
@@ -149,6 +160,14 @@ const ProductsControl = () => {
           </Table>
         </div>
       )}
+      {isModalOpen && (
+              <ProductFormModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                product={editProduct}
+                refetch={refetch}
+              />
+            )}
     </div>
   );
 };
