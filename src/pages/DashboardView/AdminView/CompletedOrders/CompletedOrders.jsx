@@ -11,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Helmet } from "react-helmet-async";
+import { Edit, Eye, Trash2 } from "lucide-react";
+import Swal from "sweetalert2";
 
 const CompletedOrders = () => {
   const [allOrders] = useAllOrders();
@@ -28,6 +30,81 @@ const CompletedOrders = () => {
         customerName.includes(search.toLowerCase()) || orderId.includes(search)
       );
     }) || [];
+
+    // View Order Details in SweetAlert
+      const handleView = (order) => {
+        Swal.fire({
+          title: `Order Details - ${order._id}`,
+          html: `
+            <div style='text-align:left'>
+              <p><strong>Customer:</strong> ${order.fullName}</p>
+              <p><strong>Email:</strong> ${order.userEmail}</p>
+              <p><strong>WhatsappNumber:</strong> ${order.whatsappNumber}</p>
+              <p><strong>CompanyUrl:</strong> ${order.companyUrl || "N/A"}</p>
+              <p><strong>SkypeId:</strong> ${order.skypeId || "N/A"}</p>
+              <p><strong>Total Price:</strong> $${order.totalPrice.toFixed(2)}</p>
+              <p><strong>Items:</strong></p>
+              <ul>${order.cartItems
+                .map((item) => `<li>${item.productName} - ${item.quantity}</li>`)
+                .join("")}</ul>
+            </div>`,
+          confirmButtonText: "Close",
+          confirmButtonColor: "#3085d6",
+        });
+      };
+    
+      // Update Order Status with SweetAlert2
+      const handleStatusUpdate = async (order) => {
+        const { value: newStatus } = await Swal.fire({
+          title: "Update Order Status",
+          input: "select",
+          inputOptions: {
+            Pending: "Pending",
+            Processing: "Processing",
+            Complete: "Completed",
+          },
+          inputValue: order.status,
+          showCancelButton: true,
+          confirmButtonText: "Update",
+        });
+    
+        if (newStatus && newStatus !== order.status) {
+          try {
+            await axiosSecure.put(`/orders/${order._id}`, { status: newStatus });
+            Swal.fire("Updated!", "Order status has been updated.", "success");
+            refetch(); // Refresh orders after update
+          } catch (error) {
+            Swal.fire("Error!", "Failed to update order status.", error);
+          }
+        }
+      };
+    
+      // Delete Order with SweetAlert2
+      const handleDelete = async (id) => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            try {
+              const response = await axiosSecure.delete(`/orders/${id}`);
+              if (response.data.deletedCount > 0) {
+                Swal.fire("Deleted!", "Order has been deleted.", "success");
+                refetch();
+              } else {
+                Swal.fire("Error!", "Failed to delete order.", "error");
+              }
+            } catch (error) {
+              Swal.fire("Error!", "Failed to delete order.", error);
+            }
+          }
+        });
+      };
 
   return (
     <div className="p-6 w-full">
@@ -106,51 +183,76 @@ const CompletedOrders = () => {
         <Table className="w-full border-collapse">
           <TableHeader className="border-b bg-gray-500 text-white">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="text-baseColor">Order ID</TableHead>
-              <TableHead className="text-baseColor">Customer</TableHead>
-              <TableHead className="text-baseColor">Total ($)</TableHead>
-              <TableHead className="text-baseColor">Status</TableHead>
-              <TableHead className="text-baseColor">Date</TableHead>
-              <TableHead className="text-baseColor">Actions</TableHead>
+              <TableHead className="text-baseColor border-r">Items</TableHead>
+              <TableHead className="text-baseColor border-r">
+                Customer Name
+              </TableHead>
+              <TableHead className="text-baseColor border-r">
+                Total ($)
+              </TableHead>
+              <TableHead className="text-baseColor border-r">Status</TableHead>
+              <TableHead className="text-baseColor border-r">Date</TableHead>
+              <TableHead className="text-baseColor w-20">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredOrders.length > 0 ? (
               filteredOrders.map((order) => (
                 <TableRow
-                  key={order.id}
-                  className="border-b hover:bg-gray-600 transition-all"
+                  key={order._id}
+                  className="border-b hover:bg-background2 transition-all"
                 >
-                  <TableCell className="py-3 px-4">{order.id}</TableCell>
-                  <TableCell className="py-3 px-4">{order.customer}</TableCell>
-                  <TableCell className="py-3 px-4">
-                    ${order.total ? order.total.toFixed(2) : "0.00"}
+                  <TableCell className="py-3 px-4 border-r">
+                    {order.cartItems.map((item) => (
+                      <ul key={item._id} className="list-disc pl-1">
+                        <li>
+                          {item?.productName} - {item?.quantity}
+                        </li>
+                      </ul>
+                    ))}
                   </TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="py-3 px-4 border-r">
+                    {order?.fullName}
+                  </TableCell>
+                  <TableCell className="py-3 px-4 border-r">
+                    ${order.totalPrice ? order.totalPrice.toFixed(2) : "0.00"}
+                  </TableCell>
+                  <TableCell className="py-3 px-4 border-r">
                     <span
-                      className={`px-3 py-1 rounded text-white text-sm font-medium ${
-                        order.status === "Pending"
-                          ? "bg-yellow-500"
-                          : order.status === "Processing"
-                          ? "bg-blue-500"
-                          : "bg-green-500"
-                      }`}
+                      className={`px-3 py-1 rounded text-white text-sm font-medium bg-yellow-500 `}
                     >
                       {order.status}
                     </span>
                   </TableCell>
-                  <TableCell className="py-3 px-4">
-                    {order.date
-                      ? new Date(order.date).toLocaleDateString()
+                  <TableCell className="py-3 px-4 border-r">
+                    {order.orderDate
+                      ? new Date(order.orderDate).toLocaleDateString()
                       : "N/A"}
                   </TableCell>
-                  <TableCell className="py-3 px-4">
+                  <TableCell className="flex flex-grow gap-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-gray-300 rounded-lg px-4 py-2 text-sm hover:bg-gray-100"
+                      className="hover:bg-green-600"
+                      onClick={() => handleView(order)}
                     >
-                      View
+                      <Eye size={16} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hover:bg-baseColor"
+                      onClick={() => handleStatusUpdate(order)}
+                    >
+                      <Edit size={16} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hover:bg-red-600"
+                      onClick={() => handleDelete(order._id)}
+                    >
+                      <Trash2 size={16} />
                     </Button>
                   </TableCell>
                 </TableRow>
