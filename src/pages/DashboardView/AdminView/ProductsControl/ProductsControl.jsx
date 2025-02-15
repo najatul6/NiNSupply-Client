@@ -16,6 +16,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import ProductFormModal from "@/components/DashboardView/ProductFormModal";
 import { Edit, Trash2 } from "lucide-react";
 import Loading from "@/components/common/Loading";
+import { motion } from "framer-motion";
 
 const ProductsControl = () => {
   const [products, isLoading, refetch] = useProduct();
@@ -113,7 +114,15 @@ const ProductsControl = () => {
             <TableBody>
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, index) => (
-                  <TableRow key={product._id}>
+                  <motion.TableRow key={product._id} initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    ease: "easeOut",
+                    duration: 0.6,
+                    delay: index * 0.2,
+                  }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  >
                     <TableCell className="text-baseColor border-r text-center">
                     {(index + 1).toString().padStart(2, '0')}
                     </TableCell>
@@ -157,7 +166,7 @@ const ProductsControl = () => {
                        <Trash2 size={16} />
                       </Button>
                     </TableCell>
-                  </TableRow>
+                  </motion.TableRow>
                 ))
               ) : (
                 <TableRow>
