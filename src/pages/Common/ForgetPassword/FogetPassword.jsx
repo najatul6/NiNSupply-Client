@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import app from "../firebaseConfig"; // Make sure to import your Firebase config
+import useAuth from "@/hooks/useAuth";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const {resetPassword}=useAuth()
 
-  const auth = getAuth(app);
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -17,7 +16,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      await sendPasswordResetEmail(auth, email);
+      await resetPassword( email);
       setMessage("Password reset email sent! Check your inbox.");
     } catch (err) {
       setError(err.message);
