@@ -42,10 +42,10 @@ const Register = () => {
             }
           });
         })
-        .catch((error) => {
-          console.error("Error Creating User:", error);
-          setError(error.code);
-          throw error;
+        .catch((err) => {
+          console.log("Error Creating User:", err);
+          setError(err.message);
+          throw err;
         }),
       {
         pending: "Creating User...",
