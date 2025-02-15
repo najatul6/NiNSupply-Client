@@ -16,7 +16,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 import ProductFormModal from "@/components/DashboardView/ProductFormModal";
 import { Edit, Trash2 } from "lucide-react";
 import Loading from "@/components/common/Loading";
-import { motion } from "framer-motion";
 
 const ProductsControl = () => {
   const [products, isLoading, refetch] = useProduct();
@@ -83,17 +82,22 @@ const ProductsControl = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <h2 className="text-xl font-semibold flex-shrink-0">Total Products : {filteredProducts?.length.toString().padStart(2, '0') || 0}</h2>
+        <h2 className="text-xl font-semibold flex-shrink-0">
+          Total Products :{" "}
+          {filteredProducts?.length.toString().padStart(2, "0") || 0}
+        </h2>
       </div>
 
       {isLoading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <div className="overflow-x-auto">
           <Table className="border rounded-xl">
             <TableHeader className="bg-gray-500 text-white">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="text-baseColor border-r text-center">No.</TableHead>
+                <TableHead className="text-baseColor border-r text-center">
+                  No.
+                </TableHead>
                 <TableHead className="text-baseColor border-r w-20">
                   Thumbnail
                 </TableHead>
@@ -114,17 +118,9 @@ const ProductsControl = () => {
             <TableBody>
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, index) => (
-                  <motion.TableRow key={product._id} initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    ease: "easeOut",
-                    duration: 0.6,
-                    delay: index * 0.2,
-                  }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  >
+                  <TableRow key={product._id} className="hover:bg-gray-600">
                     <TableCell className="text-baseColor border-r text-center">
-                    {(index + 1).toString().padStart(2, '0')}
+                      {(index + 1).toString().padStart(2, "0")}
                     </TableCell>
                     <TableCell className="border-r">
                       <img
@@ -139,9 +135,7 @@ const ProductsControl = () => {
                     <TableCell className="border-r capitalize">
                       {product.category}
                     </TableCell>
-                    <TableCell className=" border-r">
-                      {product.stock}
-                    </TableCell>
+                    <TableCell className=" border-r">{product.stock}</TableCell>
                     <TableCell className=" border-r">
                       ${product.price}
                     </TableCell>
@@ -163,10 +157,10 @@ const ProductsControl = () => {
                         onClick={() => handleDelete(product._id)}
                         className="hover:bg-red-600"
                       >
-                       <Trash2 size={16} />
+                        <Trash2 size={16} />
                       </Button>
                     </TableCell>
-                  </motion.TableRow>
+                  </TableRow>
                 ))
               ) : (
                 <TableRow>
