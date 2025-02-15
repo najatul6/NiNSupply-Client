@@ -2,6 +2,7 @@ import Loading from "@/components/common/Loading";
 import useAuth from "@/hooks/useAuth";
 import useCarts from "@/hooks/useCart";
 import useOrders from "@/hooks/useOrders";
+import { motion } from "framer-motion";
 
 const UserOverview = () => {
   const { user } = useAuth();
@@ -68,8 +69,16 @@ const UserOverview = () => {
             <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
             {cart.length > 0 ? (
               <div className="space-y-4">
-                {cart.map((cartItem) => (
-                  <div
+                {cart.map((cartItem,index) => (
+                  <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      ease: "easeOut",
+                      duration: 0.6,
+                      delay: index * 0.2,
+                    }}
+                    viewport={{ once: true, amount: 0.2 }}
                     key={cartItem._id}
                     className="flex justify-between items-center"
                   >
@@ -77,7 +86,7 @@ const UserOverview = () => {
                     <span>
                       {cartItem.quantity} x ${cartItem.price}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
                 <hr />
                 <div className="flex justify-between items-center mt-4">
