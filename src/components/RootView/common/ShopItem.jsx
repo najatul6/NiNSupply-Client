@@ -80,40 +80,18 @@ const ShopItem = ({ item }) => {
           const isOutOfStock = product?.stock === 0;
           return (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{
-                ease: "easeOut",
-                duration: 0.6,
-                delay: index * 0.2,
-              }}
-              viewport={{ once: true, amount: 0.2 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ damping: 20, duration: 0.5, delay: index * 0.2 }}
               key={product?._id}
               className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
             >
               <div className="relative flex flex-col h-full">
-                <motion.img
+                <img
                   src={product?.thumbnail}
                   alt={product?.productName}
                   className="w-full h-36 md:h-64 object-cover md:rounded-t-lg"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    ease: "easeOut",
-                    delay: index * 0.3,
-                  }}
                 />
-                {product.isPopular && (
-                  <motion.div
-                    className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                  >
-                    Popular
-                  </motion.div>
-                )}
                 <div className="p-4 flex-grow">
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="text-xs md:text-xl font-semibold text-white">
@@ -123,30 +101,22 @@ const ShopItem = ({ item }) => {
                       {product?.price || "N/A"}৳
                     </span>
                   </div>
-
+                  {/* Description list */}
                   {product.description?.length > 0 && (
                     <ul className="text-sm text-gray-500 hidden md:block">
                       {product.description.map((desc, index) => (
-                        <motion.li
-                          key={index}
-                          className="list-disc ml-5"
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: index * 0.1 }}
-                        >
+                        <li key={index} className="list-disc ml-5">
                           {desc}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   )}
                 </div>
 
-                <motion.button
+                <button
                   onClick={() => addToCart(product)}
                   disabled={isOutOfStock}
                   aria-disabled={isOutOfStock}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                   className={`text-xs md:text-base font-bold my-2 inline-block md:px-6 py-2 rounded-md transition-all w-2/3 mx-auto ${
                     isOutOfStock
                       ? "bg-gray-400 text-white cursor-not-allowed"
@@ -154,8 +124,14 @@ const ShopItem = ({ item }) => {
                   }`}
                 >
                   {isOutOfStock ? "Out of Stock" : "Add to Cart"}
-                </motion.button>
+                </button>
               </div>
+
+              {product.isPopular && (
+                <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full">
+                  Popular
+                </div>
+              )}
             </motion.div>
           );
         })
