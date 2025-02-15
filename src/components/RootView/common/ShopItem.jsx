@@ -82,7 +82,7 @@ const ShopItem = ({ item }) => {
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ damping: 20, duration: 0.5, delay: index * 0.2 }}
+              transition={{ damping: 20, duration: 0.4, delay: index * 0.2 }}
               key={product?._id}
               className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
             >
