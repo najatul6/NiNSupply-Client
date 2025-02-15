@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2"; // Import SweetAlert2
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const UserAccount = () => {
   const { user, updateUserProfile } = useAuth(); // Assuming updateUserProfile is part of your useAuth hook
   const [newName, setNewName] = useState(user?.displayName || "");
+  const axiosSecure= useAxiosSecure();
 
   const handleOpenModal = () => {
     Swal.fire({
@@ -18,7 +20,7 @@ const UserAccount = () => {
       inputPlaceholder: "Enter new name",
       preConfirm: (value) => {
         if (value.trim()) {
-          updateUserProfile(value); // Function to update user name in your auth system
+          updateUserProfile(value); 
         }
       },
     }).then((result) => {
