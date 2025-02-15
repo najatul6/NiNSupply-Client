@@ -30,13 +30,13 @@ const LogIn = () => {
         })
         .catch((error) => {
           console.error("Error Signing In:", error);
-          setError(error.code);
+          setError(error.message);
           throw error;
         }),
       {
         pending: "Signing In...",
         success: "User Signed In Successfully",
-        error: `${error}`,
+        error: `${error.message}`,
       }
     );
   };
