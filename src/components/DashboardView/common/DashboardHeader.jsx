@@ -17,7 +17,7 @@ const DashboardHeader = () => {
 
         <Link to="/dashboard/my-profile">
           <img
-            src={user?.photoURL}
+            src={user?.photoURL || "https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png"}
             alt="profile-pic"
             className="w-10 h-10 rounded-full border-2 border-baseColor cursor-pointer"
           />
