@@ -24,7 +24,7 @@ import ProcessingOrders from "@/pages/DashboardView/AdminView/ProcessingOrders/P
 import CompletedOrders from "@/pages/DashboardView/AdminView/CompletedOrders/CompletedOrders";
 import CategoriesControl from "@/pages/DashboardView/AdminView/CategoriesControl/CategoriesControl";
 import ProductsControl from "@/pages/DashboardView/AdminView/ProductsControl/ProductsControl";
-import ForgotPassword from "@/pages/Common/ForgetPassword/FogetPassword";
+import ForgetPassword from "@/pages/Common/ForgetPassword/FogetPassword";
 
 const Router = createBrowserRouter([
   {
@@ -164,7 +164,7 @@ const Router = createBrowserRouter([
   },
   {
     path:"/forget-password",
-    element: <ForgotPassword />
+    element: <ForgetPassword />
   }
 ]);
 

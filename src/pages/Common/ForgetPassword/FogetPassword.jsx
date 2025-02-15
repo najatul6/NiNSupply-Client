@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
+import { toast } from "react-toastify";
 
 const ForgetPassword = () => {
   const { resetPassword, setLoading, loading } = useAuth();
