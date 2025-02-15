@@ -9,7 +9,6 @@ const DashboardHeader = () => {
       <div className="flex flex-wrap items-center justify-between gap-4 w-full relative bg-background2">
         <Link to="/" className="flex justify-center items-center gap-2">
           <img src={headerLogo} alt="logo" className="w-36" />
-          {/* <p className="text-3xl font-merienda font-bold">Admin Panel</p> */}
         </Link>
 
         <Link to="/dashboard/my-profile">
