@@ -4,7 +4,7 @@ import { Mail } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const LogIn = () => {
@@ -256,12 +256,12 @@ const LogIn = () => {
           )}
         </div>
         <div className="mt-4 text-right">
-          <a
-            href=""
+          <Link
+            to="/forget-password"
             className="text-blue-600 text-sm font-semibold hover:underline"
           >
             Forgot your password?
-          </a>
+          </Link>
         </div>
 
         <div className="mt-8">
