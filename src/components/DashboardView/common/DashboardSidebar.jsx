@@ -13,6 +13,7 @@ import {
   Newspaper,
   PackageSearch,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { logOut } = useAuth();
@@ -94,7 +95,15 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <ul className="space-y-2">
             {userRole === "user"
               ? userNav.map((item, index) => (
-                  <NavLink
+                  <motion.NavLink
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      ease: "easeOut",
+                      duration: 0.6,
+                      delay: index * 0.2,
+                    }}
+                    viewport={{ once: true, amount: 0.2 }}
                     key={index}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                     to={item.path}
@@ -108,11 +117,22 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   >
                     {item.icon}
                     <span>{item.label}</span>
-                  </NavLink>
+                  </motion.NavLink>
                 ))
               : adminNav.map((item, index) => (
+                <motion.div key={index} initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{
+                  ease: "easeOut",
+                  duration: 0.6,
+                  delay: index * 0.2,
+                }}
+                viewport={{ once: true, amount: 0.2 }}>
+
+                
                   <NavLink
-                    key={index}
+                    
+                    
                     to={item.path}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
                     className={({ isActive }) =>
@@ -126,6 +146,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <p className="mr-3">{item.icon}</p>
                     <span>{item.label}</span>
                   </NavLink>
+                  </motion.div>
                 ))}
           </ul>
 
