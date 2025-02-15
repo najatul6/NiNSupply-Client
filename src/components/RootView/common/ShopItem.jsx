@@ -104,7 +104,16 @@ const ShopItem = ({ item }) => {
                     delay: index * 0.3,
                   }}
                 />
-
+                {product.isPopular && (
+                  <motion.div
+                    className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                  >
+                    Popular
+                  </motion.div>
+                )}
                 <div className="p-4 flex-grow">
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="text-xs md:text-xl font-semibold text-white">
@@ -147,17 +156,6 @@ const ShopItem = ({ item }) => {
                   {isOutOfStock ? "Out of Stock" : "Add to Cart"}
                 </motion.button>
               </div>
-
-              {product.isPopular && (
-                <motion.div
-                  className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 text-sm font-semibold rounded-full"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                >
-                  Popular
-                </motion.div>
-              )}
             </motion.div>
           );
         })
