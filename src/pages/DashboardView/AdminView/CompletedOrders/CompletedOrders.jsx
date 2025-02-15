@@ -237,6 +237,7 @@ const CompletedOrders = () => {
                       size="sm"
                       className="hover:bg-green-600"
                       onClick={() => handleView(order)}
+                      title="View Order Details"
                     >
                       <Eye size={16} />
                     </Button>

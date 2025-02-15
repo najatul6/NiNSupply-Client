@@ -148,6 +148,7 @@ const ProductsControl = () => {
                         variant="outline"
                         size="sm"
                         className="hover:bg-baseColor"
+                        title="Edit Product"
                       >
                         <Edit size={16} />
                       </Button>
@@ -156,6 +157,7 @@ const ProductsControl = () => {
                         size="sm"
                         onClick={() => handleDelete(product._id)}
                         className="hover:bg-red-600"
+                        title="Delete Product"
                       >
                         <Trash2 size={16} />
                       </Button>
