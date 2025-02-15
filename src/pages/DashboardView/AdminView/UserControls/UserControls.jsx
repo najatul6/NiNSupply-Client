@@ -66,7 +66,7 @@ const UserControls = () => {
   );
 
   return (
-    <div>
+    <div className="p-6 w-full">
       {/* Helmet for title and meta tags Start here */}
       <Helmet>
         <title>User Controls | NiN Supply</title>
@@ -167,20 +167,20 @@ const UserControls = () => {
               </tr>
             </thead>
             <tbody className="whitespace-nowrap">
-              {filteredUsers?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((user) => (
-                <tr key={user?._id} className="even:bg-blue-50">
+              {filteredUsers?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((dbuser) => (
+                <tr key={dbuser?._id} className="even:bg-blue-50">
                   <td className="p-4 text-sm text-black">
                     <img
-                      src={user?.photoURL}
-                      alt={user?.name}
+                      src={dbuser.photoURL}
+                      alt={dbuser?.name}
                       className="w-10 h-10 rounded-full object-cover"
                     />
                   </td>
-                  <td className="p-4 text-sm text-black">{user?.name}</td>
-                  <td className="p-4 text-sm text-black">{user?.email}</td>
+                  <td className="p-4 text-sm text-black">{dbuser?.name}</td>
+                  <td className="p-4 text-sm text-black">{dbuser?.email}</td>
                   <td className="p-4 text-sm text-black capitalize">
                     <select
-                      value={user?.role}
+                      value={dbuser?.role}
                       onChange={(e) => setNewRole(e.target.value)}
                     >
                       <option value="user">User</option>
@@ -188,11 +188,11 @@ const UserControls = () => {
                     </select>
                   </td>
                   <td className="p-4 text-sm text-black">
-                    <DateComponent createdAt={user?.createdAt} />
+                    <DateComponent createdAt={dbuser?.createdAt} />
                   </td>
                   <td className="p-4">
                     <button
-                      onClick={() => handleChangeRole(user._id)}
+                      onClick={() => handleChangeRole(dbuser._id)}
                       className="mr-4"
                       title="Save"
                     >
@@ -214,7 +214,7 @@ const UserControls = () => {
                       </svg>
                     </button>
                     <button
-                      onClick={() => handleDeleteUser(user)}
+                      onClick={() => handleDeleteUser(dbuser)}
                       className="mr-4"
                       title="Delete"
                     >

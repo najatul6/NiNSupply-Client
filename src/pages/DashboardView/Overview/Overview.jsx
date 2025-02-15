@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const Overview = () => {
   const [userRole] = useRole();
   return (
-    <div>
+    <div className="p-6 w-full">
       {/* Helmet for title and meta tags Start here */}
       <Helmet>
         <title>Dashboard Overview | NiN Supply</title>
