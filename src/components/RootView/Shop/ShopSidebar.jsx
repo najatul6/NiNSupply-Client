@@ -1,5 +1,6 @@
 import useCategory from "@/hooks/useCategory";
 import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 
 const ShopSidebar = ({ category, setCategory }) => {
   const [categories] = useCategory();
@@ -22,8 +23,16 @@ const ShopSidebar = ({ category, setCategory }) => {
         >
           Popular
         </button>
-        {categories?.map((item) => (
-          <button
+        {categories?.map((item,index) => (
+          <motion.button
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{
+            ease: "easeOut",
+            duration: 0.6,
+            delay: index * 0.2,
+          }}
+          viewport={{ once: true, amount: 0.2 }}
             key={item?._id}
             onClick={() => setCategory(item?.category)}
             className={`text-left px-4 py-2 text-lg rounded-md transition-colors hover:text-baseColor capitalize ${
@@ -33,7 +42,7 @@ const ShopSidebar = ({ category, setCategory }) => {
             }`}
           >
             {item?.category}
-          </button>
+          </motion.button>
         ))}
       </div>
 
