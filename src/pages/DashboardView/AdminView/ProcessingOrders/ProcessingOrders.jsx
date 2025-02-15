@@ -261,7 +261,7 @@ const ProcessingOrders = () => {
                       size="sm"
                       className="hover:bg-red-600"
                       onClick={() => handleDelete(order._id)}
-                      title="Delete Order
+                      title="Delete Order"
                     >
                       <Trash2 size={16} />
                     </Button>
