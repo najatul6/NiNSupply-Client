@@ -6,7 +6,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 
 const UserAccount = () => {
-  const { user, updateUserProfile,setLoading } = useAuth(); // Assuming updateUserProfile is part of your useAuth hook
+  const { user, updateUserProfile,setLoading } = useAuth(); 
   const [newName, setNewName] = useState(user?.displayName || "");
   const axiosSecure = useAxiosSecure(); // Hook to handle secure axios requests
 
