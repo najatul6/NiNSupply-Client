@@ -1,9 +1,9 @@
 const ProductCardSkeleton = () => {
     return (
-      <div className="bg-background2 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl animate-pulse">
+      <div className="bg-background2 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
         <div className="relative flex flex-col h-full">
           {/* Skeleton for Image */}
-          <div className="w-full h-64 bg-gray-300"></div>
+          <div className="w-full h-60 bg-gray-300"></div>
   
           {/* Skeleton for Content */}
           <div className="p-4 flex-grow">

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useCartContext } from "@/providers/CartProvider";
 import useCarts from "@/hooks/useCart";
 import useRole from "@/hooks/useRole";
+import { motion } from "framer-motion";
 
 const Wholesale = () => {
   const [products, isLoading] = useProduct();
@@ -96,8 +97,16 @@ const Wholesale = () => {
               <ProductCardSkeleton key={index} />
             ))
           ) : products?.length > 0 ? (
-            products.map((product) => (
-              <div
+            products.map((product,index) => (
+              <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{
+                ease: "easeOut",
+                duration: 0.6,
+                delay: index * 0.2,
+              }}
+              viewport={{ once: true, amount: 0.2 }}
                 key={product?._id}
                 className="bg-background2 shadow-lg md:rounded-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
               >
@@ -138,7 +147,7 @@ const Wholesale = () => {
                     Popular
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))
           ) : (
             <p className="text-center col-span-full text-lg text-gray-500">
