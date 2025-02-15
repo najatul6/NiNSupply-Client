@@ -36,7 +36,7 @@ const UserControls = () => {
     });
   };
 
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteUser = async (user) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -47,7 +47,7 @@ const UserControls = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${userId}`).then((res) => {
+        axiosSecure.delete(`/users/${user?._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             toast.success("User deleted successfully");
@@ -214,7 +214,7 @@ const UserControls = () => {
                       </svg>
                     </button>
                     <button
-                      onClick={() => handleDeleteUser(user?._id)}
+                      onClick={() => handleDeleteUser(user)}
                       className="mr-4"
                       title="Delete"
                     >

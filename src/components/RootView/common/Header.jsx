@@ -138,7 +138,7 @@ const Header = () => {
                     Login
                   </NavLink>
                   <NavLink
-                    to="/auth/registration"
+                    to="/auth/register"
                     className="uppercase font-bold text-xl tracking-[2px] bg-transparent border-2 w-3/4 text-center py-2 border-baseColor hover:text-white hover:bg-baseColor transition duration-200 rounded-md text-baseColor"
                   >
                     Register

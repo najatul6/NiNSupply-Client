@@ -50,7 +50,7 @@ const AuthLayout = () => {
         <Outlet />
         <div className="lg:hidden">
           {logIn ? (
-            <div className="text-center">
+            <div className="text-center text-black">
               <p className="">
                 Don&apos;t have an account?
                 <Link
@@ -63,7 +63,7 @@ const AuthLayout = () => {
             </div>
           ) : (
             // <Link to={"/auth/login"}>Log in</Link>
-            <div className="text-center">
+            <div className="text-center text-black">
               <p className="">
                 Already have an account?
                 <Link
