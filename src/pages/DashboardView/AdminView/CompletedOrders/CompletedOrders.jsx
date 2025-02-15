@@ -246,6 +246,7 @@ const CompletedOrders = () => {
                       size="sm"
                       className="hover:bg-baseColor"
                       onClick={() => handleStatusUpdate(order)}
+                      title="Update Order Status"
                     >
                       <Edit size={16} />
                     </Button>
@@ -254,6 +255,7 @@ const CompletedOrders = () => {
                       size="sm"
                       className="hover:bg-red-600"
                       onClick={() => handleDelete(order._id)}
+                      title="Delete Order"
                     >
                       <Trash2 size={16} />
                     </Button>
