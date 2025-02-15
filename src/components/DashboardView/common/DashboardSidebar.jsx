@@ -95,7 +95,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <ul className="space-y-2">
             {userRole === "user"
               ? userNav.map((item, index) => (
-                  <motion.NavLink
+                  <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{
@@ -105,47 +105,49 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     }}
                     viewport={{ once: true, amount: 0.2 }}
                     key={index}
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    to={item.path}
-                    className={({ isActive }) =>
-                      `text-white text-sm flex items-center rounded-md px-4 py-2 transition-all ${
-                        isActive
-                          ? "text-baseColor bg-background"
-                          : "hover:bg-background"
-                      }`
-                    }
                   >
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </motion.NavLink>
+                    <NavLink
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      to={item.path}
+                      className={({ isActive }) =>
+                        `text-white text-sm flex items-center rounded-md px-4 py-2 transition-all ${
+                          isActive
+                            ? "text-baseColor bg-background"
+                            : "hover:bg-background"
+                        }`
+                      }
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </NavLink>
+                  </motion.div>
                 ))
               : adminNav.map((item, index) => (
-                <motion.div key={index} initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{
-                  ease: "easeOut",
-                  duration: 0.6,
-                  delay: index * 0.2,
-                }}
-                viewport={{ once: true, amount: 0.2 }}>
-
-                
-                  <NavLink
-                    
-                    
-                    to={item.path}
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className={({ isActive }) =>
-                      `text-sm flex items-center rounded-md px-4 py-2 transition-all hover:text-baseColor ${
-                        isActive
-                          ? "bg-background text-baseColor"
-                          : " text-white hover:bg-background"
-                      }`
-                    }
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      ease: "easeOut",
+                      duration: 0.6,
+                      delay: index * 0.2,
+                    }}
+                    viewport={{ once: true, amount: 0.2 }}
                   >
-                    <p className="mr-3">{item.icon}</p>
-                    <span>{item.label}</span>
-                  </NavLink>
+                    <NavLink
+                      to={item.path}
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      className={({ isActive }) =>
+                        `text-sm flex items-center rounded-md px-4 py-2 transition-all hover:text-baseColor ${
+                          isActive
+                            ? "bg-background text-baseColor"
+                            : " text-white hover:bg-background"
+                        }`
+                      }
+                    >
+                      <p className="mr-3">{item.icon}</p>
+                      <span>{item.label}</span>
+                    </NavLink>
                   </motion.div>
                 ))}
           </ul>
