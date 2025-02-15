@@ -213,8 +213,9 @@ const CategoriesControl = () => {
                       variant="outline"
                       size="icon"
                       onClick={() => handleDelete(category._id)}
+                      className="hover:bg-red-600 hover:text-white"
                     >
-                      <AiOutlineDelete className="text-red-500 hover:text-white hover:bg-red-600" size={20} />
+                      <AiOutlineDelete className="text-red-500 " size={20} />
                     </Button>
                   </TableCell>
                 </TableRow>
