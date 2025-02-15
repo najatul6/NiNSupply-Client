@@ -25,7 +25,7 @@ const UserAccount = () => {
             await updateUserProfile(value);
 
             // Update the name in the database
-            const response = await axiosSecure.put("/update-profile", { name: value });
+            const response = await axiosSecure.put(`/users/${user.email}`, { name: value });
             
             // Check if the database update was successful
             if (response.status === 200) {
