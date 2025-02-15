@@ -206,6 +206,7 @@ const CategoriesControl = () => {
                       variant="outline"
                       size="icon"
                       onClick={() => handleEdit(category)}
+                      title="Edit Category"
                     >
                       <AiOutlineEdit className="text-yellow-400" size={20} />
                     </Button>
@@ -214,6 +215,7 @@ const CategoriesControl = () => {
                       size="icon"
                       onClick={() => handleDelete(category._id)}
                       className="hover:bg-red-600 hover:text-white"
+                      title="Delete Category"
                     >
                       <AiOutlineDelete className="text-red-500 " size={20} />
                     </Button>
