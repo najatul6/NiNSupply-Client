@@ -2,6 +2,7 @@ import Container from "@/components/common/Container";
 import useProduct from "@/hooks/useProduct";
 import ShopItem from "../../common/ShopItem";
 import ProductCardSkeleton from "../../common/ProductCardSkeleton";
+import { motion } from "motion/react"
 
 const PopularProducts = () => {
   const [products, isLoading] = useProduct();
