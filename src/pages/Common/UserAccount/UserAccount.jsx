@@ -7,7 +7,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 const UserAccount = () => {
   const { user, updateUserProfile } = useAuth(); // Assuming updateUserProfile is part of your useAuth hook
   const [newName, setNewName] = useState(user?.displayName || "");
-  const axiosSecure= useAxiosSecure();
+  const axiosSecure = useAxiosSecure(); // Hook to handle secure axios requests
 
   const handleOpenModal = () => {
     Swal.fire({
@@ -18,15 +18,30 @@ const UserAccount = () => {
       confirmButtonText: "Save",
       cancelButtonText: "Cancel",
       inputPlaceholder: "Enter new name",
-      preConfirm: (value) => {
+      preConfirm: async (value) => {
         if (value.trim()) {
-          updateUserProfile(value); 
+          try {
+            // Update the name in the authentication system (Firebase, etc.)
+            await updateUserProfile(value);
+
+            // Update the name in the database
+            const response = await axiosSecure.put("/update-profile", { name: value });
+            
+            // Check if the database update was successful
+            if (response.status === 200) {
+              Swal.fire("Success!", "Your name has been updated.", "success");
+              setNewName(value);
+            } else {
+              Swal.fire("Error", "There was an issue updating your name in the database.", "error");
+            }
+          } catch (error) {
+            console.error("Error updating profile:", error);
+            Swal.fire("Error", "Failed to update your profile. Please try again.", "error");
+          }
+        } else {
+          Swal.showValidationMessage("Please enter a valid name.");
         }
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setNewName(result.value);
-      }
     });
   };
 
