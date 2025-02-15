@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const UserAccount = () => {
-  const { user, updateUserProfile } = useAuth(); // Assuming updateUserProfile is part of your useAuth hook
+  const { user, updateUserProfile,setLoading } = useAuth(); // Assuming updateUserProfile is part of your useAuth hook
   const [newName, setNewName] = useState(user?.displayName || "");
   const axiosSecure = useAxiosSecure(); // Hook to handle secure axios requests
 
   const handleOpenModal = () => {
+    setLoading(true);
     Swal.fire({
       title: "Change Your Name",
       input: "text",
@@ -23,27 +25,31 @@ const UserAccount = () => {
           try {
             // Update the name in the authentication system (Firebase, etc.)
             await updateUserProfile(value);
-
+  
             // Update the name in the database
             const response = await axiosSecure.put(`/users/${user.email}`, { name: value });
-            
+  
             // Check if the database update was successful
-            if (response.status === 200) {
-              Swal.fire("Success!", "Your name has been updated.", "success");
+            if (response.data.modifiedCount > 0) {
+              toast.success("Success!", "Your name has been updated.", "success");
               setNewName(value);
             } else {
-              Swal.fire("Error", "There was an issue updating your name in the database.", "error");
+              toast.error("Error", "There was an issue updating your name in the database.", "error");
             }
           } catch (error) {
             console.error("Error updating profile:", error);
             Swal.fire("Error", "Failed to update your profile. Please try again.", "error");
+          } finally {
+            setLoading(false); // Ensure loading is set to false
           }
         } else {
           Swal.showValidationMessage("Please enter a valid name.");
+          setLoading(false); // Ensure loading is set to false
         }
       },
     });
   };
+  
 
   return (
     <div className="max-w-md mx-auto mt-16 bg-white shadow-lg rounded-lg overflow-hidden text-gray-900">
