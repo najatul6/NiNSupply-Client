@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import useAuth from "@/hooks/useAuth";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2"; 
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 
 const UserAccount = () => {
   const { user, updateUserProfile,setLoading } = useAuth(); 
   const [newName, setNewName] = useState(user?.displayName || "");
-  const axiosSecure = useAxiosSecure(); // Hook to handle secure axios requests
+  const axiosSecure = useAxiosSecure(); 
 
   const handleOpenModal = () => {
     setLoading(true);
