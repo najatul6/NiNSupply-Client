@@ -103,7 +103,7 @@ const Wholesale = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{
                 ease: "easeOut",
-                duration: 0.6,
+                duration: 0.4,
                 delay: index * 0.2,
               }}
               viewport={{ once: true, amount: 0.2 }}
