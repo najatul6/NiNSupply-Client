@@ -15,7 +15,7 @@ const UserAccount = () => {
       <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-center items-center bg-gray-600">
         <img
           className="object-cover object-center h-32"
-          src={user?.photoURL}
+          src={user?.photoURL  ||  "https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png"}
           alt={`${user?.displayName} Profile Picture`}
         />
       </div>
