@@ -16,7 +16,7 @@ const ForgetPassword = () => {
       setLoading(true);
       await resetPassword(email);
       form.reset();
-      navigate('/login')
+      navigate('/auth/login')
       toast.success("Password reset link has been sent to your email.");
       setDisabled(true)
     } catch (err) {
@@ -39,7 +39,7 @@ const ForgetPassword = () => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Remember your password?
               <Link
-                to="/logIn"
+                to="/auth/login"
                 className="text-blue-600 decoration-2 hover:underline font-medium"
               >
                 Login here
