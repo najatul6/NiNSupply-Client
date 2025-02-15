@@ -2,7 +2,6 @@ import Container from "@/components/common/Container";
 import useProduct from "@/hooks/useProduct";
 import ShopItem from "../../common/ShopItem";
 import ProductCardSkeleton from "../../common/ProductCardSkeleton";
-import { motion } from "motion/react"
 
 const PopularProducts = () => {
   const [products, isLoading] = useProduct();
@@ -18,13 +17,11 @@ const PopularProducts = () => {
       </h2>
       <Container>
         {isLoading ? (
-          <motion.div initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: index * 0.1 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
             ))}
-          </motion.div>
+          </div>
         ) : (
           <ShopItem item={popularProduct} />
         )}
