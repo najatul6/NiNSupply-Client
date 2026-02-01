@@ -25,7 +25,6 @@ const Register = () => {
     toast.promise(
       createUser(data.email, data.password)
         .then((result) => {
-
           console.log("User Created:", result);
           updateUserProfile(data.name);
           const userData = {
@@ -37,7 +36,7 @@ const Register = () => {
             createdAt: new Date().toISOString(),
           };
           axiosPublic.post("/createUser", userData).then((res) => {
-            if(res.data.insertedId){
+            if (res.data.insertedId) {
               navigate(form, { replace: true });
             }
           });
@@ -51,7 +50,7 @@ const Register = () => {
         pending: "Creating User...",
         success: "User Created Successfully",
         error: `${error}`,
-      }
+      },
     );
   };
 
@@ -59,7 +58,7 @@ const Register = () => {
     <div className="bg-white rounded-xl sm:px-6 px-4 py-8 max-w-md w-full h-max shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] max-lg:mx-auto">
       <Helmet>
         <title>Register</title>
-        <link rel="najatul islam" href="https://www.najatulislam.me/" />
+        <link rel="najatul islam" href="https://najatul-islam.vercel.app/" />
       </Helmet>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-8">

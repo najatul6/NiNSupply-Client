@@ -27,9 +27,9 @@ const Home = () => {
         />
         <meta
           property="og:image"
-          content="https://www.najatulislam.me/og-image.jpg"
+          content="https://najatul-islam.vercel.app/og-image.jpg"
         />
-        <meta property="og:url" content="https://www.najatulislam.me/" />
+        <meta property="og:url" content="https://najatul-islam.vercel.app/" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card for better previews on Twitter */}
@@ -41,16 +41,16 @@ const Home = () => {
         />
         <meta
           name="twitter:image"
-          content="https://www.najatulislam.me/twitter-image.jpg"
+          content="https://najatul-islam.vercel.app/twitter-image.jpg"
         />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.najatulislam.me/" />
+        <link rel="canonical" href="https://najatul-islam.vercel.app/" />
 
         {/* Favicon */}
         <link
           rel="icon"
-          href="https://www.najatulislam.me/favicon.ico"
+          href="https://najatul-islam.vercel.app/favicon.ico"
           type="image/x-icon"
         />
       </Helmet>

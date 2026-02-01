@@ -25,7 +25,7 @@ const Header = ({ setOpen }) => {
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
               <AvatarImage
-                src="https://www.najatulislam.me/najatul6.png"
+                src="https://najatul-islam.vercel.app/najatul6.png"
                 alt="Profile Picture"
               />
               <AvatarFallback>NiN</AvatarFallback>

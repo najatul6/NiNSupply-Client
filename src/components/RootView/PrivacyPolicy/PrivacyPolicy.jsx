@@ -25,11 +25,11 @@ const PrivacyPolicy = () => {
         />
         <meta
           property="og:image"
-          content="https://www.najatulislam.me/privacy-policy-og.jpg"
+          content="https://najatul-islam.vercel.app/privacy-policy-og.jpg"
         />
         <meta
           property="og:url"
-          content="https://www.najatulislam.me/privacy-policy"
+          content="https://najatul-islam.vercel.app/privacy-policy"
         />
         <meta property="og:type" content="website" />
 
@@ -42,19 +42,19 @@ const PrivacyPolicy = () => {
         />
         <meta
           name="twitter:image"
-          content="https://www.najatulislam.me/twitter-privacy-policy.jpg"
+          content="https://najatul-islam.vercel.app/twitter-privacy-policy.jpg"
         />
 
         {/* Canonical URL */}
         <link
           rel="canonical"
-          href="https://www.najatulislam.me/privacy-policy"
+          href="https://najatul-islam.vercel.app/privacy-policy"
         />
 
         {/* Favicon */}
         <link
           rel="icon"
-          href="https://www.najatulislam.me/favicon.ico"
+          href="https://najatul-islam.vercel.app/najatul6.png"
           type="image/x-icon"
         />
       </Helmet>
