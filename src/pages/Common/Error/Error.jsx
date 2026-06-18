@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import img from "../../../assets/Animations/notFound.json";
 import { Button } from "@/components/ui/button";
 import { Link, useRouteError } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Error = () => {
   const error = useRouteError();
@@ -22,7 +23,9 @@ const Error = () => {
       <p className="text-center">{error.data}</p>
 
       <Link to="/">
-        <Button>Back to Home</Button>
+        <Button className="flex items-center gap-2">
+          <FaArrowLeft /> Back to Home
+        </Button>
       </Link>
     </div>
   );
